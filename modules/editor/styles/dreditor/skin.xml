@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin version="0.2">
+    <title xml:lang="ko">dreditor</title>
+    <title xml:lang="en">dreditor</title>
+    <title xml:lang="tr">dreditor</title>
+    <description xml:lang="ko">
+		단락편집기 문서 서식입니다.
+		텍스타일 이외의 페이지에서 단락편집기 스타일에 맞추어 서식을 표시해줍니다.
+    </description>
+    <description xml:lang="en">
+		DrEditor document style.
+		If you use DrEditor with other pages rather than Textyle, setting style as this would help disply better.
+    </description>
+    <description xml:lang="tr">
+		DrEditor belge şekli.
+		DrEditorü Textyle yerine diğer modüllerle kullanıyorsanız, setting style as this would help disply better.
+    </description>
+    <version>0.1</version>
+    <date>2010-05-25</date>
+    <author email_address="developers@xpressengine.com" link="http://xpressengine.com/">
+        <name xml:lang="ko">NHN</name>
+        <name xml:lang="en">NHN</name>
+        <name xml:lang="tr">NHN</name>
+    </author>
+</skin>
