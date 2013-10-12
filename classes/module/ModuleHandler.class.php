@@ -2,7 +2,7 @@
 
 /**
  * @class ModuleHandler
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * Handling modules
  *
  * @remarks This class is to excute actions of modules.

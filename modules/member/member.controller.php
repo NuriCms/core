@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  memberController
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * Controller class of member module
  */
 class memberController extends member

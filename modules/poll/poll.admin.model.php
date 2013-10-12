@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  pollAdminModel
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief The admin model class of the poll module
  */
 class pollAdminModel extends poll

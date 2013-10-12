@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  layoutAdminController
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * admin controller class of the layout module
  */
 class layoutAdminController extends layout

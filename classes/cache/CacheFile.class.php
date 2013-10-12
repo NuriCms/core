@@ -5,7 +5,7 @@
  *
  * Filedisk Cache Handler
  *
- * @author Arnia Software (xe_dev@arnia.ro)
+ * @author NURI Project (developer@nuricms.org) (xe_dev@arnia.ro)
  */
 class CacheFile extends CacheBase
 {

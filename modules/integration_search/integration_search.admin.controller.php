@@ -2,7 +2,7 @@
 /**
  * The admin view class of the integration_search module
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 class integration_searchAdminController extends integration_search
 {

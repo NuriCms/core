@@ -2,7 +2,7 @@
 
 /**
  * XML Generater
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 class XmlGenerater
 {
@@ -54,7 +54,7 @@ class XmlGenerater
 
 /**
  * High class of the autoinstall module
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 class autoinstall extends ModuleObject
 {

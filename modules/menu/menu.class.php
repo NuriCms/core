@@ -3,7 +3,7 @@
  * menu class
  * high class of the menu module
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @package /modules/menu
  * @version 0.1
  */

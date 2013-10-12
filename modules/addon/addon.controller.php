@@ -2,7 +2,7 @@
 
 /**
  * Addon module's controller class
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 class addonController extends addon
 {

@@ -6,7 +6,7 @@
  * ttimport class
  * ttxml import class
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @package /modules/importer
  * @version 0.1
  */

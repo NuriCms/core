@@ -4,7 +4,7 @@
  * commentItem class
  * comment Object
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @package /modules/comment
  * @version 0.1
  */

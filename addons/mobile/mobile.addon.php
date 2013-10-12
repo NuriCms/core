@@ -5,7 +5,7 @@ if(!defined('__XE__'))
 
 /**
  * @file mobile.addon.php
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief Mobile XE add-on
  *
  * If a mobile connection is made (see the header information), display contents with WAP tags

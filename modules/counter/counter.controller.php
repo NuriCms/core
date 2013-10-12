@@ -3,7 +3,7 @@
 /**
  * Counter module's controller class
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 class counterController extends counter
 {

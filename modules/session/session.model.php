@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  sessionModel
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief The Model class of the session module
  */
 class sessionModel extends session

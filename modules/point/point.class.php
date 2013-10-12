@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  point
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief The parent class of the point module
  */
 class point extends ModuleObject

@@ -4,7 +4,7 @@
  * adminloggingModel class
  * model class of adminlogging module
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @package /modules/adminlogging
  * @version 0.1
  */

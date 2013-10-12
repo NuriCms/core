@@ -2,7 +2,7 @@
 
 /**
  * @class  communicationAdminModel
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief communication module of the admin model class
  */
 class communicationAdminModel extends communication

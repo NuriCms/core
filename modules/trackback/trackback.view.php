@@ -3,7 +3,7 @@
  * @class  trackbackView
  * @brief trackback module's view class
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @package /modules/trackback
  * @version 0.1
  */

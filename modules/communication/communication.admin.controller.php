@@ -2,7 +2,7 @@
 
 /**
  * @class  communicationAdminController
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief communication module of the admin controller class
  */
 class communicationAdminController extends communication

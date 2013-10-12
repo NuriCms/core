@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  install
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief install module of the high class
  */
 class install extends ModuleObject

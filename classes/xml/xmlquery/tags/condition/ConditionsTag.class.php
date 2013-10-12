@@ -3,7 +3,7 @@
 /**
  * ConditionsTag class
  *
- * @author Arnia Software
+ * @author NURI Project (developer@nuricms.org)
  * @package /classes/xml/xmlquery/tags/condition
  * @version 0.1
  */

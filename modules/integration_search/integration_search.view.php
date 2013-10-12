@@ -2,7 +2,7 @@
 /**
  * The view class of the integration_search module
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 class integration_searchView extends integration_search
 {

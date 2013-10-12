@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  layoutModel
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @version 0.1
  * Model class of the layout module
  */

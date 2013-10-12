@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  pageAdminController
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief page of the module admin controller class
  */
 class pageAdminController extends page

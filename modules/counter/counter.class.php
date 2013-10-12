@@ -3,7 +3,7 @@
 /**
  * High class of counter module
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 class counter extends ModuleObject
 {

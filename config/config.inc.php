@@ -4,7 +4,7 @@
  * set the include of the class file and other environment configurations
  *
  * @file   config/config.inc.php
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 if(version_compare(PHP_VERSION, '5.4.0', '<'))
 {

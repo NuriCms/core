@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  moduleAdminController
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief admin controller class of the module module
  */
 class moduleAdminController extends module

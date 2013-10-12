@@ -3,7 +3,7 @@
  * trackbackAdminView class
  * trackback module admin view class
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @package /modules/trackback
  * @version 0.1
  */

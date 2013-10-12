@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  moduleAdminView
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief admin view class of the module module
  */
 class moduleAdminView extends module

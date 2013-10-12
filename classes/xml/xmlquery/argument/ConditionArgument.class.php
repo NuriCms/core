@@ -2,7 +2,7 @@
 
 /**
  * ConditionArgument class
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @package /classes/xml/xmlquery/argument
  * @version 0.1
  */

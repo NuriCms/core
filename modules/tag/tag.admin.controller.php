@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  tagAdminController
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief admin controller class of the tag module
  */
 class tagAdminController extends tag

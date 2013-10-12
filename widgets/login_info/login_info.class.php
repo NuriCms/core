@@ -1,7 +1,7 @@
 <?php
 /**
  * @class login_info
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @version 0.1
  * @brief Widget to display log-in form
  *

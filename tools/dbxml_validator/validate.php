@@ -10,7 +10,7 @@
 	XpressEngine is an open source framework for creating your web sites.
 	http://xpressengine.org/
 
-	@Author: Arnia Software
+	@Author: NURI Project (developer@nuricms.org)
 	@Date:   9 apr 2012
 
 	The validation is based on, and is meant to model, the behavior exposed
@@ -29,7 +29,7 @@ ini_set('display_errors', 'stderr');
 /**
 	@brief callback to turn a php error into a php exception
 	So now any error interrupts or terminates script execution
-	@developer Arnia Software
+	@developer NURI Project (developer@nuricms.org)
 	@param $errno - php error number
 	@param $errstr - php error string
 	@param $errfile - file name
@@ -49,7 +49,7 @@ function exception_error_handler($errno, $errstr, $errfile, $errline)
 /**
  @brief Exception class for user error messages.
 
- @developer Arnia Software
+ @developer NURI Project (developer@nuricms.org)
  */
 class ErrorMessage extends Exception
 {
@@ -59,7 +59,7 @@ class ErrorMessage extends Exception
 	@brief Error message class to signal and carry
 	the command-line usage description (string) for the script
 
-	@developer Arnia Software
+	@developer NURI Project (developer@nuricms.org)
  */
 class SyntaxError extends ErrorMessage
 {
@@ -67,7 +67,7 @@ class SyntaxError extends ErrorMessage
 
 /**
 	@brief Error in an XML query
-	@developer Arnia Software
+	@developer NURI Project (developer@nuricms.org)
  */
 class XmlSchemaError extends ErrorMessage
 {
@@ -82,7 +82,7 @@ class XmlSchemaError extends ErrorMessage
 		file_name (line_no):
 			message
 		</pre>
-		@developer Arnia Software
+		@developer NURI Project (developer@nuricms.org)
 
 		@return
 		@param $file
@@ -102,7 +102,7 @@ class XmlSchemaError extends ErrorMessage
 
 /**
 	@brief Clean up libxml errors list when going out of scope (on the destructor)
-	@developer Arnia Software
+	@developer NURI Project (developer@nuricms.org)
  */
 class LibXmlClearErrors
 {

@@ -3,7 +3,7 @@
  * documentAdminModel class
  * Document the module's admin model class
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @package /modules/document
  * @version 0.1
  */

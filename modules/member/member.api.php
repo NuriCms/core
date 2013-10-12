@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  memberAPI
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * API Processing of View Action in the member module
  */
 class memberAPI extends member

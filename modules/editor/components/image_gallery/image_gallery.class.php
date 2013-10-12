@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  image_gallery
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief Making images uploaded to the image gallery
  */
 class image_gallery extends EditorHandler

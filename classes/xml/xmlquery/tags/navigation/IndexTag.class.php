@@ -3,7 +3,7 @@
 /**
  * IndexTag class
  *
- * @author Arnia Software
+ * @author NURI Project (developer@nuricms.org)
  * @package /classes/xml/xmlquery/tags/navigation
  * @version 0.1
  */

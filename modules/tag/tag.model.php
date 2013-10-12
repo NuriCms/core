@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  tagModel
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief tag model class of the module
  */
 class tagModel extends tag

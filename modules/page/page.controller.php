@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  documentController
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief controller class of the document module
  */
 class pageController extends page

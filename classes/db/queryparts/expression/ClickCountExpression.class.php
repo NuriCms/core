@@ -2,7 +2,7 @@
 
 /**
  * ClickCountExpression
- * @author Arnia Software
+ * @author NURI Project (developer@nuricms.org)
  * @package /classes/db/queryparts/expression
  * @version 0.1
  */

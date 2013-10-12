@@ -6,7 +6,7 @@ require_once('./modules/importer/extract.class.php');
  * importerAdminController class
  * admin controller class of importer module
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @package /modules/importer
  * @version 0.1
  */

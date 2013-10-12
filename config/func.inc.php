@@ -3,7 +3,7 @@
 /**
  * function library files for convenience
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 if(!defined('__XE__'))
 {

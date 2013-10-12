@@ -3,7 +3,7 @@
 /**
  * GroupsTag class
  *
- * @author Arnia Software
+ * @author NURI Project (developer@nuricms.org)
  * @package /classes/xml/xmlquery/tags/group
  * @version 0.1
  */

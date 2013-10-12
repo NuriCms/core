@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  layoutAdminView
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * admin view class of the layout module
  */
 class layoutAdminView extends layout

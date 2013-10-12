@@ -2,7 +2,7 @@
 /**
  * The controller class of rss module
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 class rssController extends rss
 {

@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  messageAdminView
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief admin view class of the message module
  */
 class messageAdminView extends message

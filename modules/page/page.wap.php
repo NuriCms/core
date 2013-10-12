@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  pageWap
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief wap class page of the module
  */
 class pageWap extends page

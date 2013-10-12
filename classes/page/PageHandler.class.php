@@ -2,7 +2,7 @@
 
 /**
  * @class PageHandler
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * handles page navigation
  * @version 0.1
  *

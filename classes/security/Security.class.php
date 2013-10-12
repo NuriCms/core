@@ -3,7 +3,7 @@
 /**
  * - Security class
  * - This class helps to solve security problems.
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @package /classes/security
  * @version 0.1
  */

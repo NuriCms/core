@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  moduleAdminModel
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @version 0.1
  * @brief AdminModel class of the "module" module
  */

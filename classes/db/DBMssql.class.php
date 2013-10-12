@@ -4,7 +4,7 @@
  * - DBMSSQL
  * - Modified to use MSSQL driver by sol (sol@ngleader.com)
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @package /classes/db
  * @version 0.1
  */

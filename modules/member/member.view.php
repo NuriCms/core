@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  memberView
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief View class of member module
  */
 class memberView extends member

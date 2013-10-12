@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  message
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief high class of message module
  */
 class message extends ModuleObject

@@ -2,7 +2,7 @@
 /**
  * High class of rss module
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 class rss extends ModuleObject
 {

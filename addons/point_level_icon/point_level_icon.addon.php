@@ -5,7 +5,7 @@ if(!defined('__XE__'))
 
 /**
  * @file point.addon.php
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief Icon-on-point level
  *
  * Display point level icon before user name when point system is enabled.

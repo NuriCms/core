@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  installAdminController
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief admin controller class of the install module
  */
 class installAdminController extends install

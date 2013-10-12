@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  layout
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * high class of the layout module
  */
 class layout extends ModuleObject

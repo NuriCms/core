@@ -5,7 +5,7 @@
  * Set up the component variables
  *
  * @class EditorHandler
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 class EditorHandler extends Object
 {

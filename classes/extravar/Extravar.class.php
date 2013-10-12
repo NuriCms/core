@@ -3,7 +3,7 @@
 /**
  * A class to handle extra variables used in posts, member and others
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 class ExtraVar
 {
@@ -78,7 +78,7 @@ class ExtraVar
 /**
  * Each value of the extra vars
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 class ExtraItem
 {

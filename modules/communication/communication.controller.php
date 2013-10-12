@@ -2,7 +2,7 @@
 
 /**
  * @class  communicationController
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * communication module of the Controller class
  */
 class communicationController extends communication

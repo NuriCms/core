@@ -3,7 +3,7 @@
 /**
  * Every modules inherits from Object class. It includes error, message, and other variables for communicatin purpose.
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 class Object
 {

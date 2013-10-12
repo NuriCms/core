@@ -2,7 +2,7 @@
 /**
  * The view class of the rss module
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 class rssView extends rss
 {

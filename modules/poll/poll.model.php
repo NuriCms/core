@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  pollModel
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief The model class for the poll modules
  */
 class pollModel extends poll

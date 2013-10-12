@@ -12,7 +12,7 @@ else
 /**
  * Mailing class for XpressEngine
  *
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 class Mail extends PHPMailer
 {

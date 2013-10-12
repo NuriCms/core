@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  editorModel
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief model class of the editor odule
  */
 class editorModel extends editor

@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  session
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief session module's high class
  * @version 0.1
  *

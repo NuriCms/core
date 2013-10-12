@@ -2,7 +2,7 @@
 
 /**
  * Admin view class of addon modules
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 class addonAdminView extends addon
 {

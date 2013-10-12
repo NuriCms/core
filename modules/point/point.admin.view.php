@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  pointAdminView
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief The admin view class of the point module
  */
 class pointAdminView extends point

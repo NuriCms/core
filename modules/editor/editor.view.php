@@ -1,7 +1,7 @@
 <?php
 /**
  * @class  editorView
- * @author NHN (developers@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  * @brief view class of the editor module
  */
 class editorView extends editor

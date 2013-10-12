@@ -4,7 +4,7 @@
  * class JoinTable
  * 		$conditions in an array of Condition objects
  *
- * @author Arnia Software
+ * @author NURI Project (developer@nuricms.org)
  * @package /classes/db/queryparts/table
  * @version 0.1
  */
