@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  editorAdminController
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief editor of the module admin controller class
  */
 class editorAdminController extends editor

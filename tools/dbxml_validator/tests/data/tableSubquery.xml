@@ -1,36 +1,36 @@
 <query id="tableSubquery" action="select">
-    <tables>
+	<tables>
 	<table name="tableName" />
 	<table name="tableSubquery" alias="tableName2">
-	    <tables>
+		<tables>
 		<table name="documents" alias="documents" />
-	    </tables>
-	    <columns>
+		</tables>
+		<columns>
 		<column name="member_srl" alias="member_srl" />
 		<column name="count(*)" alias="count" />
-	    </columns>
-	    <groups>
+		</columns>
+		<groups>
 		<group column="member_srl" />
-	    </groups>
+		</groups>
 	</table>
-    </tables>
-    <columns>
+	</tables>
+	<columns>
 	<column name="columnName" alias="alias" />
-    </columns>
-    <conditions>
+	</columns>
+	<conditions>
 	<condition operation="like_prefix" column="column1" var="variable" filter="user_id" default="default" notnull="notnull" minlength="10" maxlength="1000" pipe="AND"/>
 	<group pipe="and">
-	    <condition operation="notlike_tail" column="column" var="variable" filter="numbers" default="default" notnull="notnull" minlength ="0" maxlength="10000" pipe="and"/>
+		<condition operation="notlike_tail" column="column" var="variable" filter="numbers" default="default" notnull="notnull" minlength ="0" maxlength="10000" pipe="and"/>
 	</group>
-    </conditions>
-    <navigation>
+	</conditions>
+	<navigation>
 	<index var="var" default="default" order="desc|asc" />
 	<list_count var="var" default="25" />
 	<page_count var="var" default="5" />
 	<page var="var" default="2" />
-    </navigation>
-    <groups>
+	</navigation>
+	<groups>
 	<group column="GroupBy daesang" />
-    </groups>
+	</groups>
 </query>
 

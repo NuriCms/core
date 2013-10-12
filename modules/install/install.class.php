@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  install
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief install module of the high class
  */
 class install extends ModuleObject

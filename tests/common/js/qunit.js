@@ -798,7 +798,7 @@ function done() {
 
 	if ( config.altertitle && typeof document !== "undefined" && document.title ) {
 		// show ✖ for good, ✔ for bad suite result in title
-		// use escape sequences in case file gets loaded with non-utf-8-charset
+		// use escape sequences in case file gets loaded with non-UTF-8-charset
 		document.title = [
 			(config.stats.bad ? "\u2716" : "\u2714"),
 			document.title.replace(/^[\u2714\u2716] /i, "")

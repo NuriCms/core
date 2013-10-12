@@ -8,7 +8,8 @@ define('RELEASE_SSL', 2);
  * Manages Context such as request arguments/environment variables
  * It has dual method structure, easy-to use methods which can be called as Context::methodname(),and methods called with static object.
  *
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class Context
 {

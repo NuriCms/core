@@ -41,7 +41,8 @@
  *  tag = key : name of variable that will contain the result of the execution
  * }</pre>
  * @class XmlJsFilter
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /classes/xml
  * @version 0.2
  */

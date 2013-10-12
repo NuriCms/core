@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  pointAdminController
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief The admin controller class of the point module
  */
 class pointAdminController extends point

@@ -3,7 +3,8 @@
  * extract class
  * Class to save each file by using tags in the large xml
  *
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/importer
  * @version 0.1
  */

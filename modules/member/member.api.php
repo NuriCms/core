@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  memberAPI
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * API Processing of View Action in the member module
  */
 class memberAPI extends member

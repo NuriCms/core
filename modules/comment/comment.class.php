@@ -6,7 +6,8 @@ require_once(_XE_PATH_ . 'modules/comment/comment.item.php');
  * comment
  * comment module's high class
  *
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/comment
  * @version 0.1
  */

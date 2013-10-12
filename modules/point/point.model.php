@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  pointModel
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief The model class fo the point module
  */
 class pointModel extends point

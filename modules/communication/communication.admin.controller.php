@@ -2,7 +2,8 @@
 
 /**
  * @class  communicationAdminController
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief communication module of the admin controller class
  */
 class communicationAdminController extends communication

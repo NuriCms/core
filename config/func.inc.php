@@ -3,7 +3,8 @@
 /**
  * function library files for convenience
  *
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 if(!defined('__XE__'))
 {

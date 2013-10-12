@@ -5,7 +5,8 @@ if(!defined('__XE__'))
 
 /**
  * @file ./addons/blogapi/blogapi.func.php
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief Function collections for the implementation of blogapi
  * */
 // Error messages

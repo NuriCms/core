@@ -5,7 +5,8 @@ if(!defined('__XE__'))
 
 /**
  * @file adminlogging.addon.php
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief Automatic link add-on
  */
 $logged_info = Context::get('logged_info');

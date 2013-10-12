@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  documentController
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief controller class of the document module
  */
 class pageController extends page

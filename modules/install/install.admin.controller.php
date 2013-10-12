@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  installAdminController
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief admin controller class of the install module
  */
 class installAdminController extends install

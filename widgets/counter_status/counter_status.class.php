@@ -1,7 +1,8 @@
 <?php
 /**
  * @class counter_status
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @version 0.1
  * @brief Display counter status by using data in the counter module
  */

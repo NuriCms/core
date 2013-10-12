@@ -3,7 +3,8 @@
 /**
  * Xml_Node_ class
  * Element node or attribute node.
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /classes/xml
  * @version 0.1
  */
@@ -30,7 +31,8 @@ class Xml_Node_
  * attributes when kor is only supported language. It seems to work fine now but we did not scrutinze any potential side effects,
  * }</pre>
  *
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /classes/xml
  * @version 0.1
  */

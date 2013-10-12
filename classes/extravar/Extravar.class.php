@@ -3,7 +3,8 @@
 /**
  * A class to handle extra variables used in posts, member and others
  *
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class ExtraVar
 {
@@ -78,7 +79,8 @@ class ExtraVar
 /**
  * Each value of the extra vars
  *
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class ExtraItem
 {

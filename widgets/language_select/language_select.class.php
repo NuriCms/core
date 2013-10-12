@@ -1,7 +1,8 @@
 <?php
 /**
  * @class language_select
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief Language selector
  * @version 0.1
  */

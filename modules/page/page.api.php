@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  pageAPI
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief View Action page for the module API processing
  */
 class pageAPI extends page

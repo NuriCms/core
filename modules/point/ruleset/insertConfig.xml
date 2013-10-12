@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ruleset version="1.5.0">
-    <customrules>
+	<customrules>
 		<rule name="less_than_1000" type="expr" test="$$ &lt; 1000" />
-    </customrules>
-    <fields>
+	</customrules>
+	<fields>
 		<field name="max_level" required="true" rule="number,less_than_1000" />
 		<field name="point_name" required="true" />
 		<field name="signup_point" required="true" default="0" />
@@ -16,5 +16,5 @@
 		<field name="voted" required="true" default="0" />
 		<field name="blamed" required="true" default="0" />
 		<field name="level_icon" required="true" default="default" />
-    </fields>
+	</fields>
 </ruleset>

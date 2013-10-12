@@ -1,7 +1,8 @@
 <?php
 /**
  * @class login_info
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @version 0.1
  * @brief Widget to display log-in form
  *

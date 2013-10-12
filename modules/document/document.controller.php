@@ -3,7 +3,8 @@
  * documentController class
  * document the module's controller class
  *
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/document
  * @version 0.1
  */

@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  pointView
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief The view class of the point module
  *
  * POINT 2.0 format document output

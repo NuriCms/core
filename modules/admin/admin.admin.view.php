@@ -4,7 +4,8 @@
  * adminAdminView class
  * Admin view class of admin module
  *
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/admin
  * @version 0.1
  */

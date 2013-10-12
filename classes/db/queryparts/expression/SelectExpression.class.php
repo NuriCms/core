@@ -10,7 +10,8 @@
  * 	  		- an sql expression - substr(column_name, 1, 8) or score1 + score2
  * 		$column_name is already escaped
  *
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /classes/db/queryparts/expression
  * @version 0.1
  */

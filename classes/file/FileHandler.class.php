@@ -3,7 +3,8 @@
 /**
  * Contains methods for accessing file system
  *
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class FileHandler
 {

@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  spamfilterModel
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief The Model class of the spamfilter module
  */
 class spamfilterModel extends spamfilter

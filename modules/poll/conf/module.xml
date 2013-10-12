@@ -1,25 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <module>
-    <grants />
-    <permissions />
-    <actions>
-        <action name="dispPollAdminList" type="view" admin_index="true" standalone="true" menu_name="poll" menu_index="true" />
-        <action name="dispPollAdminResult" type="view" standalone="true" />
+	<grants />
+	<permissions />
+	<actions>
+		<action name="dispPollAdminList" type="view" admin_index="true" standalone="true" menu_name="poll" menu_index="true" />
+		<action name="dispPollAdminResult" type="view" standalone="true" />
 
-        <action name="dispPollAdminConfig" type="view" standalone="true" />
+		<action name="dispPollAdminConfig" type="view" standalone="true" />
 
-        <action name="getPollGetColorsetList" type="model" standalone="true" />
+		<action name="getPollGetColorsetList" type="model" standalone="true" />
 
-        <action name="getPollAdminTarget" type="model" standalone="true" />
+		<action name="getPollAdminTarget" type="model" standalone="true" />
 
-        <action name="procInsert" type="controller" standalone="true" />
-        <action name="procPoll" type="controller" standalone="true" ruleset="poll" />
-        <action name="procPollViewResult" type="controller" standalone="true" />
-        <action name="procPollGetList" type="controller" standalone="true" />
-        <action name="procPollAdminDeleteChecked" type="controller" standalone="true" ruleset="deleteChecked" />
-        <action name="procPollAdminInsertConfig" type="controller" standalone="true" ruleset="insertConfig" />
-        <action name="procPollAdminAddCart" type="controller" standalone="true" />
-    </actions>
+		<action name="procInsert" type="controller" standalone="true" />
+		<action name="procPoll" type="controller" standalone="true" ruleset="poll" />
+		<action name="procPollViewResult" type="controller" standalone="true" />
+		<action name="procPollGetList" type="controller" standalone="true" />
+		<action name="procPollAdminDeleteChecked" type="controller" standalone="true" ruleset="deleteChecked" />
+		<action name="procPollAdminInsertConfig" type="controller" standalone="true" ruleset="insertConfig" />
+		<action name="procPollAdminAddCart" type="controller" standalone="true" />
+	</actions>
 	<menus>
 		<menu name="poll">
 			<title xml:lang="en">Poll</title>

@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  memberAdminController
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * member module of the admin controller class
  */
 class memberAdminController extends member

@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  pageWap
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief wap class page of the module
  */
 class pageWap extends page

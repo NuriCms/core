@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  memberView
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief View class of member module
  */
 class memberView extends member

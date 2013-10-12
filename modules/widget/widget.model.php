@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  widgetModel
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @version 0.1
  * @brief Model class for widget modules
  */

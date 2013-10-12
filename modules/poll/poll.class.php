@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  poll
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief The parent class of the poll module
  */
 class poll extends ModuleObject

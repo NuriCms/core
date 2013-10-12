@@ -2,7 +2,8 @@
 
 /**
  * @class TemplateHandler
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * template compiler
  * @version 0.1
  * @remarks It compiles template file by using regular expression into php

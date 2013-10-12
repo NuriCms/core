@@ -5,7 +5,8 @@ if(!defined('__XE__'))
 
 /**
  * @file openid_delegation_id.addon.php
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief OpenID Delegation ID Add-on
  *
  * This enables to use openID as user's homepage or blog url.

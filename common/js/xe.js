@@ -1468,7 +1468,7 @@ $.exec_xml = window.exec_xml = function(module, act, params, callback_func, resp
 	if(_u1.protocol != _u2.protocol || _u1.port != _u2.port) return send_by_form(xml_path, params);
 
 	var xml = [], i = 0;
-	xml[i++] = '<?xml version="1.0" encoding="utf-8" ?>';
+	xml[i++] = '<?xml version="1.0" encoding="UTF-8" ?>';
 	xml[i++] = '<methodCall>';
 	xml[i++] = '<params>';
 

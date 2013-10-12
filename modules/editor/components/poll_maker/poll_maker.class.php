@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  poll_maker
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief Editor provides the ability to link to the url.
  */
 class poll_maker extends EditorHandler

@@ -1,7 +1,8 @@
 <?php
 /**
  * @class mcontent
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief widget to display mcontent
  * @version 0.1
  */

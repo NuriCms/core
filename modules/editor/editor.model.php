@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  editorModel
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief model class of the editor odule
  */
 class editorModel extends editor

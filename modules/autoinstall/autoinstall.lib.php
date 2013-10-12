@@ -4,7 +4,8 @@ require_once(_XE_PATH_ . 'libs/ftp.class.php');
 
 /**
  * Module installer
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class ModuleInstaller
 {
@@ -314,7 +315,8 @@ class ModuleInstaller
 
 /**
  * Module installer for SFTP
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class SFTPModuleInstaller extends ModuleInstaller
 {
@@ -483,7 +485,8 @@ class SFTPModuleInstaller extends ModuleInstaller
 
 /**
  * Module installer for PHP FTP
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class PHPFTPModuleInstaller extends ModuleInstaller
 {
@@ -697,7 +700,8 @@ class PHPFTPModuleInstaller extends ModuleInstaller
 
 /**
  * Module installer for FTP
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class FTPModuleInstaller extends ModuleInstaller
 {

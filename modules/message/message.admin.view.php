@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  messageAdminView
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief admin view class of the message module
  */
 class messageAdminView extends message

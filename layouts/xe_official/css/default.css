@@ -1,15 +1,17 @@
-@charset "utf-8";
-/* NHN (developers@xpressengine.com) */
+@charset "UTF-8";
+/* Original author NHN,
+ * Adapter Nuri Project (developer@nuricms.org) */
 /* Default Skin - Start */
 .selectLang{margin:0;padding:0}
 /* Site Layout - Body Wrap */
-html{background:#fff url(../images/default/bgBody.gif) repeat-x left top;font-family:Tahoma, Geneva, sans-serif}
-.xe{width:960px;margin:1.5em auto 0 auto}
+html{background:#fff url(../images/default/bgBody.gif) repeat-x left top;}
+.xe{width:960px;margin:1.5em auto 0 auto;font-family:'나눔고딕','맑은 고딕',Tahoma, Geneva, sans-serif}
 /* Site Layout - Header */
 .header{position:relative;width:960px;height:120px;background:url(../images/default/bgHeader.jpg) no-repeat right top;margin-bottom:10px;z-index:2}
 .body .header{width:auto;height:auto;background:none;margin:auto;z-index:1}
-.header h1{margin:0;position:absolute;top:32px;left:25px}
+.header h1{margin:0;position:absolute;top:17px;left:25px}
 .header h1 a{color:#fff;text-decoration:none}
+.header h1 a img{border:0;}
 .language{position:absolute;top:18px;right:19px;z-index:100}
 .language strong{display:inline-block;height:15px;color:#fff;font:.75em/15px Tahoma;margin-right:3px;vertical-align:top}
 .language .toggle{background:none;border:0;cursor:pointer;vertical-align:top;padding:0;height:15px}

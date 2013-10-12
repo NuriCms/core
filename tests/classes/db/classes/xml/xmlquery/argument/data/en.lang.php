@@ -1,7 +1,8 @@
 <?php
 /**
  * @file   common/lang/en.lang.php
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief  English Language Pack (Only basic words are included here)
  **/
 

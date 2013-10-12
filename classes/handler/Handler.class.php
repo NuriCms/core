@@ -3,7 +3,8 @@
 /**
  * An abstract class of (*)Handler
  *
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class Handler
 {

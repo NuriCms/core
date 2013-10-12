@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  sessionAdminController
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief The admin controller class of the session module
  */
 class sessionAdminController extends session

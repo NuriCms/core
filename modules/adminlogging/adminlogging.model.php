@@ -4,7 +4,8 @@
  * adminloggingModel class
  * model class of adminlogging module
  *
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/adminlogging
  * @version 0.1
  */

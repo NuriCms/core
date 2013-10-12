@@ -4,7 +4,8 @@
  * set the include of the class file and other environment configurations
  *
  * @file   config/config.inc.php
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 if(version_compare(PHP_VERSION, '5.4.0', '<'))
 {

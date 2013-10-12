@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  installView
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief View class of install module
  */
 class installView extends install

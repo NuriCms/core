@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  pageView
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief page view class of the module
  */
 class pageView extends page

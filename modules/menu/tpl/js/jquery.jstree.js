@@ -3028,9 +3028,9 @@
 		return false;
 	};
 	var xsl = {
-		'nest' : '<' + '?xml version="1.0" encoding="utf-8" ?>' +
+		'nest' : '<' + '?xml version="1.0" encoding="UTF-8" ?>' +
 			'<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" >' +
-			'<xsl:output method="html" encoding="utf-8" omit-xml-declaration="yes" standalone="no" indent="no" media-type="text/html" />' +
+			'<xsl:output method="html" encoding="UTF-8" omit-xml-declaration="yes" standalone="no" indent="no" media-type="text/html" />' +
 			'<xsl:template match="/">' +
 			'	<xsl:call-template name="nodes">' +
 			'		<xsl:with-param name="node" select="/root" />' +
@@ -3089,9 +3089,9 @@
 			'</xsl:template>' +
 			'</xsl:stylesheet>',
 
-		'flat' : '<' + '?xml version="1.0" encoding="utf-8" ?>' +
+		'flat' : '<' + '?xml version="1.0" encoding="UTF-8" ?>' +
 			'<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" >' +
-			'<xsl:output method="html" encoding="utf-8" omit-xml-declaration="yes" standalone="no" indent="no" media-type="text/xml" />' +
+			'<xsl:output method="html" encoding="UTF-8" omit-xml-declaration="yes" standalone="no" indent="no" media-type="text/xml" />' +
 			'<xsl:template match="/">' +
 			'	<ul>' +
 			'	<xsl:for-each select="//item[not(@parent_id) or @parent_id=0 or not(@parent_id = //item/@id)]">' + /* the last `or` may be removed */

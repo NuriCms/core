@@ -6,7 +6,8 @@ require_once(_XE_PATH_.'modules/document/document.item.php');
  * @brief document the module's high class
  * {@internal Silently adds one extra Foo to compensate for lack of Foo }
  *
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/document
  * @version 0.1
  */

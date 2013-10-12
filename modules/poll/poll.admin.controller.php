@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  pollAdminController
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief The admin controller class of the poll module
  */
 class pollAdminController extends poll

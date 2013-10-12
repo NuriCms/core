@@ -3,7 +3,8 @@
  * @class  menuAdminModel
  * @brief admin model class of the menu module
  *
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/menu
  * @version 0.1
  */

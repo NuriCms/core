@@ -1,7 +1,8 @@
 <?php
 /**
  * Mobile XE Library Class ver 0.1
- * @author NURI Project (developer@nuricms.org) / lang_select : misol
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org) / lang_select : misol
  * @brief XE library for WAP tag output
  */
 class mobileXE

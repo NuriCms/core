@@ -3,7 +3,8 @@
  * trashView class
  * View class of the module trash
  *
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/trash
  * @version 0.1
  */

@@ -2,7 +2,8 @@
 
 /**
  * SortQueryArgument class
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /classes/xml/xmlquery/queryargument
  * @version 0.1
  */

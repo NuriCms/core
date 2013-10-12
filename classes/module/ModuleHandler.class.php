@@ -2,7 +2,8 @@
 
 /**
  * @class ModuleHandler
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * Handling modules
  *
  * @remarks This class is to excute actions of modules.

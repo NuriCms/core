@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  memberAdminModel
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * admin model class of member module
  */
 class memberAdminModel extends member

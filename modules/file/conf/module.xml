@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <module>
-    <grants />
-    <permissions />
-    <actions>
-        <action name="dispFileAdminList" type="view" admin_index="true" standalone="true" menu_name="file" menu_index="true" />
-        <action name="dispFileAdminConfig" type="view" menu_name="fileUpload" menu_index="true" />
-        <action name="getFileList" type="model" standalone="true" />
-        <action name="procFileUpload" type="controller" standalone="true" />
-        <action name="procFileIframeUpload" type="controller" standalone="true" />
-        <action name="procFileImageResize" type="controller" standalone="true" ruleset="imageResize" />
-        <action name="procFileDelete" type="controller" standalone="true" />
-        <action name="procFileDownload" type="controller" standalone="true" method="GET|POST" />
-        <action name="procFileOutput" type="controller" standalone="true" />
-        <action name="procFileAdminDeleteChecked" type="controller" standalone="true" ruleset="deleteChecked" />
-        <action name="procFileAdminInsertConfig" type="controller" standalone="true" ruleset="insertConfig" />
-        <action name="procFileAdminInsertModuleConfig" type="controller" standalone="true" ruleset="fileModuleConfig" />
-        <action name="procFileAdminAddCart" type="controller" standalone="true" />
-        <action name="procFileGetList" type="controller" standalone="true" />
-    </actions>
+	<grants />
+	<permissions />
+	<actions>
+		<action name="dispFileAdminList" type="view" admin_index="true" standalone="true" menu_name="file" menu_index="true" />
+		<action name="dispFileAdminConfig" type="view" menu_name="fileUpload" menu_index="true" />
+		<action name="getFileList" type="model" standalone="true" />
+		<action name="procFileUpload" type="controller" standalone="true" />
+		<action name="procFileIframeUpload" type="controller" standalone="true" />
+		<action name="procFileImageResize" type="controller" standalone="true" ruleset="imageResize" />
+		<action name="procFileDelete" type="controller" standalone="true" />
+		<action name="procFileDownload" type="controller" standalone="true" method="GET|POST" />
+		<action name="procFileOutput" type="controller" standalone="true" />
+		<action name="procFileAdminDeleteChecked" type="controller" standalone="true" ruleset="deleteChecked" />
+		<action name="procFileAdminInsertConfig" type="controller" standalone="true" ruleset="insertConfig" />
+		<action name="procFileAdminInsertModuleConfig" type="controller" standalone="true" ruleset="fileModuleConfig" />
+		<action name="procFileAdminAddCart" type="controller" standalone="true" />
+		<action name="procFileGetList" type="controller" standalone="true" />
+	</actions>
 	<menus>
 		<menu name="file">
 			<title xml:lang="en">File</title>

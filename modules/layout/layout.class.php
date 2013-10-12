@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  layout
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * high class of the layout module
  */
 class layout extends ModuleObject

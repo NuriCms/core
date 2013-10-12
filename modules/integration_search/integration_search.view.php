@@ -2,7 +2,8 @@
 /**
  * The view class of the integration_search module
  *
- * @author NURI Project (developer@nuricms.org)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class integration_searchView extends integration_search
 {
