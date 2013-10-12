@@ -1,7 +1,8 @@
 <?php
 /**
  * Model class of the file module
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class fileModel extends file
 {
@@ -116,7 +117,7 @@ class fileModel extends file
 		if(!$file_config) $file_config = $file_module_config;
 
 		$config = new stdClass();
-		
+
 		if($file_config)
 		{
 			$config->allowed_filesize = $file_config->allowed_filesize;
@@ -302,7 +303,7 @@ class fileModel extends file
 
 		$oDocumentModel = &getModel('document');
 		$oDocument = $oDocumentModel->getDocument($file_info->upload_target_srl);
-		if($oDocument->isExists()) $document_grant = $oDocument->isGranted(); 
+		if($oDocument->isExists()) $document_grant = $oDocument->isGranted();
 
 		$file_grant->is_deletable = ($document_grant || $member_info->is_admin == 'Y' || $member_info->member_srl == $file_info->member_srl || $grant->manager);
 

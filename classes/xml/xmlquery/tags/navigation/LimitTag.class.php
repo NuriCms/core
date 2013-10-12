@@ -3,7 +3,8 @@
 /**
  * LimitTag class
  *
- * @author Arnia Software
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /classes/xml/xmlquery/tags/navigation
  * @version 0.1
  */

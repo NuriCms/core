@@ -25,7 +25,7 @@ var Uploader = xe.createApp('Uploader', {
 		if (!this.settings.browse.length) throw 'The parameter browseButton is not valid object or selector.';
 
 		var s = this.settings;
-	
+
 		if (s.dropzone) s.dropzone = $(s.dropzone);
 		if (s.upload) s.upload = $(s.upload);
 
@@ -161,7 +161,7 @@ runtimes.gears = {
 		if (!window.google) window.google = {};
 		if (!google.gears) {
 			google.gears = {};
-	
+
 			if (typeof(GearsFactory)!='undefined'){f = new GearsFactory()} // Firefox
 			else {
 				try{ // IE
@@ -232,7 +232,7 @@ runtimes.gears = {
 				uploader.request = null;
 
 				if (req.status == 200) {
-					file.status = 'DONE';	
+					file.status = 'DONE';
 				} else {
 					file.status = 'FAILED';
 				}

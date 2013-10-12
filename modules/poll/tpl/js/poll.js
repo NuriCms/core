@@ -17,8 +17,8 @@ function doPoll(fo_obj) {
 
         } else if(name.indexOf('item_')>-1) {
             var t = name.split('_');
-            var poll_srl = parseInt(t[1],10); 
-            var poll_srl_index = parseInt(t[2],10); 
+            var poll_srl = parseInt(t[1],10);
+            var poll_srl_index = parseInt(t[2],10);
             if(obj.checked == true) item[poll_srl_index][item[poll_srl_index].length] = obj.value;
         }
     }

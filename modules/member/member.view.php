@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  memberView
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief View class of member module
  */
 class memberView extends member
@@ -198,7 +199,7 @@ class memberView extends member
 		$oMemberModel = &getModel('member');
 		// Get the member information if logged-in
 		if($oMemberModel->isLogged()) return $this->stop('msg_already_logged');
-		// call a trigger (before) 
+		// call a trigger (before)
 		$trigger_output = ModuleHandler::triggerCall('member.dispMemberSignUpForm', 'before', $member_config);
 		if(!$trigger_output->toBool()) return $trigger_output;
 		// Error appears if the member is not allowed to join
@@ -242,7 +243,7 @@ class memberView extends member
 		if ($this->member_config->identifier == 'email_address')
 		{
 			Context::set('identifierTitle', Context::getLang('email_address'));
-			Context::set('identifierValue', $logged_info->email_address); 
+			Context::set('identifierValue', $logged_info->email_address);
 		}
 		else
 		{
@@ -256,7 +257,7 @@ class memberView extends member
 	/**
 	 * @brief Modify member information
 	 */
-	function dispMemberModifyInfo() 
+	function dispMemberModifyInfo()
 	{
 		if($_SESSION['rechecked_password_step'] != 'VALIDATE_PASSWORD' && $_SESSION['rechecked_password_step'] != 'INPUT_DATA')
 		{
@@ -397,7 +398,7 @@ class memberView extends member
 	}
 
 	/**
-	 * @brief Display the login form 
+	 * @brief Display the login form
 	 */
 	function dispMemberLoginForm()
 	{
@@ -541,12 +542,12 @@ class memberView extends member
 	/**
 	 * @brief Page of re-sending an authentication mail
 	 */
-	function dispMemberResendAuthMail() 
+	function dispMemberResendAuthMail()
 	{
 		$authMemberSrl = $_SESSION['auth_member_srl'];
 		unset($_SESSION['auth_member_srl']);
 
-		if(Context::get('is_logged')) 
+		if(Context::get('is_logged'))
 		{
 			return $this->stop('already_logged');
 		}
@@ -589,7 +590,7 @@ class memberView extends member
 		$js_code[] = 'if(!validator) return false;';
 
 		$errorLang = array();
-		foreach($extraList as $val) 
+		foreach($extraList as $val)
 		{
 			$title = str_ireplace(array('<script', '</script'), array('<scr"+"ipt', '</scr"+"ipt'), addslashes($val->column_title));
 			if($val->column_type == 'kr_zip' || $val->column_type == 'tel')

@@ -8,7 +8,7 @@ jQuery(function($){
 
 $('button.calc_point').click(function(){
 	var $this, form, elems, reset, el, fn, i=0;
-	
+
 	$this = $(this);
 	$expr = $('input.level_expression');
 	form  = this.form;

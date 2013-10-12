@@ -16,8 +16,8 @@ jQuery(function($){
             gItem.find('>ul').slideUp(200);
             gItem.find('a').removeClass('hover');
             t.next('ul').slideDown(200);
-            t.addClass('hover');            
-        }; 
+            t.addClass('hover');
+        };
     };
     function gMenuOut(){
         gItem.find('ul').slideUp(200);

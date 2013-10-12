@@ -1,7 +1,8 @@
 <?php
 /**
  * @file  index.php
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief Start page
  *
  * Find and create module object by mif, act in Request Argument \n

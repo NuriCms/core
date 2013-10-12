@@ -59,7 +59,7 @@
         <td class="title">
 
             <!--@if($widget_info->show_browser_title=='Y' && $item->getBrowserTitle())-->
-        
+
                 <a href="<!--@if($item->contents_link)-->{$item->contents_link}<!--@else-->{getSiteUrl($item->domain, '', 'mid', $item->get('mid'))}<!--@end-->" target="_blank"|cond="$widget_info->new_window"><strong class="board">{$item->getBrowserTitle()}</strong></a>
             <!--@end-->
             <!--@if($widget_info->show_category=='Y' && $item->get('category_srl') )-->

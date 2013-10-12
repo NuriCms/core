@@ -42,7 +42,8 @@ if(!defined('__XE_LOADED_DB_CLASS__'))
  * - query xml has unique query id, and will be created in module
  * - queryid = module_name.query_name
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /classes/db
  * @version 0.1
  */

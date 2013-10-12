@@ -8,10 +8,10 @@
 		<column name="parent_srl" var="parent_srl" filter="number" default="0" />
 		<column name="document_srl" var="document_srl" filter="number" notnull="notnull" />
 		<column name="is_secret" var="is_secret" default="N" />
-        <column name="notify_message" var="notify_message" default="N" />
+		<column name="notify_message" var="notify_message" default="N" />
 		<column name="content" var="content" notnull="notnull" />
-        <column name="voted_count" var="voted_count" default="0" />
-        <column name="blamed_count" var="blamed_count" default="0" />
+		<column name="voted_count" var="voted_count" default="0" />
+		<column name="blamed_count" var="blamed_count" default="0" />
 		<column name="password" var="password" minlength="2" maxlength="60" />
 		<column name="nick_name" var="nick_name" notnull="notnull" minlength="1" maxlength="40" />
 		<column name="user_id" var="user_id" default="" />

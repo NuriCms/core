@@ -3,7 +3,8 @@
  * importer
  * high class of importer module
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/importer
  * @version 0.1
  */

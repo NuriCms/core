@@ -6028,14 +6028,14 @@ xe.XE_WYSIWYGEnterKey = $.Class({
 	$ON_MSG_APP_READY : function(){
 		var doc = this.oApp.getWYSIWYGDocument();
 
-		if (typeof doc._enterkey_binded == "undefined") {		
+		if (typeof doc._enterkey_binded == "undefined") {
 			$(doc).keydown($.fnBind(this._onKeyDown, this));
 			doc._enterkey_binded = true;
 		}
 	},
-	_onKeyDown : function(event){	
+	_onKeyDown : function(event){
 		if(event.shiftKey) return;
-		
+
 		if(event.keyCode == 13){ // enter
 			if(this.sLineBreaker == "BR"){
 				this._insertBR(event);
@@ -6074,7 +6074,7 @@ xe.XE_WYSIWYGEnterKey = $.Class({
 
 			if(oSWrapper.innerHTML == "") oSWrapper.innerHTML = "<br>";
 			if(oEWrapper.innerHTML == "") oEWrapper.innerHTML = "<br>";
-			
+
 			if(oEWrapper.nextSibling && oEWrapper.nextSibling.tagName == "BR") oEWrapper.parentNode.removeChild(oEWrapper.nextSibling);
 
 			oSelection.selectNodeContents(oEWrapper);
@@ -6085,7 +6085,7 @@ xe.XE_WYSIWYGEnterKey = $.Class({
 			oSelection.removeStringBookmark(sBM);
 		}
 	},
-	
+
 	_insertBR : function(event){
 		event.stopPropagation();
 		event.preventDefault();
@@ -6096,7 +6096,7 @@ xe.XE_WYSIWYGEnterKey = $.Class({
 		oSelection.insertNode(elBR);
 		oSelection.selectNode(elBR);
 		oSelection.collapseToEnd();
-		
+
 		if(!$.browser.msie){
 			var oLineInfo = oSelection.getLineInfo();
 			var oStart = oLineInfo.oStart;

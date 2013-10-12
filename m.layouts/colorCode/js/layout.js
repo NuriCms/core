@@ -9,5 +9,5 @@ jQuery(function($){
             lang.removeClass('off').addClass('on');
             lang_lst.show();
         }
-    })    
+    })
 }); // end of ready

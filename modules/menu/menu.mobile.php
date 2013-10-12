@@ -3,7 +3,8 @@
  * menuMobile class
  * mobile class of the menu module
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/menu
  * @version 0.1
  */
@@ -64,7 +65,7 @@ class menuMobile extends moduleObject
 			}
 		}
 
-		Context::set('menu', $this->result);	
+		Context::set('menu', $this->result);
 
 		$this->setTemplatePath(sprintf("%stpl/",$this->module_path));
 		$this->setTemplateFile('menu.html');

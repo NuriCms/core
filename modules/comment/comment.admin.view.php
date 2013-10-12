@@ -4,7 +4,8 @@
  * commentAdminView class
  * admin view class of the comment module
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/comment
  * @version 0.1
  */
@@ -48,7 +49,7 @@ class commentAdminView extends comment
 		  }
 		 */
 
-		// get a list by using comment->getCommentList. 
+		// get a list by using comment->getCommentList.
 		$oCommentModel = getModel('comment');
 		$secretNameList = $oCommentModel->getSecretNameList();
 		$columnList = array('comment_srl', 'document_srl', 'is_secret', 'status', 'content', 'comments.member_srl', 'comments.nick_name', 'comments.regdate', 'ipaddress', 'voted_count', 'blamed_count');
@@ -66,7 +67,7 @@ class commentAdminView extends comment
 		Context::set('modules_list', $modules_list);
 		Context::set('page_navigation', $output->page_navigation);
 		Context::set('secret_name_list', $secretNameList);
-		// set the template 
+		// set the template
 		$this->setTemplatePath($this->module_path . 'tpl');
 		$this->setTemplateFile('comment_list');
 	}

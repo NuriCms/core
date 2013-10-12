@@ -213,7 +213,7 @@
                 $this->ftp_debug("Error : Cannot get remote file list\n");
                 return -1;
             }
-            
+
             reset($remote_list);
             while (list(,$value) = each($remote_list)) {
                 if ($value == $pathname) {
@@ -360,7 +360,7 @@
 
         function ftp_put($remotefile, $localfile, $mode = 1)
         {
-            
+
             if (!@file_exists($localfile)) {
                 $this->ftp_debug("Error : No such file or directory \"".$localfile."\"\n");
                 $this->ftp_debug("Error : PUT command failed\n");
@@ -491,7 +491,7 @@
 				$line .= $char;
 				if($char === "\n") break;
 			}
-				
+
 			// 세자리 응답 코드가 나와야 한다.
 			if(!preg_match('@^[0-9]{3}@', $line))
 			{

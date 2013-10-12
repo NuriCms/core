@@ -1,7 +1,8 @@
 <?php
 /**
  * Admin model class of the file module
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class fileAdminModel extends file
 {
@@ -54,7 +55,7 @@ class fileAdminModel extends file
 	 * - isvaild
 	 * - regdate
 	 * - ipaddress
-	 * 
+	 *
 	 * </pre>
 	 *
 	 * @param object $obj Search options

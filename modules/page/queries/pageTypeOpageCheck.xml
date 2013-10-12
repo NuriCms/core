@@ -1,11 +1,11 @@
 <query id="pageTypeOpageCheck" action="select">
-    <tables>
-        <table name="modules" />
-    </tables>
-    <columns>
-        <column name="*" />
-    </columns>
-    <conditions>
+	<tables>
+		<table name="modules" />
+	</tables>
+	<columns>
+		<column name="*" />
+	</columns>
+	<conditions>
 		<condition operation="equal" column="module" default="opage" />
-    </conditions>
+	</conditions>
 </query>

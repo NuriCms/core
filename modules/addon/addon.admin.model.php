@@ -2,7 +2,8 @@
 
 /**
  * Admin model class of addon module
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class addonAdminModel extends addon
 {

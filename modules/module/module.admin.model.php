@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  moduleAdminModel
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @version 0.1
  * @brief AdminModel class of the "module" module
  */
@@ -196,7 +197,7 @@ class moduleAdminModel extends module
 		$group_list = $oMemberModel->getGroups($module_info->site_srl);
 		Context::set('group_list', $group_list);
 
-		//Security			
+		//Security
 		$security = new Security();
 		$security->encodeHTML('group_list..title');
 		$security->encodeHTML('group_list..description');
@@ -352,14 +353,14 @@ class moduleAdminModel extends module
 			$skin_vars = $oModuleModel->getModuleMobileSkinVars($module_srl);
 		}
 
-		if(count($skin_info->extra_vars)) 
+		if(count($skin_info->extra_vars))
 		{
-			foreach($skin_info->extra_vars as $key => $val) 
+			foreach($skin_info->extra_vars as $key => $val)
 			{
 				$group = $val->group;
 				$name = $val->name;
 				$type = $val->type;
-				if($skin_vars[$name]) 
+				if($skin_vars[$name])
 				{
 					$value = $skin_vars[$name]->value;
 				}
@@ -381,7 +382,7 @@ class moduleAdminModel extends module
 		Context::set('mode', $mode);
 
 		//Security
-		$security = new Security(); 
+		$security = new Security();
 		$security->encodeHTML('mid');
 		$security->encodeHTML('module_info.browser_title');
 		$security->encodeHTML('skin_info...');

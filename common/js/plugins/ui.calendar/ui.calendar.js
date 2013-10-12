@@ -3,7 +3,7 @@
  * @author NHN (developers@xpressengine.com)
  *
  * 사용법
- * 
+ *
  **/
 (function($){
 
@@ -47,7 +47,7 @@ $.extend(Calendar.prototype, {
 
 		var uid = $.calendar.uuid+'-'+(index++);
 		var c = calendars[uid] = {};
-		
+
 		// uid 추가
 		obj.addClass('ui-calendar-'+uid).mousedown(function(){return false});
 
@@ -65,7 +65,7 @@ $.extend(Calendar.prototype, {
 			nextyear  : 'Next Year',
 			close : 'Close'
 		}, options.lang||{});
-		
+
 		c.lang.weekdays = c.lang.weekdays.split(',');
 
 		// 날짜 설정
@@ -150,18 +150,18 @@ $.extend(Calendar.prototype, {
 				else w.push('<button type="button" class="day'+v.yyyy+'-'+v.m+'-'+(i+1-start)+'">'+(i+1-start)+'</button>');
 			}
 		}
-		
+
 		// 템플릿 처리
 		tpl = this._processTemplate(tpl, v);
 		obj.html(tpl);
 
 		// 선택한 날짜
 		if (cal.options.type == 'month') {
-			
+
 		} else {
 			var t = new Date();
 			obj.find('td>button.day'+t.getFullYear()+'-'+(t.getMonth()+1)+'-'+t.getDate()).addClass('today');
-			
+
 			t = cal.activeDate;
 			obj.find('td>button.day'+t.getFullYear()+'-'+(t.getMonth()+1)+'-'+t.getDate()).addClass('active');
 		}
@@ -184,9 +184,9 @@ $.extend(Calendar.prototype, {
 		var cal  = calendars[ this._getuid(obj) ];
 		var date = btn.attr('class').match(/day([\d\-]+)/);
 		if (!date) return;
-		
+
 		date = date[1].split('-');
-		
+
 		var ad = cal.activeDate;
 		ad.setFullYear(date[0]-0);
 		ad.setMonth(date[1]-1);
@@ -203,7 +203,7 @@ $.extend(Calendar.prototype, {
 		cal.activeDate = new Date(newDate.getTime());
 		cal.date = new Date(newDate.getTime());
 		this._draw(obj);
-		
+
 		if ($.isFunction(cal.options.select) && obj.hasClass('ui-calendar')) {
 			cal.options.select(newDate.getFullYear(), newDate.getMonth()+1, newDate.getDate());
 		}
@@ -236,7 +236,7 @@ $.extend(Calendar.prototype, {
 	_nextMonth : function(obj) {
 		var cal = calendars[this._getuid(obj)];
 		var m = cal.date.getMonth();
-		
+
 		cal.date.setDate(1);
 		if (m == 11) {
 			cal.date.setFullYear(cal.date.getFullYear()+1);

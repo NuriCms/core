@@ -12,7 +12,7 @@ jQuery(function($){
 	// Toggle
 	var $acTog = $('a[href="#acField"]');
 	var $acField = $('#acField');
-	$acTog.click(function(){ 
+	$acTog.click(function(){
 		$this = $(this);
 		$acField.slideToggle(200, function(){
 			var $user_id = $(this).find('input[name="user_id"]:eq(0)');

@@ -1,9 +1,9 @@
 <?php
 
 if (!defined('__DIR__'))
-    define('__DIR__', realpath(dirname(__FILE__))); 
+    define('__DIR__', realpath(dirname(__FILE__)));
 
-/** The tests here are meant only for the built-in checks in validator.php, 
+/** The tests here are meant only for the built-in checks in validator.php,
     and not for the entire syntax expressed by the .xsd files. */
 class XmlQueriesTest extends PHPUnit_Framework_TestCase
 {
@@ -23,33 +23,33 @@ class XmlQueriesTest extends PHPUnit_Framework_TestCase
     {
 	 $this->validator_cmd = "php " . escapeshellarg(__DIR__ . '/../validate.php') . " ";
     }
- 
+
     // recursive glob
     // On Windows glob() is case-sensitive.
-    public function globr($sDir, $sPattern, $nFlags = NULL) 
-    { 
-	// Get the list of all matching files currently in the 
-	// directory. 
+    public function globr($sDir, $sPattern, $nFlags = NULL)
+    {
+	// Get the list of all matching files currently in the
+	// directory.
 
-	$aFiles = glob("$sDir/$sPattern", $nFlags); 
+	$aFiles = glob("$sDir/$sPattern", $nFlags);
 
 	$this->assertTrue(is_array($aFiles), 'directory listing failed.');
 
 	$aDirs = glob("$sDir/*", GLOB_ONLYDIR | GLOB_NOSORT | GLOB_NOESCAPE | GLOB_ERR);
 	$this->assertTrue(is_array($aDirs), 'directory listing failed.');
 
-	foreach ($aDirs as $sSubDir) 
-	{ 
+	foreach ($aDirs as $sSubDir)
+	{
 	    if ($sSubDir != '.' && $sSubDir != '..')
 	    {
-		$aSubFiles = $this->globr($sSubDir, $sPattern, $nFlags); 
-		$aFiles = array_merge($aFiles, $aSubFiles); 
+		$aSubFiles = $this->globr($sSubDir, $sPattern, $nFlags);
+		$aFiles = array_merge($aFiles, $aSubFiles);
 	    }
-	} 
+	}
 
 	// return merged array with all (recursive) files
-	return $aFiles; 
-    } 
+	return $aFiles;
+    }
 
     /** Tests all XML Query and Schema Language files (in all modules/addons/widgets) in XE */
     public function invoke_testReleasedXMLLangFiles

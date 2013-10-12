@@ -26,30 +26,30 @@ $.fn.hotkey = function(key, func) {
 		for(var x in key) $(this).hotkey(x, key[x]);
 		return this;
 	}
-	
+
 	if (!$.isString(key)) return this;
 	if (key == 'disable' || key == 'enable') {
 		this.attr('hotkey_disabled', (key=='disable'));
 		return this;
 	}
-	
+
 	if (!$.isFunction(func)) return this;
 	if ($.isObject(key)) key = hk2str(key);
-		
+
 	Hotkey[key] = func;
-	
+
 	if (!this.attr('assign-hotkey')) {
 		this.attr('assign-hotkey', true);
-		
+
 		this.keydown(function(evt){
 			if ($(this).attr('hotkey_disabled')) return;
-			
+
 			var stroke = hk2str(evt).split(',');
-			
+
 			for(var i=0; i < stroke.length; i++) {
 				if (Hotkey[stroke[i]]) {
 					if ($(evt.target).is(':input') && (evt.ctrlKey||evt.altKey||evt.metaKey)) break;
-					
+
 					Hotkey[stroke[i]](evt, stroke[i]);
 
 					evt.stopPropagation();
@@ -58,7 +58,7 @@ $.fn.hotkey = function(key, func) {
 			}
 		});
 	}
-	
+
 	return this;
 };
 
@@ -89,13 +89,13 @@ function hk2str(key) {
 		vkey = String.fromCharCode(key.keyCode).toUpperCase();
 		if (vkey.length != 1) return '';
 	}
-	
+
 	key.altKey?str.push('Alt'):_;
 	key.ctrlKey?str.push('Ctrl'):_;
 	key.shiftKey?str.push('Shift'):_;
-	
+
 	str.push(vkey);
-	
+
 	return str.join('+');
 }
 
@@ -103,16 +103,16 @@ function hk2str(key) {
 function str2hk(str) {
 	var key = {altKey:false,ctrlKey:false,shiftKey:false,keyCode:0};
 	var lastKey = str.match(/\+([A-Z0-9]+)$/)[1];
-	
+
 	if (!lastKey) return key;
-	
+
 	str += '+';
-	
+
 	key.altKey   = str.indexOf('Alt+') > -1;
 	key.ctrlKey  = str.indexOf('Ctrl+') > -1;
 	key.shiftKey = str.indexOf('Shift+') > -1;
-	
+
 	key.keyCode = VKEY[lastKey] || lastKey.charCodeAt(0);
 }
-	
+
 })(jQuery);

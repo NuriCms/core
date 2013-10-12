@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  moduleAdminView
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief admin view class of the module module
  */
 class moduleAdminView extends module
@@ -86,7 +87,7 @@ class moduleAdminView extends module
 		$module_info = $oModuleModel->getModuleInfoXml(Context::get('selected_module'));
 		Context::set('module_info', $module_info);
 
-		$security = new Security();				
+		$security = new Security();
 		$security->encodeHTML('module_info...');
 
 		// Set the layout to be pop-up
@@ -249,7 +250,7 @@ class moduleAdminView extends module
 		$oMemberModel = &getModel('member');
 		$group_list = $oMemberModel->getGroups($module_info->site_srl);
 		Context::set('group_list', $group_list);
-		$security = new Security();				
+		$security = new Security();
 		$security->encodeHTML('group_list..title');
 
 		// Set the layout to be pop-up
@@ -304,7 +305,7 @@ class moduleAdminView extends module
 		Context::set('filebox_list', $output->data);
 		Context::set('page_navigation', $output->page_navigation);
 		Context::set('page', $page);
-		
+
 		$oSecurity = new Security();
 		$oSecurity->encodeHTML('filebox_list..comment', 'filebox_list..attributes.');
 		debugPrint($output->data);

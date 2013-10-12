@@ -6,7 +6,8 @@ require_once(_XE_PATH_.'modules/document/document.item.php');
  * @brief document the module's high class
  * {@internal Silently adds one extra Foo to compensate for lack of Foo }
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/document
  * @version 0.1
  */
@@ -117,10 +118,10 @@ class document extends ModuleObject
 		// 2011. 10. 25 status index check
 		if(!$oDB->isIndexExists("documents", "idx_module_status")) return true;
 
-		// 2012. 02. 27 Add a trigger to copy extra keys when the module is copied 
+		// 2012. 02. 27 Add a trigger to copy extra keys when the module is copied
 		if(!$oModuleModel->getTrigger('module.procModuleAdminCopyModule', 'document', 'controller', 'triggerCopyModuleExtraKeys', 'after')) return true;
 
-		// 2012. 08. 29 Add a trigger to copy additional setting when the module is copied 
+		// 2012. 08. 29 Add a trigger to copy additional setting when the module is copied
 		if(!$oModuleModel->getTrigger('module.procModuleAdminCopyModule', 'document', 'controller', 'triggerCopyModule', 'after')) return true;
 
 		return false;
@@ -165,7 +166,7 @@ class document extends ModuleObject
 		// 2007. 10. 17 Add a trigger to delete all posts together when the module is deleted
 		if(!$oModuleModel->getTrigger('module.deleteModule', 'document', 'controller', 'triggerDeleteModuleDocuments', 'after'))
 			$oModuleController->insertTrigger('module.deleteModule', 'document', 'controller', 'triggerDeleteModuleDocuments', 'after');
-		// 2007. 10. 25 add columns(parent_srl, expand) 
+		// 2007. 10. 25 add columns(parent_srl, expand)
 		if(!$oDB->isColumnExists("document_categories","parent_srl")) $oDB->addColumn('document_categories',"parent_srl","number",12,0);
 		if(!$oDB->isColumnExists("document_categories","expand")) $oDB->addColumn('document_categories',"expand","char",1,"N");
 		if(!$oDB->isColumnExists("document_categories","group_srls")) $oDB->addColumn('document_categories',"group_srls","text");
@@ -309,13 +310,13 @@ class document extends ModuleObject
 		if(!$oDB->isIndexExists("documents", "idx_module_status"))
 			$oDB->addIndex("documents", "idx_module_status", array("module_srl","status"));
 
-		// 2012. 02. 27 Add a trigger to copy extra keys when the module is copied 
+		// 2012. 02. 27 Add a trigger to copy extra keys when the module is copied
 		if(!$oModuleModel->getTrigger('module.procModuleAdminCopyModule', 'document', 'controller', 'triggerCopyModuleExtraKeys', 'after'))
 		{
 			$oModuleController->insertTrigger('module.procModuleAdminCopyModule', 'document', 'controller', 'triggerCopyModuleExtraKeys', 'after');
 		}
 
-		// 2012. 08. 29 Add a trigger to copy additional setting when the module is copied 
+		// 2012. 08. 29 Add a trigger to copy additional setting when the module is copied
 		if(!$oModuleModel->getTrigger('module.procModuleAdminCopyModule', 'document', 'controller', 'triggerCopyModule', 'after'))
 		{
 			$oModuleController->insertTrigger('module.procModuleAdminCopyModule', 'document', 'controller', 'triggerCopyModule', 'after');

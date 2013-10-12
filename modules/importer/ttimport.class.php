@@ -6,7 +6,8 @@
  * ttimport class
  * ttxml import class
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/importer
  * @version 0.1
  */
@@ -61,7 +62,7 @@ class ttimport
 
 					$obj = null;
 					$obj->title = $category;
-					$obj->module_srl = $module_srl; 
+					$obj->module_srl = $module_srl;
 					if($v->parent) $obj->parent_srl = $match_sequence[$v->parent];
 					$output = $oDocumentController->insertCategory($obj);
 
@@ -248,7 +249,7 @@ class ttimport
 				// Save state if not published
 				if(!in_array($xmlDoc->post->visibility->body, $status_published))
 				{
-					$obj->module_srl = $member_info->member_srl; 
+					$obj->module_srl = $member_info->member_srl;
 				}
 			}
 			// Document
@@ -514,7 +515,7 @@ class ttimport
 		{
 			$uploaded_count++;
 			$tmp_obj = null;
-			if($file_obj->direct_download == 'Y') $files[$name]->url = $file_obj->uploaded_filename; 
+			if($file_obj->direct_download == 'Y') $files[$name]->url = $file_obj->uploaded_filename;
 			else $files[$name]->url = getUrl('','module','file','act','procFileDownload','file_srl',$file_obj->file_srl,'sid',$file_obj->sid);
 			$files[$name]->direct_download = $file_obj->direct_download;
 			$files[$name]->source_filename = $file_obj->source_filename;
@@ -581,7 +582,7 @@ class ttimport
 			if(preg_match('/\.(jpg|gif|jpeg|png)$/i', $obj->source_filename))
 			{
 				return sprintf('<img editor_component="image_link" src="%s" alt="%s" />', $obj->url, str_replace('"','\\"',$matches[4]));
-				// If other multimedia file but image is, 
+				// If other multimedia file but image is,
 			}
 			else
 			{
@@ -604,7 +605,7 @@ class ttimport
 		$key = $matches[1];
 		if(!$key) return $matches[0];
 
-		return 
+		return
 			'<object type="application/x-shockwave-flash" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="100%" height="402">'.
 			'<param name="movie" value="http://flvs.daum.net/flvPlayer.swf?vid='.urlencode($key).'"/>'.
 			'<param name="allowScriptAccess" value="always"/>'.

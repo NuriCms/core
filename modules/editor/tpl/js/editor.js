@@ -129,7 +129,7 @@ function editorStart(editor_sequence, primary_key, content_key, editor_height, f
     editor_path = editor_path.replace(/^\.\//ig, '');
     var contentHtml = ''+
         '<!DOCTYPE html>'+
-        '<html><head><meta charset="utf-8"/>'+
+        '<html><head><meta charset="UTF-8"/>'+
         '<style>'+
         'body{font-size:.75em;line-height:1.6;font-family:Sans-serif;height:'+editor_height+'px;padding:0;margin:0;background-color:transparent;color:'+font_color+';}'+
         '</style>'+

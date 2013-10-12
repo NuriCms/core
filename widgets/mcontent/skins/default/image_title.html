@@ -15,29 +15,29 @@
 			<!--@else-->
 				<span class="th">No Image</span>
 			<!--@end-->
-			
+
 			<!--@for($j=0,$c=count($widget_info->option_view_arr);$j<$c;$j++)-->
 				<!--@if($widget_info->option_view_arr[$j]=='title')-->
 				<span class="title">
 					<!--@if(!$__module_info && $widget_info->show_browser_title=='Y' && $item->getBrowserTitle())-->
 					{$item->getBrowserTitle()} &rsaquo;
 					<!--@end-->
-					
+
 					<!--@if($widget_info->show_category=='Y' && $item->getCategory())-->
 					{$item->getCategory()} &rsaquo;
 					<!--@end-->
-					
+
 					<strong>{$item->getTitle($widget_info->subject_cut_size)}</strong>
-					
+
 					<!--@if($widget_info->show_comment_count=='Y' && $item->getCommentCount())-->
 					<em title="Replies">[{$item->getCommentCount()}]</em>
 					<!--@end-->
-					
+
 					<!--@if($widget_info->show_trackback_count=='Y' && $item->getTrackbackCount())-->
 					<em title="Trackbacks">[{$item->getTrackbackCount()}]</em>
 					<!--@end-->
 				</span>
-	
+
 				<!--@else if($widget_info->option_view_arr[$j]=='nickname')-->
 				<span class="auth">
 					<strong>{$item->getNickName()}</strong>

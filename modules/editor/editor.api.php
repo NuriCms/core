@@ -1,8 +1,9 @@
 <?php
 /**
  * @class  editorAPI
- * @author NHN (developers@xpressengine.com)
- * @brief 
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
+ * @brief
  */
 class editorAPI extends editor
 {

@@ -79,7 +79,7 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 		$arr = array('no-userid'=>'');
 		$vd->validate($arr);
 		$this->assertEquals( $arr, array('no-userid'=>'') );
-		
+
 		$arr = array('userid'=>'');
 		$vd->validate(&$arr); // pass-by-reference
 		$this->assertEquals( $arr, array('userid'=>'ididid') );

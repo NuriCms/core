@@ -19,7 +19,7 @@ function editorUploadInit(obj) {
     if(typeof(obj["replaceButtonID"])=="undefined") obj["replaceButtonID"] = "swfUploadButton"+obj["editorSequence"];
     if(typeof(obj["insertFiles"])=="undefined") obj["insertFiles"] = 0;
    // xAddEventListener(window,'load', function() {XEUploaderStart(obj); } );
-    XEUploaderStart(obj); 
+    XEUploaderStart(obj);
 
 }
 
@@ -77,7 +77,7 @@ function XEUploaderStart(obj) {
 		upload_complete_handler : uploadComplete,
 		queue_complete_handler :queueComplete
 	};
-	
+
 	if(typeof(xeVid)!='undefined') settings["post_params"]["vid"] = xeVid;
 	settings["post_params"][obj["sessionName"]] = xGetCookie(obj["sessionName"]);
 	settings["editorSequence"] = obj["editorSequence"];
@@ -85,14 +85,14 @@ function XEUploaderStart(obj) {
 	for(var x in obj) {
 		if (typeof settings[x] != 'undefined') settings[x] = obj[x];
 	}
-	
+
 	uploaderSettings[obj["editorSequence"]] = settings;
-	
+
 	var swfu   = new SWFUpload(settings);
 	var swfObj = jQuery('#'+swfu.movieName);
 	swfUploadObjs[obj["editorSequence"]] = swfu.movieName;
 	if(!swfObj) return;
-	
+
 	jQuery(swfObj).css({
 		display  : 'block',
 		cursor   : 'pointer',
@@ -238,10 +238,10 @@ function completeReloadFileList(ret_obj, response_tags, settings) {
 	var upload_target_srl= ret_obj['upload_target_srl'];
 	var files = ret_obj['files'];
 	var left_size = parseInt(parseInt(ret_obj["left_size"],10)/1024,10);
-	
+
 	if(!files || typeof(files['item'])=='undefined') return;
 	if (!jQuery.isArray(files['item'])) files['item'] = [ files['item'] ];
-	
+
 	orderedFiles = files['item'];
 
 	jQuery.each(files['item'], function(){

@@ -4,7 +4,8 @@
  * adminAdminView class
  * Admin view class of admin module
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/admin
  * @version 0.1
  */

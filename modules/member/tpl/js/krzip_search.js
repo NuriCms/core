@@ -50,7 +50,7 @@ function completeSearchKrZip(ret_obj, response_tags, callback_args) {
 	var column_name  = callback_args['column_name'];
 
 	var $j = jQuery;
-	
+
 	address_list = $j.map(address_list, function(addr){ return '<option value="'+addr+'">'+addr+'</option>'; });
 
 	$j('#zone_address_list_'+column_name).show();

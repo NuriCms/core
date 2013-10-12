@@ -2,7 +2,8 @@
 
 /**
  * @class  communicationAdminController
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief communication module of the admin controller class
  */
 class communicationAdminController extends communication
@@ -57,7 +58,7 @@ class communicationAdminController extends communication
 		$output = $oModuleController->insertModuleConfig('communication', $args);
 
 		$returnUrl = Context::get('success_return_url') ? Context::get('success_return_url') : getNotEncodedUrl('', 'module', 'admin', 'act', 'dispCommunicationAdminConfig');
-		
+
 		return $this->setRedirectUrl($returnUrl, $output);
 	}
 

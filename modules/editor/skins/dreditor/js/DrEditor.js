@@ -39,10 +39,10 @@ var DrEditor = xe.createApp('DrEditor', {
 					function(){ $(this).parent().removeClass('hover'); }
 				)
 				.click(
-					function(event){					
+					function(event){
 						var type = $(this).parent().attr('class').toUpperCase().split(' ')[0];
 						self.cast('CLICK_TOOLBUTTON', [seq, this, type]);
-						
+
 						return false;
 					}
 				);
@@ -57,7 +57,7 @@ var DrEditor = xe.createApp('DrEditor', {
 					var tools = [];
 
 					if (!$numbers) {
-						($numbers = _toolbar.find('button .nx')).sort(function(a, b){				
+						($numbers = _toolbar.find('button .nx')).sort(function(a, b){
 							return (parseInt(a.firstChild.nodeValue,10) > parseInt(b.firstChild.nodeValue,10))?1:-1;
 						});
 					}
@@ -139,7 +139,7 @@ var DrEditor = xe.createApp('DrEditor', {
 			if(para.parents('div.material:first').length) return true;
 
 			var seq = para.parents('form:first')[0].elements['editor_sequence'].value;
-			
+
 			if (configs[seq].editArea.children('div.wArea:visible').length) {
 				// save
 				if (configs[seq].last_type) self.cast('CLOSE_EDITOR', [seq, true, configs[seq].last_type]);
@@ -429,7 +429,7 @@ var DrEditor = xe.createApp('DrEditor', {
 			} else if (shift) { // hit shift + up, down to select multiple paragraphs
 				var children  = configs[seq].editArea.children('div.eArea');
 				var current   = configs[seq].selLast || configs[seq].selFirst;
-				
+
 				if (key == UP) {
 					if ((prev=current.prev('div.eArea')).length) current = prev;
 				} else {
@@ -862,10 +862,10 @@ var TextWriter = xe.createPlugin('TextWriter', {
 		//ed.registerPlugin(new xe.XE_FontSetter(this.getFontFamily(), this.getFontSize()));
 
 		// Ctrl+Enter를 입력하면 현재 문단 저장 후 새 텍스트 문단을 보여준다.
-        pHotkey.add(pHotkey.normalize('ctrl+enter'), function(){ 
+        pHotkey.add(pHotkey.normalize('ctrl+enter'), function(){
 			setTimeout(function() { self.cast('CLOSE_EDITOR', [seq, true, 'TXT']) }, 1);
 		});
-		pHotkey.add(pHotkey.normalize('esc'), function(){ 
+		pHotkey.add(pHotkey.normalize('esc'), function(){
 			setTimeout(function() { self.cast('CLOSE_EDITOR', [seq, false, 'TXT']) }, 1);
 		});
 
@@ -1229,7 +1229,7 @@ var ImageWriter = xe.createPlugin('ImageWriter', {
 		_file.change(function(){
 			var t = $(this);
 			var prev = t.prev();
-			
+
 			if ( !/\.(jpe?g|png|gif)$/i.test(t.val()) ) {
 				t.val('');
 				return false;
@@ -1237,7 +1237,7 @@ var ImageWriter = xe.createPlugin('ImageWriter', {
 
 			var callback_id = ''+(new Date).getTime()+Math.ceil(Math.random()*1000);
 			window[callback_id] = function(fileObj){ self.onfileuploaded(seq, callback_id, fileObj); }
-			
+
 			var filesrl = (_image.attr('class')||'').match(/(?:^|\s)xe_filesrl_(\d+)(?:\s|$)/);
 			filesrl = (filesrl && filesrl[1])? filesrl[1] : '';
 
@@ -1331,7 +1331,7 @@ var ImageWriter = xe.createPlugin('ImageWriter', {
 			alert(fileObj.message);
 			return;
 		}
-		
+
 		var self = this;
 		var cfg  = this.configs[seq];
 
@@ -1467,13 +1467,13 @@ var ImageWriter = xe.createPlugin('ImageWriter', {
 
 			var filesrl = cfg.image.attr('filesrl');
 			if (filesrl) img.addClass('xe_filesrl_'+filesrl);
-			
+
 			box.remove();
 			this.cast('SAVE_PARAGRAPH', [seq, cfg.editor, box=newBox, 'IMG']);
 		} else {
 			box.show();
 		}
-		
+
 		if(!box.length) box = cfg.editor.prev('div.eArea');
 		this.cast('SELECT_PARAGRAPH', [seq, box, box, box]);
 
@@ -1530,7 +1530,7 @@ var MaterialWriter = xe.createPlugin('MaterialWriter', {
 		var _buttons = _editor.find('div.controls button');
 		_buttons.eq(0).click(function(){ self.load_material(seq, 1); });
 		_buttons.eq(1).click(function(){ self.cast('CLOSE_EDITOR', [seq, false, 'MATERIAL']); });
-	
+
 		this.configs[seq] = {
 			editor     : _editor,
 			template   : _editor.find('div._container > dl').remove(),
@@ -1578,7 +1578,7 @@ var MaterialWriter = xe.createPlugin('MaterialWriter', {
 			cfg.prev_page  = data.page_navigation.cur_page;
 			cfg.next_page  = data.page_navigation.cur_page;
 			cfg.total_page = data.page_navigation.total_page;
-			
+
 			if(!cfg.loaded){
 				paginate.find('> button.prev').click(function(){ self.load_material_prev(seq) });
 				paginate.find('> button.next').click(function(){ self.load_material_next(seq) });
@@ -1812,7 +1812,7 @@ var FileWriter = xe.createPlugin('FileWriter', {
 		var box = params[1];
 		var bef = params[2];
 		var cfg = this.configs[seq];
-		
+
 
 		if (!cfg) {
 			cfg  = this.create(seq);
@@ -1843,7 +1843,7 @@ var FileWriter = xe.createPlugin('FileWriter', {
 
 			cfg.count.text(cfg.n_count);
 			cfg.size.text(this.formatsize(cfg.n_size));
-			
+
 			cfg.files.show();
 			cfg.summary.show();
 
@@ -1893,8 +1893,8 @@ var FileWriter = xe.createPlugin('FileWriter', {
 				var fileObj = uploadedFiles[srl];
 				var a  = $('<a>').attr('href', request_uri + fileObj.download_url.replace(/\&amp;/g, '&')).text(fileObj.source_filename);
 				var sz = $('<span>').text(fileObj.disp_file_size);
-				
-				
+
+
 				$('<dd>').attr('class', 'filesrl_'+srl).append(a).append(sz).appendTo(dl);
 			});
 
@@ -1958,7 +1958,7 @@ var ListWriter = xe.createPlugin('ListWriter', {
 		var _editor  = configs[seq].writeArea.find('>div.list');
 		var _toolbar = _editor.find('ul.toolbar');
 		var _list    = _editor.find('div.listArea');
-		
+
 		this.cast('ADD_DEFAULT_EDITOR_ACTION', [seq, _editor, 'LIST']);
 
 		_toolbar.find('button').click(function(){
@@ -2106,7 +2106,7 @@ var ListWriter = xe.createPlugin('ListWriter', {
 
 						obj.val( val + ($.browser.opera?' ':'') + next.val() );
 						this.set_pos(obj, val.length);
-						
+
 						// remove next item
 						next.parent().remove();
 					}
@@ -2142,7 +2142,7 @@ var ListWriter = xe.createPlugin('ListWriter', {
 			obj[0].setSelectionRange(pos, pos);
 		} else if(obj[0].createTextRange) {
 			var range = obj[0].createTextRange();
-	
+
 			range.moveStart('character', pos);
 			range.collapse(true);
 			range.select();
@@ -2214,7 +2214,7 @@ var ListWriter = xe.createPlugin('ListWriter', {
 		var el  = $(elem).get(0);
 		var lev = 0;
 		var tag = '';
-		
+
 		while(el) {
 			tag = el.tagName.toLowerCase();
 			if (tag == 'div' && el.className == 'listArea') break;
@@ -2517,7 +2517,7 @@ var HelpViewer = xe.createPlugin('Help', {
 
 		this.views[seq].hide();
 		this.cast('SELECT_PARAGRAPH', [seq, box, box, box]);
-		
+
 	}
 });
 editor.registerPlugin(new HelpViewer);
@@ -2588,7 +2588,7 @@ function translate_cite(str) {
 }
 
 function is_left_click(event) {
-	var ie = $.browser.msie; 
+	var ie = $.browser.msie;
 	return (typeof(event.button)=='undefined' || (ie && event.button == 1) || (!ie && event.button == 0));
 }
 

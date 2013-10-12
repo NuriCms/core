@@ -2,7 +2,8 @@
 /**
  * The admin view class of the integration_search module
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class integration_searchAdminView extends integration_search
 {
@@ -50,7 +51,7 @@ class integration_searchAdminView extends integration_search
 		// module_category and module combination
 		if($module_categories) {
 		foreach($mid_list as $module_srl => $module) {
-		$module_categories[$module->module_category_srl]->list[$module_srl] = $module; 
+		$module_categories[$module->module_category_srl]->list[$module_srl] = $module;
 		}
 		} else {
 		$module_categories[0]->list = $mid_list;

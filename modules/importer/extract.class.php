@@ -3,7 +3,8 @@
  * extract class
  * Class to save each file by using tags in the large xml
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/importer
  * @version 0.1
  */
@@ -266,7 +267,7 @@ class extract
 					return;
 				}
 			}
-			$this->buff .= fgets($this->fd, 1024); 
+			$this->buff .= fgets($this->fd, 1024);
 		}
 
 		$startPos = strpos($this->buff, $this->itemStartTag);

@@ -1,26 +1,26 @@
 <query id="update" action="update">
-    <tables>
+	<tables>
 	<table name="table1" />
-    </tables>
-    <columns>
+	</tables>
+	<columns>
 	<column name="column1" default="10"/>
 	<column name="column2" default="12" />
 	<column name="column3" default="13"/>
-    </columns>
-    <conditions>
+	</columns>
+	<conditions>
 	<condition operation="more" column="column4" default="100" var="condition_value">
-	    <query id="documentMaxRegdate">
+		<query id="documentMaxRegdate">
 		<tables>
-		    <table name="documents" alias="documents" />
+			<table name="documents" alias="documents" />
 		</tables>
 		<columns>
-		    <column name="max(regdate)" />
+			<column name="max(regdate)" />
 		</columns>
 		<conditions>
-		    <condition operation="equal" column="documents.user_id" var="member.user_id" notnull="notnull" />
+			<condition operation="equal" column="documents.user_id" var="member.user_id" notnull="notnull" />
 		</conditions>
-	    </query>
+		</query>
 	</condition>
-    </conditions>
+	</conditions>
 </query>
 

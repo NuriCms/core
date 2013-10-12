@@ -2,7 +2,8 @@
 
 /**
  * @class  communicationController
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * communication module of the Controller class
  */
 class communicationController extends communication
@@ -215,7 +216,7 @@ class communicationController extends communication
 			return $output;
 		}
 
-		// create a flag that message is sent (in file format) 
+		// create a flag that message is sent (in file format)
 		$flag_path = './files/member_extra_info/new_message_flags/' . getNumberingPath($receiver_srl);
 		FileHandler::makeDir($flag_path);
 		$flag_file = sprintf('%s%s', $flag_path, $receiver_srl);
@@ -524,7 +525,7 @@ class communicationController extends communication
 	}
 
 	/**
-	 * Delete a friend 
+	 * Delete a friend
 	 * @return void|Object (success : void, fail : Object)
 	 */
 	function procCommunicationDeleteFriend()
@@ -726,7 +727,7 @@ class communicationController extends communication
 
 	/**
 	 * set a message status to be 'already read'
-	 * @param int $message_srl 
+	 * @param int $message_srl
 	 * @return Object
 	 */
 	function setMessageReaded($message_srl)

@@ -1,5 +1,5 @@
 <query id="initMemberPoint" action="delete">
-    <tables>
-        <table name="point" />
-    </tables>
+	<tables>
+		<table name="point" />
+	</tables>
 </query>

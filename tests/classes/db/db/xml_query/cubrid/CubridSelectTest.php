@@ -392,16 +392,16 @@
                                         where "expired" <= \'' . date("YmdHis") . '\'';
                     $this->_test($xml_file, $argsString, $expected);
                 }
-				
+
                 function test_rlike_1(){
                     $xml_file = _TEST_PATH_ . "db/xml_query/cubrid/data/rlike1.xml";
                     $argsString = '$args->title = "aaa";';
                     $expected = 'select * from "xe_modules" as "modules" where "title" rlike \'aaa\'';
 					define('__CUBRID_VERSION__', '8.4.1');
                     $this->_test($xml_file, $argsString, $expected);
-                }				
-				
-	
+                }
+
+
 		function test_resource_getLatestItem(){
 			$xml_file = _TEST_PATH_ . "db/xml_query/cubrid/data/resource.getLatestItem.xml";
 			$expected = 'SELECT "package"."module_srl" as "module_srl"
@@ -429,12 +429,12 @@
 							, "item"."voter" as "item_voter"
 							, "item"."voted" as "item_voted"
 							, "item"."downloaded" as "item_downloaded"
-							, "item"."regdate" as "item_regdate"  
-						FROM "xe_resource_packages" as "package" 
-							, "xe_member" as "member" 
-							, "xe_resource_items" as "item"   
-						WHERE "package"."package_srl" = ? 
-							and "package"."member_srl" = "member"."member_srl" 
+							, "item"."regdate" as "item_regdate"
+						FROM "xe_resource_packages" as "package"
+							, "xe_member" as "member"
+							, "xe_resource_items" as "item"
+						WHERE "package"."package_srl" = ?
+							and "package"."member_srl" = "member"."member_srl"
 							and "item"."item_srl" = "package"."latest_item_srl"';
 			$argsString = '$args->package_srl = 18325662;';
 			$expectedArgs = array(18325662);

@@ -3,7 +3,7 @@
  * Listener for HTTP_Request and HTTP_Response objects
  *
  * PHP versions 4 and 5
- * 
+ *
  * LICENSE:
  *
  * Copyright (c) 2002-2007, Richard Heyes
@@ -40,7 +40,7 @@
  * @copyright   2002-2007 Richard Heyes
  * @license     http://opensource.org/licenses/bsd-license.php New BSD License
  * @version     CVS: $Id: Listener.php,v 1.3 2007/05/18 10:33:31 avb Exp $
- * @link        http://pear.php.net/package/HTTP_Request/ 
+ * @link        http://pear.php.net/package/HTTP_Request/
  */
 
 /**
@@ -54,7 +54,7 @@
  * @author      Alexey Borzov <avb@php.net>
  * @version     Release: 1.4.1
  */
-class HTTP_Request_Listener 
+class HTTP_Request_Listener
 {
    /**
     * A listener's identifier
