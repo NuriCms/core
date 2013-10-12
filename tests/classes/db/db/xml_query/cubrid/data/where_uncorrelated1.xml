@@ -1,4 +1,4 @@
-<query id="getMemberInfo" action="select">    
+<query id="getMemberInfo" action="select">
     <tables>
         <table name="member" />
     </tables>

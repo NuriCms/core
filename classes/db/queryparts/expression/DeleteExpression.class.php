@@ -6,7 +6,7 @@
  * @author Arnia Software
  * @package /classes/db/queryparts/expression
  * @version 0.1
- * @todo Fix this class 
+ * @todo Fix this class
  */
 class DeleteExpression extends Expression
 {

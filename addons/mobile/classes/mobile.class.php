@@ -133,7 +133,7 @@ class mobileXE
 	 */
 	function setModuleInfo(&$module_info)
 	{
-		if($this->module_info) return; 
+		if($this->module_info) return;
 		$this->module_info = $module_info;
 	}
 
@@ -257,7 +257,7 @@ class mobileXE
 				$text = sprintf('%s (%d/%d)', Context::getLang('cmd_next'), $this->mobilePage+1, $this->totalPage);
 				$this->setNextUrl($url, $text);
 			}
-		} 
+		}
 		$this->childs = $childs;
 	}
 
@@ -374,7 +374,7 @@ class mobileXE
 	 */
 	function cutStr($string, $cut_size)
 	{
-		return preg_match('/.{'.$cut_size.'}/su', $string, $arr) ? $arr[0] : $string; 
+		return preg_match('/.{'.$cut_size.'}/su', $string, $arr) ? $arr[0] : $string;
 	}
 
 	/**

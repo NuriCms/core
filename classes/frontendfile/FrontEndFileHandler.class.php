@@ -168,7 +168,7 @@ class FrontEndFileHandler extends Handler
 		{
 			return $existsInfo[$existsKey];
 		}
-		
+
 		$pathInfo = pathinfo($fileName);
 		$file = new stdClass();
 		$file->fileName = $pathInfo['basename'];

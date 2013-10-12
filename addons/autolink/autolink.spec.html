@@ -1,5 +1,5 @@
-<!DOCTYPE html> 
-<html lang="ko"> 
+<!DOCTYPE html>
+<html lang="ko">
 <head>
 <meta charset="utf-8" />
 <title>Autolink Addon Unit Test</title>
@@ -25,7 +25,7 @@ var TestSuite = xe.createPlugin("TestSuite", {
 xe.registerPlugin(new TestSuite);
 
 jQuery(function($){
-	
+
 describe('AutoLink functionality', {
 	"#test1 - plain text don't have any link text" : function() {
 		value_of( $('#test1').children().length ).should_be(0);

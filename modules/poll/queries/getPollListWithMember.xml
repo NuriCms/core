@@ -25,9 +25,9 @@
         <column name="M.*" />
     </columns>
     <conditions>
-		
+
 		<condition operation="in" column="poll_index_srl" var="pollIndexSrlList" filter="number" pipe="and" />
-		
+
 		<group pipe="and">
 			<condition operation="like" column="P.title" var="s_title" pipe="or"/>
 			<condition operation="like_prefix" column="P.regdate" var="s_regdate" pipe="or" />

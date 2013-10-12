@@ -115,7 +115,7 @@ class moduleView extends module
 				$mid_list[$module]->title = $xml_info->title;
 			}
 		}
-		
+
 		// not show admin bar
 		Context::set('admin_bar', 'false');
 		Context::set('mid_list', $mid_list);

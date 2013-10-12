@@ -10,7 +10,7 @@
         	</columns>
 		    <groups>
 		       <group column="member_srl" />
-		    </groups>        		        	
+		    </groups>
         </table>
     </tables>
     <columns>

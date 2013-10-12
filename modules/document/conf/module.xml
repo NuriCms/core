@@ -58,7 +58,7 @@
         <action name="procDocumentAdminInsertConfig" type="controller" standalone="true" />
         <action name="procDocumentAdminDeleteAllThumbnail" type="controller" standalone="true" />
         <action name="procDocumentAdminCancelDeclare" type="controller" standalone="true" />
-	
+
     </actions>
 	<menus>
 		<menu name="document">

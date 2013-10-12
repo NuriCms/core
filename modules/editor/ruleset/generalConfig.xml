@@ -4,6 +4,6 @@
     </customrules>
     <fields>
 		<field name="editor_height" required="true" rule="number" />
-		<field name="comment_editor_height" required="true" rule="number" />		
+		<field name="comment_editor_height" required="true" rule="number" />
     </fields>
 </ruleset>

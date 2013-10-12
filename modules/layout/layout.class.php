@@ -2,7 +2,7 @@
 /**
  * @class  layout
  * @author NHN (developers@xpressengine.com)
- * high class of the layout module 
+ * high class of the layout module
  */
 class layout extends ModuleObject
 {

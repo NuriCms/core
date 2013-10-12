@@ -54,7 +54,7 @@ class fileAdminModel extends file
 	 * - isvaild
 	 * - regdate
 	 * - ipaddress
-	 * 
+	 *
 	 * </pre>
 	 *
 	 * @param object $obj Search options

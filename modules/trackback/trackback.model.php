@@ -95,7 +95,7 @@ class trackbackModel extends trackback
 		return $trackback_list;
 	}
 
-	/** 
+	/**
 	 * Bringing a mid Trackbacks
 	 * @param object $obj
 	 * @return object

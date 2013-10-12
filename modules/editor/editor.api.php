@@ -2,7 +2,7 @@
 /**
  * @class  editorAPI
  * @author NHN (developers@xpressengine.com)
- * @brief 
+ * @brief
  */
 class editorAPI extends editor
 {

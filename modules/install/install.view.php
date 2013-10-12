@@ -37,7 +37,7 @@ class installView extends install
 			include $install_config_file;
 			if(is_array($install_config))
 			{
-				foreach($install_config as $k => $v) 
+				foreach($install_config as $k => $v)
 				{
 					$v = ($k == 'db_table_prefix') ? $v.'_' : $v;
 					Context::set($k,$v,true);
@@ -64,7 +64,7 @@ class installView extends install
 	{
 		$useRewrite = $this->useRewriteModule() ? 'Y' : 'N';
 		$_SESSION['use_rewrite'] = $useRewrite;
-		Context::set('use_rewrite', $useRewrite); 
+		Context::set('use_rewrite', $useRewrite);
 
 		$this->setTemplateFile('check_env');
 	}
@@ -132,7 +132,7 @@ class installView extends install
 
 		include _XE_PATH_.'files/config/tmpDB.config.php';
 
-		Context::set('use_rewrite', $_SESSION['use_rewrite']); 
+		Context::set('use_rewrite', $_SESSION['use_rewrite']);
 		Context::set('time_zone', $GLOBALS['time_zone']);
 		Context::set('db_type', $db_info->db_type);
 		$this->setTemplateFile('config_form');

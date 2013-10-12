@@ -19,5 +19,5 @@
 			<conditions>
 					<condition operation="more" column="column4" default="100" var="condition_value" />
 			</conditions>
-	</query>		
+	</query>
 </query>

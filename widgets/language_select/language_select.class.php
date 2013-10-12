@@ -1,6 +1,6 @@
 <?php
 /**
- * @class language_select 
+ * @class language_select
  * @author NHN (developers@xpressengine.com)
  * @brief Language selector
  * @version 0.1

@@ -18,7 +18,7 @@ class pageMobile extends pageView
 				}
 			case 'OUTSIDE' :
 				{
-					$this->cache_file = sprintf("./files/cache/opage/%d.%s.m.cache.php", $this->module_info->module_srl, Context::getSslStatus()); 
+					$this->cache_file = sprintf("./files/cache/opage/%d.%s.m.cache.php", $this->module_info->module_srl, Context::getSslStatus());
 					$this->interval = (int)($this->module_info->page_caching_interval);
 					$this->path = $this->module_info->mpath;
 					break;
@@ -60,19 +60,19 @@ class pageMobile extends pageView
 					$mtime = filemtime($cache_file);
 				}
 
-				if($mtime + $interval*60 > time()) 
+				if($mtime + $interval*60 > time())
 				{
-					$page_content = FileHandler::readFile($cache_file); 
+					$page_content = FileHandler::readFile($cache_file);
 					$page_content = preg_replace('@<\!--#Meta:@', '<!--Meta:', $page_content);
-				} 
-				else 
+				}
+				else
 				{
 					$oWidgetController = &getController('widget');
 					$page_content = $oWidgetController->transWidgetCode($this->module_info->mcontent);
 					FileHandler::writeFile($cache_file, $page_content);
 				}
-			} 
-			else 
+			}
+			else
 			{
 				if(file_exists($cache_file))
 				{
@@ -85,7 +85,7 @@ class pageMobile extends pageView
 		{
 			preg_match_all('!(<img)([^\>]*)(widget=)([^\>]*?)(\>)!is', $this->module_info->content, $matches);
 			$page_content = '';
-			for($i=0,$c=count($matches[0]);$i<$c;$i++) 
+			for($i=0,$c=count($matches[0]);$i<$c;$i++)
 			{
 				$page_content .= preg_replace('/ style\=\"([^\"]+)\" /i',' style="overflow:hidden;clear:both;margin:0 0 20px 0; _margin-right:10px;" ',$matches[0][$i])."\n\n";
 			}

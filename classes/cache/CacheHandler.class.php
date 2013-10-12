@@ -3,7 +3,7 @@
 /**
  * CacheHandler
  *
- * @author NHN (developer@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 class CacheHandler extends Handler
 {
@@ -254,7 +254,7 @@ class CacheHandler extends Handler
 /**
  * Base class of Cache
  *
- * @author NHN (developer@xpressengine.com)
+ * @author NURI Project (developer@nuricms.org)
  */
 class CacheBase
 {

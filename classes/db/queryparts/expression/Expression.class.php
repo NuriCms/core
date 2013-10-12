@@ -3,7 +3,7 @@
 /**
  * Expression
  * Represents an expression used in select/update/insert/delete statements
- * 
+ *
  *  Examples (expressions are inside double square brackets):
  *  	select [[columnA]], [[columnB as aliasB]] from tableA
  *  	update tableA set [[columnA = valueA]] where columnB = something
@@ -47,7 +47,7 @@ class Expression
 	 */
 	function getExpression()
 	{
-		
+
 	}
 
 }

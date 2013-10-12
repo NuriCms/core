@@ -2,8 +2,8 @@
 
 /**
  * class JoinTable
- * 		$conditions in an array of Condition objects 
- * 
+ * 		$conditions in an array of Condition objects
+ *
  * @author Arnia Software
  * @package /classes/db/queryparts/table
  * @version 0.1

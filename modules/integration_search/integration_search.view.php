@@ -76,7 +76,7 @@ class integration_searchView extends integration_search
 		if(!$page) $page = 1;
 		// Search by search tab
 		$where = Context::get('where');
-		// Create integration search model object 
+		// Create integration search model object
 		if($is_keyword)
 		{
 			$oIS = &getModel('integration_search');

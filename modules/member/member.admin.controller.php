@@ -627,7 +627,7 @@ class memberAdminController extends member
 	 * Add a join form
 	 * @return void|Object (void : success, Object : fail)
 	 */
-	function procMemberAdminInsertJoinForm() 
+	function procMemberAdminInsertJoinForm()
 	{
 		$args = new stdClass();
 		$args->member_join_form_srl = Context::get('member_join_form_srl');
@@ -653,7 +653,7 @@ class memberAdminController extends member
 		// Check ID duplicated
 		$oMemberModel = &getModel('member');
 		$config = $oMemberModel->getMemberConfig();
-		foreach($config->signupForm as $item) 
+		foreach($config->signupForm as $item)
 		{
 			if($item->name == $args->column_name)
 			{
@@ -693,7 +693,7 @@ class memberAdminController extends member
 
 		if($isInsert)
 		{
-			$config->signupForm[] = $signupItem;	
+			$config->signupForm[] = $signupItem;
 		}
 		else
 		{
@@ -772,7 +772,7 @@ class memberAdminController extends member
 	}
 
 	/**
-	 * selected member manager layer in dispAdminList 
+	 * selected member manager layer in dispAdminList
 	 * @return void|Object (void : success, Object : fail)
 	 */
 	function procMemberAdminSelectedMemberManage()
@@ -788,7 +788,7 @@ class memberAdminController extends member
 		foreach($members as $key=>$member_srl)
 		{
 			$args = new stdClass();
-			$args->member_srl = $member_srl; 
+			$args->member_srl = $member_srl;
 			switch($var->type)
 			{
 				case 'modify':
@@ -1068,7 +1068,7 @@ class memberAdminController extends member
 	function insertGroup($args)
 	{
 		if(!$args->site_srl) $args->site_srl = 0;
-		// Check the value of is_default. 
+		// Check the value of is_default.
 		if($args->is_default!='Y')
 		{
 			$args->is_default = 'N';
@@ -1090,7 +1090,7 @@ class memberAdminController extends member
 	 */
 	function updateGroup($args)
 	{
-		// Check the value of is_default. 
+		// Check the value of is_default.
 		if(!$args->group_srl) return new Object(-1, 'lang->msg_not_founded');
 		if($args->is_default!='Y')
 		{
@@ -1138,7 +1138,7 @@ class memberAdminController extends member
 	 */
 	public function procMemberAdminGroupConfig()
 	{
-		$vars = Context::getRequestVars();	
+		$vars = Context::getRequestVars();
 
 		$oMemberModel = &getModel('member');
 		$oModuleController = &getController('module');

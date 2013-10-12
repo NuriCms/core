@@ -93,7 +93,7 @@
             <description xml:lang="es">Logo en la parte superior de la pantalla de diseño, por favor, introduzca las letras. Si la imagen no se muestra el logotipo.</description>
             <description xml:lang="tr">Lütfen logonun görüntülenemediği durumlarda, yerleşim düzeninin üstünde görüntülenecek harfleri giriniz.</description>
         </var>
-        <var name="copyright_text" type="text"> 
+        <var name="copyright_text" type="text">
             <title xml:lang="ko">카피라이트 문구</title>
             <title xml:lang="jp">Copyright文章</title>
             <title xml:lang="zh-CN">网站版权文档</title>

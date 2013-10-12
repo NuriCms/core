@@ -71,7 +71,7 @@ if($called_position == 'before_module_init')
 // Before module processing, handle requests from blogapi tool and then terminate.
 if($called_position == 'before_module_proc')
 {
-	// Check writing permission 
+	// Check writing permission
 	if(!$this->grant->write_document)
 	{
 		printContent(getXmlRpcFailure(1, 'no permission'));
@@ -219,7 +219,7 @@ if($called_position == 'before_module_proc')
 									'</value>' .
 								'</param>' .
 							'</params>' .
-							'</methodResponse>', 
+							'</methodResponse>',
 							$category,
 							date("Ymd", $oDocument->getRegdateTime()) . 'T' . date("H:i:s", $oDocument->getRegdateTime()),
 							$oDocument->getContent(false, false, true, false),
@@ -300,7 +300,7 @@ if($called_position == 'before_module_proc')
 			$oDocumentController = getController('document');
 			$obj->commentStatus = 'ALLOW';
 			$obj->allow_trackback = 'Y';
-			
+
 			$logged_info = Context::get('logged_info');
 			$obj->member_srl = $logged_info->member_srl;
 			$obj->user_id = $logged_info->user_id;

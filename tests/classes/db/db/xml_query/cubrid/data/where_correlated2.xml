@@ -17,7 +17,7 @@
                 <conditions>
                     <condition operation="equal" column="documents.user_id" default="member.user_id" notnull="notnull" />
                     <condition operation="equal" column="module_srl" var="module_srl" notnull="notnull" pipe="and" />
-                </conditions>        		        	
+                </conditions>
         </query>
     </conditions>
 </query>

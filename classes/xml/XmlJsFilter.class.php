@@ -69,7 +69,7 @@ class XmlJsFilter extends XmlParser
 	 * Compiled js file
 	 * @var string
 	 */
-	var $js_file = NULL; // / 
+	var $js_file = NULL; // /
 
 	/**
 	 * constructor

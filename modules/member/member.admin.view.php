@@ -1,4 +1,4 @@
-<?php	
+<?php
 /**
  * @class  memberAdminView
  * @author NHN (developers@xpressengine.com)
@@ -8,14 +8,14 @@ class memberAdminView extends member
 {
 	/**
 	 * Group list
-	 * 
+	 *
 	 * @var array
 	 */
 	var $group_list = NULL;
 
 	/**
 	 * Selected member info
-	 * 
+	 *
 	 * @var array
 	 */
 	var $memberInfo = NULL;
@@ -32,7 +32,7 @@ class memberAdminView extends member
 	 *
 	 * @return void
 	 */
-	function init() 
+	function init()
 	{
 		$oMemberModel = &getModel('member');
 		$this->memberConfig = $oMemberModel->getMemberConfig();
@@ -42,7 +42,7 @@ class memberAdminView extends member
 
 		// if member_srl exists, set memberInfo
 		$member_srl = Context::get('member_srl');
-		if($member_srl) 
+		if($member_srl)
 		{
 			$this->memberInfo = $oMemberModel->getMemberInfoByMemberSrl($member_srl);
 			if(!$this->memberInfo)
@@ -94,7 +94,7 @@ class memberAdminView extends member
 		}
 		$config = $this->memberConfig;
 		$memberIdentifiers = array('user_id'=>'user_id', 'user_name'=>'user_name', 'nick_name'=>'nick_name');
-		$usedIdentifiers = array();	
+		$usedIdentifiers = array();
 
 		if(is_array($config->signupForm))
 		{
@@ -228,7 +228,7 @@ class memberAdminView extends member
 	 *
 	 * @return void
 	 */
-	function dispMemberAdminConfigOLD() 
+	function dispMemberAdminConfigOLD()
 	{
 		$oModuleModel = &getModel('module');
 		$oMemberModel = &getModel('member');
@@ -375,7 +375,7 @@ class memberAdminView extends member
 	}
 
 	/**
-	 * Get tags by the member info type 
+	 * Get tags by the member info type
 	 *
 	 * @param object $memberInfo
 	 * @param boolean $isAdmin (true : admin, false : not admin)
@@ -651,7 +651,7 @@ EOD;
 	 *
 	 * @return void
 	 */
-	function dispMemberAdminGroupList() 
+	function dispMemberAdminGroupList()
 	{
 		$oModuleModel = &getModel('module');
 		$output = $oModuleModel->getModuleFileBoxList();

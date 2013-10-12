@@ -188,7 +188,7 @@ class commentItem extends Object
 			return;
 		}
 
-		// pass if the author is not logged-in user 
+		// pass if the author is not logged-in user
 		if(!$this->get('member_srl'))
 		{
 			return;
@@ -201,7 +201,7 @@ class commentItem extends Object
 			return;
 		}
 
-		// get where the comment belongs to 
+		// get where the comment belongs to
 		$oDocumentModel = getModel('document');
 		$oDocument = $oDocumentModel->getDocument($this->get('document_srl'));
 
@@ -361,7 +361,7 @@ class commentItem extends Object
 		// Remove tags
 		$content = preg_replace('!<([^>]*?)>!is', '', $content);
 
-		// replace < , >, " 
+		// replace < , >, "
 		$content = str_replace(array('&lt;', '&gt;', '&quot;', '&nbsp;'), array('<', '>', '"', ' '), $content);
 
 		// delete a series of blanks
@@ -612,7 +612,7 @@ class commentItem extends Object
 			}
 		}
 
-		// get an image file from the doc content if no file attached. 
+		// get an image file from the doc content if no file attached.
 		if(!$source_file)
 		{
 			$content = $this->get('content');

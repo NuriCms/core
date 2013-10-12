@@ -44,7 +44,7 @@ class adminlogging extends ModuleObject
 	 */
 	function recompileCache()
 	{
-		
+
 	}
 
 }

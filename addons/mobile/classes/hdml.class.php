@@ -61,7 +61,7 @@ class wap extends mobileXE {
 		else
 		{
 			printf('<wrap>%s<br>%s', $this->getContent(),"\n");
-		} 
+		}
 	}
 
 	/**

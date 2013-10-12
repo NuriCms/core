@@ -16,7 +16,7 @@ class counter extends ModuleObject
 	{
 		$oCounterController = getController('counter');
 
-		// add a row for the total visit history 
+		// add a row for the total visit history
 		//$oCounterController->insertTotalStatus();
 
 		// add a row for today's status
@@ -77,7 +77,7 @@ class counter extends ModuleObject
 	 */
 	function recompileCache()
 	{
-		
+
 	}
 
 }

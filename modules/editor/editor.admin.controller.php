@@ -19,14 +19,14 @@ class editorAdminController extends editor
 	function procEditorAdminCheckUseListOrder()
 	{
 		$site_module_info = Context::get('site_module_info');
-		$enables = Context::get('enables');			
+		$enables = Context::get('enables');
 		$component_names = Context::get('component_names');
 
 		if(!is_array($component_names)) $component_names = array();
 		if(!is_array($enables)) $enables = array();
 
 		$unables = array_diff($component_names, $enables);
-		$componentList = array();	
+		$componentList = array();
 
 		foreach($enables as $component_name)
 		{
@@ -101,7 +101,7 @@ class editorAdminController extends editor
 				if(!$output->toBool()) return new Object();
 				$list_order_num++;
 			}
-		}	
+		}
 		unset($component_names);
 		return $output;
 	}

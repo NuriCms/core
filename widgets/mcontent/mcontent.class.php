@@ -381,7 +381,7 @@ class mcontent extends WidgetHandler
 		$content = str_replace(array('</p>', '</div>', '</li>'), ' ', $content);
 		// Remove Tag
 		$content = preg_replace('!<([^>]*?)>!is','', $content);
-		// Replace tags to < , > , " 
+		// Replace tags to < , > , "
 		$content = str_replace(array('&lt;','&gt;','&quot;','&nbsp;'), array('<','>','"',' '), $content);
 		// Delete a series of whitespaces
 		$content = preg_replace('/ ( +)/is', ' ', $content);
@@ -389,9 +389,9 @@ class mcontent extends WidgetHandler
 		$content = trim(cut_str($content, $str_size, $tail));
 		// Replace back < , > , "  to theoriginal tags
 		$content = str_replace(array('<','>','"'),array('&lt;','&gt;','&quot;'), $content);
-		// Fixed a newline bug on a set of consecutive English letters 
+		// Fixed a newline bug on a set of consecutive English letters
 		$content = preg_replace('/([a-z0-9\+:\/\.\~,\|\!\@\#\$\%\^\&\*\(\)\_]){20}/is',"$0-",$content);
-		return $content; 
+		return $content;
 	}
 
 

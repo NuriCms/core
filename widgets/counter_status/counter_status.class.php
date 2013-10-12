@@ -21,7 +21,7 @@ class counter_status extends WidgetHandler
 		$output = $oCounterModel->getStatus(array('00000000', date('Ymd', time()-60*60*24), date('Ymd')), $site_module_info->site_srl);
 		if(count($output))
 		{
-			foreach($output as $key => $val) 
+			foreach($output as $key => $val)
 			{
 				if(!$key) Context::set('total_counter', $val);
 				elseif($key == date("Ymd")) Context::set('today_counter', $val);

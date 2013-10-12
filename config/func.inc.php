@@ -378,7 +378,7 @@ function getNotEncodedFullUrl()
 /**
  * getSiteUrl() returns the URL by transforming the given argument value of domain
  * The first argument should consist of domain("http://" not included) and path
- * 
+ *
  * @return string
  */
 function getSiteUrl()
@@ -400,7 +400,7 @@ function getSiteUrl()
 /**
  * getSiteUrl() returns the not encoded URL by transforming the given argument value of domain
  * The first argument should consist of domain("http://" not included) and path
- * 
+ *
  * @return string
  */
 function getNotEncodedSiteUrl()
@@ -724,7 +724,7 @@ function zdate($str, $format = 'Y-m-d H:i:s', $conversion = TRUE)
 	}
 	else
 	{
-		// if year value is greater than 1970, get unixtime by using ztime() for date() function's argument. 
+		// if year value is greater than 1970, get unixtime by using ztime() for date() function's argument.
 		$string = date($format, ztime($str));
 	}
 	// change day and am/pm for each language
@@ -752,7 +752,7 @@ function getEncodeEmailAddress($email)
 }
 
 /**
- * Prints debug messages 
+ * Prints debug messages
  *
  * Display $buff contents into the file ./files/_debug_message.php.
  * You can see the file on your prompt by command: tail-f./files/_debug_message.php
@@ -892,7 +892,7 @@ function delObjectVars($target_obj, $del_obj)
 }
 
 /**
- * Change error_handing to debugPrint on php5 higher 
+ * Change error_handing to debugPrint on php5 higher
  *
  * @param int $errno
  * @param string $errstr
@@ -1111,7 +1111,7 @@ if(!function_exists('hexrgb'))
 
 /**
  * Php function for mysql old_password()
- * provides backward compatibility for zero board4 which uses old_password() of mysql 4.1 earlier versions. 
+ * provides backward compatibility for zero board4 which uses old_password() of mysql 4.1 earlier versions.
  * the function implemented by referring to the source codes of password.c file in mysql
  *
  * @param string $password

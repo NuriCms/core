@@ -26,7 +26,7 @@ class messageView extends message
 		{
 			$config = new stdClass();
 		}
-		
+
 		if(!$config->skin)
 		{
 			$config->skin = 'default';
@@ -51,7 +51,7 @@ class messageView extends message
 		// Get the member configuration
 		$member_config = $oModuleModel->getModuleConfig('member');
 		Context::set('member_config', $member_config);
-		// Set a flag to check if the https connection is made when using SSL and create https url 
+		// Set a flag to check if the https connection is made when using SSL and create https url
 		$ssl_mode = false;
 		if($member_config->enable_ssl == 'Y')
 		{

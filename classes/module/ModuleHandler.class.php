@@ -122,7 +122,7 @@ class ModuleHandler extends Handler
 				throw new Exception('msg_default_url_is_null');
 			}
 		}
-		
+
 		$oModuleModel = getModel('module');
 		$site_module_info = Context::get('site_module_info');
 

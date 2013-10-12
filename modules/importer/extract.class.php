@@ -266,7 +266,7 @@ class extract
 					return;
 				}
 			}
-			$this->buff .= fgets($this->fd, 1024); 
+			$this->buff .= fgets($this->fd, 1024);
 		}
 
 		$startPos = strpos($this->buff, $this->itemStartTag);

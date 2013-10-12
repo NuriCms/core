@@ -176,13 +176,13 @@ class Net_URL2
             $this->$method($arg);
         }
     }
-    
+
     /**
      * Magic Getter.
      *
-     * This is the magic get method to retrieve the private variable 
+     * This is the magic get method to retrieve the private variable
      * that was set by either __set() or it's setter...
-     * 
+     *
      * @param  string $var         The property name to retrieve.
      * @return mixed  $this->$var  Either a boolean false if the
      *                             property is not set or the value
@@ -194,10 +194,10 @@ class Net_URL2
         if (method_exists($this, $method)) {
             return $this->$method();
         }
-        
+
         return false;
     }
-    
+
     /**
      * Returns the scheme, e.g. "http" or "urn", or false if there is no
      * scheme specified, i.e. if this is a relative URL.
@@ -602,7 +602,7 @@ class Net_URL2
         if ($this->_fragment !== false) {
             $url .= '#' . $this->_fragment;
         }
-    
+
         return $url;
     }
 
@@ -617,7 +617,7 @@ class Net_URL2
         return $this->getURL();
     }
 
-    /** 
+    /**
      * Returns a normalized string representation of this URL. This is useful
      * for comparison of URLs.
      *
@@ -630,7 +630,7 @@ class Net_URL2
         return $url->getUrl();
     }
 
-    /** 
+    /**
      * Returns a normalized Net_URL2 instance.
      *
      * @return  Net_URL2
@@ -770,7 +770,7 @@ class Net_URL2
 
         // Make sure not to be trapped in an infinite loop due to a bug in this
         // method
-        $j = 0; 
+        $j = 0;
         while ($path && $j++ < 100) {
             if (substr($path, 0, 2) == './') {
                 // Step 2.A
@@ -825,7 +825,7 @@ class Net_URL2
     /**
      * Returns a Net_URL2 instance representing the canonical URL of the
      * currently executing PHP script.
-     * 
+     *
      * @return  string
      */
     public static function getCanonical()

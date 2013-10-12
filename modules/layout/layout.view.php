@@ -34,7 +34,7 @@ class layoutView extends layout
 
 	/**
 	 * Preview a layout with module.
-	 * 
+	 *
 	 * @return Object
 	 */
 	public function dispLayoutPreviewWithModule()
@@ -259,7 +259,7 @@ class layoutView extends layout
 			{
 				throw new Exception(Context::getLang('msg_unabled_preview'));
 			}
-		
+
 			$mid = current($output->data)->mid;
 		}
 
@@ -384,7 +384,7 @@ class layoutView extends layout
 		}
 		else
 		{
-			return ''; 
+			return '';
 		}
 
 	}
@@ -400,7 +400,7 @@ class layoutView extends layout
 		}
 		else
 		{
-			return ''; 
+			return '';
 		}
 
 	}

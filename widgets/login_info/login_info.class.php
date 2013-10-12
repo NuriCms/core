@@ -27,7 +27,7 @@ class login_info extends WidgetHandler
 		$this->member_config = $oModuleModel->getModuleConfig('member');
 		Context::set('member_config', $this->member_config);
 
-		// Set a flag to check if the https connection is made when using SSL and create https url 
+		// Set a flag to check if the https connection is made when using SSL and create https url
 		$ssl_mode = false;
 		$useSsl = Context::getSslStatus();
 		if($useSsl != 'none')

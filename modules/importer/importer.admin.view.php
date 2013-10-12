@@ -1,7 +1,7 @@
 <?php
 /**
  * importerAdminView class
- * admin view class of the importer module 
+ * admin view class of the importer module
  *
  * @author NHN (developers@xpressengine.com)
  * @package /modules/importer
@@ -29,30 +29,30 @@ class importerAdminView extends importer
 		$source_type = Context::get('source_type');
 		switch($source_type)
 		{
-			case 'member' : 
+			case 'member' :
 				$template_filename = "member";
 				break;
-			case 'ttxml' : 
+			case 'ttxml' :
 				$oModuleModel = &getModel('module');
 				//$mid_list = $oModuleModel->getMidList();	//perhaps mid_list variables not use
 				//Context::set('mid_list', $mid_list);
 
 				$template_filename = "ttxml";
 				break;
-			case 'module' : 
+			case 'module' :
 				$oModuleModel = &getModel('module');
 				//$mid_list = $oModuleModel->getMidList();	//perhaps mid_list variables not use
 				//Context::set('mid_list', $mid_list);
 
 				$template_filename = "module";
 				break;
-			case 'message' : 
+			case 'message' :
 				$template_filename = "message";
 				break;
-			case 'sync' : 
+			case 'sync' :
 				$template_filename = "sync";
 				break;
-			default : 
+			default :
 				$template_filename = "index";
 				break;
 		}

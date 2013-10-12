@@ -44,7 +44,7 @@ class ExtraVar
 
 	/**
 	 * Register a key of extra variable
-	 * 
+	 *
 	 * @param object[] $extra_keys Array of extra variable. A value of array is object that contains module_srl, idx, name, default, desc, is_required, search, value, eid.
 	 * @return void
 	 */
@@ -305,10 +305,10 @@ class ExtraItem
 
 			case 'tel' :
 				return sprintf('%s - %s - %s', $value[0], $value[1], $value[2]);
-				
+
 			case 'textarea' :
 				return nl2br($value);
-				
+
 			case 'checkbox' :
 				if(is_array($value))
 				{
@@ -318,7 +318,7 @@ class ExtraItem
 				{
 					return $value;
 				}
-				
+
 			case 'date' :
 				return zdate($value, "Y-m-d");
 
@@ -501,7 +501,7 @@ class ExtraItem
 		{
 			$buff .= '<p>' . htmlspecialchars($this->desc) . '</p>';
 		}
-		
+
 		return $buff;
 	}
 

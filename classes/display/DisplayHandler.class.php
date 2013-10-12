@@ -70,7 +70,7 @@ class DisplayHandler extends Handler
 
 		// call a trigger before display
 		ModuleHandler::triggerCall('display', 'before', $output);
-		
+
 		// execute add-on
 		$called_position = 'before_display_content';
 		$oAddonController = &getController('addon');

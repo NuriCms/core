@@ -39,7 +39,7 @@ if(!$oMobile)
 {
 	return;
 }
-// Specify charset on the add-on settings 
+// Specify charset on the add-on settings
 $oMobile->setCharSet($addon_info->charset);
 // Set module information
 $oMobile->setModuleInfo($this->module_info);

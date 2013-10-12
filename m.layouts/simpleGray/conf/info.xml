@@ -8,27 +8,27 @@
     <description xml:lang="ko">
         XE 심플 그레이 레이아웃입니다.
         디자인, 퍼블리싱 : 정찬명
-        레이아웃 제작 : haneul 
+        레이아웃 제작 : haneul
     </description>
     <description xml:lang="en">
         This layout is the Official website layout of XE.
         Design, HTML/CSS : Chan-Myung Jeong
-        Layout producer : haneul 
+        Layout producer : haneul
     </description>
     <description xml:lang="zh-CN">
         官方移动版布局。
         Design, HTML/CSS : Chan-Myung Jeong
-        Layout producer : haneul 
+        Layout producer : haneul
     </description>
     <description xml:lang="tr">
         官方移动版布局。
         Design, HTML/CSS : Chan-Myung Jeong
-        Layout producer : haneul 
+        Layout producer : haneul
     </description>
     <description xml:lang="zh-TW">
         XE Mobile 官方網站版面。
         Design, HTML/CSS : Chan-Myung Jeong
-        Layout producer : haneul 
+        Layout producer : haneul
     </description>
     <version>0.1</version>
     <date>2010-06-10</date>

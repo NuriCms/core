@@ -478,8 +478,8 @@ class commentController extends comment
 
 	/**
 	 * Send email to module's admins after a new comment was interted successfully
-	 * if Comments Approval System is used 
-	 * @param object $obj 
+	 * if Comments Approval System is used
+	 * @param object $obj
 	 * @return void
 	 */
 	function sendEmailToAdminAfterInsertComment($obj)
@@ -732,7 +732,7 @@ class commentController extends comment
 			$oCacheHandler->invalidateGroupKey('commentList_' . $obj->document_srl);
 			$oCacheHandler->invalidateGroupKey('newestCommentsList');
 		}
-		
+
 		return $output;
 	}
 

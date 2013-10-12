@@ -13,7 +13,7 @@
 
 var gallery = xe.getApp('gallery')[0];
 
-// Add images 
+// Add images
 <!--@foreach($gallery_info->images_list as $img)-->
 gallery.cast('ADD_IMAGE', [{$gallery_info->srl}, '{$img}']);
 <!--@end-->

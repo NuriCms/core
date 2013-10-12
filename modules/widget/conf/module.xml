@@ -7,11 +7,11 @@
         <action name="dispWidgetGenerateCode" type="view" standalone="true" />
         <action name="dispWidgetGenerateCodeInPage" type="view" standalone="true" />
         <action name="dispWidgetStyleGenerateCodeInPage" type="view" standalone="true" />
-        
+
 		<action name="dispWidgetAdminDownloadedList" type="view" standalone="true" admin_index="true" menu_name="installedWidget" menu_index="true" />
         <action name="dispWidgetAdminAddContent" type="view" standalone="true" />
 		<action name="dispWidgetAdminGenerateCode" type="view" menu_name="installedWidget" />
-        
+
 		<action name="procWidgetGenerateCode" type="controller" standalone="true" />
         <action name="procWidgetStyleExtraImageUpload" type="controller" standalone="true" />
         <action name="procWidgetStyleGenerateCodeInPage" type="controller" standalone="true" />

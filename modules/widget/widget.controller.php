@@ -706,7 +706,7 @@ class widgetController extends widget
 		{
 			$vars = new stdClass();
 		}
-		
+
 		$widget = $vars->selected_widget;
 		$vars->widgetstyle = $request_vars->widgetstyle;
 

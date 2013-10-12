@@ -183,7 +183,7 @@ class autoinstallAdminView extends autoinstall
 		}
 
 		$oModel = getModel('autoinstall');
-		
+
 		if($package == null)
 		{
 			$packages = $oModel->getInstalledPackages(array_keys($targetpackages));

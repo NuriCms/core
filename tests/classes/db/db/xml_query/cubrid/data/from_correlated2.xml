@@ -10,10 +10,10 @@
         	</columns>
                 <conditions>
                     <condition operation="equal" column="module_srl" var="module_srl" notnull="notnull" />
-                </conditions>        		        	                
+                </conditions>
                 <groups>
                    <group column="member_srl" />
-                </groups>        		        	
+                </groups>
         </table>
         <table name="member" alias="m" type="left join">
             <conditions>
@@ -29,5 +29,5 @@
     </columns>
     <conditions>
         <condition operation="more" column="a.count" var="count" notnull="notnull" />
-    </conditions>        		        	                    
+    </conditions>
 </query>

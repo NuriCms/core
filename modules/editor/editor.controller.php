@@ -112,7 +112,7 @@ class editorController extends editor
 			{
 				$editor_config->{$key} = array();
 			}
-			else if(is_array($grant)) 
+			else if(is_array($grant))
 			{
 				$editor_config->{$key} = $grant;
 			}
@@ -382,7 +382,7 @@ class editorController extends editor
 				$extra_vars = unserialize($component->extra_vars);
 				if($extra_vars->target_group)
 				{
-					$xml_info->target_group = $extra_vars->target_group;	
+					$xml_info->target_group = $extra_vars->target_group;
 				}
 
 				if($extra_vars->mid_list && count($extra_vars->mid_list))

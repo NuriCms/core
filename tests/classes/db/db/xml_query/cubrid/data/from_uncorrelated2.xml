@@ -10,10 +10,10 @@
         	</columns>
                 <conditions>
                         <condition operation="equal" column="module_srl" var="module_srl" notnull="notnull" />
-                </conditions>     
+                </conditions>
                 <groups>
                    <group column="member_srl" />
-                </groups>        		        	
+                </groups>
         </table>
     </tables>
     <columns>
@@ -21,5 +21,5 @@
     </columns>
     <conditions>
             <condition operation="equal" column="member_srl" var="member_srl" notnull="notnull" />
-    </conditions>         
+    </conditions>
 </query>

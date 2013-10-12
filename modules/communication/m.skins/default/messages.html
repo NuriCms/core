@@ -9,7 +9,7 @@
 	</li>
 </ul>
 <div class="pn">
-	<a cond="$page != 1" href="{getUrl('page',$page-1,'document_srl','')}" class="prev">{$lang->cmd_prev}</a> 
+	<a cond="$page != 1" href="{getUrl('page',$page-1,'document_srl','')}" class="prev">{$lang->cmd_prev}</a>
 	<strong>{$page} / {$page_navigation->last_page}</strong>
 	<a cond="$page != $page_navigation->last_page" href="{getUrl('page',$page+1,'document_srl','')}" class="next">{$lang->cmd_next}</a>
 </div>

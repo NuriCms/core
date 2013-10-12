@@ -34,7 +34,7 @@ class memberAdminModel extends member
 
 	/**
 	 * Get a member list
-	 * 
+	 *
 	 * @return object|array (object : when member count is 1, array : when member count is more than 1)
 	 */
 	function getMemberList()
@@ -128,7 +128,7 @@ class memberAdminModel extends member
 		else
 		{
 			$query_id = 'member.getMemberList';
-			$args->sort_index = $sort_index; 
+			$args->sort_index = $sort_index;
 		}
 
 		$args->sort_order = $sort_order;
@@ -144,7 +144,7 @@ class memberAdminModel extends member
 
 	/**
 	 * Get a memebr list for each site
-	 * 
+	 *
 	 * @param int $site_srl
 	 * @param int $page
 	 *
@@ -163,8 +163,8 @@ class memberAdminModel extends member
 
 	/**
 	 * Get member_srls lists about site admins
-	 * 
-	 * @return array 
+	 *
+	 * @return array
 	 */
 	function getSiteAdminMemberSrls()
 	{
@@ -182,8 +182,8 @@ class memberAdminModel extends member
 
 	/**
 	 * Return colorset list of a skin in the member module
-	 * 
-	 * @return void 
+	 *
+	 * @return void
 	 */
 	function getMemberAdminColorset()
 	{
@@ -210,7 +210,7 @@ class memberAdminModel extends member
 
 	/**
 	 * Return member count with date
-	 * 
+	 *
 	 * @param string $date
 	 *
 	 * @return int
@@ -270,7 +270,7 @@ class memberAdminModel extends member
 
 		$oMemberModel = &getModel('member');
 		$config = $oMemberModel->getMemberConfig();
-		foreach($config->signupForm as $item) 
+		foreach($config->signupForm as $item)
 		{
 			$list[] = $item->name;
 		}
@@ -285,7 +285,7 @@ class memberAdminModel extends member
 	}
 
 	/**
-	 * check allowed target ip address when  login for admin. 
+	 * check allowed target ip address when  login for admin.
 	 *
 	 * @return boolean (true : allowed, false : refuse)
 	 */
@@ -303,8 +303,8 @@ class memberAdminModel extends member
 			{
 				$admin_ip = $matches[0];
 				$admin_ip = str_replace('*','',$admin_ip);
-				$admin_ip_patterns[] = preg_quote($admin_ip);				
-				$admin_ip_pattern = '/^('.implode($admin_ip_patterns,'|').')/';				
+				$admin_ip_patterns[] = preg_quote($admin_ip);
+				$admin_ip_pattern = '/^('.implode($admin_ip_patterns,'|').')/';
 				if(preg_match($admin_ip_pattern, $ip, $matches)) return true;
 				$flag = true;
 			}

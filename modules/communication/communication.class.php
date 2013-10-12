@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @class  communication 
+ * @class  communication
  * @author NHN (developers@xpressengine.com)
  * communication module of the high class
  */
@@ -80,7 +80,7 @@ class communication extends ModuleObject
 				}
 			}
 		}
-		
+
 		return new Object(0, 'success_updated');
 	}
 
@@ -90,7 +90,7 @@ class communication extends ModuleObject
 	 */
 	function recompileCache()
 	{
-		
+
 	}
 
 }

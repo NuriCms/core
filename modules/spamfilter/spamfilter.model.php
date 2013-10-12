@@ -100,7 +100,7 @@ class spamfilterModel extends spamfilter
 	{
 		$config = $this->getConfig();
 
-		if($config->limits != 'Y') return new Object(); 
+		if($config->limits != 'Y') return new Object();
 		$limit_count = '3';
 		$interval = '10';
 

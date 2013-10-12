@@ -1,7 +1,7 @@
 <?php
 
 /**
- * File abstraction class 
+ * File abstraction class
  *
  * @author NHN (developers@xpressengine.com)
  */
@@ -27,10 +27,10 @@ class FileObject extends Object
 	var $mode = "r";
 
 	/**
-	 * Constructor 
+	 * Constructor
 	 *
 	 * @param string $path Path of target file
-	 * @param string $mode File open mode 
+	 * @param string $mode File open mode
 	 * @return void
 	 */
 	function FileObject($path, $mode)
@@ -42,10 +42,10 @@ class FileObject extends Object
 	}
 
 	/**
-	 * Append target file's content to current file 
+	 * Append target file's content to current file
 	 *
 	 * @param string $file_name Path of target file
-	 * @return void 
+	 * @return void
 	 */
 	function append($file_name)
 	{
@@ -61,7 +61,7 @@ class FileObject extends Object
 	/**
 	 * Check current file meets eof
 	 *
-	 * @return bool true: if eof. false: otherwise 
+	 * @return bool true: if eof. false: otherwise
 	 */
 	function feof()
 	{
@@ -69,7 +69,7 @@ class FileObject extends Object
 	}
 
 	/**
-	 * Read from current file 
+	 * Read from current file
 	 *
 	 * @param int $size Size to read
 	 * @return string Returns the read string or false on failure.
@@ -80,7 +80,7 @@ class FileObject extends Object
 	}
 
 	/**
-	 * Write string to current file 
+	 * Write string to current file
 	 *
 	 * @param string $str String to write
 	 * @return int Returns the number of bytes written, or false on error.
@@ -143,7 +143,7 @@ class FileObject extends Object
 	}
 
 	/**
-	 * Close file 
+	 * Close file
 	 *
 	 * @return void
 	 */

@@ -18,7 +18,7 @@
 				<iframe src="{getUrl('','act', 'dispEditorConfigPreview','mode','main')}" id="pre_document_frame" frameborder="0" style="border:0"></iframe>
 			</div>
 			<div class="x_tab-pane" id="pre_comment">
-				<iframe src="{getUrl('','act', 'dispEditorConfigPreview','mode','comment')}" id="pre_comment_frame" frameborder="0" style="border:0"></iframe> 
+				<iframe src="{getUrl('','act', 'dispEditorConfigPreview','mode','comment')}" id="pre_comment_frame" frameborder="0" style="border:0"></iframe>
 			</div>
 		</div>
 	</div>
@@ -90,7 +90,7 @@
 		<div class="x_control-group">
 			<label class="x_control-label">{$lang->guide_choose_font_body}</label>
 			<div class="x_controls">
-				{@ 
+				{@
 					if($editor_config->content_font_size) $fontSize = str_replace('px','',$editor_config->content_font_size);
 					else $fontSize = str_replace('px','',$editor_config_default['content_font_size']);
 				}
@@ -104,7 +104,7 @@
 					<input type="radio" name="content_font" id="font_{$name}" value="{$detail}" checked="checked"|cond="stripcslashes($editor_config->content_font)==$detail && $editor_config->font_defined!= 'Y'" />{$detail}
 				</label>
 				<label>
-					<input type="radio" name="font_defined" id="font_defined" value="Y" checked="checked"|cond="$editor_config->font_defined== 'Y'" />{$lang->by_you} : 
+					<input type="radio" name="font_defined" id="font_defined" value="Y" checked="checked"|cond="$editor_config->font_defined== 'Y'" />{$lang->by_you} :
 					<input type="text" name="content_font_defined" value="{stripcslashes($editor_config->content_font)}"|cond="$editor_config->font_defined == 'Y'" />
 				</label>
 				<label>
@@ -188,7 +188,7 @@ jQuery(function($){
 	}
 	preview();
 	$('._preview li>a').click(preview);
-	
+
 //init
 	var fontPreview = $('.fontPreview');
 	var fontSelector = $('.fontSelector');

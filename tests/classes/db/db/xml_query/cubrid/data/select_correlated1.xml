@@ -13,7 +13,7 @@
         	</columns>
                 <conditions>
                     <condition operation="equal" column="documents.user_id" default="member.user_id" />
-                </conditions>        	
+                </conditions>
         </query>
     </columns>
     <conditions>

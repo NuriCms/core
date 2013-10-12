@@ -187,7 +187,7 @@ class autoinstall extends ModuleObject
 	 */
 	function recompileCache()
 	{
-		
+
 	}
 
 }

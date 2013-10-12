@@ -15,7 +15,7 @@
 	        	</columns>
 			    <conditions>
 			        <condition operation="equal" column="documents.user_id" var="member.user_id" notnull="notnull" />
-			    </conditions>        		        	
+			    </conditions>
 	        </query>
     </conditions>
 </query>

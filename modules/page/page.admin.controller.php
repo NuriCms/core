@@ -309,7 +309,7 @@ class pageAdminController extends page
 		$bAnonymous = false;
 
 		// 이미 존재하는 경우 수정
-		if($oDocument->isExists() && $oDocument->document_srl == $obj->document_srl) 
+		if($oDocument->isExists() && $oDocument->document_srl == $obj->document_srl)
 		{
 			$output = $oDocumentController->updateDocument($oDocument, $obj);
 			$msg_code = 'success_updated';

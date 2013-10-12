@@ -157,7 +157,7 @@ class documentAdminView extends document
 		}
 		else
 		{
-			$aliases = $output->data; 
+			$aliases = $output->data;
 		}
 
 		Context::set('aliases', $aliases);

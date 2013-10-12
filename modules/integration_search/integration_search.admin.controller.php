@@ -110,7 +110,7 @@ class integration_searchAdminController extends integration_search
 				$obj->{$vars->name} = $filename;
 			}
 		}
-		// Serialize and save 
+		// Serialize and save
 		$args->skin_vars = serialize($obj);
 
 		$oModuleController = &getController('module');

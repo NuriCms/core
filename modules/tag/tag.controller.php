@@ -28,7 +28,7 @@ class tagController extends tag
 		foreach($tag_list as $tag)
 		{
 			if(!trim($tag)) continue;
-			$arranged_tag_list[] = trim($tag); 
+			$arranged_tag_list[] = trim($tag);
 		}
 		if(!count($arranged_tag_list)) $obj->tags = null;
 		else $obj->tags = implode(',',$arranged_tag_list);

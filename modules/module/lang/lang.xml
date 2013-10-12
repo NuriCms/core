@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<lang>	
+<lang>
 	<item name="msg_avail_install">
 		<value xml:lang="ko"><![CDATA[DB Table 생성을 해야 설치가 완료됩니다.]]></value>
 		<value xml:lang="en"><![CDATA[You have to create db table, if you want to finish to install this iteam]]></value>
@@ -936,7 +936,7 @@ Le module [Administration des Modules] montera tous les modules installés et vo
  Управление модулем покажет все установленные модули и поможет управлять ими.]]></value>
 		<value xml:lang="es"><![CDATA[XE consiste de módulos excepto la librería básica.
  Módulo del Manejo del Módulo muestra todos los módulos instalados y ayuda el manejo de ellos.]]></value>
-		<value xml:lang="tr"><![CDATA[XE, temel kitaplık dışında, modüllerden oluşmaktadır. 
+		<value xml:lang="tr"><![CDATA[XE, temel kitaplık dışında, modüllerden oluşmaktadır.
  [Modül Yönetimi] modülü, size kurulu tüm modülleri gösterecek ve onları yönetmenize yardımcı olacaktır.]]></value>
 		<value xml:lang="vi"><![CDATA[Khu vực Module trong XE ngoại trừ Library là tại [Module Manage]. Tất cả những Module đang có sẽ hiển thị, giúp bạn quản lý một cách dễ dàng.]]></value>
 	</item>

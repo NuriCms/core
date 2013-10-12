@@ -4,9 +4,9 @@
 	vi:set ts=4:
 	@file
 
-	Script to validate a query or a SQL statement written in the 
+	Script to validate a query or a SQL statement written in the
 	XpressEngine XML Query Language or the XML Schema language.
-	
+
 	XpressEngine is an open source framework for creating your web sites.
 	http://xpressengine.org/
 
@@ -58,14 +58,14 @@ class ErrorMessage extends Exception
 /**
 	@brief Error message class to signal and carry
 	the command-line usage description (string) for the script
-	
+
 	@developer Arnia Software
  */
 class SyntaxError extends ErrorMessage
 {
 }
 
-/** 
+/**
 	@brief Error in an XML query
 	@developer Arnia Software
  */
@@ -180,7 +180,7 @@ function checkDuplicateDescendants($xml_file, $node, $child_tag)
 
 	if($children->length > 1)
 	{
-		throw 
+		throw
 			new XmlSchemaError(
 				$xml_file,
 				$children->item(1)->getLineNo(),
@@ -205,7 +205,7 @@ function checkDuplicateDescendants($xml_file, $node, $child_tag)
 	are given, than the first one that is present on a child is included
 	in the check.
  @param $key
-	True if child elements are required to expose at least one of the 
+	True if child elements are required to expose at least one of the
 	attribute. False if only the child nodes with some of the
 	attributes present are to be checked.
  @brief
@@ -326,7 +326,7 @@ function checkTableExpression($xml_file, $table_element)
 			if($query_clause->nodeType == XML_ELEMENT_NODE
 						&&
 					(
-						$query_clause->tagName == 'columns' 
+						$query_clause->tagName == 'columns'
 							||
 						$query_clause->tagName == 'tables'))
 			{
@@ -415,7 +415,7 @@ function checkTableExpression($xml_file, $table_element)
 }
 
 /**
-  All table names and aliases should be distinct throughout 
+  All table names and aliases should be distinct throughout
   the <tables> element.
 
   Subquery tables should be valid queries.
@@ -565,7 +565,7 @@ function checkConditionElement($xml_file, $condition)
 
 	if($child_query_node && $has_var_attribute)
 	{
-		throw 
+		throw
 			new XmlSchemaError(
 				$xml_file,
 				$query_line_no,
@@ -652,7 +652,7 @@ function checkConditionsGroup($xml_file, $conditions)
 
 /**
   Ensure at most one <list_count>, <page_count> and
-  <page> elements are present. There can be any number of 
+  <page> elements are present. There can be any number of
   <index> elements listed.
 
   @brief
@@ -791,10 +791,10 @@ function validate_insert_select_query($xml_file, $query_element)
 	}
 }
 
-$validate_query_type = 
+$validate_query_type =
 	array
 		(
-			// 'insert' =>		
+			// 'insert' =>
 							// there is currently nothing special to check
 							// for a plain insert, all the needed checks
 							// are already expressed in the .xsd
@@ -824,7 +824,7 @@ function validate_xml_query($xml_file, $query_element)
 }
 
 if(strpos(PHP_SAPI, 'cli') !== FALSE
-			|| 
+			||
 		strpos(PHP_SAPI, 'cgi') !== FALSE)
 {
 	/**
@@ -882,10 +882,10 @@ if(strpos(PHP_SAPI, 'cli') !== FALSE
 
 /**
 	Checks that the query_id is the same as the given file name.
-	For portability with case-sensitive file systems, the 
+	For portability with case-sensitive file systems, the
 	actual casing of the file name from the file system is used,
 	and the subsequent string comparatin is case-sensitive.
-	
+
 	Assumes the file is known to exist (has already been opened).
 
 	@brief
@@ -987,7 +987,7 @@ function validate_query_id($xml_file, $query_id)
 	types, and that it is always present for VARCHAR.
 
 	Check that auto_increment is only given for (big)number types.
-	
+
 	Check for CUBRID-only/mysql+MSsql-only attributes 'auto_increment'
 	and 'tinytext'.
 
@@ -1013,7 +1013,7 @@ function validate_schema_doc($xml_file, $table_element)
 			{
 				fwrite
 					(
-						fopen('php://stdout', 'wt'), 
+						fopen('php://stdout', 'wt'),
 						$xml_file . '(' . $col_node->getLineNo() . ")\n\t"
 							.
 						"<column>: attribute 'auto_increment' is currently supported only by SQL Server and mysql backends.\n"
@@ -1040,7 +1040,7 @@ function validate_schema_doc($xml_file, $table_element)
 			{
 				fwrite
 					(
-						fopen('php://stdout', 'wt'), 
+						fopen('php://stdout', 'wt'),
 						$xml_file . '(' . $col_node->getLineNo() . ")\n\t"
 							.
 						"<column>: type \"tinytext\" is supported only by CUBRID.\n"
@@ -1055,7 +1055,7 @@ function validate_schema_doc($xml_file, $table_element)
 
 			if($col_type == 'varchar' && $col_size === NULL)
 			{
-				throw 
+				throw
 					new XmlSchemaError(
 							$xml_file,
 							$col_node->getLineNo(),
@@ -1065,11 +1065,11 @@ function validate_schema_doc($xml_file, $table_element)
 
 			static
 				$varsize_types = array('char', 'varchar', 'float');
-					
+
 
 			if($col_size !== NULL  && !in_array($col_type, $varsize_types))
 			{
-				throw 
+				throw
 					new XmlSchemaError(
 							$xml_file,
 							$col_node->getLineNo(),
@@ -1085,7 +1085,7 @@ function validate_schema_doc($xml_file, $table_element)
 /**
   Class to accumulate the highest return code when multiple files are being
   processed, list return codes, and save/restore the code as needed.
-  
+
   Use specific error codes depending on the validation stage and results,
   so the unit tests can tell what validation step has failed.
 
@@ -1220,7 +1220,7 @@ try
 
 	if(!defined('__DIR__'))
 	{
-		define('__DIR__', dirname(__FILE__)); 
+		define('__DIR__', dirname(__FILE__));
 	}
 
 
@@ -1338,7 +1338,7 @@ try
 				$argc = count($argv);
 
 				break;
-		
+
 			case '--help':
 			case '--usage':
 			case '/?':
@@ -1346,7 +1346,7 @@ try
 			case '-h':
 			case '--':
 
-				// break out of both the switch 
+				// break out of both the switch
 				// and while statements
 				break 2;
 
@@ -1516,7 +1516,7 @@ try
 			{
 				return self::$db_info;
 			}
-			
+
 			/**
 				@brief
 				@developer
@@ -1858,7 +1858,7 @@ try
 	{
 		$schema_file = $argv[$i++];
 	}
-	
+
 	for(; $i < count($argv); $i++)
 	{
 		try
@@ -2045,7 +2045,7 @@ try
 												{
 													case 'email':
 													case 'email_address':
-														$query_user_args[$arg->variable_name] = 
+														$query_user_args[$arg->variable_name] =
 															'user@mail.com';
 														break;
 
@@ -2062,7 +2062,7 @@ try
 
 													case 'number':
 													case 'numbers':
-														$query_user_args[$arg->variable_name] = 
+														$query_user_args[$arg->variable_name] =
 															10982431;
 														break;
 
@@ -2110,7 +2110,7 @@ try
 												substr
 													(
 														$query_user_args[$arg->variable_name],
-														0, 
+														0,
 														$arg->argument_validator->max_length
 													);
 										}
@@ -2120,7 +2120,7 @@ try
 								$k++;
 							}
 
-							$resultset = 
+							$resultset =
 								$GLOBALS['__DB__'][$db_type]->_executeQuery
 									(
 										$unlink_tmpfile->file_name,		// cache_file

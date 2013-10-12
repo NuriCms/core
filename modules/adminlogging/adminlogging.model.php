@@ -10,7 +10,7 @@
  */
 class adminloggingModel extends adminlogging
 {
-	
+
 }
 /* End of file adminlogging.model.php */
 /* Location: ./modules/adminlogging/adminlogging.model.php */

@@ -172,7 +172,7 @@ class communicationModel extends communication
 		$args->page = Context::get('page');
 		$args->list_count = 20;
 		$args->page_count = 10;
-		
+
 		return executeQuery($query_id, $args, $columnList);
 	}
 
@@ -197,7 +197,7 @@ class communicationModel extends communication
 		$args->page_count = 10;
 
 		$output = executeQuery('communication.getFriends', $args, $columnList);
-		
+
 		return $output;
 	}
 
@@ -213,7 +213,7 @@ class communicationModel extends communication
 		$args = new stdClass();
 		$args->member_srl = $logged_info->member_srl;
 		$args->target_srl = $member_srl;
-		
+
 		$output = executeQuery('communication.isAddedFriend', $args);
 
 		return $output->data->count;
@@ -233,7 +233,7 @@ class communicationModel extends communication
 		$args->friend_group_srl = $friend_group_srl;
 
 		$output = executeQuery('communication.getFriendGroup', $args);
-		
+
 		return $output->data;
 	}
 
@@ -255,14 +255,14 @@ class communicationModel extends communication
 		{
 			return;
 		}
-		
+
 		return $group_list;
 	}
 
 	/**
 	 * check whether to be added in the friend list
-	 * @param int $target_srl 
-	 * @return boolean (true : friend, false : not friend) 
+	 * @param int $target_srl
+	 * @return boolean (true : friend, false : not friend)
 	 */
 	function isFriend($target_srl)
 	{

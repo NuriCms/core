@@ -33,7 +33,7 @@ define('__ZBXE__', __XE__);
 
  * First position number means 'major' update.
  * Second position number means 'minor' update.
- * Third position number '0, 1, 2, 3' means 'status' update. 
+ * Third position number '0, 1, 2, 3' means 'status' update.
  * Forth position number means 'patch' update.
 
  * Third position number for status display is consist of 0~3 numbers.

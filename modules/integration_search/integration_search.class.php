@@ -25,7 +25,7 @@ class integration_search extends ModuleObject
 	 *
 	 * @return bool
 	 */
-	function checkUpdate() 
+	function checkUpdate()
 	{
 		$oModuleModel = &getModel('module');
 		$config = $oModuleModel->getModuleConfig('integration_search');
@@ -47,7 +47,7 @@ class integration_search extends ModuleObject
 	 *
 	 * @return Object
 	 */
-	function moduleUpdate() 
+	function moduleUpdate()
 	{
 		$oModuleModel = &getModel('module');
 		$config = $oModuleModel->getModuleConfig('message');

@@ -14,7 +14,7 @@
         	</columns>
 		    <conditions>
 		        <condition operation="equal" column="column_ab" var="user_name" notnull="notnull" />
-		    </conditions>        	
+		    </conditions>
         </query>
         <column name="column_c" alias="value_c" />
     </columns>
