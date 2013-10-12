@@ -10,20 +10,20 @@ form, fieldset{margin:0;padding:0}
 .x strong{color:#f60}
 .x button{margin:0;padding:0;overflow:visible;cursor:pointer}
 .x a{text-decoration:none}
-.x a:hover, 
-.x a:active, 
+.x a:hover,
+.x a:active,
 .x a:focus{text-decoration:underline}
 /* Bootstrap Override */
 .x label[for],
 .x .x_form-horizontal .x_control-label{font-weight:bold}
 .x ol,
 .x ul{margin-top:15px;margin-bottom:15px}
-.x input[type="radio"], 
+.x input[type="radio"],
 .x input[type="checkbox"]{margin:0}
 .x hr{border-bottom:0}
 .x .x_btn{text-decoration:none}
 .x .x_control-group{padding-top:8px;margin-bottom:10px;border-top:1px dotted #888;clear:both}
-.x .x_control-group:first-child, 
+.x .x_control-group:first-child,
 .x .x_control-group:first-of-type{border-top:0;padding-top:0}
 /* Layout */
 .x{width:800px;margin:120px auto 0 auto;background-color:transparent}

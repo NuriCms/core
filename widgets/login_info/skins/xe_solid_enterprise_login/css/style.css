@@ -42,7 +42,7 @@
 .mbInfo_window div.body .btnbar		{width:143px;margin:0 auto;padding:10px 0 8px 0;}
 .mbInfo_window .btnbar p			{width:75px;margin:0 7px 0 0;float:left;font-size:11px;color:#7e7e7e; font-family:Arial, Helvetica, sans-serif;}
 .mbInfo_window .btnbar a			{float:right;}
-.icon_img		{width:16px; height:16px;} 
+.icon_img		{width:16px; height:16px;}
 .mbInfo_window .tail				{width:172px;height:3px;float:left;}
 
 .mbInfo_window li.i1					{background:url(../images/icon_write.gif) no-repeat 1px 0;}

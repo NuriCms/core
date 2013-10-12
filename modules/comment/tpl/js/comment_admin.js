@@ -26,7 +26,7 @@ function getCommentList()
 	var commentListTable = jQuery('#commentListTable');
 	var cartList = [];
 	commentListTable.find(':checkbox[name=cart]').each(function(){
-		if(this.checked) cartList.push(this.value); 
+		if(this.checked) cartList.push(this.value);
 	});
 
     var params = new Array();

@@ -4,39 +4,41 @@
 	$ssl_actions = Context::getSSLActions();
 	$css_files=Context::getCssFile();
 	$js_files=Context::getJsFile();
+	$js_body_files = Context::getJsFile('body');
+	$isAdminKind = FALSE;
 }
+<!--@if(strpos(strtolower(Context::get('act')),'admin') || Context::get('module') == 'admin')-->
+{@$isAdminKind = TRUE}
+<!--@end-->
 <!DOCTYPE html>
 <html lang="{$lang_type}">
 <head>
-<!-- META -->
-<meta charset="utf-8">
-<meta name="Generator" content="XpressEngine">
-<block loop="Context::getMetaTag() => $no, $val">
-<meta http-equiv="{$val['name']}"|cond="$val['is_http_equiv']" name="{$val['name']}"|cond="!$val['is_http_equiv']" content="{$val['content']}">
-</block>
-<!-- TITLE -->
+<!--// META -->
+<meta charset="UTF-8">
+<meta name="generator" content="NURI CMS">
+<block loop="Context::getMetaTag() => $no, $val"><meta http-equiv="{$val['name']}"|cond="$val['is_http_equiv']" name="{$val['name']}"|cond="!$val['is_http_equiv']" content="{$val['content']}"></block>
+<!--// TITLE -->
 <title>{Context::getBrowserTitle()}</title>
-<!-- CSS -->
+<!--// RSS -->
+<link rel="alternate" type="application/rss+xml" title="RSS" href="{$rss_url}" cond="$rss_url" />
+<link rel="alternate" type="application/rss+xml" title="Site RSS" href="{$general_rss_url}" cond="$general_rss_url" />
+<link rel="alternate" type="application/atom+xml" title="Atom" href="{$atom_url}" cond="$rss_url" />
+<link rel="alternate" type="application/atom+xml" title="Site Atom" href="{$general_atom_url}" cond="$general_rss_url" />
+<!--// ICON -->
+<link cond="$favicon_url" rel="shortcut icon" href="{$favicon_url}" />
+<link cond="$mobicon_url" rel="apple-touch-icon" href="{$mobicon_url}" />
+<!--// CSS -->
 <block loop="$css_files=>$key,$css_file">
 <block cond="$css_file['targetie']"><!--[if {$css_file['targetie']}]></block>
 <link rel="stylesheet" href="{$css_file['file']}" media="{$css_file['media']}"|cond="$css_file['media'] != 'all'" />
 <block cond="$css_file['targetie']"><![endif]--></block>
 </block>
-<!-- JS -->
+<!--// JS -->
 <block loop="$js_files=>$key,$js_file">
 <block cond="$js_file['targetie']"><!--[if {$js_file['targetie']}]></block>
 <script src="{$js_file['file']}"></script>
 <block cond="$js_file['targetie']"><![endif]--></block>
 </block>
-<!--[if lt IE 9]><script src="../js/html5.js"></script><![endif]-->
-<!-- RSS -->
-<link rel="alternate" type="application/rss+xml" title="RSS" href="{$rss_url}" cond="$rss_url" />
-<link rel="alternate" type="application/rss+xml" title="Site RSS" href="{$general_rss_url}" cond="$general_rss_url" />
-<link rel="alternate" type="application/atom+xml" title="Atom" href="{$atom_url}" cond="$rss_url" />
-<link rel="alternate" type="application/atom+xml" title="Site Atom" href="{$general_atom_url}" cond="$general_rss_url" />
-<!-- ICON -->
-<link cond="$favicon_url" rel="shortcut icon" href="{$favicon_url}" />
-<link cond="$mobicon_url" rel="apple-touch-icon" href="{$mobicon_url}" />
 {Context::getHtmlHeader()}
 <script>
 //<![CDATA[
@@ -61,22 +63,16 @@ xe.msg_select_menu = "{$lang->msg_select_menu}";
 //]]>
 </script>
 </head>
-{@$isAdminKind = false}
-<!--@if(strpos(strtolower(Context::get('act')),'admin') || Context::get('module') == 'admin')-->
-{@$isAdminKind = true}
-<!--@end-->
 <body{Context::getBodyClass()}>
 <include target="../../modules/admin/tpl/admin_bar.html" cond="$logged_info->is_admin=='Y' && !$isAdminKind && Context::get('current_module_info')->module_type == 'view' && Context::get('admin_bar') != 'false'" />
 {Context::getBodyHeader()}
 {$content}
 {Context::getHtmlFooter()}
-<!-- ETC -->
+<!--// ETC -->
 <div class="wfsr"></div>
-{@ $js_body_files = Context::getJsFile('body') }
 <block loop="$js_body_files => $key, $js_file">
 <block cond="$js_file['targetie']"><!--[if {$js_file['targetie']}]></block><script src="{$js_file['file']}"></script><block cond="$js_file['targetie']"><![endif]--></block>
 </block>
-
 <script cond="$logged_info->is_admin=='Y' && !$isAdminKind && Context::get('current_module_info')->module_type == 'view' && Context::get('admin_bar') != 'false'">
 jQuery(function($){
 	function get_body_margin(position){

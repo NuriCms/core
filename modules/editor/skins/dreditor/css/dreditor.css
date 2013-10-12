@@ -2,7 +2,7 @@
 
 /* Textyle Editor */
 .textyleEditor{position:relative;*zoom:1;margin:0 0 1em 0}
-.textyleEditor:after{content:"";display:block;clear:both} 
+.textyleEditor:after{content:"";display:block;clear:both}
 .textyleEditor .editorContainer{position:relative;width:100%;display:table;table-layout:fixed}
 .textyleEditor .editorContainer .editorArea{opacity:1;filter:alpha(opacity=100)}
 .textyleEditor .editorContainer .writeArea{position:relative;*zoom:1}

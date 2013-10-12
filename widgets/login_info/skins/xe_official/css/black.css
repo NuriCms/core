@@ -21,11 +21,11 @@
 .login_black fieldset ul.help li.first-child a{color:#cbcbcb}
 .login_black fieldset .userName{margin:0;position:relative;width:172px;overflow:hidden;border-bottom:1px solid #515151;padding:0 0 6px 0;margin-top:-5px}
 .login_black fieldset .userName strong{color:#cbcbcb;padding:4px 0 0 2px;font:bold .9em Tahoma}
-.login_black fieldset .userName a{position:relative;right:0px}
 .login_black fieldset .userName img{border:none}
+.login_black fieldset .userName .logout{position:absolute; right:0px;}
 .login_black fieldset ul.userMenu{margin:0;position:relative;padding:0 0 6px 4px;overflow:hidden;margin-top:10px}
 .login_black fieldset ul.userMenu li{list-style:none;color:#cbcbcb;list-style:none;padding-left:10px;background:url(../images/black/bulletFF1A00.gif) no-repeat left 4px;margin-bottom:5px}
 .login_black fieldset ul.userMenu li a{color:#cbcbcb;text-decoration:none}
 .login_black fieldset ul.userMenu li a:hover{text-decoration:underline}
-.login_black fieldset p.latestLogin{margin:5px 0;color:#818181;font:.9em}
+.login_black fieldset p.latestLogin{margin:15px 0px 5px;color:#818181;font:.9em}
 .login_black fieldset p.latestLogin span{font:1em Tahoma}

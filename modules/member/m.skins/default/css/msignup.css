@@ -60,7 +60,7 @@ input[type=radio]{width:13px;height:13px;margin:0;padding:0}
 .bna{text-align:center;padding:0 10px;margin:10px 0}
 .bna:after{content:"";display:block;clear:both}
 .bn{display:inline-block;line-height:26px !important;padding:0 10px;font-size:12px;font-weight:bold;border:1px solid;text-decoration:none;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;cursor:pointer;vertical-align:middle}
-.bn[type=submit], 
+.bn[type=submit],
 .bn[type=button]{height:28px}
 .bn[href]{height:26px}
 .bn{border-color:#b5b5b5;background:-webkit-linear-gradient(top,#fff,#f0f0f0 50%,#e4e4e4 50%,#f6f6f6);background:-moz-linear-gradient(top,#fff,#f0f0f0 50%,#e4e4e4 50%,#f6f6f6);background:-o-linear-gradient(top,#fff,#f0f0f0 50%,#e4e4e4 50%,#f6f6f6);background:-ms-linear-gradient(top,#fff,#f0f0f0 50%,#e4e4e4 50%,#f6f6f6);background:linear-gradient(top,#fff,#f0f0f0 50%,#e4e4e4 50%,#f6f6f6);background-color:#fff;color:#000}

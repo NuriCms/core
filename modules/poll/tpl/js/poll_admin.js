@@ -84,8 +84,8 @@ jQuery(function ($){
 		{
 			e.stopPropagation();
 			return false;
-			
+
 		}
 	});
-	
+
 });

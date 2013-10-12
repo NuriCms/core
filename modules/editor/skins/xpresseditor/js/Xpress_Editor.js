@@ -1366,7 +1366,7 @@ xe.XpressRange = $.Class({
 			oNode = aAllNodes[i];
 
 			if(!oNode || oNode.nodeType != 3 || oNode.nodeValue == '') continue;
-			
+
 			oParentNode = xe.DOMFix.parentNode(oNode);
 
 			if(oParentNode.tagName == "SPAN"){
@@ -1376,7 +1376,7 @@ xe.XpressRange = $.Class({
 				oTmpNode = this._getVeryFirstRealChild(oParentNode);
 				if(oTmpNode == oNode) iSIdx = 1;
 				else iSIdx = parentText.indexOf(oTmpNode);
-				
+
 				if(iSIdx != -1){
 					oTmpNode = this._getVeryLastRealChild(oParentNode);
 					if(oTmpNode == oNode) iEIdx = 1;
@@ -5068,7 +5068,7 @@ xe.XE_Editorresize = $.Class({
 		if(this.oCheckBox.checked == true){
 			if(this._prevHeight == undefined)
 				this._prevHeight = this.inputArea.style.height;
-			
+
 			this.oVerticalResizer.style.display = 'none';
 			this.oApp.registerBrowserEvent(this.oIframeBody, 'keydown', 'XE_EDITOR_RESIZE');
 

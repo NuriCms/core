@@ -35,7 +35,7 @@ function completeArticleDocumentInserted(ret_obj){
     alert(message);
 
     var url = '';
-	
+
 	if(is_mobile == 'Y')
         url = current_url.setQuery('act', 'dispPageAdminMobileContent').setQuery('mid', mid);
 	else
@@ -103,7 +103,7 @@ function doRemoveWidgetCache(module_srl) {
 
 function completeRemoveWidgetCache(ret_obj) {
     var message = ret_obj['message'];
-    location.reload(); 
+    location.reload();
 }
 
 /* 일괄 설정 */

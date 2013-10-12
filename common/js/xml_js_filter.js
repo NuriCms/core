@@ -2,7 +2,7 @@
  * @file   common/js/xml_js_filter.js
  * @author NHN (developers@xpressengine.com)
  * @brief  xml filter (validator) plugin
- * 
+ *
  * A rule is a method validate one field.
  * A filter is made up of one or more rules.
  **/
@@ -77,7 +77,7 @@ var Validator = xe.createApp('Validator', {
 				}
 			})
 			.submit(function(e){
-				var legacyFn = this['xe:onsubmit'];		
+				var legacyFn = this['xe:onsubmit'];
 				var hasLegacyFn = $.isFunction(legacyFn);
 				var bResult = hasLegacyFn?legacyFn.apply(this):self.run(this);
 
@@ -178,7 +178,7 @@ var Validator = xe.createApp('Validator', {
 			if((min && min > (minb?lenb:len)) || (max && max < (maxb?lenb:len))) {
 				return this.cast('ALERT', [form, name, 'outofrange', min, max]) && false;
 			}
-			
+
 			if(f.equalto) {
 				e_el  = elems[f.equalto];
 				e_val = e_el?$.trim(get_value($(e_el))):'';
@@ -186,7 +186,7 @@ var Validator = xe.createApp('Validator', {
 					return this.cast('ALERT', [form, name, 'equalto']) && false;
 				}
 			}
-			
+
 			rules = (f.rule || '').split(',');
 			for(i=0,c=rules.length; i < c; i++) {
 				if(!(r = rules[i])) continue;
@@ -404,10 +404,10 @@ function legacy_filter(filter_name, form, module, act, callback, responses, conf
 			var v = $.trim(field.value), n = field.name;
 			if(!v || !n) return true;
 			if(rename_params[n]) n = rename_params[n];
-			
+
 			if(/\[\]$/.test(n)) n = n.replace(/\[\]$/, '');
 			if(params[n]) params[n] += '|@|'+v;
-			else params[n] = field.value;			
+			else params[n] = field.value;
 		});
 
 		if (confirm_msg && !confirm(confirm_msg)) return false;

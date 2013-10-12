@@ -18,7 +18,7 @@ if($called_position == 'after_module_proc')
 	$site_module_info = Context::get('site_module_info');
 	$rsd_url = getFullSiteUrl($site_module_info->domain, '', 'mid', $this->module_info->mid, 'act', 'api');
 	// Insert rsd tag into the header
-	Context::addHtmlHeader("    " . '<link rel="EditURI" type="application/rsd+xml" title="RSD" href="' . $rsd_url . '" />');
+	Context::addHtmlHeader('	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="' . $rsd_url . '" />');
 }
 // If act isnot api, just return
 if($_REQUEST['act'] != 'api')
@@ -513,12 +513,12 @@ if($called_position == 'before_module_proc')
 <?xml version="1.0" ?>
 <rsd version="1.0" xmlns="http://archipelago.phrasewise.com/rsd" >
 <service>
-    <engineName>XpressEngine</engineName>
-    <engineLink>http://www.xpressengine.com/ </engineLink>
-    <homePageLink>{$homepagelink}</homePageLink>
-    <apis>
-        <api name="MetaWeblog" preferred="true" apiLink="{$api_url}" blogID="" />
-    </apis>
+	<engineName>XpressEngine</engineName>
+	<engineLink>http://www.xpressengine.com/ </engineLink>
+	<homePageLink>{$homepagelink}</homePageLink>
+	<apis>
+		<api name="MetaWeblog" preferred="true" apiLink="{$api_url}" blogID="" />
+	</apis>
 </service>
 </rsd>
 RSDContent;

@@ -1,7 +1,7 @@
 jQuery(function ($){
 	if($('input[name=group_image_mark]:checked').val() == 'Y') $('._imageMarkButton').show();
 	else $('._imageMarkButton').hide();
-	
+
 	$('input[name=group_image_mark]').click(function (){
 		var checked = $(this).val();
 		if (checked == 'Y') $('._imageMarkButton').show();
@@ -39,7 +39,7 @@ jQuery(function ($){
 	$('._deleteGroup').click(function (event){
 		event.preventDefault();
 		var $target = $(event.target).closest('tr');
-		var group_srl = $(event.target).attr('href').substr(1); 
+		var group_srl = $(event.target).attr('href').substr(1);
 		if(!confirm(xe.lang.groupDeleteMessage)) return;
 
 		if (group_srl.indexOf("new") >= 0){
@@ -76,7 +76,7 @@ jQuery(function ($){
 	$('.filebox').bind('filebox.selected', function (e, src){
 		var $targetImage = $(this).parent().find('img');
 		var $imageMarkHidden = $(this).parent().find('._imgMarkHidden');
-		
+
 		if ($targetImage.length){
 			$targetImage.attr('src', src);
 		}else{
@@ -94,7 +94,7 @@ jQuery(function ($){
 			});
 		}
 	});
-	
+
 	var checkTitle = new CheckTitle();
 	var v = xe.getApp('Validator')[0];
 	v.registerPlugin(checkTitle);

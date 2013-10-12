@@ -85,11 +85,11 @@
 .xm input[type="file"]:focus,
 .xm input[type="radio"]:focus,
 .xm input[type="checkbox"]:focus{outline:thin dotted #333;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}
-.xm input:-moz-placeholder, 
+.xm input:-moz-placeholder,
 .xm textarea:-moz-placeholder {color:#999999}
-.xm input:-ms-input-placeholder, 
+.xm input:-ms-input-placeholder,
 .xm textarea:-ms-input-placeholder {color:#999999}
-.xm input::-webkit-input-placeholder, 
+.xm input::-webkit-input-placeholder,
 .xm textarea::-webkit-input-placeholder {color:#999999}
 .xm input,
 .xm textarea{margin-left:0}
@@ -103,11 +103,11 @@
 .xm input[type="checkbox"][disabled],
 .xm input[type="radio"][readonly],
 .xm input[type="checkbox"][readonly]{background-color:transparent}
-.xm input:focus:invalid, 
-.xm textarea:focus:invalid, 
+.xm input:focus:invalid,
+.xm textarea:focus:invalid,
 .xm select:focus:invalid {color:#b94a48;border-color:#ee5f5b}
-.xm input:focus:invalid:focus, 
-.xm textarea:focus:invalid:focus, 
+.xm input:focus:invalid:focus,
+.xm textarea:focus:invalid:focus,
 .xm select:focus:invalid:focus {border-color:#e9322d;-webkit-box-shadow:0 0 6px #f8b9b7;-moz-box-shadow:0 0 6px #f8b9b7;box-shadow:0 0 6px #f8b9b7}
 /* Forms */
 .xm .form-horizontal .control-group{margin-bottom:20px;*zoom:1}

@@ -249,11 +249,11 @@ function getTypeBase() {
 	var _base = function() {
 		var self = this;
 		var pool = null;
-		
+
 		if ($.isArray(this._plugins))   this._plugins   = [];
 		if (this._messages) this._messages = {};
 		else this._binded_fn = {};
-		
+
 		// bind functions
 		$.each(this, function(key, val){
 			if (!$.isFunction(val)) return true;
@@ -346,7 +346,7 @@ if(jQuery) jQuery.noConflict();
             } else {
                 var obj = $('input[name='+itemName+']:checkbox');
             }
-			
+
 			if(options.checked == 'toggle') {
                 obj.each(function() {
                     $(this).attr('checked', ($(this).attr('checked')) ? false : true);
@@ -355,7 +355,7 @@ if(jQuery) jQuery.noConflict();
                 (options.doClick == true) ? obj.click() : obj.attr('checked', options.checked);
             }
         },
-		
+
         /**
          * @brief 문서/회원 등 팝업 메뉴 출력
          */
@@ -469,16 +469,16 @@ jQuery(function($) {
             $(this).hide().prev('button').show().parent().next(fold_container).hide();
         });
     }
-	
+
 	jQuery('input[type="submit"],button[type="submit"]').click(function(ev){
 		var $el = jQuery(ev.currentTarget);
-		
+
 		setTimeout(function(){
 			return function(){
 				$el.attr('disabled', 'disabled');
 			};
 		}(), 0);
-		
+
 		setTimeout(function(){
 			return function(){
 				$el.removeAttr('disabled');
@@ -1564,7 +1564,7 @@ $.exec_xml = window.exec_xml = function(module, act, params, callback_func, resp
 	// ajax 통신중 대기 메세지 출력 (show_waiting_message값을 false로 세팅시 보이지 않음)
 	var waiting_obj = $('.wfsr');
 	if(show_waiting_message && waiting_obj.length) {
-	
+
 		var timeoutId = $(".wfsr").data('timeout_id');
 		if(timeoutId) clearTimeout(timeoutId);
 		$(".wfsr").css('opacity', 0.0);
@@ -1703,7 +1703,7 @@ $(function($){
  * @file   common/js/xml_js_filter.js
  * @author NHN (developers@xpressengine.com)
  * @brief  xml filter (validator) plugin
- * 
+ *
  * A rule is a method validate one field.
  * A filter is made up of one or more rules.
  **/
@@ -1778,7 +1778,7 @@ var Validator = xe.createApp('Validator', {
 				}
 			})
 			.submit(function(e){
-				var legacyFn = this['xe:onsubmit'];		
+				var legacyFn = this['xe:onsubmit'];
 				var hasLegacyFn = $.isFunction(legacyFn);
 				var bResult = hasLegacyFn?legacyFn.apply(this):self.run(this);
 
@@ -1879,7 +1879,7 @@ var Validator = xe.createApp('Validator', {
 			if((min && min > (minb?lenb:len)) || (max && max < (maxb?lenb:len))) {
 				return this.cast('ALERT', [form, name, 'outofrange', min, max]) && false;
 			}
-			
+
 			if(f.equalto) {
 				e_el  = elems[f.equalto];
 				e_val = e_el?$.trim(get_value($(e_el))):'';
@@ -1887,7 +1887,7 @@ var Validator = xe.createApp('Validator', {
 					return this.cast('ALERT', [form, name, 'equalto']) && false;
 				}
 			}
-			
+
 			rules = (f.rule || '').split(',');
 			for(i=0,c=rules.length; i < c; i++) {
 				if(!(r = rules[i])) continue;
@@ -2105,10 +2105,10 @@ function legacy_filter(filter_name, form, module, act, callback, responses, conf
 			var v = $.trim(field.value), n = field.name;
 			if(!v || !n) return true;
 			if(rename_params[n]) n = rename_params[n];
-			
+
 			if(/\[\]$/.test(n)) n = n.replace(/\[\]$/, '');
 			if(params[n]) params[n] += '|@|'+v;
-			else params[n] = field.value;			
+			else params[n] = field.value;
 		});
 
 		if (confirm_msg && !confirm(confirm_msg)) return false;

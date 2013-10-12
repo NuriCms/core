@@ -191,7 +191,7 @@ function doFillWidgetVars() {
 		.each(function(){
 			var $this = jQuery(this);
 			var src = $this.siblings('input').eq(0).val().split(',');
-			
+
 			if (src) $this.trigger('filebox.selected', [src]);
 		})
 }
@@ -243,7 +243,7 @@ jQuery(document).ready(function($){
 		}
 		$(this).before(htmlCode);
 
-		
+
 
 		$('.filebox_del').bind('click', function(){
 			var filename = $(this).prev('img').attr("src");

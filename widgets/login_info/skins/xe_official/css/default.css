@@ -21,11 +21,11 @@
 .login_default fieldset ul.help li a:hover{text-decoration:underline}
 .login_default fieldset .userName{position:relative;width:172px;overflow:hidden;border-bottom:1px solid #e4e4e4;padding:0 0 6px 0;margin-top:-5px}
 .login_default fieldset .userName strong{color:#282828;padding:4px 0 0 2px;font:bold .9em Tahoma}
-.login_default fieldset .userName a{position:relative;right:0px}
 .login_default fieldset .userName img{border:none}
+.login_default fieldset .userName .logout{position:absolute; right:0px;}
 .login_default fieldset ul.userMenu{margin:0;position:relative;padding:0;margin-top:10px}
 .login_default fieldset ul.userMenu li{list-style:none;margin-bottom:5px}
 .login_default fieldset ul.userMenu li a{color:#54564b;text-decoration:none}
 .login_default fieldset ul.userMenu li a:hover{text-decoration:underline}
-.login_default fieldset p.latestLogin{margin:5px 0;color:#666}
+.login_default fieldset p.latestLogin{margin:15px 0px 5px;color:#666}
 .login_default fieldset p.latestLogin span{font:1em Tahoma}

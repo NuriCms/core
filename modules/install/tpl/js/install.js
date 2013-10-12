@@ -18,7 +18,7 @@ jQuery(function($){
 		}
 		return false;
 	});
-// SUBMIT disabled 
+// SUBMIT disabled
 	$('input[required]').change(function(){
 		var invalid = $('input[required]').is('[value=""], [value=" "], [value="  "], [value="   "]');
 		var $submit = $('[type="submit"]');
