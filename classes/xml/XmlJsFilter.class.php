@@ -41,7 +41,8 @@
  *  tag = key : name of variable that will contain the result of the execution
  * }</pre>
  * @class XmlJsFilter
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /classes/xml
  * @version 0.2
  */
@@ -69,7 +70,7 @@ class XmlJsFilter extends XmlParser
 	 * Compiled js file
 	 * @var string
 	 */
-	var $js_file = NULL; // / 
+	var $js_file = NULL; // /
 
 	/**
 	 * constructor

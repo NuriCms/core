@@ -110,9 +110,9 @@ class TableTag
 
 	/**
 	 * Returns string for printing in PHP query cache file
-	 * The string contains code for instantiation of either 
+	 * The string contains code for instantiation of either
 	 * a Table or a JoinTable object
-	 * @return string 
+	 * @return string
 	 */
 	function getTableString()
 	{

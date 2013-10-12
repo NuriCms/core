@@ -4,7 +4,8 @@
  * set the include of the class file and other environment configurations
  *
  * @file   config/config.inc.php
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 if(version_compare(PHP_VERSION, '5.4.0', '<'))
 {
@@ -33,7 +34,7 @@ define('__ZBXE__', __XE__);
 
  * First position number means 'major' update.
  * Second position number means 'minor' update.
- * Third position number '0, 1, 2, 3' means 'status' update. 
+ * Third position number '0, 1, 2, 3' means 'status' update.
  * Forth position number means 'patch' update.
 
  * Third position number for status display is consist of 0~3 numbers.

@@ -2,7 +2,8 @@
 /**
  * The admin view class of the integration_search module
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class integration_searchAdminController extends integration_search
 {
@@ -110,7 +111,7 @@ class integration_searchAdminController extends integration_search
 				$obj->{$vars->name} = $filename;
 			}
 		}
-		// Serialize and save 
+		// Serialize and save
 		$args->skin_vars = serialize($obj);
 
 		$oModuleController = &getController('module');

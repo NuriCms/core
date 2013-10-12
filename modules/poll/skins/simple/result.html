@@ -4,7 +4,7 @@
 	<div cond="$XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'module/poll/skins/simple/form/1'" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
 		<p>{$XE_VALIDATOR_MESSAGE}</p>
 	</div>
-	
+
     <table cellspacing="0" class="simple_poll">
     <tr>
         <td>
@@ -23,14 +23,14 @@
 					</block>
 
                     <div class="resultItem">
-                        {$item->title} 
+                        {$item->title}
                     </div>
 
                     <div class="barBox">
                         <div class="bar"><img src="./images/color_bar.png" style="width:<!--@if($per<1)-->1<!--@else-->{$per}<!--@end-->%;height:6px;" alt="bar" /></div>
                         <div class="status">{$item->poll_count} ({$per}%)</div>
                     </div>
-                    
+
                 <!--@end-->
 
             </div>

@@ -163,19 +163,19 @@ describe('"Should be"s', {
 	'Object mismatch 1': function() {
 		var actual = {a:1, b:2};
 		var expected = {a:1, b:2, d:3};
-		
+
 		value_of(actual).should_be(expected);
 	},
 	'Object mismatch 2': function() {
 		var actual = {a:1, b:2, c:3, d:4};
 		var expected = {a:1, b:2, c:3};
-		
+
 		value_of(actual).should_be(expected);
 	},
 	'Object mismatch 3': function() {
 		var actual = {a:1, b:4, c:3};
 		var expected = {a:1, b:2, c:3};
-		
+
 		value_of(actual).should_be(expected);
 	},
 	'null should be null': function() {

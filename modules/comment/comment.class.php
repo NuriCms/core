@@ -6,7 +6,8 @@ require_once(_XE_PATH_ . 'modules/comment/comment.item.php');
  * comment
  * comment module's high class
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/comment
  * @version 0.1
  */
@@ -94,7 +95,7 @@ class comment extends ModuleObject
 			return TRUE;
 		}
 
-		// 2012. 08. 29 Add a trigger to copy additional setting when the module is copied 
+		// 2012. 08. 29 Add a trigger to copy additional setting when the module is copied
 		if(!$oModuleModel->getTrigger('module.procModuleAdminCopyModule', 'comment', 'controller', 'triggerCopyModule', 'after'))
 		{
 			return TRUE;
@@ -168,7 +169,7 @@ class comment extends ModuleObject
 			);
 		}
 
-		// 2012. 08. 29 Add a trigger to copy additional setting when the module is copied 
+		// 2012. 08. 29 Add a trigger to copy additional setting when the module is copied
 		if(!$oModuleModel->getTrigger('module.procModuleAdminCopyModule', 'comment', 'controller', 'triggerCopyModule', 'after'))
 		{
 			$oModuleController->insertTrigger('module.procModuleAdminCopyModule', 'comment', 'controller', 'triggerCopyModule', 'after');
@@ -183,7 +184,7 @@ class comment extends ModuleObject
 	 */
 	function recompileCache()
 	{
-		
+
 	}
 
 }

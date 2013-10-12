@@ -4,7 +4,7 @@ function doSubmitConfig()
 	var $configForm = jQuery('#config_form');
 	var $container = $configForm.children('div');
 	$container.empty();
-	
+
 	$forms.each(function($)
 	{
 		var $this = jQuery(this);

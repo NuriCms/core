@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  layoutAdminController
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * admin controller class of the layout module
  */
 class layoutAdminController extends layout
@@ -17,7 +18,7 @@ class layoutAdminController extends layout
 	/**
 	 * Create a new layout
 	 * Insert a title into "layouts" table in order to create a layout
-	 * @deprecated 
+	 * @deprecated
 	 * @return void|Object (void : success, Object : fail)
 	 */
 	function procLayoutAdminInsert()
@@ -63,7 +64,7 @@ class layoutAdminController extends layout
 	 * Initiate if it is faceoff layout
 	 * @param int $layout_srl
 	 * @param string $layout_name
-	 * @return void 
+	 * @return void
 	 */
 	function initLayout($layout_srl, $layout_name)
 	{
@@ -741,7 +742,7 @@ class layoutAdminController extends layout
 		$args = new stdClass();
 		$args->extra_vars = $output->extra_vars;
 		$extra_vars = unserialize($args->extra_vars);
-		
+
 		if($layout->extra_var_count) {
 			$reg = "/^.\/files\/attach\/images\/([0-9]+)\/(.*)/";
 			foreach($extra_vars as $key => $val) {

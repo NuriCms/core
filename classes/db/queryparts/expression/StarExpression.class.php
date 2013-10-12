@@ -2,7 +2,7 @@
 
 /**
  * StarExpression
- * Represents the * in 'select * from ...' statements 
+ * Represents the * in 'select * from ...' statements
  *
  * @author Corina
  * @package /classes/db/queryparts/expression

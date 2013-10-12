@@ -2,7 +2,8 @@
 
 /**
  * @class ModuleHandler
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * Handling modules
  *
  * @remarks This class is to excute actions of modules.
@@ -122,7 +123,7 @@ class ModuleHandler extends Handler
 				throw new Exception('msg_default_url_is_null');
 			}
 		}
-		
+
 		$oModuleModel = getModel('module');
 		$site_module_info = Context::get('site_module_info');
 

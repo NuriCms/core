@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  pageView
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief page view class of the module
  */
 class pageView extends page
@@ -67,7 +68,7 @@ class pageView extends page
 
 			if($mtime + $this->interval*60 > time())
 			{
-				$page_content = FileHandler::readFile($this->cache_file); 
+				$page_content = FileHandler::readFile($this->cache_file);
 				$page_content = preg_replace('@<\!--#Meta:@', '<!--Meta:', $page_content);
 			}
 			else
@@ -181,7 +182,7 @@ class pageView extends page
 			ob_start();
 			@include($path);
 			$content = ob_get_clean();
-			// Replace relative path to the absolute path 
+			// Replace relative path to the absolute path
 			$this->path = str_replace('\\', '/', realpath(dirname($path))) . '/';
 			$content = preg_replace_callback('/(target=|src=|href=|url\()("|\')?([^"\'\)]+)("|\'\))?/is',array($this,'_replacePath'),$content);
 			$content = preg_replace_callback('/(<!--%import\()(\")([^"]+)(\")/is',array($this,'_replacePath'),$content);

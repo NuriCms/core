@@ -2,9 +2,10 @@
 
 /**
  * XmlQueryParser
- * Case to parse XE xml query 
+ * Case to parse XE xml query
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @version 0.1
  * @todo need to support extend query such as subquery, union
  */
@@ -563,7 +564,7 @@ class XmlQueryParser extends XmlParser
 	}
 
 	/**
-	 * Retrieve condition information from $output->condition to generate corresponding php code 
+	 * Retrieve condition information from $output->condition to generate corresponding php code
 	 * The name of this method is misleading.
 	 * @param array $conditions array containing Query conditions
 	 * @return string buffer containing php code
@@ -646,8 +647,8 @@ class XmlQueryParser extends XmlParser
 	}
 
 	/**
-	 * Returns predefined default values correspoding to given parameters 
-	 * @param string $name 
+	 * Returns predefined default values correspoding to given parameters
+	 * @param string $name
 	 * @param mixed $value
 	 * @return mixed Returns a default value for specified field
 	 */

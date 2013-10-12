@@ -3,7 +3,8 @@
  * @class  trackbackAdminModel
  * @brief trackback module admin model class
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/trackback
  * @version 0.1
  */
@@ -29,7 +30,7 @@ class trackbackAdminModel extends trackback
 		$search_keyword = $obj->search_keyword?$obj->search_keyword:trim(Context::get('search_keyword'));
 
 		$args = new stdClass();
-		
+
 		if($search_target && $search_keyword)
 		{
 			switch($search_target)

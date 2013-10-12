@@ -74,7 +74,7 @@
 		<input cond="$search_keyword" type="hidden" name="search_keyword" value="{$search_keyword}" />
 		<ul>
 			<li class="x_disabled"|cond="!$page || $page == 1"><a href="{getUrl('page', '')}">&laquo; {$lang->first_page}</a></li>
-	
+
 			<block cond="$page_navigation->first_page != 1 && $page_navigation->first_page + $page_navigation->page_count > $page_navigation->last_page - 1 && $page_navigation->page_count != $page_navigation->total_page">
 				{@$isGoTo = true}
 				<li>
@@ -85,12 +85,12 @@
 					</span>
 				</li>
 			</block>
-	
+
 			<!--@while($page_no = $page_navigation->getNextPage())-->
 				{@$last_page = $page_no}
 				<li class="x_active"|cond="$page_no == $page"><a  href="{getUrl('page', $page_no)}">{$page_no}</a></li>
 			<!--@end-->
-	
+
 			<block cond="$last_page != $page_navigation->last_page && $last_page + 1 != $page_navigation->last_page">
 				{@$isGoTo = true}
 				<li>
@@ -100,9 +100,9 @@
 						<button type="submit" class="x_add-on">Go</button>
 					</span>
 				</li>
-				
+
 			</block>
-	
+
 			<li class="x_disabled"|cond="$page == $page_navigation->last_page"><a href="{getUrl('page', $page_navigation->last_page)}" title="{$page_navigation->last_page}">{$lang->last_page} &raquo;</a></li>
 		</ul>
 	</form>

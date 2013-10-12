@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  layoutAdminView
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * admin view class of the layout module
  */
 class layoutAdminView extends layout
@@ -96,7 +97,7 @@ class layoutAdminView extends layout
 				$layout_info = $oLayoutModel->getLayoutInfo($item->layout, null, $type);
 				if ($layout_info)
 				{
-					$layout_list[$item->layout]['title'] = $layout_info->title; 
+					$layout_list[$item->layout]['title'] = $layout_info->title;
 				}
 			}
 

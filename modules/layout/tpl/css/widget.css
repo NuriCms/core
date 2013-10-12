@@ -1,4 +1,4 @@
-@charset "utf-8";
+@charset "UTF-8";
 /* NHN (developers@xpressengine.com) */
 
 /* common */
@@ -503,7 +503,7 @@ address.period { font-style:normal; font-size:10px; font-family:tahoma; text-ali
 .widgetContainer .widgetTabA li a{ background-image:url(../img/white/buttonWidgetTab.gif);}
 .widgetContainer .widgetTabA li a{ color:#333;}
 
-/* widgetTabB */ 
+/* widgetTabB */
 .widgetContainer .widgetTabB li a{ color:#333;}
 
 /* widgetTabC */

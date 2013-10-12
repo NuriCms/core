@@ -5,7 +5,7 @@
 		<ul>
 			<li loop="$checklist => $key,$val" cond="!$val">
 				{@ $isDisable = TRUE}
-				<strong>{$lang->install_checklist_title[$key]}<block cond="$key == 'php_version'">(Ver. {$phpversion})</block></strong> 
+				<strong>{$lang->install_checklist_title[$key]}<block cond="$key == 'php_version'">(Ver. {$phpversion})</block></strong>
 				:
 				<em><i class="x_icon-ban-circle x_icon-white"></i> {$lang->disable}</em>
 				<p>{$lang->install_checklist_desc[$key]}</p>
@@ -14,13 +14,13 @@
 		<div cond="!$isDisable">
 			<p>
 				<i class="x_icon-ok-sign x_icon-white"></i>
-				<strong>XE {__XE_VERSION__}</strong> {$lang->install_condition_enable} 
+				<strong>XE {__XE_VERSION__}</strong> {$lang->install_condition_enable}
 				&rsaquo;
 				<a href="#details" data-toggle style="text-decoration:underline">{$lang->install_details}</a>
 			</p>
 			<ul id="details" style="display:none;outline:none">
 				<li loop="$checklist => $key,$val">
-					<strong>{$lang->install_checklist_title[$key]}<block cond="$key == 'php_version'">(Ver. {$phpversion})</block></strong> 
+					<strong>{$lang->install_checklist_title[$key]}<block cond="$key == 'php_version'">(Ver. {$phpversion})</block></strong>
 					:
 					<em>{$lang->enable}</em>
 				</li>

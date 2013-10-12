@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  widgetController
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief Controller class for widget modules
  */
 class widgetController extends widget
@@ -706,7 +707,7 @@ class widgetController extends widget
 		{
 			$vars = new stdClass();
 		}
-		
+
 		$widget = $vars->selected_widget;
 		$vars->widgetstyle = $request_vars->widgetstyle;
 

@@ -17,7 +17,7 @@ function doUpdateDeniedID(user_id, mode, message) {
 }
 
 /* prohibited nick name functions */
-function doUpdateDeniedNickName(nick_name, mode, message) 
+function doUpdateDeniedNickName(nick_name, mode, message)
 {
     if(typeof(message)!='undefined' && !confirm(message)) return;
 
@@ -36,7 +36,7 @@ function doUpdateDeniedNickName(nick_name, mode, message)
 }
 
 jQuery(function($){
-	// hide form if enable_join is setted "No" 
+	// hide form if enable_join is setted "No"
 	var suForm = $('table.__join_form'); // 회원가입 양식
 
 	function changeTable($i)
@@ -51,7 +51,7 @@ jQuery(function($){
 						.end()
 					.prev('td')
 					.find(':input[value=Y]').removeAttr('disabled').attr('checked', 'checked');
-				
+
 			} else {
 				$i.parent('td').next('td').next('td')
 					.find('>._subItem').hide().end()
@@ -90,13 +90,13 @@ jQuery(function($){
 		);
 
 	});
-	
+
 	$('a._extendFormDelete').click(function(event){
 		event.preventDefault();
 		if (!confirm(xe.lang.msg_delete_extend_form)) return;
 
 		var memberFormSrl = $(event.target).parent().attr('id');
-		var targetTR = $(event.target).closest('tr'); 
+		var targetTR = $(event.target).closest('tr');
 
 		exec_xml(
 			'member',
@@ -111,12 +111,12 @@ jQuery(function($){
 
 	$('button._addDeniedID').click(function(){
 		var ids = $('#prohibited_id').val();
-		if(ids == ''){ 
+		if(ids == ''){
 			alert(xe.lang.msg_null_prohibited_id);
 			$('#prohibited_id').focus();
 			return;
 		}
-		
+
 
 		ids = ids.replace(/\n/g, ',');
 
@@ -140,12 +140,12 @@ jQuery(function($){
 
 	$('button._addDeniedNickName').click(function(){
 		var ids = $('#prohibited_nick_name').val();
-		if(ids == ''){ 
+		if(ids == ''){
 			alert(xe.lang.msg_null_prohibited_nick_name);
 			$('#prohibited_nick_name').focus();
 			return;
 		}
-		
+
 
 		ids = ids.replace(/\n/g, ',');
 
@@ -195,10 +195,10 @@ jQuery(function($){
 			$notCheckedTR.find('th').html('<div class="wrap"><button type="button" class="dragBtn">Move to</button><span class="_title" >'+$notCheckedTR.find('th ._title').html()+'</span></div>');
 			$notCheckedTR.removeClass('sticky');
 
-			// add sticky class 
+			// add sticky class
 		}
 	});
-	
+
 	$('#userDefine').submit(function(e) {
 		var id_list = $(this).find('input[name=join_form_id_list]').val();
 		var id_list_arr = id_list.split(',');

@@ -200,7 +200,7 @@ class MysqlSelectTest extends MysqlTest {
                                      from `xe_modules` as `modules`
                                         , `xe_documents` as `documents`
                                      where (
-										`documents`.`module_srl` not in (0) 
+										`documents`.`module_srl` not in (0)
                                         and `documents`.`module_srl` in (566036,3777868)
                                         and `modules`.`module_srl` = `documents`.`module_srl`)
                                         and `documents`.`list_order` <= 2100000000
@@ -235,29 +235,29 @@ class MysqlSelectTest extends MysqlTest {
 	function test_distinct_outer_join() {
 		$xml_file = _TEST_PATH_ . "db/xml_query/mysql/data/distinct_outer_join.xml";
 		$argsString = '$args->site_srl = 0;';
-		$expected = 'select distinct `modules`.`module_srl` as `module_site_srl` 
-												from `xe_sites` as `sites` 
-													left join `xe_modules` as `modules` on `modules`.`module_srl` = `sites`.`index_module_srl` 
+		$expected = 'select distinct `modules`.`module_srl` as `module_site_srl`
+												from `xe_sites` as `sites`
+													left join `xe_modules` as `modules` on `modules`.`module_srl` = `sites`.`index_module_srl`
 												where `sites`.`site_srl` = 0';
 		$this->_test($xml_file, $argsString, $expected);
 	}
 
 	function test_getDocumentListWithinComment() {
 		$xml_file = _TEST_PATH_ . "db/xml_query/mysql/data/document.getDocumentListWithinComment.xml";
-		$argsString = '$args->module_srl = 19778968; 
+		$argsString = '$args->module_srl = 19778968;
 										$args->s_comment = "dfsds";
 										$args->statusList = "PUBLIC, SECRET";
 										';
-		$expected = 'select `documents`.`document_srl`, `documents`.`list_order` 
+		$expected = 'select `documents`.`document_srl`, `documents`.`list_order`
 										from `xe_documents` as `documents`
-											, `xe_comments` as `comments` 
-										where (`documents`.`module_srl` in (19778968) 
-													and `documents`.`document_srl` = `comments`.`document_srl` 
-													and `documents`.`status` in (\'public\',\'secret\') 
-													and `comments`.`content` like \'%dfsds%\') 
-													and `comments`.`list_order` <= 2100000000 
-										group by `documents`.`document_srl` 
-										order by `comments`.`list_order` asc 
+											, `xe_comments` as `comments`
+										where (`documents`.`module_srl` in (19778968)
+													and `documents`.`document_srl` = `comments`.`document_srl`
+													and `documents`.`status` in (\'public\',\'secret\')
+													and `comments`.`content` like \'%dfsds%\')
+													and `comments`.`list_order` <= 2100000000
+										group by `documents`.`document_srl`
+										order by `comments`.`list_order` asc
 										limit 0, 20';
 		$this->_test($xml_file, $argsString, $expected);
 	}

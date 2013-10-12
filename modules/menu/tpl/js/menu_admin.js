@@ -8,12 +8,12 @@ function doDeleteMenu(menu_srl) {
       procFilter(fo_obj, delete_menu);
 }
 
-/* 메뉴 삭제 후 */ 
+/* 메뉴 삭제 후 */
 function completeDeleteMenu(ret_obj) {
     var menu_srl = ret_obj['menu_srl'];
     alert(ret_obj['message']);
     location.href = current_url.setQuery('act','dispMenuAdminContent').setQuery('menu_srl','');
-} 
+}
 
 /* 빈 메뉴 아이템 추가 */
 function doInsertMenuItem(parent_srl) {
@@ -31,17 +31,17 @@ function doGetMenuItemInfo(menu_id, obj) {
     var parent_srl = 0;
 
     if(typeof(obj)!="undefined") {
-        if(typeof(obj.getAttribute)!="undefined") { 
+        if(typeof(obj.getAttribute)!="undefined") {
           node_srl = obj.getAttribute("node_srl");
         } else {
-            node_srl = obj.node_srl; 
-            parent_srl = obj.parent_srl; 
+            node_srl = obj.node_srl;
+            parent_srl = obj.parent_srl;
         }
     }
 
     var params = {menu_item_srl:node_srl, parent_srl:parent_srl};
 
-    // 서버에 요청하여 해당 노드의 정보를 수정할 수 있도록 한다. 
+    // 서버에 요청하여 해당 노드의 정보를 수정할 수 있도록 한다.
     var response_tags = new Array('error','message','tpl');
     exec_xml('menu', 'getMenuAdminTplInfo', params, completeGetMenuItemTplInfo, response_tags, params);
 }
@@ -97,7 +97,7 @@ function doReloadTreeMenu(menu_srl) {
     var params = new Array();
     params["menu_srl"] = menu_srl;
 
-    // 서버에 요청하여 해당 노드의 정보를 수정할 수 있도록 한다. 
+    // 서버에 요청하여 해당 노드의 정보를 수정할 수 있도록 한다.
     var response_tags = new Array('error','message', 'xml_file', 'menu_title');
     exec_xml('menu', 'procMenuAdminMakeXmlFile', params, completeRemakeCache, response_tags, params);
 }
@@ -117,7 +117,7 @@ function doDeleteMenuItem(menu_item_srl) {
       procFilter(fo_obj, delete_menu_item);
 }
 
-/* 메뉴 아이템 삭제 후 */ 
+/* 메뉴 아이템 삭제 후 */
 function completeDeleteMenuItem(ret_obj) {
     var menu_title = ret_obj['menu_title'];
     var menu_srl = ret_obj['menu_srl'];
@@ -127,7 +127,7 @@ function completeDeleteMenuItem(ret_obj) {
 
     loadTreeMenu(xml_file, 'menu', 'menu_zone_menu', menu_title, '', doGetMenuItemInfo, menu_item_srl, doMoveTree);
 	jQuery('#menu_zone_info').html('');
-} 
+}
 
 
 /* 레이아웃의 메뉴에 mid 추가 */
@@ -200,9 +200,9 @@ function completeDeleteButton(ret_obj, response_tags) {
     jQuery('#'+target+'_img').attr('src', '');
 	jQuery('#'+target+'_zone').hide();
 }
-/* 메뉴 입력후 */ 
+/* 메뉴 입력후 */
 function completeInsertMenu(ret_obj) {
     var menu_srl = ret_obj['menu_srl'];
     alert(ret_obj['message']);
     location.href = current_url.setQuery('act','dispMenuAdminContent');
-} 
+}

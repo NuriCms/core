@@ -5,7 +5,8 @@ if(!defined('__XE__'))
 
 /**
  * @file autolink.addon.php
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief Automatic link add-on
  */
 if($called_position == 'after_module_proc' && Context::getResponseMethod() != "XMLRPC")

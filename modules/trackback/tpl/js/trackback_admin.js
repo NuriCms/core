@@ -19,7 +19,7 @@ function getTrackbackList()
 	var trackbackListTable = jQuery('#trackbackListTable');
 	var cartList = [];
 	trackbackListTable.find(':checkbox[name=cart]').each(function(){
-		if(this.checked) cartList.push(this.value); 
+		if(this.checked) cartList.push(this.value);
 	});
 
     var params = new Array();

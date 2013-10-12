@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ruleset version="1.5.0">
-    <customrules>
-    </customrules>
-    <fields>
+	<customrules>
+	</customrules>
+	<fields>
 		<field name="user_id" required="true" length="3:20" />
 		<field name="password1" required="true" length="6:20" />
 		<field name="password2" required="true" length="6:20" equalto="password1" />
@@ -11,5 +11,5 @@
 		<field name="email_address" required="true" length="1:200" rule="email" />
 		<field name="find_account_question" required="true" />
 		<field name="find_account_answer" required="true" length=":250" />
-    </fields>
+	</fields>
 </ruleset>

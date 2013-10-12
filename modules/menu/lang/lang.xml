@@ -840,7 +840,7 @@ Menu không phải là người quản lý, nhiệm vụ của nó chỉ là li�
 		<value xml:lang="ko"><![CDATA[URL 또는 다른 메뉴에 대한 링크입니다.]]></value>
 		<value xml:lang="en"><![CDATA[A shortcut is a link to a URL or to another menu]]></value>
 	</item>
-	
+
 	<item name="msg_target_is_sub_of_origin">
 		<value xml:lang="ko"><![CDATA[대상 메뉴가 원본 메뉴의 하위 메뉴 입니다.]]></value>
 		<value xml:lang="en"><![CDATA[Target menu is sub of origin menu.]]></value>

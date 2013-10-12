@@ -5,7 +5,8 @@ require_once(_XE_PATH_ . 'modules/autoinstall/autoinstall.lib.php');
 /**
  * autoinstall module admin controller class
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class autoinstallAdminController extends autoinstall
 {

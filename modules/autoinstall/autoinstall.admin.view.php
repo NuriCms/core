@@ -2,7 +2,8 @@
 
 /**
  * Admin view class in the autoinstall module
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class autoinstallAdminView extends autoinstall
 {
@@ -183,7 +184,7 @@ class autoinstallAdminView extends autoinstall
 		}
 
 		$oModel = getModel('autoinstall');
-		
+
 		if($package == null)
 		{
 			$packages = $oModel->getInstalledPackages(array_keys($targetpackages));

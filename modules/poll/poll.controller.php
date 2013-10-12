@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  pollController
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief Controller class for poll module
  */
 class pollController extends poll
@@ -116,8 +117,8 @@ class pollController extends poll
 	 */
 	function procPoll()
 	{
-		$poll_srl = Context::get('poll_srl'); 
-		$poll_srl_indexes = Context::get('poll_srl_indexes'); 
+		$poll_srl = Context::get('poll_srl');
+		$poll_srl_indexes = Context::get('poll_srl_indexes');
 		$tmp_item_srls = explode(',',$poll_srl_indexes);
 		for($i=0;$i<count($tmp_item_srls);$i++)
 		{
@@ -169,7 +170,7 @@ class pollController extends poll
 
 		$oDB->commit();
 
-		$skin = Context::get('skin'); 
+		$skin = Context::get('skin');
 		if(!$skin || !is_dir('./modules/poll/skins/'.$skin)) $skin = 'default';
 		// Get tpl
 		$tpl = $oPollModel->getPollHtml($poll_srl, '', $skin);
@@ -187,9 +188,9 @@ class pollController extends poll
 	 */
 	function procPollViewResult()
 	{
-		$poll_srl = Context::get('poll_srl'); 
+		$poll_srl = Context::get('poll_srl');
 
-		$skin = Context::get('skin'); 
+		$skin = Context::get('skin');
 		if(!$skin || !is_dir('./modules/poll/skins/'.$skin)) $skin = 'default';
 
 		$oPollModel = &getModel('poll');

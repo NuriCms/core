@@ -1,7 +1,8 @@
 <?php
 /**
  * @class content
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief widget to display content
  * @version 0.1
  */
@@ -443,7 +444,7 @@ class content extends WidgetHandler
 		$content = str_replace(array('<','>','"'),array('&lt;','&gt;','&quot;'), $content);
 		// Fixed to a newline bug for consecutive sets of English letters
 		$content = preg_replace('/([a-z0-9\+:\/\.\~,\|\!\@\#\$\%\^\&\*\(\)\_]){20}/is',"$0-",$content);
-		return $content; 
+		return $content;
 	}
 
 	/**
@@ -728,7 +729,7 @@ class content extends WidgetHandler
 		$widget_info->tab_type = $args->tab_type;
 
 		$widget_info->markup_type = $args->markup_type;
-		// If it is a tab type, list up tab items and change key value(module_srl) to index 
+		// If it is a tab type, list up tab items and change key value(module_srl) to index
 		if($args->tab_type != 'none' && $args->tab_type)
 		{
 			$tab = array();
@@ -915,7 +916,7 @@ class contentItem extends Object
 	{
 		return $this->get('thumbnail');
 	}
-	function getMemberSrl() 
+	function getMemberSrl()
 	{
 		return $this->get('member_srl');
 	}

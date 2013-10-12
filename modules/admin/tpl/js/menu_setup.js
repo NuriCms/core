@@ -65,7 +65,7 @@ $('form.adminMap')
 		}
 	})
 
-var 
+var
 	dragging = false,
 	$holder  = $('<li class="placeholder">');
 
@@ -142,7 +142,7 @@ $('form.adminMap>ul')
 
 					diff = {x:position.x-event.pageX, y:position.y-event.pageY};
 					nTop = offset.top - diff.y;
-					
+
 					for(i=0,c=offsets.length; i < c; i++) {
 						o = offsets[i];
 						if(o.top > nTop || o.bottom < nTop) continue;

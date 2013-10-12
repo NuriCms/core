@@ -217,7 +217,7 @@ $.exec_xml = window.exec_xml = function(module, act, params, callback_func, resp
 	if(_u1.protocol != _u2.protocol || _u1.port != _u2.port) return send_by_form(xml_path, params);
 
 	var xml = [], i = 0;
-	xml[i++] = '<?xml version="1.0" encoding="utf-8" ?>';
+	xml[i++] = '<?xml version="1.0" encoding="UTF-8" ?>';
 	xml[i++] = '<methodCall>';
 	xml[i++] = '<params>';
 
@@ -313,7 +313,7 @@ $.exec_xml = window.exec_xml = function(module, act, params, callback_func, resp
 	// ajax 통신중 대기 메세지 출력 (show_waiting_message값을 false로 세팅시 보이지 않음)
 	var waiting_obj = $('.wfsr');
 	if(show_waiting_message && waiting_obj.length) {
-	
+
 		var timeoutId = $(".wfsr").data('timeout_id');
 		if(timeoutId) clearTimeout(timeoutId);
 		$(".wfsr").css('opacity', 0.0);

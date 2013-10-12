@@ -4,7 +4,8 @@
  * commentModel class
  * model class of the comment module
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/comment
  * @version 0.1
  */

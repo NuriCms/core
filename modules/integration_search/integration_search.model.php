@@ -2,7 +2,8 @@
 /**
  * The model class of integration module
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class integration_searchModel extends module
 {
@@ -49,7 +50,7 @@ class integration_searchModel extends module
 		$args->page_count = 10;
 		$args->search_target = $search_target;
 		$args->search_keyword = $search_keyword;
-		$args->sort_index = 'list_order'; 
+		$args->sort_index = 'list_order';
 		$args->order_type = 'asc';
 		$args->statusList = array('PUBLIC');
 		if(!$args->module_srl) unset($args->module_srl);
@@ -73,10 +74,10 @@ class integration_searchModel extends module
 	function getComments($target, $module_srls_list, $search_keyword, $page=1, $list_count = 20)
 	{
 		$args = new stdClass();
-		
+
 		if(is_array($module_srls_list))
 		{
-			if (count($module_srls_list) > 0) $module_srls = implode(',',$module_srls_list); 
+			if (count($module_srls_list) > 0) $module_srls = implode(',',$module_srls_list);
 		}
 		else
 		{
@@ -93,7 +94,7 @@ class integration_searchModel extends module
 		$args->page_count = 10;
 		$args->search_target = 'content';
 		$args->search_keyword = $search_keyword;
-		$args->sort_index = 'list_order'; 
+		$args->sort_index = 'list_order';
 		$args->order_type = 'asc';
 		// Get a list of documents
 		$oCommentModel = &getModel('comment');
@@ -117,7 +118,7 @@ class integration_searchModel extends module
 	function getTrackbacks($target, $module_srls_list, $search_target = "title", $search_keyword, $page=1, $list_count = 20)
 	{
 		$args = new stdClass();
-		
+
 		if(is_array($module_srls_list)) $module_srls = implode(',',$module_srls_list);
 		else $module_srls = $module_srls_list;
 		if($target == 'exclude') $args->exclude_module_srl = $module_srls;
@@ -127,7 +128,7 @@ class integration_searchModel extends module
 		$args->page_count = 10;
 		$args->search_target = $search_target;
 		$args->search_keyword = $search_keyword;
-		$args->sort_index = 'list_order'; 
+		$args->sort_index = 'list_order';
 		$args->order_type = 'asc';
 		// Get a list of documents
 		$oTrackbackModel = &getAdminModel('trackback');
@@ -151,7 +152,7 @@ class integration_searchModel extends module
 	function _getFiles($target, $module_srls_list, $search_keyword, $page, $list_count, $direct_download = 'Y')
 	{
 		$args = new stdClass();
-		
+
 		if(is_array($module_srls_list)) $module_srls = implode(',',$module_srls_list);
 		else $module_srls = $module_srls_list;
 		if($target == 'exclude') $args->exclude_module_srl = $module_srls;
@@ -161,7 +162,7 @@ class integration_searchModel extends module
 		$args->page_count = 10;
 		$args->search_target = 'filename';
 		$args->search_keyword = $search_keyword;
-		$args->sort_index = 'files.file_srl'; 
+		$args->sort_index = 'files.file_srl';
 		$args->order_type = 'desc';
 		$args->isvalid = 'Y';
 		$args->direct_download = $direct_download=='Y'?'Y':'N';

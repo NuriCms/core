@@ -2,7 +2,8 @@
 /**
  * The view class of the integration_search module
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class integration_searchView extends integration_search
 {
@@ -76,7 +77,7 @@ class integration_searchView extends integration_search
 		if(!$page) $page = 1;
 		// Search by search tab
 		$where = Context::get('where');
-		// Create integration search model object 
+		// Create integration search model object
 		if($is_keyword)
 		{
 			$oIS = &getModel('integration_search');

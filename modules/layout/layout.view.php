@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  layoutView
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * admin view class of the layout module
  */
 class layoutView extends layout
@@ -34,7 +35,7 @@ class layoutView extends layout
 
 	/**
 	 * Preview a layout with module.
-	 * 
+	 *
 	 * @return Object
 	 */
 	public function dispLayoutPreviewWithModule()
@@ -259,7 +260,7 @@ class layoutView extends layout
 			{
 				throw new Exception(Context::getLang('msg_unabled_preview'));
 			}
-		
+
 			$mid = current($output->data)->mid;
 		}
 
@@ -384,7 +385,7 @@ class layoutView extends layout
 		}
 		else
 		{
-			return ''; 
+			return '';
 		}
 
 	}
@@ -400,7 +401,7 @@ class layoutView extends layout
 		}
 		else
 		{
-			return ''; 
+			return '';
 		}
 
 	}

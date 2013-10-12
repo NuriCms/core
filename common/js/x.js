@@ -1,6 +1,6 @@
-/** 
- * x.js compiled from X 4.0 with XC 0.27b. 
- * Distributed by GNU LGPL. For copyrights, license, documentation and more visit Cross-Browser.com 
+/**
+ * x.js compiled from X 4.0 with XC 0.27b.
+ * Distributed by GNU LGPL. For copyrights, license, documentation and more visit Cross-Browser.com
  * Copyright 2001-2005 Michael Foster (Cross-Browser.com)
  **/
 function xDeprecate(funcName) {
@@ -168,7 +168,7 @@ function xEvent(evt) // object prototype
     this.offsetY = this.pageY - xPageY(this.target);
   }
   // End Section A
-  
+
   if (e.keyCode) { this.keyCode = e.keyCode; } // for moz/fb, if keyCode==0 use which
   else if (xDef(e.which) && e.type.indexOf('key')!=-1) { this.keyCode = e.which; }
 
@@ -216,7 +216,7 @@ function xGetComputedStyle(oEle, sProp, bInt)
     for (var i=1; i<a.length; ++i) {
       c = a[i].charAt(0);
       sProp += a[i].replace(c, c.toUpperCase());
-    }   
+    }
     p = oEle.currentStyle[sProp];
   }
   else return null;
