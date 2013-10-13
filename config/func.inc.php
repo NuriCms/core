@@ -14,12 +14,10 @@ if(!defined('__XE__'))
 // define an empty function to avoid errors when iconv function doesn't exist
 if(!function_exists('iconv'))
 {
-	eval('
-		function iconv($in_charset, $out_charset, $str)
-		{
-			return $str;
-		}
-	');
+	function iconv($in_charset, $out_charset, $str)
+	{
+		return $str;
+	}
 }
 
 if(!function_exists('htmlspecialchars_decode'))

@@ -16,6 +16,6 @@ jQuery(function($){
 
 });
 function completeLogin(ret_obj, response_tags, params, fo_obj) {
-    var url =  current_url.setQuery('act','');
-    location.href = url;
+	var url =  current_url.setQuery('act','');
+	location.href = url;
 }

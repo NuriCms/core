@@ -630,7 +630,7 @@ private function clamp_number($n, $min, $max)
  *
  * @param string $haystack
  * @param string $needle
- * @param int    $offset index (optional)
+ * @param int	$offset index (optional)
  * @return int
  */
 private function index_of($haystack, $needle, $offset = 0)
@@ -646,7 +646,7 @@ private function index_of($haystack, $needle, $offset = 0)
  * Tests: http://margenn.com/tubal/substring/
  *
  * @param string   $str
- * @param int      $from index
+ * @param int	  $from index
  * @param int|bool $to index (optional)
  * @return string
  */
@@ -678,7 +678,7 @@ private function substring($str, $from = 0, $to = FALSE)
  * Tests: http://margenn.com/tubal/str_slice/
  *
  * @param string   $str
- * @param int      $start index
+ * @param int	  $start index
  * @param int|bool $end index (optional)
  * @return string
  */

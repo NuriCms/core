@@ -1,21 +1,21 @@
 /* NHN (developers@xpressengine.com) */
 // install module
 function doInstallModule(module) {
-    var params = new Array();
-    params['module_name'] = module;
-    exec_xml('install','procInstallAdminInstall',params, completeInstallModule);
+	var params = new Array();
+	params['module_name'] = module;
+	exec_xml('install','procInstallAdminInstall',params, completeInstallModule);
 }
 
 // upgrade module
 function doUpdateModule(module) {
-    var params = new Array();
-    params['module_name'] = module;
-    exec_xml('install','procInstallAdminUpdate',params, completeInstallModule);
+	var params = new Array();
+	params['module_name'] = module;
+	exec_xml('install','procInstallAdminUpdate',params, completeInstallModule);
 }
 
 function completeInstallModule(ret_obj) {
-    alert(ret_obj['message']);
-    location.reload();
+	alert(ret_obj['message']);
+	location.reload();
 }
 
 jQuery(function($){
@@ -657,7 +657,7 @@ jQuery(function($){
 				.delegate('button','click',function(){
 					var $this, $finder;
 
-					$this    = $(this);
+					$this	= $(this);
 					$finder  = $this.closest('.modulefinder');
 
 					function on_complete(data) {
@@ -692,8 +692,8 @@ jQuery(function($){
 					var $this, $mid_select, val, list;
 
 					$this   = $(this);
-					val     = $this.val();
-					list    = $this.data('module_list');
+					val	 = $this.val();
+					list	= $this.data('module_list');
 
 					if(!list[val]) return;
 
@@ -826,7 +826,7 @@ jQuery(function($){
 					.delegate('a','click',function(oEvent){
 						var $this, $finder;
 
-						$this    = $(this);
+						$this	= $(this);
 						$finder  = $this.closest('.moduleSearch');
 
 						function on_complete(data) {
@@ -1243,7 +1243,7 @@ jQuery(function($){
 				if(event.which != 1) return;
 
 				$this  = $(this);
-				$tr    = $this.closest('tr');
+				$tr	= $this.closest('tr');
 				$table = $this.closest('table');
 				ofspar = $table.get(0).offsetParent;
 				height = $tr.height();
@@ -1282,8 +1282,8 @@ jQuery(function($){
 						opacity : .6,
 						width   : width,
 						height  : height,
-						left    : offset.left,
-						top     : offset.top,
+						left	: offset.left,
+						top	 : offset.top,
 						zIndex  : 100
 					});
 
@@ -1294,8 +1294,8 @@ jQuery(function($){
 						opacity : .6,
 						width   : width,
 						height  : '10px',
-						left    : offset.left,
-						top     : offset.top,
+						left	: offset.left,
+						top	 : offset.top,
 						backgroundColor : '#bbb',
 						overflow: 'hidden',
 						zIndex  : 99

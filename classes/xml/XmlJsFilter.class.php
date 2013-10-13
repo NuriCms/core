@@ -8,10 +8,10 @@
  * <pre>{
  * <filter name="name of javascript funcion" act="action name" confirm_msg_code="message string to be prompted when submitting the form" >
  *  <form> <-- code to validate data in the form
- *    <node target="name" required="true" minlength="1" maxlength="5" filter="email,userid,alpha,number" equalto="target" />
+ *	<node target="name" required="true" minlength="1" maxlength="5" filter="email,userid,alpha,number" equalto="target" />
  *  </form>
  * <parameter> "- A form of key = val combination of items to js array return, act required
- *    <param name="key" target="target" />
+ *	<param name="key" target="target" />
  *  </parameter>
  * <response callback_func="specifying the name of js function to callback" > "- Result to get by sending ajax to the server
  * <tag name="error" /> <- get the result of error name
@@ -26,12 +26,12 @@
  *  required = flag indicating whether a field is mandatory or not
  *  minlength, maxlength = mininum, maxinum length of string allowed for the field
  *  filter = name of filter to be used for javascript validation. Following is the description of filter available
- *      1) email : validate the confirmance of the value against an email format
- *      2) userid : validate the confirmance of the value against the format of user id. (combination of number[0-9],alphabet(lower case) and '_', underscore starting with an alphatic character)
- *      3) alpha : check if the value is consists of alphabatic characters.
- *      4) number : check if the value is consists of numerical digits
- *      5) equalto = target : indicate that values in the form should be equal to those in target
- *      6) pattern_id/regex pattern/[i] : check the value using custom regular expression.
+ *	  1) email : validate the confirmance of the value against an email format
+ *	  2) userid : validate the confirmance of the value against the format of user id. (combination of number[0-9],alphabet(lower case) and '_', underscore starting with an alphatic character)
+ *	  3) alpha : check if the value is consists of alphabatic characters.
+ *	  4) number : check if the value is consists of numerical digits
+ *	  5) equalto = target : indicate that values in the form should be equal to those in target
+ *	  6) pattern_id/regex pattern/[i] : check the value using custom regular expression.
  *
  * - parameter - param
  *  name = key : indicate that a new array, 'key' will be created and a value will be assigned to it

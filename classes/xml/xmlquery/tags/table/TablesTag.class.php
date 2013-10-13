@@ -5,13 +5,13 @@
  * Models the <tables> tag inside an XML Query file
  * @abstract
  *   Example
- *      <tables>
- *          <table name="documents" alias="doc" />
- *      </tables>
+ *	  <tables>
+ *		  <table name="documents" alias="doc" />
+ *	  </tables>
  *   Attributes
- *      None.
+ *	  None.
  *   Children
- *      Can have children of type <table> or <query>
+ *	  Can have children of type <table> or <query>
  *
  * @author Arnia Sowftare
  * @package /classes/xml/xmlquery/tags/table

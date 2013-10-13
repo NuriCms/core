@@ -9,10 +9,10 @@
 (function($){
 
 var messages  = [];
-var rules     = [];
+var rules	 = [];
 var filters   = {};
 var callbacks = [];
-var extras    = {};
+var extras	= {};
 
 var Validator = xe.createApp('Validator', {
 	init : function() {
