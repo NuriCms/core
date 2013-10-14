@@ -22,7 +22,6 @@
         <action name="dispSavedDocumentList" type="view" />
 
         <action name="dispMemberAdminList" type="view" index="true" admin_index="true" menu_name="userList" menu_index="true"/>
-        <!--action name="dispMemberAdminConfig" type="view" menu_name="userSetting" menu_index="true" /-->
         <action name="dispMemberAdminConfig" type="view" menu_name="userSetting" menu_index="true" />
         <action name="dispMemberAdminSignUpConfig" type="view" menu_name="userSetting" />
         <action name="dispMemberAdminLoginConfig" type="view" menu_name="userSetting" />
