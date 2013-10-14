@@ -110,7 +110,7 @@
 	</item>
 	<item name="msg_not_exist_option">
 		<value xml:lang="ko"><![CDATA[이 애드온은 설정이 존재하지 않습니다.]]></value>
-		<value xml:lang="en"><![CDATA[Configuration for this addon does not exist.]]></value>		
+		<value xml:lang="en"><![CDATA[Configuration for this addon does not exist.]]></value>
 		<value xml:lang="jp"><![CDATA[このアドオンは、設定がありません。]]></value>
 		<value xml:lang="zh-CN"><![CDATA[此插件不存在设置。]]></value>
 		<value xml:lang="zh-TW"><![CDATA[此附加元件的設定不存在。]]></value>

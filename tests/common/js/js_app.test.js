@@ -41,7 +41,7 @@ jQuery(function($){
 
 		equal(app1.getName(), 'App', 'The app1 is an instance of App.');
 		ok(xe.getApp('App') == null, 'The app1 is NOT registered yet.');
-		
+
 		xe.registerApp(app1);
 
 		ok(xe.getApp('App')[0] === app1, 'The app1 is registered successfully.');

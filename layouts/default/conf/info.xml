@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layout version="0.2">
-    <title xml:lang="ko">기본 레이아웃</title>
-    <title xml:lang="en">Default Layout</title>
-    <description xml:lang="ko">사이트 기본 레이아웃.</description>
-    <description xml:lang="en">Site default layout.</description>
-    <version>1.0</version>
-    <date>2013-02-28</date>
-    <author email_address="developer@xpressengine.com" link="http://xpressengine.com/">
-        <name xml:lang="ko">NHN</name>
-        <name xml:lang="en">NHN</name>
-    </author>
-    <menus>
-        <menu name="GNB" maxdepth="2" default="true">
-            <title xml:lang="ko">전역 네비게이션 바</title>
-            <title xml:lang="en">Global Navigation Bar</title>
-        </menu>
-    </menus>
+	<title xml:lang="ko">기본 레이아웃</title>
+	<title xml:lang="en">Default Layout</title>
+	<description xml:lang="ko">사이트 기본 레이아웃.</description>
+	<description xml:lang="en">Site default layout.</description>
+	<version>1.0</version>
+	<date>2013-02-28</date>
+	<author email_address="developer@xpressengine.com" link="http://xpressengine.com/">
+		<name xml:lang="ko">NHN</name>
+		<name xml:lang="en">NHN</name>
+	</author>
+	<menus>
+		<menu name="GNB" maxdepth="2" default="true">
+			<title xml:lang="ko">전역 네비게이션 바</title>
+			<title xml:lang="en">Global Navigation Bar</title>
+		</menu>
+	</menus>
 	<extra_vars>
 		<var name="LOGO_IMG" type="image">
 			<title xml:lang="ko">사이트 로고 이미지</title>

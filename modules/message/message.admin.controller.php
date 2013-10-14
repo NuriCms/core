@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  messageAdminController
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief admin controller class of message module
  */
 class messageAdminController extends message

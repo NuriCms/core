@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <module>
-    <grants />
-    <permissions />
+	<grants />
+	<permissions />
 	<menus>
 		<menu name="spamFilter" tyle="super">
 			<title xml:lang="en">Spam Filter</title>
@@ -17,17 +17,16 @@
 			<title xml:lang="tr">Spam Filter</title>
 		</menu>
 	</menus>
-    <actions>
-        <action name="dispSpamfilterAdminDeniedIPList" type="view" admin_index="true" menu_name="spamFilter" menu_index="true" />
-        <action name="dispSpamfilterAdminDeniedWordList" type="view" menu_name="spamFilter" />
-        <action name="dispSpamfilterAdminConfigBlock" type="view" menu_name="spamFilter" />
+	<actions>
+		<action name="dispSpamfilterAdminDeniedIPList" type="view" admin_index="true" menu_name="spamFilter" menu_index="true" />
+		<action name="dispSpamfilterAdminDeniedWordList" type="view" menu_name="spamFilter" />
+		<action name="dispSpamfilterAdminConfigBlock" type="view" menu_name="spamFilter" />
 
 		<action name="procSpamfilterAdminInsertDeniedIP" type="controller" />
-        <action name="procSpamfilterAdminInsertDeniedWord" type="controller" />
+		<action name="procSpamfilterAdminInsertDeniedWord" type="controller" />
 
-        <action name="procSpamfilterAdminDeleteDeniedIP" type="controller" />
-        <action name="procSpamfilterAdminDeleteDeniedWord" type="controller" />
-        <action name="procSpamfilterAdminInsertConfig" type="controller" ruleset="insertConfig" />
-
+		<action name="procSpamfilterAdminDeleteDeniedIP" type="controller" />
+		<action name="procSpamfilterAdminDeleteDeniedWord" type="controller" />
+		<action name="procSpamfilterAdminInsertConfig" type="controller" ruleset="insertConfig" />
 	</actions>
 </module>

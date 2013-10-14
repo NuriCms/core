@@ -11,15 +11,15 @@ var reloadCallback = new Array();
  **/
 // window.load 이벤트일 경우 && 문서 번호가 가상의 번호가 아니면 기존에 저장되어 있을지도 모르는 파일 목록을 가져옴
 function editorUploadInit(obj) {
-    if(typeof(obj["editorSequence"])=="undefined") return;
-    if(typeof(obj["sessionName"])=="undefined") obj["sessionName"]= "PHPSESSID";
-    if(typeof(obj["allowedFileSize"])=="undefined") obj["allowedFileSize"]= 2*1024*1024;
-    if(typeof(obj["allowedFileTypes"])=="undefined") obj["allowedFileTypes"]= "*.*";
-    if(typeof(obj["allowedFileTypesDescription"])=="undefined") obj["allowedFileTypesDescription"]= "All Files";
-    if(typeof(obj["replaceButtonID"])=="undefined") obj["replaceButtonID"] = "swfUploadButton"+obj["editorSequence"];
-    if(typeof(obj["insertFiles"])=="undefined") obj["insertFiles"] = 0;
+	if(typeof(obj["editorSequence"])=="undefined") return;
+	if(typeof(obj["sessionName"])=="undefined") obj["sessionName"]= "PHPSESSID";
+	if(typeof(obj["allowedFileSize"])=="undefined") obj["allowedFileSize"]= 2*1024*1024;
+	if(typeof(obj["allowedFileTypes"])=="undefined") obj["allowedFileTypes"]= "*.*";
+	if(typeof(obj["allowedFileTypesDescription"])=="undefined") obj["allowedFileTypesDescription"]= "All Files";
+	if(typeof(obj["replaceButtonID"])=="undefined") obj["replaceButtonID"] = "swfUploadButton"+obj["editorSequence"];
+	if(typeof(obj["insertFiles"])=="undefined") obj["insertFiles"] = 0;
    // xAddEventListener(window,'load', function() {XEUploaderStart(obj); } );
-    XEUploaderStart(obj); 
+	XEUploaderStart(obj);
 
 }
 
@@ -28,13 +28,13 @@ function XEUploaderStart(obj) {
 	try { document.execCommand('BackgroundImageCache',false,true); } catch(e) { };
 
 	var oBtn  = jQuery('#'+obj['replaceButtonID']);
-    var btnWidth = 500;
-    var btnHeight = 40;
-    oBtn.css('position','relative');
+	var btnWidth = 500;
+	var btnHeight = 40;
+	oBtn.css('position','relative');
 
-    var dummy = xCreateElement("span");
-    dummy.id = "dummy"+obj["replaceButtonID"];
-    oBtn.get(0).appendChild(dummy);
+	var dummy = xCreateElement("span");
+	dummy.id = "dummy"+obj["replaceButtonID"];
+	oBtn.get(0).appendChild(dummy);
 
 	var settings = {
 		flash_url : request_uri+"modules/editor/tpl/images/SWFUpload.swf",
@@ -77,7 +77,7 @@ function XEUploaderStart(obj) {
 		upload_complete_handler : uploadComplete,
 		queue_complete_handler :queueComplete
 	};
-	
+
 	if(typeof(xeVid)!='undefined') settings["post_params"]["vid"] = xeVid;
 	settings["post_params"][obj["sessionName"]] = xGetCookie(obj["sessionName"]);
 	settings["editorSequence"] = obj["editorSequence"];
@@ -85,22 +85,22 @@ function XEUploaderStart(obj) {
 	for(var x in obj) {
 		if (typeof settings[x] != 'undefined') settings[x] = obj[x];
 	}
-	
+
 	uploaderSettings[obj["editorSequence"]] = settings;
-	
+
 	var swfu   = new SWFUpload(settings);
 	var swfObj = jQuery('#'+swfu.movieName);
 	swfUploadObjs[obj["editorSequence"]] = swfu.movieName;
 	if(!swfObj) return;
-	
+
 	jQuery(swfObj).css({
 		display  : 'block',
 		cursor   : 'pointer',
 		position : 'absolute',
 		left	 : 0,
-		width    : btnWidth,
+		width	: btnWidth,
 		height   : btnHeight,
-		top	     : '-3px'
+		top		 : '-3px'
 	});
 }
 
@@ -223,13 +223,13 @@ function queueComplete(numFilesUploaded) {
 }
 
 function reloadFileList(settings) {
-    var params = new Array();
-    params["file_list_area_id"] = settings["fileListAreaID"];
-    params["editor_sequence"] = settings["editorSequence"];
-    params["upload_target_srl"] = settings["uploadTargetSrl"];
-    params["mid"] = current_mid;
-    var response_tags = new Array("error","message","files","upload_status","upload_target_srl","editor_sequence","left_size");
-    exec_xml("file","getFileList", params, completeReloadFileList, response_tags, settings);
+	var params = new Array();
+	params["file_list_area_id"] = settings["fileListAreaID"];
+	params["editor_sequence"] = settings["editorSequence"];
+	params["upload_target_srl"] = settings["uploadTargetSrl"];
+	params["mid"] = current_mid;
+	var response_tags = new Array("error","message","files","upload_status","upload_target_srl","editor_sequence","left_size");
+	exec_xml("file","getFileList", params, completeReloadFileList, response_tags, settings);
 }
 
 function completeReloadFileList(ret_obj, response_tags, settings) {
@@ -238,10 +238,10 @@ function completeReloadFileList(ret_obj, response_tags, settings) {
 	var upload_target_srl= ret_obj['upload_target_srl'];
 	var files = ret_obj['files'];
 	var left_size = parseInt(parseInt(ret_obj["left_size"],10)/1024,10);
-	
+
 	if(!files || typeof(files['item'])=='undefined') return;
 	if (!jQuery.isArray(files['item'])) files['item'] = [ files['item'] ];
-	
+
 	orderedFiles = files['item'];
 
 	jQuery.each(files['item'], function(){

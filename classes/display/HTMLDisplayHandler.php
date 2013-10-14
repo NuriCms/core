@@ -226,13 +226,13 @@ class HTMLDisplayHandler
 		if(Mobile::isFromMobilePhone())
 		{
 			$this->_loadMobileJSCSS();
-			$output = $oTemplate->compile('./common/tpl', 'mobile_layout');
+			Context::addMetaTag('viewport', 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no', FALSE);
 		}
 		else
 		{
 			$this->_loadJSCSS();
-			$output = $oTemplate->compile('./common/tpl', 'common_layout');
 		}
+		$output = $oTemplate->compile('./common/tpl', 'common_layout');
 
 		// replace the user-defined-language
 		$oModuleController = getController('module');
@@ -398,6 +398,7 @@ class HTMLDisplayHandler
 			$oContext->loadFile(array('./common/js/js_app.js', 'head', '', -100000), true);
 			$oContext->loadFile(array('./common/js/xml_handler.js', 'head', '', -100000), true);
 			$oContext->loadFile(array('./common/js/xml_js_filter.js', 'head', '', -100000), true);
+			$oContext->loadFile(array('./common/js/html5.js', 'head', 'lt IE 9', -100000), true);
 			$oContext->loadFile(array('./common/css/xe.css', '', '', -1000000), true);
 		}
 		else
@@ -405,6 +406,7 @@ class HTMLDisplayHandler
 			$oContext->loadFile(array('./common/js/jquery.min.js', 'head', '', -100000), true);
 			$oContext->loadFile(array('./common/js/x.min.js', 'head', '', -100000), true);
 			$oContext->loadFile(array('./common/js/xe.min.js', 'head', '', -100000), true);
+			$oContext->loadFile(array('./common/js/html5.js', 'head', 'lt IE 9', -100000), true);
 			$oContext->loadFile(array('./common/css/xe.min.css', '', '', -1000000), true);
 		}
 

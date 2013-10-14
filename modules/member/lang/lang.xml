@@ -1623,7 +1623,7 @@
 	</item>
 	<item name="about_rechecked_password">
 		<value xml:lang="ko"><![CDATA[회원의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인 합니다.]]></value>
-        <value xml:lang="en"><![CDATA[Confirm your password before editing account information.]]></value>
+		<value xml:lang="en"><![CDATA[Confirm your password before editing account information.]]></value>
 		<value xml:lang="zh-CN"><![CDATA[为了会员资料的安全保护，再次确认密码。]]></value>
 	</item>
 	<item name="about_user_id">

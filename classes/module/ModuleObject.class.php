@@ -2,7 +2,8 @@
 
 /**
  * @class ModuleObject
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * base class of ModuleHandler
  * */
 class ModuleObject extends Object

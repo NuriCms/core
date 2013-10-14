@@ -1,7 +1,8 @@
 <?php
 /**
  * Admin view of the module class file
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class fileAdminView extends file
 {
@@ -59,7 +60,7 @@ class fileAdminView extends file
 				// Find and update if upload_target_type doesn't exist
 				if(!$file->upload_target_type)
 				{
-					// Pass if upload_target_type is already found 
+					// Pass if upload_target_type is already found
 					if($document_list[$target_srl])
 					{
 						$file->upload_target_type = 'doc';
@@ -200,7 +201,7 @@ class fileAdminView extends file
 		// Set a template
 		$security = new Security();
 		$security->encodeHTML('file_list..');
-		$security->encodeHTML('module_list..');						
+		$security->encodeHTML('module_list..');
 
 		$this->setTemplatePath($this->module_path.'tpl');
 		$this->setTemplateFile('file_list');

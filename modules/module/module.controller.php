@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  moduleController
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief controller class of the module module
  */
 class moduleController extends module

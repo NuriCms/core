@@ -3,7 +3,7 @@
  **/
 function doDeleteDeniedIP(ipaddress) {
 	var fo_obj = get_by_id('spamfilterDelete');
-    fo_obj.ipaddress.value = ipaddress;
+	fo_obj.ipaddress.value = ipaddress;
 	fo_obj.act.value = "procSpamfilterAdminDeleteDeniedIP";
 	fo_obj.submit();
 }

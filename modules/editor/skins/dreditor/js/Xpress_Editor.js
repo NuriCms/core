@@ -2281,10 +2281,10 @@ xe.Hotkey = jQuery.Class({
 			backspace : 8,
 			tab		  : 9,
 			enter	  : 13,
-			shift     : 16,
-			ctrl      : 17,
-			alt       : 18,
-			meta      : 224,
+			shift	 : 16,
+			ctrl	  : 17,
+			alt	   : 18,
+			meta	  : 224,
 			esc		  : 27,
 			space	  : 32,
 			pageup	  : 33,
@@ -2299,8 +2299,8 @@ xe.Hotkey = jQuery.Class({
 			comma	  : 188,//(,)
 			period	  : 190,//(.)
 			slash	  : 191,//(/)
-			hyphen    : 109,
-			equal     : 61
+			hyphen	: 109,
+			equal	 : 61
 		};
 
 		if (jQuery.browser.msie || jQuery.browser.safari) {
@@ -4965,38 +4965,38 @@ xe.XE_Hyperlink = jQuery.Class({
 		this.oSelection = this.oApp.getSelection();
 
 		//if(this._validateURL(sURL)){
-        var sTarget = "";
-        if(this.oCbNewWin.checked)
-            sTarget = "_blank";
-        else
-            sTarget = "_self";
+		var sTarget = "";
+		if(this.oCbNewWin.checked)
+			sTarget = "_blank";
+		else
+			sTarget = "_self";
 
-        if(this.oSelection.collapsed){
-            var str = "<a href='" + sURL + "' target="+sTarget+">" + sURL + "</a>";
-            this.oSelection.pasteHTML(str);
-        }else{
-            var nSession = Math.ceil(Math.random()*10000);
-            var arg = ( sURL == "" ? ["unlink"] : ["createLink", false, this.sATagMarker+nSession+sURL] );
-            this.oApp.exec("EXECCOMMAND", arg);
+		if(this.oSelection.collapsed){
+			var str = "<a href='" + sURL + "' target="+sTarget+">" + sURL + "</a>";
+			this.oSelection.pasteHTML(str);
+		}else{
+			var nSession = Math.ceil(Math.random()*10000);
+			var arg = ( sURL == "" ? ["unlink"] : ["createLink", false, this.sATagMarker+nSession+sURL] );
+			this.oApp.exec("EXECCOMMAND", arg);
 
-            this.oSelection.setFromSelection();
+			this.oSelection.setFromSelection();
 
-            var oDoc = this.oApp.getWYSIWYGDocument();
-            var aATags = oDoc.body.getElementsByTagName("A");
-            var nLen = aATags.length;
-            var rxMarker = new RegExp(this.sRXATagMarker+nSession, "i");
-            var elATag;
-            for(var i=0; i<nLen; i++){
-                elATag = aATags[i];
-                if(elATag.href && elATag.href.match(rxMarker)){
-                    elATag.href = elATag.href.replace(rxMarker, "");
-                    elATag.target = sTarget;
-                }
-            }
-        }
-        this.oApp.exec("HIDE_ACTIVE_LAYER");
+			var oDoc = this.oApp.getWYSIWYGDocument();
+			var aATags = oDoc.body.getElementsByTagName("A");
+			var nLen = aATags.length;
+			var rxMarker = new RegExp(this.sRXATagMarker+nSession, "i");
+			var elATag;
+			for(var i=0; i<nLen; i++){
+				elATag = aATags[i];
+				if(elATag.href && elATag.href.match(rxMarker)){
+					elATag.href = elATag.href.replace(rxMarker, "");
+					elATag.target = sTarget;
+				}
+			}
+		}
+		this.oApp.exec("HIDE_ACTIVE_LAYER");
 
-        setTimeout(jQuery.fnBind(function(){this.oSelection.select()}, this), 0);
+		setTimeout(jQuery.fnBind(function(){this.oSelection.select()}, this), 0);
 		//}else{
 			//alert(this.oApp.$MSG("XE_Hyperlink.invalidURL"));
 			//this.oLinkInput.focus();
@@ -5393,8 +5393,8 @@ xe.XE_XHTMLFormatter = $.Class({
 	TO_IR : function(sContent) {
 		var stack = [];
 
-        // remove xeHandled attrs
-        sContent = sContent.replace(/xeHandled="YES"/ig,'');
+		// remove xeHandled attrs
+		sContent = sContent.replace(/xeHandled="YES"/ig,'');
 
 
 		// remove all useless styles
@@ -5429,7 +5429,7 @@ xe.XE_XHTMLFormatter = $.Class({
 				return '<'+m1+' '+
 					m2.replace(regex_quote_attr, function(s0,s1,s2,s3){
 						if (s1) return s1;
-                        if(/^"/.test(s3)||/"$/.test(s3)) return s2+'='+s3;
+						if(/^"/.test(s3)||/"$/.test(s3)) return s2+'='+s3;
 						return s2+'="'+s3+'"';
 					}) + '>';
 			});
@@ -5698,7 +5698,7 @@ xe.XE_Table = jQuery.Class({
 		this.oApp.exec("RECORD_UNDO_ACTION", ["Cell:Split By Row"]);
 
 		// 선택 영역의 상하 좌표 구함
-		var _top    = this._getRect(cell.eq(0)).top;
+		var _top	= this._getRect(cell.eq(0)).top;
 		var _bottom = this._getRect(cell.eq(cell.length-1)).bottom;
 
 		// 테이블의 모든 셀에서 선택영역에 해당하는 셀을 구한다(상하 기준).
@@ -5707,10 +5707,10 @@ xe.XE_Table = jQuery.Class({
 
 			return !(rect.bottom <= _top || rect.top >= _bottom);
 		})).filter('.xe_selected_cell').each(function(){
-			var t       = $(this);
-			var row     = t.parent('tr');
+			var t	   = $(this);
+			var row	 = t.parent('tr');
 			var rowspan = self._getSpan(t, 'row');
-			var rect    = self._getRect(t);
+			var rect	= self._getRect(t);
 			var queue   = [];
 			var clone   = t.clone().html('<br />');
 			var topspan = 1, botspan = 1;
@@ -5807,7 +5807,7 @@ xe.XE_Table = jQuery.Class({
 
 			return !(rect.right <= _left || rect.left >= _right);
 		})).filter('.xe_selected_cell').each(function(idx){
-			var t       = jQuery(this);
+			var t	   = jQuery(this);
 			var colspan = self._getSpan(t, 'col');
 			var clone   = t.clone().html('<br />');
 
@@ -5914,7 +5914,7 @@ xe.XE_Table = jQuery.Class({
 		this._getRect(this._endSel = cell);
 
 		// 선택 범위를 구한다
-		var _top    = Math.min(this._startSel.rect.top,  this._endSel.rect.top);
+		var _top	= Math.min(this._startSel.rect.top,  this._endSel.rect.top);
 		var _left   = Math.min(this._startSel.rect.left, this._endSel.rect.left);
 		var _bottom = Math.max(this._startSel.rect.bottom, this._endSel.rect.bottom);
 		var _right  = Math.max(this._startSel.rect.right,  this._endSel.rect.right);
@@ -5933,7 +5933,7 @@ xe.XE_Table = jQuery.Class({
 				// 영역 재계산
 				if (rect.right  > _right)  _right  = rect.right;
 				if (rect.left   < _left)   _left   = rect.left;
-				if (rect.top    < _top)    _top    = rect.top;
+				if (rect.top	< _top)	_top	= rect.top;
 				if (rect.bottom > _bottom) _bottom = rect.bottom;
 			});
 
@@ -5981,7 +5981,7 @@ xe.XE_Table = jQuery.Class({
 		var el = obj.get(0);
 
 		obj.rect = {};
-		obj.rect.top    = el.offsetTop;
+		obj.rect.top	= el.offsetTop;
 		obj.rect.left   = el.offsetLeft;
 		obj.rect.bottom = obj.rect.top  + el.offsetHeight;
 		obj.rect.right  = obj.rect.left + el.offsetWidth;
@@ -6028,14 +6028,14 @@ xe.XE_WYSIWYGEnterKey = $.Class({
 	$ON_MSG_APP_READY : function(){
 		var doc = this.oApp.getWYSIWYGDocument();
 
-		if (typeof doc._enterkey_binded == "undefined") {		
+		if (typeof doc._enterkey_binded == "undefined") {
 			$(doc).keydown($.fnBind(this._onKeyDown, this));
 			doc._enterkey_binded = true;
 		}
 	},
-	_onKeyDown : function(event){	
+	_onKeyDown : function(event){
 		if(event.shiftKey) return;
-		
+
 		if(event.keyCode == 13){ // enter
 			if(this.sLineBreaker == "BR"){
 				this._insertBR(event);
@@ -6074,7 +6074,7 @@ xe.XE_WYSIWYGEnterKey = $.Class({
 
 			if(oSWrapper.innerHTML == "") oSWrapper.innerHTML = "<br>";
 			if(oEWrapper.innerHTML == "") oEWrapper.innerHTML = "<br>";
-			
+
 			if(oEWrapper.nextSibling && oEWrapper.nextSibling.tagName == "BR") oEWrapper.parentNode.removeChild(oEWrapper.nextSibling);
 
 			oSelection.selectNodeContents(oEWrapper);
@@ -6085,7 +6085,7 @@ xe.XE_WYSIWYGEnterKey = $.Class({
 			oSelection.removeStringBookmark(sBM);
 		}
 	},
-	
+
 	_insertBR : function(event){
 		event.stopPropagation();
 		event.preventDefault();
@@ -6096,7 +6096,7 @@ xe.XE_WYSIWYGEnterKey = $.Class({
 		oSelection.insertNode(elBR);
 		oSelection.selectNode(elBR);
 		oSelection.collapseToEnd();
-		
+
 		if(!$.browser.msie){
 			var oLineInfo = oSelection.getLineInfo();
 			var oStart = oLineInfo.oStart;

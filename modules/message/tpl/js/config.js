@@ -9,11 +9,11 @@ function doGetSkinColorset(skin, type) {
 
 	function on_complete(ret) {
 		var $container = jQuery('#colorset');
-		
+
 		if(type == 'M'){
 			$container = jQuery('#mcolorset');
 		}
-		
+
 		var old_h = $container.is(':visible') ? $container.outerHeight() : 0;
 
 		if(ret.tpl == ''){
@@ -21,7 +21,7 @@ function doGetSkinColorset(skin, type) {
 		}else{
 			$container.show();
 			var $colorset = jQuery('#message_colorset');
-			
+
 			if(type == 'M'){
 				$colorset = jQuery('#message_mcolorset');
 			}

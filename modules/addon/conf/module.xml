@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <module>
-    <grants />
-    <permissions />
-    <actions>
-        <action name="dispAddonAdminIndex" type="view" admin_index="true" menu_name="installedAddon" menu_index="true" />
-        <action name="dispAddonAdminInfo" type="view" />
-        <action name="dispAddonAdminSetup" type="view" menu_name="installedAddon" />
-        <action name="procAddonAdminToggleActivate" type="controller" />
-        <action name="procAddonAdminSetupAddon" type="controller" ruleset="updateAddonSetup" />
+	<grants />
+	<permissions />
+	<actions>
+		<action name="dispAddonAdminIndex" type="view" admin_index="true" menu_name="installedAddon" menu_index="true" />
+		<action name="dispAddonAdminInfo" type="view" />
+		<action name="dispAddonAdminSetup" type="view" menu_name="installedAddon" />
+		<action name="procAddonAdminToggleActivate" type="controller" />
+		<action name="procAddonAdminSetupAddon" type="controller" ruleset="updateAddonSetup" />
 		<action name="procAddonAdminSaveActivate" type="controller" />
-    </actions>
+	</actions>
 	<menus>
 		<menu name="installedAddon">
 			<title xml:lang="en">Add-ons</title>

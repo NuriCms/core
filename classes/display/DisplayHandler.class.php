@@ -2,7 +2,8 @@
 
 /**
  * @class DisplayHandler
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  *  DisplayHandler is responsible for displaying the execution result. \n
  *  Depending on the request type, it can display either HTML or XML content.\n
  *  Xml content is simple xml presentation of variables in oModule while html content
@@ -70,7 +71,7 @@ class DisplayHandler extends Handler
 
 		// call a trigger before display
 		ModuleHandler::triggerCall('display', 'before', $output);
-		
+
 		// execute add-on
 		$called_position = 'before_display_content';
 		$oAddonController = &getController('addon');

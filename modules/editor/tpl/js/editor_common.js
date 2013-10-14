@@ -95,7 +95,7 @@ function _editorAutoSave(exe, callback) {
 			params,
 			function() {
 				var arg = jQuery.extend({}, params, {auto_saved_msg:auto_saved_msg});
-			
+
 				editorAutoSaveObj.locked = false;
 				if(jQuery.isFunction(callback)) callback(arg);
 			}
@@ -297,7 +297,7 @@ function editorReplaceHTML(iframe_obj, html) {
 
     // iframe 에디터에 포커스를 둠
 	try { iframe_obj.contentWindow.focus(); }catch(e){};
-	
+
 	if (jQuery.isFunction(iframe_obj.replaceHTML)) {
 		iframe_obj.replaceHTML(html);
 	} else if(xIE4Up) {

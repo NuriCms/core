@@ -1,41 +1,41 @@
 /* 설문 참여 함수 */
 function doPoll(fo_obj) {
 
-    var checkcount = new Array();
-    var item = new Array();
+	var checkcount = new Array();
+	var item = new Array();
 
-    for(var i=0;i<fo_obj.length;i++) {
-        var obj = fo_obj[i];
-        if(obj.nodeName != 'INPUT') continue;
+	for(var i=0;i<fo_obj.length;i++) {
+		var obj = fo_obj[i];
+		if(obj.nodeName != 'INPUT') continue;
 
-        var name = obj.name;
-        if(name.indexOf('checkcount')>-1) {
-            var t = name.split('_');
-            var poll_srl_index = parseInt(t[1],10);
-            checkcount[poll_srl_index] = obj.value;
-            item[poll_srl_index] = new Array();
+		var name = obj.name;
+		if(name.indexOf('checkcount')>-1) {
+			var t = name.split('_');
+			var poll_srl_index = parseInt(t[1],10);
+			checkcount[poll_srl_index] = obj.value;
+			item[poll_srl_index] = new Array();
 
-        } else if(name.indexOf('item_')>-1) {
-            var t = name.split('_');
-            var poll_srl = parseInt(t[1],10); 
-            var poll_srl_index = parseInt(t[2],10); 
-            if(obj.checked == true) item[poll_srl_index][item[poll_srl_index].length] = obj.value;
-        }
-    }
+		} else if(name.indexOf('item_')>-1) {
+			var t = name.split('_');
+			var poll_srl = parseInt(t[1],10);
+			var poll_srl_index = parseInt(t[2],10);
+			if(obj.checked == true) item[poll_srl_index][item[poll_srl_index].length] = obj.value;
+		}
+	}
 
-    var poll_srl_indexes = "";
-    for(var poll_srl_index in checkcount) {
+	var poll_srl_indexes = "";
+	for(var poll_srl_index in checkcount) {
 	if(!checkcount.hasOwnProperty(poll_srl_index)) continue;
-        var count = checkcount[poll_srl_index];
-        var items = item[poll_srl_index];
-        if(items.length < 1 || count < items.length) {
-            alert(poll_alert_lang);
-            return false;
-        }
+		var count = checkcount[poll_srl_index];
+		var items = item[poll_srl_index];
+		if(items.length < 1 || count < items.length) {
+			alert(poll_alert_lang);
+			return false;
+		}
 
-        poll_srl_indexes += items.join(',')+',';
-    }
-    fo_obj.poll_srl_indexes.value = poll_srl_indexes;
+		poll_srl_indexes += items.join(',')+',';
+	}
+	fo_obj.poll_srl_indexes.value = poll_srl_indexes;
 
 	fo_obj.submit();
 }

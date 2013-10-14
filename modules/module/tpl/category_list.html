@@ -15,7 +15,7 @@
 <form id="fo_category_info" action="./" method="post">
 	<input type="hidden" name="module" value="module" />
 	<input type="hidden" name="act" value="procModuleAdminDeleteCategory" />
-    <input type="hidden" name="module_category_srl" value="" />
+	<input type="hidden" name="module_category_srl" value="" />
 	<input type="hidden" name="xe_validator_id" value="modules/module/tpl/category_list/1" />
 </form>
 <table class="x_table x_table-striped x_table-hover">
@@ -37,8 +37,8 @@
 			<td>{$val->title}</td>
 			<td>{zdate($val->regdate,"Y-m-d")}</td>
 			<td>
-				<a class="x_btn x_btn-link" href="{getUrl('module_category_srl',$val->module_category_srl)}">{$lang->cmd_modify}</a> 
-				<i>|</i> 
+				<a class="x_btn x_btn-link" href="{getUrl('module_category_srl',$val->module_category_srl)}">{$lang->cmd_modify}</a>
+				<i>|</i>
 				<button type="button" class="x_btn x_btn-link" onclick="doUpdateCategory('{$val->module_category_srl}','{$lang->confirm_delete}');return false;">{$lang->cmd_delete}</button>
 			</td>
 		</tr>

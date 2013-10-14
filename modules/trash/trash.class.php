@@ -5,7 +5,8 @@ require_once(_XE_PATH_.'modules/trash/model/TrashVO.php');
  * trash class
  * trash the module's high class
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/trash
  * @version 0.1
  */

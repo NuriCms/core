@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  pageAdminController
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief page of the module admin controller class
  */
 class pageAdminController extends page
@@ -309,7 +310,7 @@ class pageAdminController extends page
 		$bAnonymous = false;
 
 		// 이미 존재하는 경우 수정
-		if($oDocument->isExists() && $oDocument->document_srl == $obj->document_srl) 
+		if($oDocument->isExists() && $oDocument->document_srl == $obj->document_srl)
 		{
 			$output = $oDocumentController->updateDocument($oDocument, $obj);
 			$msg_code = 'success_updated';

@@ -3,7 +3,8 @@ if(!defined("__XE__")) exit();
 
 /**
  * @file captcha.addon.php
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief Captcha for a particular action
  * English alphabets and voice verification added
  * */

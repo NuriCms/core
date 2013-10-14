@@ -6,7 +6,7 @@ function getFileList() {
 	var fileListTable = jQuery('#fileListTable');
 	var cartList = [];
 	fileListTable.find(':checkbox[name=cart]').each(function(){
-		if(this.checked) cartList.push(this.value); 
+		if(this.checked) cartList.push(this.value);
 	});
 
     var params = new Array();

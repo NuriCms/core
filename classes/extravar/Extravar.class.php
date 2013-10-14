@@ -3,7 +3,8 @@
 /**
  * A class to handle extra variables used in posts, member and others
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class ExtraVar
 {
@@ -44,7 +45,7 @@ class ExtraVar
 
 	/**
 	 * Register a key of extra variable
-	 * 
+	 *
 	 * @param object[] $extra_keys Array of extra variable. A value of array is object that contains module_srl, idx, name, default, desc, is_required, search, value, eid.
 	 * @return void
 	 */
@@ -78,7 +79,8 @@ class ExtraVar
 /**
  * Each value of the extra vars
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class ExtraItem
 {
@@ -305,10 +307,10 @@ class ExtraItem
 
 			case 'tel' :
 				return sprintf('%s - %s - %s', $value[0], $value[1], $value[2]);
-				
+
 			case 'textarea' :
 				return nl2br($value);
-				
+
 			case 'checkbox' :
 				if(is_array($value))
 				{
@@ -318,7 +320,7 @@ class ExtraItem
 				{
 					return $value;
 				}
-				
+
 			case 'date' :
 				return zdate($value, "Y-m-d");
 
@@ -456,17 +458,17 @@ class ExtraItem
 						'<input type="text" id="date_' . $column_name . '" value="' . zdate($value, 'Y-m-d') . '" class="date" /> <input type="button" value="' . Context::getLang('cmd_delete') . '" id="dateRemover_' . $column_name . '" />' . "\n" .
 						'<script>' . "\n" .
 						'(function($){' . "\n" .
-						'    $(function(){' . "\n" .
-						'        var option = { dateFormat: "yy-mm-dd", changeMonth:true, changeYear:true, gotoCurrent: false,yearRange:\'-100:+10\', onSelect:function(){' . "\n" .
-						'            $(this).prev(\'input[type="hidden"]\').val(this.value.replace(/-/g,""))}' . "\n" .
-						'        };' . "\n" .
-						'        $.extend(option,$.datepicker.regional[\'' . Context::getLangType() . '\']);' . "\n" .
-						'        $("#date_' . $column_name . '").datepicker(option);' . "\n" .
+						'	$(function(){' . "\n" .
+						'		var option = { dateFormat: "yy-mm-dd", changeMonth:true, changeYear:true, gotoCurrent: false,yearRange:\'-100:+10\', onSelect:function(){' . "\n" .
+						'			$(this).prev(\'input[type="hidden"]\').val(this.value.replace(/-/g,""))}' . "\n" .
+						'		};' . "\n" .
+						'		$.extend(option,$.datepicker.regional[\'' . Context::getLangType() . '\']);' . "\n" .
+						'		$("#date_' . $column_name . '").datepicker(option);' . "\n" .
 						'		$("#dateRemover_' . $column_name . '").click(function(){' . "\n" .
 						'			$(this).siblings("input").val("");' . "\n" .
 						'			return false;' . "\n" .
 						'		})' . "\n" .
-						'    });' . "\n" .
+						'	});' . "\n" .
 						'})(jQuery);' . "\n" .
 						'</script>';
 				break;
@@ -501,7 +503,7 @@ class ExtraItem
 		{
 			$buff .= '<p>' . htmlspecialchars($this->desc) . '</p>';
 		}
-		
+
 		return $buff;
 	}
 

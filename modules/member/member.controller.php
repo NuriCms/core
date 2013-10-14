@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  memberController
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * Controller class of member module
  */
 class memberController extends member
@@ -111,7 +112,7 @@ class memberController extends member
 
 	/**
 	 * Scrap document
-	 * 
+	 *
 	 * @return void|Object (void : success, Object : fail)
 	 */
 	function procMemberScrapDocument()
@@ -148,7 +149,7 @@ class memberController extends member
 
 	/**
 	 * Delete a scrap
-	 * 
+	 *
 	 * @return void|Object (void : success, Object : fail)
 	 */
 	function procMemberDeleteScrap()
@@ -177,7 +178,7 @@ class memberController extends member
 
 	/**
 	 * Delete the post
-	 * 
+	 *
 	 * @return void|Object (void : success, Object : fail)
 	 */
 	function procMemberDeleteSavedDocument()
@@ -195,7 +196,7 @@ class memberController extends member
 
 	/**
 	 * Check values when member joining
-	 * 
+	 *
 	 * @return void|Object (void : success, Object : fail)
 	 */
 	function procMemberCheckValue()
@@ -239,7 +240,7 @@ class memberController extends member
 
 	/**
 	 * Join Membership
-	 * 
+	 *
 	 * @return void|Object (void : success, Object : fail)
 	 */
 	function procMemberInsert()
@@ -420,10 +421,10 @@ class memberController extends member
 
 	/**
 	 * Edit member profile
-	 * 
+	 *
 	 * @return void|Object (void : success, Object : fail)
 	 */
-	function procMemberModifyInfo() 
+	function procMemberModifyInfo()
 	{
 		if(!Context::get('is_logged'))
 		{
@@ -534,7 +535,7 @@ class memberController extends member
 
 	/**
 	 * Change the user password
-	 * 
+	 *
 	 * @return void|Object (void : success, Object : fail)
 	 */
 	function procMemberModifyPassword()
@@ -572,7 +573,7 @@ class memberController extends member
 
 	/**
 	 * Membership withdrawal
-	 * 
+	 *
 	 * @return void|Object (void : success, Object : fail)
 	 */
 	function procMemberLeave()
@@ -608,7 +609,7 @@ class memberController extends member
 
 	/**
 	 * Add a profile image
-	 * 
+	 *
 	 * @return void|Object (void : success, Object : fail)
 	 */
 	function procMemberInsertProfileImage()
@@ -637,7 +638,7 @@ class memberController extends member
 
 	/**
 	 * Insert a profile image
-	 * 
+	 *
 	 * @param int $member_srl
 	 * @param object $target_file
 	 *
@@ -669,7 +670,7 @@ class memberController extends member
 
 	/**
 	 * Add an image name
-	 * 
+	 *
 	 * @return void|Object (void : success, Object : fail)
 	 */
 	function procMemberInsertImageName()
@@ -698,7 +699,7 @@ class memberController extends member
 
 	/**
 	 * Insert a image name
-	 * 
+	 *
 	 * @param int $member_srl
 	 * @param object $target_file
 	 *
@@ -764,7 +765,7 @@ class memberController extends member
 
 		$logged_info = Context::get('logged_info');
 
-		if($logged_info && ($logged_info->is_admin == 'Y' || $logged_info->member_srl == $member_srl)) 
+		if($logged_info && ($logged_info->is_admin == 'Y' || $logged_info->member_srl == $member_srl))
 		{
 			$oMemberModel = &getModel('member');
 			$image_name = $oMemberModel->getImageName($member_srl);
@@ -804,7 +805,7 @@ class memberController extends member
 
 	/**
 	 * Insert a image mark
-	 * 
+	 *
 	 * @param int $member_srl
 	 * @param object $target_file
 	 *
@@ -836,7 +837,7 @@ class memberController extends member
 	 *
 	 * @return Object
 	 */
-	function procMemberDeleteImageMark($_memberSrl = 0) 
+	function procMemberDeleteImageMark($_memberSrl = 0)
 	{
 		$member_srl = ($_memberSrl) ? $_memberSrl : Context::get('member_srl');
 		if(!$member_srl)
@@ -846,7 +847,7 @@ class memberController extends member
 
 		$logged_info = Context::get('logged_info');
 
-		if($logged_info && ($logged_info->is_admin == 'Y' || $logged_info->member_srl == $member_srl)) 
+		if($logged_info && ($logged_info->is_admin == 'Y' || $logged_info->member_srl == $member_srl))
 		{
 			$oMemberModel = &getModel('member');
 			$image_mark = $oMemberModel->getImageMark($member_srl);
@@ -1199,7 +1200,7 @@ class memberController extends member
 		$args->member_srl = $memberInfo->member_srl;
 		$output = executeQuery('member.deleteAuthMail', $args);
 
-		if(!$output->toBool()) 
+		if(!$output->toBool())
 		{
 			return $output;
 		}
@@ -1209,7 +1210,7 @@ class memberController extends member
 		list($args->email_id, $args->email_host) = explode('@', $newEmail);
 
 		$output = executeQuery('member.updateMemberEmailAddress', $args);
-		if(!$output->toBool()) 
+		if(!$output->toBool())
 		{
 			return $this->stop($output->getMessage());
 		}
@@ -1629,11 +1630,11 @@ class memberController extends member
 		}
 
 		// If denied == 'Y', notify
-		if($this->memberInfo->denied == 'Y') 
+		if($this->memberInfo->denied == 'Y')
 		{
 			$args->member_srl = $this->memberInfo->member_srl;
 			$output = executeQuery('member.chkAuthMail', $args);
-			if ($output->toBool() && $output->data->count != '0') 
+			if ($output->toBool() && $output->data->count != '0')
 			{
 				$_SESSION['auth_member_srl'] = $this->memberInfo->member_srl;
 				$redirectUrl = getUrl('', 'act', 'dispMemberResendAuthMail');
@@ -1891,7 +1892,7 @@ class memberController extends member
 			{
 				// Add to the default group
 				$output = $this->addMemberToGroup($args->member_srl,$default_group->group_srl);
-				if(!$output->toBool()) 
+				if(!$output->toBool())
 				{
 					$oDB->rollback();
 					return $output;
@@ -1952,7 +1953,7 @@ class memberController extends member
 	/**
 	 * Modify member information
 	 */
-	function updateMember($args) 
+	function updateMember($args)
 	{
 		// Call a trigger (before)
 		$output = ModuleHandler::triggerCall('member.updateMember', 'before', $args);

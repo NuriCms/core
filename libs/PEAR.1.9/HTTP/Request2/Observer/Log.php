@@ -13,13 +13,13 @@
  * modification, are permitted provided that the following conditions
  * are met:
  *
- *    * Redistributions of source code must retain the above copyright
- *      notice, this list of conditions and the following disclaimer.
- *    * Redistributions in binary form must reproduce the above copyright
- *      notice, this list of conditions and the following disclaimer in the
- *      documentation and/or other materials provided with the distribution.
- *    * The names of the authors may not be used to endorse or promote products
- *      derived from this software without specific prior written permission.
+ *	* Redistributions of source code must retain the above copyright
+ *	  notice, this list of conditions and the following disclaimer.
+ *	* Redistributions in binary form must reproduce the above copyright
+ *	  notice, this list of conditions and the following disclaimer in the
+ *	  documentation and/or other materials provided with the distribution.
+ *	* The names of the authors may not be used to endorse or promote products
+ *	  derived from this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
@@ -39,7 +39,7 @@
  * @author   Alexey Borzov <avb@php.net>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
  * @version  SVN: $Id: Log.php 293416 2010-01-11 18:06:15Z avb $
- * @link     http://pear.php.net/package/HTTP_Request2
+ * @link	 http://pear.php.net/package/HTTP_Request2
  */
 
 /**
@@ -88,128 +88,128 @@ require_once 'HTTP/Request2/Exception.php';
  * @author   Alexey Borzov <avb@php.net>
  * @license  http://opensource.org/licenses/bsd-license.php New BSD License
  * @version  Release: 0.5.2
- * @link     http://pear.php.net/package/HTTP_Request2
+ * @link	 http://pear.php.net/package/HTTP_Request2
  */
 class HTTP_Request2_Observer_Log implements SplObserver
 {
-    // properties {{{
+	// properties {{{
 
-    /**
-     * The log target, it can be a a resource or a PEAR Log instance.
-     *
-     * @var resource|Log $target
-     */
-    protected $target = null;
+	/**
+	 * The log target, it can be a a resource or a PEAR Log instance.
+	 *
+	 * @var resource|Log $target
+	 */
+	protected $target = null;
 
-    /**
-     * The events to log.
-     *
-     * @var array $events
-     */
-    public $events = array(
-        'connect',
-        'sentHeaders',
-        'sentBodyPart',
-        'receivedHeaders',
-        'receivedBody',
-        'disconnect',
-    );
+	/**
+	 * The events to log.
+	 *
+	 * @var array $events
+	 */
+	public $events = array(
+		'connect',
+		'sentHeaders',
+		'sentBodyPart',
+		'receivedHeaders',
+		'receivedBody',
+		'disconnect',
+	);
 
-    // }}}
-    // __construct() {{{
+	// }}}
+	// __construct() {{{
 
-    /**
-     * Constructor.
-     *
-     * @param mixed $target Can be a file path (default: php://output), a resource,
-     *                      or an instance of the PEAR Log class.
-     * @param array $events Array of events to listen to (default: all events)
-     *
-     * @return void
-     */
-    public function __construct($target = 'php://output', array $events = array())
-    {
-        if (!empty($events)) {
-            $this->events = $events;
-        }
-        if (is_resource($target) || $target instanceof Log) {
-            $this->target = $target;
-        } elseif (false === ($this->target = @fopen($target, 'ab'))) {
-            throw new HTTP_Request2_Exception("Unable to open '{$target}'");
-        }
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param mixed $target Can be a file path (default: php://output), a resource,
+	 *					  or an instance of the PEAR Log class.
+	 * @param array $events Array of events to listen to (default: all events)
+	 *
+	 * @return void
+	 */
+	public function __construct($target = 'php://output', array $events = array())
+	{
+		if (!empty($events)) {
+			$this->events = $events;
+		}
+		if (is_resource($target) || $target instanceof Log) {
+			$this->target = $target;
+		} elseif (false === ($this->target = @fopen($target, 'ab'))) {
+			throw new HTTP_Request2_Exception("Unable to open '{$target}'");
+		}
+	}
 
-    // }}}
-    // update() {{{
+	// }}}
+	// update() {{{
 
-    /**
-     * Called when the request notifies us of an event.
-     *
-     * @param HTTP_Request2 $subject The HTTP_Request2 instance
-     *
-     * @return void
-     */
-    public function update(SplSubject $subject)
-    {
-        $event = $subject->getLastEvent();
-        if (!in_array($event['name'], $this->events)) {
-            return;
-        }
+	/**
+	 * Called when the request notifies us of an event.
+	 *
+	 * @param HTTP_Request2 $subject The HTTP_Request2 instance
+	 *
+	 * @return void
+	 */
+	public function update(SplSubject $subject)
+	{
+		$event = $subject->getLastEvent();
+		if (!in_array($event['name'], $this->events)) {
+			return;
+		}
 
-        switch ($event['name']) {
-        case 'connect':
-            $this->log('* Connected to ' . $event['data']);
-            break;
-        case 'sentHeaders':
-            $headers = explode("\r\n", $event['data']);
-            array_pop($headers);
-            foreach ($headers as $header) {
-                $this->log('> ' . $header);
-            }
-            break;
-        case 'sentBodyPart':
-            $this->log('> ' . $event['data'] . ' byte(s) sent');
-            break;
-        case 'receivedHeaders':
-            $this->log(sprintf('< HTTP/%s %s %s',
-                $event['data']->getVersion(),
-                $event['data']->getStatus(),
-                $event['data']->getReasonPhrase()));
-            $headers = $event['data']->getHeader();
-            foreach ($headers as $key => $val) {
-                $this->log('< ' . $key . ': ' . $val);
-            }
-            $this->log('< ');
-            break;
-        case 'receivedBody':
-            $this->log($event['data']->getBody());
-            break;
-        case 'disconnect':
-            $this->log('* Disconnected');
-            break;
-        }
-    }
+		switch ($event['name']) {
+		case 'connect':
+			$this->log('* Connected to ' . $event['data']);
+			break;
+		case 'sentHeaders':
+			$headers = explode("\r\n", $event['data']);
+			array_pop($headers);
+			foreach ($headers as $header) {
+				$this->log('> ' . $header);
+			}
+			break;
+		case 'sentBodyPart':
+			$this->log('> ' . $event['data'] . ' byte(s) sent');
+			break;
+		case 'receivedHeaders':
+			$this->log(sprintf('< HTTP/%s %s %s',
+				$event['data']->getVersion(),
+				$event['data']->getStatus(),
+				$event['data']->getReasonPhrase()));
+			$headers = $event['data']->getHeader();
+			foreach ($headers as $key => $val) {
+				$this->log('< ' . $key . ': ' . $val);
+			}
+			$this->log('< ');
+			break;
+		case 'receivedBody':
+			$this->log($event['data']->getBody());
+			break;
+		case 'disconnect':
+			$this->log('* Disconnected');
+			break;
+		}
+	}
 
-    // }}}
-    // log() {{{
+	// }}}
+	// log() {{{
 
-    /**
-     * Logs the given message to the configured target.
-     *
-     * @param string $message Message to display
-     *
-     * @return void
-     */
-    protected function log($message)
-    {
-        if ($this->target instanceof Log) {
-            $this->target->debug($message);
-        } elseif (is_resource($this->target)) {
-            fwrite($this->target, $message . "\r\n");
-        }
-    }
+	/**
+	 * Logs the given message to the configured target.
+	 *
+	 * @param string $message Message to display
+	 *
+	 * @return void
+	 */
+	protected function log($message)
+	{
+		if ($this->target instanceof Log) {
+			$this->target->debug($message);
+		} elseif (is_resource($this->target)) {
+			fwrite($this->target, $message . "\r\n");
+		}
+	}
 
-    // }}}
+	// }}}
 }
 
 ?>

@@ -3,7 +3,8 @@
  * trackbackController class
  * trackback module's Controller class
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/trackback
  * @version 0.1
  */

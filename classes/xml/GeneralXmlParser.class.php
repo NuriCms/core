@@ -3,7 +3,8 @@
 /**
  * GeneralXmlParser class
  * Generic XML parser for XE
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /classes/xml
  * @version 0.1
  */

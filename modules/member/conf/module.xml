@@ -1,95 +1,95 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <module>
-    <grants />
-    <permissions>
-        <permission action="getApiGroups" target="manager" />
-    </permissions>
-    <actions>
-        <action name="dispMemberInfo" type="view" />
-        <action name="dispMemberSignUpForm" type="view" />
-        <action name="dispMemberModifyEmailAddress" type="view" />
-        <action name="dispMemberModifyInfo" type="view" />
-        <action name="dispMemberModifyPassword" type="view" />
-        <action name="dispMemberLoginForm" type="view" />
-        <action name="dispMemberLogout" type="view" />
-        <action name="dispMemberLeave" type="view" />
-        <action name="dispMemberOwnDocument" type="view" />
-        <action name="dispMemberScrappedDocument" type="view" />
-        <action name="dispMemberSavedDocument" type="view" />
-        <action name="dispMemberFindAccount" type="view" />
-        <action name="dispMemberGetTempPassword" type="view" />
+	<grants />
+	<permissions>
+		<permission action="getApiGroups" target="manager" />
+	</permissions>
+	<actions>
+		<action name="dispMemberInfo" type="view" />
+		<action name="dispMemberSignUpForm" type="view" />
+		<action name="dispMemberModifyEmailAddress" type="view" />
+		<action name="dispMemberModifyInfo" type="view" />
+		<action name="dispMemberModifyPassword" type="view" />
+		<action name="dispMemberLoginForm" type="view" />
+		<action name="dispMemberLogout" type="view" />
+		<action name="dispMemberLeave" type="view" />
+		<action name="dispMemberOwnDocument" type="view" />
+		<action name="dispMemberScrappedDocument" type="view" />
+		<action name="dispMemberSavedDocument" type="view" />
+		<action name="dispMemberFindAccount" type="view" />
+		<action name="dispMemberGetTempPassword" type="view" />
 		<action name="dispMemberResendAuthMail" type="view" />
-        <action name="dispSavedDocumentList" type="view" />
+		<action name="dispSavedDocumentList" type="view" />
 
-        <action name="dispMemberAdminList" type="view" index="true" admin_index="true" menu_name="userList" menu_index="true"/>
-        <action name="dispMemberAdminConfig" type="view" menu_name="userSetting" menu_index="true" />
-        <action name="dispMemberAdminSignUpConfig" type="view" menu_name="userSetting" />
-        <action name="dispMemberAdminLoginConfig" type="view" menu_name="userSetting" />
-        <action name="dispMemberAdminDesignConfig" type="view" menu_name="userSetting" />
-        <action name="dispMemberAdminInsert" type="view" menu_name="userList" />
-        <action name="dispMemberAdminGroupList" type="view" menu_name="userGroup" menu_index="true" />
-        <action name="dispMemberAdminInfo" type="view" menu_name="userList" />
-        <action name="dispMemberAdminInsertJoinForm" type="view" />
+		<action name="dispMemberAdminList" type="view" index="true" admin_index="true" menu_name="userList" menu_index="true"/>
+		<action name="dispMemberAdminConfig" type="view" menu_name="userSetting" menu_index="true" />
+		<action name="dispMemberAdminSignUpConfig" type="view" menu_name="userSetting" />
+		<action name="dispMemberAdminLoginConfig" type="view" menu_name="userSetting" />
+		<action name="dispMemberAdminDesignConfig" type="view" menu_name="userSetting" />
+		<action name="dispMemberAdminInsert" type="view" menu_name="userList" />
+		<action name="dispMemberAdminGroupList" type="view" menu_name="userGroup" menu_index="true" />
+		<action name="dispMemberAdminInfo" type="view" menu_name="userList" />
+		<action name="dispMemberAdminInsertJoinForm" type="view" />
 
-        <action name="getMemberMenu" type="model" />
-        <action name="getMemberAdminColorset" type="model" />
+		<action name="getMemberMenu" type="model" />
+		<action name="getMemberAdminColorset" type="model" />
 		<action name="getMemberAdminInsertJoinForm" type="model" />
 		<action name="getMemberAdminIPCheck" type="model" />
 		<action name="getApiGroups" type="model" />
 
-        <action name="procMemberLogin" type="controller" ruleset="@login" />
-        <action name="procMemberLogout" type="controller" />
-        <action name="procMemberCheckValue" type="controller" />
-        <action name="procMemberInsert" type="controller" ruleset="@insertMember" />
-        <action name="procMemberModifyEmailAddress" type="controller" ruleset="modifyEmailAddress" />
-        <action name="procMemberModifyInfoBefore" type="controller" ruleset="recheckedPassword" />
-        <action name="procMemberModifyInfo" type="controller" ruleset="@insertMember" />
-        <action name="procMemberModifyPassword" type="controller" ruleset="modifyPassword" />
-        <action name="procMemberLeave" type="controller" ruleset="leaveMember" />
-        <action name="procMemberInsertProfileImage" type="controller" ruleset="insertProfileImage" />
-        <action name="procMemberInsertImageName" type="controller" ruleset="insertImageName" />
-        <action name="procMemberInsertImageMark" type="controller" ruleset="insertImageMark" />
-        <action name="procMemberDeleteProfileImage" type="controller" />
-        <action name="procMemberDeleteImageName" type="controller" />
-        <action name="procMemberDeleteImageMark" type="controller" />
-        <action name="procMemberSiteSignUp" type="controller" />
-        <action name="procMemberSiteLeave" type="controller" />
+		<action name="procMemberLogin" type="controller" ruleset="@login" />
+		<action name="procMemberLogout" type="controller" />
+		<action name="procMemberCheckValue" type="controller" />
+		<action name="procMemberInsert" type="controller" ruleset="@insertMember" />
+		<action name="procMemberModifyEmailAddress" type="controller" ruleset="modifyEmailAddress" />
+		<action name="procMemberModifyInfoBefore" type="controller" ruleset="recheckedPassword" />
+		<action name="procMemberModifyInfo" type="controller" ruleset="@insertMember" />
+		<action name="procMemberModifyPassword" type="controller" ruleset="modifyPassword" />
+		<action name="procMemberLeave" type="controller" ruleset="leaveMember" />
+		<action name="procMemberInsertProfileImage" type="controller" ruleset="insertProfileImage" />
+		<action name="procMemberInsertImageName" type="controller" ruleset="insertImageName" />
+		<action name="procMemberInsertImageMark" type="controller" ruleset="insertImageMark" />
+		<action name="procMemberDeleteProfileImage" type="controller" />
+		<action name="procMemberDeleteImageName" type="controller" />
+		<action name="procMemberDeleteImageMark" type="controller" />
+		<action name="procMemberSiteSignUp" type="controller" />
+		<action name="procMemberSiteLeave" type="controller" />
 
-        <action name="procMemberScrapDocument" type="controller" />
-        <action name="procMemberDeleteScrap" type="controller" />
-        <action name="procMemberSaveDocument" type="controller" />
-        <action name="procMemberDeleteSavedDocument" type="controller" />
+		<action name="procMemberScrapDocument" type="controller" />
+		<action name="procMemberDeleteScrap" type="controller" />
+		<action name="procMemberSaveDocument" type="controller" />
+		<action name="procMemberDeleteSavedDocument" type="controller" />
 
-        <action name="procMemberFindAccount" type="controller" />
-        <action name="procMemberFindAccountByQuestion" type="controller" />
-        <action name="procMemberAuthAccount" type="controller" method="GET|POST" />
-        <action name="procMemberAuthEmailAddress" type="controller" method="GET|POST" />
-        <action name="procMemberUpdateAuthMail" type="controller" />
+		<action name="procMemberFindAccount" type="controller" />
+		<action name="procMemberFindAccountByQuestion" type="controller" />
+		<action name="procMemberAuthAccount" type="controller" method="GET|POST" />
+		<action name="procMemberAuthEmailAddress" type="controller" method="GET|POST" />
+		<action name="procMemberUpdateAuthMail" type="controller" />
 		<action name="procMemberResendAuthMail" type="controller" ruleset="resendAuthMail" />
 		<action name="procMemberResetAuthMail" type="controller" ruleset="resetAuthMail" />
 
-        <action name="procMemberAdminInsert" type="controller" ruleset="insertAdminMember" />
-        <action name="procMemberAdminDelete" type="controller" />
-        <action name="procMemberAdminInsertDefaultConfig" type="controller" ruleset="insertDefaultConfig" />
-        <action name="procMemberAdminInsertSignupConfig" type="controller" />
-        <action name="procMemberAdminInsertLoginConfig" type="controller" />
-        <action name="procMemberAdminInsertDesignConfig" type="controller" />
-        <action name="procMemberAdminInsertGroup" type="controller" ruleset="insertGroup" />
-        <action name="procMemberAdminUpdateGroup" type="controller" ruleset="updateGroup" />
-        <action name="procMemberAdminDeleteGroup" type="controller" ruleset="deleteGroup" />
-        <action name="procMemberAdminUpdateMembersGroup" type="controller" ruleset="manageMemberGroup" />
-        <action name="procMemberAdminDeleteMembers" type="controller" />
-        <action name="procMemberAdminInsertJoinForm" type="controller" ruleset="insertJoinForm" />
-        <action name="procMemberAdminUpdateJoinForm" type="controller" />
-        <action name="procMemberAdminDeleteJoinForm" type="controller" />
-        <action name="procMemberAdminUpdateDeniedNickName" type="controller" />
-        <action name="procMemberAdminInsertDeniedID" type="controller" ruleset="insertDeniedId" />
-        <action name="procMemberAdminUpdateDeniedID" type="controller" />
-        <action name="procMemberAdminUpdateGroupOrder" type="controller" />
+		<action name="procMemberAdminInsert" type="controller" ruleset="insertAdminMember" />
+		<action name="procMemberAdminDelete" type="controller" />
+		<action name="procMemberAdminInsertDefaultConfig" type="controller" ruleset="insertDefaultConfig" />
+		<action name="procMemberAdminInsertSignupConfig" type="controller" />
+		<action name="procMemberAdminInsertLoginConfig" type="controller" />
+		<action name="procMemberAdminInsertDesignConfig" type="controller" />
+		<action name="procMemberAdminInsertGroup" type="controller" ruleset="insertGroup" />
+		<action name="procMemberAdminUpdateGroup" type="controller" ruleset="updateGroup" />
+		<action name="procMemberAdminDeleteGroup" type="controller" ruleset="deleteGroup" />
+		<action name="procMemberAdminUpdateMembersGroup" type="controller" ruleset="manageMemberGroup" />
+		<action name="procMemberAdminDeleteMembers" type="controller" />
+		<action name="procMemberAdminInsertJoinForm" type="controller" ruleset="insertJoinForm" />
+		<action name="procMemberAdminUpdateJoinForm" type="controller" />
+		<action name="procMemberAdminDeleteJoinForm" type="controller" />
+		<action name="procMemberAdminUpdateDeniedNickName" type="controller" />
+		<action name="procMemberAdminInsertDeniedID" type="controller" ruleset="insertDeniedId" />
+		<action name="procMemberAdminUpdateDeniedID" type="controller" />
+		<action name="procMemberAdminUpdateGroupOrder" type="controller" />
 
-        <action name="procMemberAdminSelectedMemberManage" type="controller" ruleset="updateSeletecdMemberInfo" />
-        <action name="procMemberAdminGroupConfig" type="controller" />
-    </actions>
+		<action name="procMemberAdminSelectedMemberManage" type="controller" ruleset="updateSeletecdMemberInfo" />
+		<action name="procMemberAdminGroupConfig" type="controller" />
+	</actions>
 	<menus>
 		<menu name="userList">
 			<title xml:lang="en">Member List</title>

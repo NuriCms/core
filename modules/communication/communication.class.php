@@ -1,8 +1,9 @@
 <?php
 
 /**
- * @class  communication 
- * @author NHN (developers@xpressengine.com)
+ * @class  communication
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * communication module of the high class
  */
 class communication extends ModuleObject
@@ -80,7 +81,7 @@ class communication extends ModuleObject
 				}
 			}
 		}
-		
+
 		return new Object(0, 'success_updated');
 	}
 
@@ -90,7 +91,7 @@ class communication extends ModuleObject
 	 */
 	function recompileCache()
 	{
-		
+
 	}
 
 }

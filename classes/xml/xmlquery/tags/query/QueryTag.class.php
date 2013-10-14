@@ -3,7 +3,8 @@
 /**
  * QueryTag class
  *
- * @author Arnia Software
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /classes/xml/xmlquery/tags/query
  * @version 0.1
  */

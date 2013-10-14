@@ -2,7 +2,8 @@
 /**
  * The view class of the integration_search module
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class integration_search extends ModuleObject
 {
@@ -25,7 +26,7 @@ class integration_search extends ModuleObject
 	 *
 	 * @return bool
 	 */
-	function checkUpdate() 
+	function checkUpdate()
 	{
 		$oModuleModel = &getModel('module');
 		$config = $oModuleModel->getModuleConfig('integration_search');
@@ -47,7 +48,7 @@ class integration_search extends ModuleObject
 	 *
 	 * @return Object
 	 */
-	function moduleUpdate() 
+	function moduleUpdate()
 	{
 		$oModuleModel = &getModel('module');
 		$config = $oModuleModel->getModuleConfig('message');

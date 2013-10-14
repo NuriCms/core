@@ -1,9 +1,9 @@
 <query id="duplicateColumnsInSelect" action="select">
-    <columns>
+	<columns>
 	<column name="count(*)" />
 	<column name="count(*)" />
-    </columns>
-    <tables>
+	</columns>
+	<tables>
 	<table name="tblName" />
-    </tables>
+	</tables>
 </query>

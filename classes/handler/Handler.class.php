@@ -1,9 +1,10 @@
 <?php
 
 /**
- * An abstract class of (*)Handler 
+ * An abstract class of (*)Handler
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class Handler
 {

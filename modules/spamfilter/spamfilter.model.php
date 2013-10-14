@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  spamfilterModel
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief The Model class of the spamfilter module
  */
 class spamfilterModel extends spamfilter
@@ -100,7 +101,7 @@ class spamfilterModel extends spamfilter
 	{
 		$config = $this->getConfig();
 
-		if($config->limits != 'Y') return new Object(); 
+		if($config->limits != 'Y') return new Object();
 		$limit_count = '3';
 		$interval = '10';
 

@@ -1,8 +1,9 @@
 <?php
 /**
  * @class  editor
- * @author NHN (developers@xpressengine.com)
- * @brief high class of the editor odule 
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
+ * @brief high class of the editor odule
  */
 class editor extends ModuleObject
 {
@@ -60,7 +61,7 @@ class editor extends ModuleObject
 		// 2009. 06. 19 Remove unused trigger
 		if($oModuleModel->getTrigger('file.getIsPermitted', 'editor', 'controller', 'triggerSrlSetting', 'before')) return true;
 
-		// 2012. 08. 29 Add a trigger to copy additional setting when the module is copied 
+		// 2012. 08. 29 Add a trigger to copy additional setting when the module is copied
 		if(!$oModuleModel->getTrigger('module.procModuleAdminCopyModule', 'editor', 'controller', 'triggerCopyModule', 'after')) return true;
 
 		return false;
@@ -76,28 +77,28 @@ class editor extends ModuleObject
 
 		$oDB = &DB::getInstance();
 		// Save module_srl when auto-saving 15/06/2009
-		if(!$oDB->isColumnExists("editor_autosave","module_srl")) 
+		if(!$oDB->isColumnExists("editor_autosave","module_srl"))
 			$oDB->addColumn("editor_autosave","module_srl","number",11);
 
 		// create an index on module_srl
 		if(!$oDB->isIndexExists("editor_autosave","idx_module_srl")) $oDB->addIndex("editor_autosave","idx_module_srl", "module_srl");
 
 		// 2007. 10. 17 Add a trigger to delete automatically saved document whenever the document(insert or update) is modified
-		if(!$oModuleModel->getTrigger('document.insertDocument', 'editor', 'controller', 'triggerDeleteSavedDoc', 'after')) 
+		if(!$oModuleModel->getTrigger('document.insertDocument', 'editor', 'controller', 'triggerDeleteSavedDoc', 'after'))
 			$oModuleController->insertTrigger('document.insertDocument', 'editor', 'controller', 'triggerDeleteSavedDoc', 'after');
-		if(!$oModuleModel->getTrigger('document.updateDocument', 'editor', 'controller', 'triggerDeleteSavedDoc', 'after')) 
+		if(!$oModuleModel->getTrigger('document.updateDocument', 'editor', 'controller', 'triggerDeleteSavedDoc', 'after'))
 			$oModuleController->insertTrigger('document.updateDocument', 'editor', 'controller', 'triggerDeleteSavedDoc', 'after');
 		// 2007. 10. Add an editor trigger on the module addition setup
-		if(!$oModuleModel->getTrigger('module.dispAdditionSetup', 'editor', 'view', 'triggerDispEditorAdditionSetup', 'before')) 
+		if(!$oModuleModel->getTrigger('module.dispAdditionSetup', 'editor', 'view', 'triggerDispEditorAdditionSetup', 'before'))
 			$oModuleController->insertTrigger('module.dispAdditionSetup', 'editor', 'view', 'triggerDispEditorAdditionSetup', 'before');
 		// 2009. 04. 14 Add a trigger from compiled codes of the editor component
-		if(!$oModuleModel->getTrigger('display', 'editor', 'controller', 'triggerEditorComponentCompile', 'before')) 
+		if(!$oModuleModel->getTrigger('display', 'editor', 'controller', 'triggerEditorComponentCompile', 'before'))
 			$oModuleController->insertTrigger('display', 'editor', 'controller', 'triggerEditorComponentCompile', 'before');
 		// 2009. 06. 19 Remove unused trigger
-		if($oModuleModel->getTrigger('file.getIsPermitted', 'editor', 'controller', 'triggerSrlSetting', 'before')) 
+		if($oModuleModel->getTrigger('file.getIsPermitted', 'editor', 'controller', 'triggerSrlSetting', 'before'))
 			$oModuleController->deleteTrigger('file.getIsPermitted', 'editor', 'controller', 'triggerSrlSetting', 'before');
 
-		// 2012. 08. 29 Add a trigger to copy additional setting when the module is copied 
+		// 2012. 08. 29 Add a trigger to copy additional setting when the module is copied
 		if(!$oModuleModel->getTrigger('module.procModuleAdminCopyModule', 'editor', 'controller', 'triggerCopyModule', 'after'))
 		{
 			$oModuleController->insertTrigger('module.procModuleAdminCopyModule', 'editor', 'controller', 'triggerCopyModule', 'after');

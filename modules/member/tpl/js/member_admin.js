@@ -1,7 +1,7 @@
 /**
  * Deprecate this file.
  *
- */ 
+ */
 /* 사용자 추가 */
 function completeInsert(ret_obj) {
     var error = ret_obj['error'];
@@ -339,7 +339,7 @@ jQuery(function($) {
 			.click(function(e){
 				var $tr = $(this).parent().parent();
 				var $prev = $tr.prev("tr");
-				if($prev.length) 
+				if($prev.length)
 				{
 					$prev.before($tr);
 					$tr.parent().find("tr").removeClass("bg1").filter(":odd").addClass("bg1");
@@ -359,5 +359,5 @@ jQuery(function($) {
 				e.preventDefault();
 			})
 		.end()
-			
+
 });

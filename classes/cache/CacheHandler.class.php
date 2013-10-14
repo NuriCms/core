@@ -3,7 +3,8 @@
 /**
  * CacheHandler
  *
- * @author NHN (developer@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class CacheHandler extends Handler
 {
@@ -214,7 +215,7 @@ class CacheHandler extends Handler
 	 * Function used for generating keys for similar objects.
 	 *
 	 * Ex: 1:document:123
-	 *     1:document:777
+	 *	 1:document:777
 	 *
 	 * This allows easily removing all object of type "document"
 	 * from cache by simply invalidating the group key.
@@ -254,7 +255,8 @@ class CacheHandler extends Handler
 /**
  * Base class of Cache
  *
- * @author NHN (developer@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class CacheBase
 {

@@ -2,8 +2,8 @@
 
 	class CubridUpdateTest extends CubridTest {
 
-                function _test($xml_file, $argsString, $expected){
-                    $this->_testQuery($xml_file, $argsString, $expected, 'getUpdateSql');
+				function _test($xml_file, $argsString, $expected){
+					$this->_testQuery($xml_file, $argsString, $expected, 'getUpdateSql');
 		}
 
 		function test_module_updateModule(){
@@ -17,20 +17,20 @@
 							$args->use_mobile = "";
 							$args->site_srl = 0;
 							$args->module_srl = 47374;';
-                        $expected = 'update "xe_modules" as "modules"
-                                        set "module" = \'page\'
-                                            , "module_category_srl" = 0
-                                            , "layout_srl" = 0
-                                            , "mid" = \'test\'
-                                            , "browser_title" = \'test\'
-                                            , "description" = \'\'
-                                            , "is_default" = \'n\'
-                                            , "open_rss" = \'y\'
-                                            , "header_text" = \'\'
-                                            , "footer_text" = \'\'
-                                            , "mlayout_srl" = 0
-                                            , "use_mobile" = \'n\'
-                                    where "site_srl" = 0 and "module_srl" = 47374';
+						$expected = 'update "xe_modules" as "modules"
+										set "module" = \'page\'
+											, "module_category_srl" = 0
+											, "layout_srl" = 0
+											, "mid" = \'test\'
+											, "browser_title" = \'test\'
+											, "description" = \'\'
+											, "is_default" = \'n\'
+											, "open_rss" = \'y\'
+											, "header_text" = \'\'
+											, "footer_text" = \'\'
+											, "mlayout_srl" = 0
+											, "use_mobile" = \'n\'
+									where "site_srl" = 0 and "module_srl" = 47374';
 //			$expected = 'UPDATE "xe_modules" as "modules"
 //						 SET "module" = \'page\'
 //						 	, "mid" = \'test\'
@@ -83,9 +83,9 @@
 		function test_menu_updateMenuItemNode(){
 			$xml_file = _XE_PATH_ . "modules/menu/queries/updateMenuItemNode.xml";
 			$argsString = '$args->parent_srl = 0;
-                            $args->menu_srl = 237423;
-                            $args->listorder = -8;
-                            $args->menu_item_srl = 237431;';
+							$args->menu_srl = 237423;
+							$args->listorder = -8;
+							$args->menu_item_srl = 237431;';
 			$expected = 'UPDATE "xe_menu_item" as "menu_item" SET "parent_srl" = 0, "listorder" = -8 WHERE  "menu_item_srl" = 237431';
 			$this->_test($xml_file, $argsString, $expected);
 		}

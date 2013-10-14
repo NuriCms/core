@@ -2,7 +2,8 @@
 
 /**
  * Validator class
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /classes/validator
  * @version 0.1
  */
@@ -193,7 +194,7 @@ class Validator
 			{
 				$fieldsNames[$name] = $title;
 			}
-			
+
 			unset($filter['name']);
 
 			// conditional statement

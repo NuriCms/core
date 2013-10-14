@@ -1,7 +1,8 @@
 <?php
 /**
  * @class login_info
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @version 0.1
  * @brief Widget to display log-in form
  *
@@ -27,7 +28,7 @@ class login_info extends WidgetHandler
 		$this->member_config = $oModuleModel->getModuleConfig('member');
 		Context::set('member_config', $this->member_config);
 
-		// Set a flag to check if the https connection is made when using SSL and create https url 
+		// Set a flag to check if the https connection is made when using SSL and create https url
 		$ssl_mode = false;
 		$useSsl = Context::getSslStatus();
 		if($useSsl != 'none')
