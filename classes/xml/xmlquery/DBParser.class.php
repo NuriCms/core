@@ -180,8 +180,8 @@ class DBParser
 	/**
 	 * Checks to see if a given column name is unqualified
 	 *
-	 * Ex: "member_srl"           -> unqualified <br />
-	 *     "member"."member_srl"  -> qualified
+	 * Ex: "member_srl"		   -> unqualified <br />
+	 *	 "member"."member_srl"  -> qualified
 	 *
 	 * @param string $column_name
 	 * @return bool
@@ -198,8 +198,8 @@ class DBParser
 	/**
 	 * Checks to see if a given column name is qualified
 	 *
-	 * Ex: "member_srl"           -> unqualified <br />
-	 *     "member"."member_srl"  -> qualified
+	 * Ex: "member_srl"		   -> unqualified <br />
+	 *	 "member"."member_srl"  -> qualified
 	 *
 	 * @param string $column_name
 	 * @return bool
@@ -220,11 +220,11 @@ class DBParser
 	 * <ul>
 	 *  <li> a column name: "member_srl" or "xe_member"."member_srl"
 	 *  <li> an expression:
-	 *     <ul>
-	 *        <li> LEFT(UPPER("content")) <br />
-	 *        <li> readed_count + voted_count <br />
-	 *        <li> CAST(regdate as DATE) </li>
-	 *     </ul>
+	 *	 <ul>
+	 *		<li> LEFT(UPPER("content")) <br />
+	 *		<li> readed_count + voted_count <br />
+	 *		<li> CAST(regdate as DATE) </li>
+	 *	 </ul>
 	 *  </li>
 	 * </ul>
 	 *

@@ -12,21 +12,21 @@
 class HTMLPurifier_Token_Text extends HTMLPurifier_Token
 {
 
-    public $name = '#PCDATA'; /**< PCDATA tag name compatible with DTD. */
-    public $data; /**< Parsed character data of text. */
-    public $is_whitespace; /**< Bool indicating if node is whitespace. */
+	public $name = '#PCDATA'; /**< PCDATA tag name compatible with DTD. */
+	public $data; /**< Parsed character data of text. */
+	public $is_whitespace; /**< Bool indicating if node is whitespace. */
 
-    /**
-     * Constructor, accepts data and determines if it is whitespace.
-     *
-     * @param $data String parsed character data.
-     */
-    public function __construct($data, $line = null, $col = null) {
-        $this->data = $data;
-        $this->is_whitespace = ctype_space($data);
-        $this->line = $line;
-        $this->col  = $col;
-    }
+	/**
+	 * Constructor, accepts data and determines if it is whitespace.
+	 *
+	 * @param $data String parsed character data.
+	 */
+	public function __construct($data, $line = null, $col = null) {
+		$this->data = $data;
+		$this->is_whitespace = ctype_space($data);
+		$this->line = $line;
+		$this->col  = $col;
+	}
 
 }
 

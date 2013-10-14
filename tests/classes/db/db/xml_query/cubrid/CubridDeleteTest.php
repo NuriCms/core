@@ -1,9 +1,9 @@
 <?php
 
-        class CubridDeleteTest extends CubridTest {
+		class CubridDeleteTest extends CubridTest {
 
 		function _test($xml_file, $argsString, $expected){
-                    $this->_testQuery($xml_file, $argsString, $expected,  'getDeleteSql');
+					$this->_testQuery($xml_file, $argsString, $expected,  'getDeleteSql');
 		}
 
 		function test_module_deleteActionForward(){

@@ -7,8 +7,8 @@
  * Handling modules
  *
  * @remarks This class is to excute actions of modules.
- *          Constructing an instance without any parameterconstructor, it finds the target module based on Context.
- *          If there is no act on the found module, excute an action referencing action_forward.
+ *			Constructing an instance without any parameterconstructor, it finds the target module based on Context.
+ *			If there is no act on the found module, excute an action referencing action_forward.
  * */
 class ModuleHandler extends Handler
 {
@@ -88,6 +88,9 @@ class ModuleHandler extends Handler
 				return;
 			}
 		}
+
+		// call a trigger before moduleHandler init
+		ModuleHandler::triggerCall('moduleHandler.init', 'before', $this);
 
 		// execute addon (before module initialization)
 		$called_position = 'before_module_init';

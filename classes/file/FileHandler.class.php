@@ -1074,6 +1074,7 @@ class FileHandler
 	 */
 	function hasContent($filename)
 	{
+		$filename = FileHandler::getRealPath($filename);
 		return (is_readable($filename) && !!filesize($filename));
 	}
 

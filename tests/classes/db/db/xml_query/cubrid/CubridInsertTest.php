@@ -3,14 +3,14 @@
 	class CubridInsertTest extends CubridTest {
 
 		function _test($xml_file, $argsString, $expected){
-                    $this->_testQuery($xml_file, $argsString, $expected, 'getInsertSql');
+					$this->_testQuery($xml_file, $argsString, $expected, 'getInsertSql');
 		}
 
 
-                /**
-                 * Note: this test can fail when comaparing regdate from the $args with
-                 * regdate from the expected string - a few seconds difference
-                 */
+				/**
+				 * Note: this test can fail when comaparing regdate from the $args with
+				 * regdate from the expected string - a few seconds difference
+				 */
 		function test_module_insertModule(){
 			$xml_file = _XE_PATH_ . "modules/module/queries/insertModule.xml";
 			$argsString = ' $args->module_category_srl = 0;
@@ -50,7 +50,7 @@
 			$this->_test($xml_file, $argsString, $expected);
 		}
 
-                function test_module_insertSiteTodayStatus(){
+				function test_module_insertSiteTodayStatus(){
 			//\''.date("YmdHis").'\'
 			$xml_file = _XE_PATH_ . "modules/counter/queries/insertTodayStatus.xml";
 			$argsString = ' $args->regdate = 0;

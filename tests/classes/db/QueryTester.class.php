@@ -303,8 +303,8 @@
 		}
 		function test_getPageList($show_output_string = false){
 			$argsString = '$args->sort_index = "module_srl";
-            $args->page_count = 10;
-            $args->s_module_category_srl = 0;
+			$args->page_count = 10;
+			$args->s_module_category_srl = 0;
 			$args->s_mid = "test";
 			$args->s_browser_title = "caca";';
 
