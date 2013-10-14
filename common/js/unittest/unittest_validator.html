@@ -44,7 +44,7 @@ describe('Validator', {
 		set_value('1');
 		value_of(validate()).should_be_true();
 	},
-    'validate email' : function() {
+	'validate email' : function() {
 		v.cast('ADD_FILTER', ['email', {
 			'text' : {required:true, rule:'email'}
 		}]);
@@ -55,7 +55,7 @@ describe('Validator', {
 
 		set_value('email@mail.com');
 		value_of(validate()).should_be_true();
-    },
+	},
 	'validate with length' : function() {
 		v.cast('ADD_FILTER', ['minlength', {
 			'text'  : {required:true, minlength:5}
