@@ -16,8 +16,8 @@
 		<action name="procEditorSaveDoc" type="controller" />
 		<action name="procEditorRemoveSavedDoc" type="controller" />
 		<action name="procEditorCall" type="controller" />
-		<action name="procEditorInsertModuleConfig" type="controller" />		
-		
+		<action name="procEditorInsertModuleConfig" type="controller" />
+
 		<action name="procEditorAdminSetupComponent" type="controller" ruleset="setupComponent" />
 		<action name="procEditorAdminGeneralConfig" type="controller" ruleset="generalConfig" />
 		<action name="procEditorAdminCheckUseListOrder" type="controller" ruleset="componentOrderAndUse" />

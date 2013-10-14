@@ -459,10 +459,10 @@ class ExtraItem
 						'<script>' . "\n" .
 						'(function($){' . "\n" .
 						'	$(function(){' . "\n" .
-						'		var option = { dateFormat: "yy-mm-dd", changeMonth:true, changeYear:true, gotoCurrent: false,yearRange:\'-100:+10\', onSelect:function(){' . "\n" .
+						'		var option = $.datepicker.regional[\'' . Context::getLangType(TRUE) . '\'];' . "\n" .
+						'		$.extend(option,{ dateFormat: "yy-mm-dd", changeMonth:true, changeYear:true, gotoCurrent: false,yearRange:\'-100:+10\', onSelect:function(){' . "\n" .
 						'			$(this).prev(\'input[type="hidden"]\').val(this.value.replace(/-/g,""))}' . "\n" .
-						'		};' . "\n" .
-						'		$.extend(option,$.datepicker.regional[\'' . Context::getLangType() . '\']);' . "\n" .
+						'		});' . "\n" .
 						'		$("#date_' . $column_name . '").datepicker(option);' . "\n" .
 						'		$("#dateRemover_' . $column_name . '").click(function(){' . "\n" .
 						'			$(this).siblings("input").val("");' . "\n" .

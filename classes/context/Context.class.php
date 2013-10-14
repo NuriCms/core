@@ -926,10 +926,32 @@ class Context
 	 *
 	 * @return string Language type
 	 */
-	function getLangType()
+	function getLangType($iso639 = FALSE)
 	{
 		is_a($this, 'Context') ? $self = $this : $self = Context::getInstance();
-		return $self->lang_type;
+		if(!$iso639) return $self->lang_type;
+		else
+		{
+			$lang_code = array(
+				/*
+				Nuri Lang Type => ISO639 Lang Code
+				*/
+				'en' => 'en',
+				'ko' => 'ko',
+				'jp' => 'ja',
+				'zh-CN' => 'zh-CN', //Macrolanguage
+				'zh-TW' => 'zh-TW', //Macrolanguage
+				'fr' => 'fr',
+				'de' => 'de',
+				'ru' => 'ru',
+				'es' => 'es',
+				'tr' => 'tr',
+				'vi' => 'vi',
+				'mn' => 'mn'
+				);
+			if($lang_code[$self->lang_type]) return $lang_code[$self->lang_type];
+			else return $self->lang_type;
+		}
 	}
 
 	/**
@@ -1108,7 +1130,7 @@ class Context
 	{
 		is_a($this, 'Context') ? $self = $this : $self = Context::getInstance();
 
-		(isset($_GET['xe_js_callback']) && $self->js_callback_func = isset($_GET['xe_js_callback'])) or 
+		(isset($_GET['xe_js_callback']) && $self->js_callback_func = isset($_GET['xe_js_callback'])) or
 			(isset($_POST['xe_js_callback']) && $self->js_callback_func = isset($_POST['xe_js_callback']));
 
 		($type && $self->request_method = $type) or
@@ -2303,7 +2325,7 @@ class Context
 			}
 			if(preg_match('/\.js$/i', $filename))
 			{
-				$self->loadFile(array($plugin_path . $filename, 'body', '', 0), true);
+				$self->loadFile(array($plugin_path . $filename, '', '', 0), true);
 			}
 			elseif(preg_match('/\.css$/i', $filename))
 			{

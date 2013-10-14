@@ -30,7 +30,9 @@
 					<script>
 					(function($){
 						$(function(){
-							var option = {
+							var option = $.datepicker.regional['{Context::getLangType(TRUE)}'];
+
+							$.extend(option,{
 								changeMonth: true
 								,changeYear: true
 								,gotoCurrent: false
@@ -45,10 +47,8 @@
 									$("#selected_date").val(this.value.replace(/-/g,''));
 									moveDate();
 								}
-							};
-
-							$.extend(option,$.datepicker.regional['{$lang_type}']);
-							$(".inputDate").datepicker(option);
+							});
+							$(".inputDate").datepicker.setDefaults(option);
 						});
 					})(jQuery);
 					</script>
