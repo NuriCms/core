@@ -87,6 +87,7 @@ class installController extends install
 		// Get DB-related variables
 		$con_string = Context::gets('db_type','db_port','db_hostname','db_userid','db_password','db_database','db_table_prefix');
 
+		$db_info = new stdClass();
 		$db_info->master_db = get_object_vars($con_string);
 		$db_info->slave_db[] = get_object_vars($con_string);
 
@@ -145,6 +146,7 @@ class installController extends install
 		// Check if it is already installed
 		if(Context::isInstalled()) return new Object(-1, 'msg_already_installed');
 		// Assign a temporary administrator when installing
+		$logged_info = new stdClass();
 		$logged_info->is_admin = 'Y';
 		Context::set('logged_info', $logged_info);
 
@@ -509,6 +511,7 @@ class installController extends install
 	function _getDBConfigFileContents($db_info)
 	{
 		$buff = '<?php if(!defined("__XE__")) exit();'."\n";
+		$buff .= '$db_info = new stdClass();'."\n"; 
 		$db_info = get_object_vars($db_info);
 		foreach($db_info as $key => $val)
 		{

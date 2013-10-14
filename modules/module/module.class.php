@@ -23,6 +23,7 @@ class module extends ModuleObject
 		FileHandler::makeDir('./files/cache/triggers');
 		FileHandler::makeDir('./files/ruleset');
 		// Insert site information into the sites table
+		$args = new stdClass();
 		$args->site_srl = 0;
 		$output = $oDB->executeQuery('module.getSite', $args);
 		if(!$output->data || !$output->data->index_module_srl)
@@ -31,6 +32,7 @@ class module extends ModuleObject
 			$domain = Context::getDefaultUrl();
 			$url_info = parse_url($domain);
 			$domain = $url_info['host'].( (!empty($url_info['port'])&&$url_info['port']!=80)?':'.$url_info['port']:'').$url_info['path'];
+			$site_args = new stdClass();
 			$site_args->site_srl = 0;
 			$site_args->index_module_srl  = 0;
 			$site_args->domain = $domain;
@@ -321,6 +323,7 @@ class module extends ModuleObject
 			$oDB->dropColumn('documents','extra_vars'.$i);
 		}
 		// Enter the main site information sites on the table
+		$args = new stdClass();
 		$args->site_srl = 0;
 		$output = $oDB->executeQuery('module.getSite', $args);
 		if(!$output->data)
@@ -403,6 +406,7 @@ class module extends ModuleObject
 		}
 
 		unset($args);
+		$args = new stdClass();
 		$args->site_srl = 0;
 		$output = executeQueryArray('module.getNotLinkedModuleBySiteSrl',$args);
 
