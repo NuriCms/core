@@ -234,8 +234,8 @@ jQuery(function($){
 			}
 		});
 		$('.x .section.collapsed>h1>.snToggle').removeClass('x_icon-chevron-up').addClass('x_icon-chevron-down');
-		$section_heading.find('>.snToggle').click(function(){
-			var $this = $(this);
+		$section_heading.find('>.snToggle').parent().click(function(){
+			var $this = $(this).find('>.snToggle');
 			var $section = $this.closest('.section');
 			if(!$section.hasClass('collapsed')){
 				$section.addClass('collapsed');
