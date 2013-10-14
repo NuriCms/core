@@ -302,9 +302,9 @@ class Context
 			);
 		}
 		session_start();
-		if($sess = $_POST[session_name()])
+		if(isset($_POST[session_name()]))
 		{
-			session_id($sess);
+			session_id($_POST[session_name()]);
 		}
 
 		// set authentication information in Context and session
@@ -1108,11 +1108,12 @@ class Context
 	{
 		is_a($this, 'Context') ? $self = $this : $self = Context::getInstance();
 
-		$self->js_callback_func = isset($_GET['xe_js_callback']) ? $_GET['xe_js_callback'] : $_POST['xe_js_callback'];
+		(isset($_GET['xe_js_callback']) && $self->js_callback_func = isset($_GET['xe_js_callback'])) or 
+			(isset($_POST['xe_js_callback']) && $self->js_callback_func = isset($_POST['xe_js_callback']));
 
 		($type && $self->request_method = $type) or
 				(strpos($_SERVER['CONTENT_TYPE'], 'json') && $self->request_method = 'JSON') or
-				($GLOBALS['HTTP_RAW_POST_DATA'] && $self->request_method = 'XMLRPC') or
+				(isset($GLOBALS['HTTP_RAW_POST_DATA']) && $self->request_method = 'XMLRPC') or
 				($self->js_callback_func && $self->request_method = 'JS_CALLBACK') or
 				($self->request_method = $_SERVER['REQUEST_METHOD']);
 	}
@@ -1767,7 +1768,7 @@ class Context
 			unset($self->get_vars->{$key});
 			return;
 		}
-		if($set_to_get_vars || $self->get_vars->{$key})
+		if($set_to_get_vars || isset($self->get_vars->{$key}))
 		{
 			$self->get_vars->{$key} = $val;
 		}
