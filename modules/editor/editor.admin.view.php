@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  editorAdminView
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief editor admin view of the module class
  */
 class editorAdminView extends editor
@@ -164,7 +165,7 @@ class editorAdminView extends editor
 			if(!is_array($mid_list)) $mid_list = array($mid_list);
 			foreach($mid_list as $module_srl => $module)
 			{
-				if($module) $module_categories[$module->module_category_srl]->list[$module_srl] = $module; 
+				if($module) $module_categories[$module->module_category_srl]->list[$module_srl] = $module;
 			}
 		}
 		else

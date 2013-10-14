@@ -24,7 +24,7 @@
 		<thead>
 			<tr>
 				<th scope="row">{$lang->total_counter}</th>
-				<th scope="row"> 
+				<th scope="row">
 					<span id="str_selected_date">{zdate($selected_date, "Y-m-d")}</span>
 					<input type="hidden" class="inputDate" value="{zdate($selected_date,'Y-m-d')}" />
 					<script>
@@ -46,7 +46,7 @@
 									moveDate();
 								}
 							};
-	
+
 							$.extend(option,$.datepicker.regional['{$lang_type}']);
 							$(".inputDate").datepicker(option);
 						});
@@ -69,7 +69,7 @@
 
 <ul class="x_nav x_nav-tabs">
 	<li loop="$lang->cmd_select_counter_type => $key, $val" class="x_active"|cond="$type==$key || (!$type && $key == 'hour')">
-		<a href="{getUrl('type',$key)}">{$val}</a> 
+		<a href="{getUrl('type',$key)}">{$val}</a>
 	</li>
 </ul>
 

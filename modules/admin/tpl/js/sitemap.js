@@ -1,7 +1,7 @@
 /* NHN (developers@xpressengine.com) */
 jQuery(function($){
 
-var 
+var
 	dragging = false,
 	$holder  = $('<li class="placeholder">');
 
@@ -80,7 +80,7 @@ $('form.siteMap')
 
 					diff = {x:position.x-event.pageX, y:position.y-event.pageY};
 					nTop = offset.top - diff.y;
-					
+
 					for(i=0,c=offsets.length; i < c; i++) {
 						t = nTop;
 						o = offsets[i];
@@ -88,7 +88,7 @@ $('form.siteMap')
 						if(i == 0 && t < o.top) t = o.top;
 						if(i == c-1 && t > o.bottom) t = o.bottom;
 
-						if(o.top <= t && o.bottom >= t) { 
+						if(o.top <= t && o.bottom >= t) {
 							dropzone = {element:o.item, state:setHolder(o,t)};
 							break;
 						}

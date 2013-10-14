@@ -2,7 +2,8 @@
 
 /**
  * DefaultValue class
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /classes/xml/xmlquery/queryargument
  * @version 0.1
  */

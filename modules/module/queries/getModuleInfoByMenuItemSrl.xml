@@ -1,8 +1,8 @@
 <query id="getModuleInfoByMenuItemSrl" action="select">
-    <tables>
-        <table name="modules" />
-    </tables>
-    <conditions>
+	<tables>
+		<table name="modules" />
+	</tables>
+	<conditions>
 		<query operation="equal" column="mid" notnull="notnull" alias="getMidByMenuSrl">
 			<tables>
 				<table name="menu_item" alias="menu_item"/>
@@ -11,8 +11,8 @@
 				<column name="url" />
 			</columns>
 			<conditions>
-        		<condition operation="equal" column="menu_item.menu_item_srl" var="menu_item_srl" notnull="notnull" />
+				<condition operation="equal" column="menu_item.menu_item_srl" var="menu_item_srl" notnull="notnull" />
 			</conditions>
 		</query>
-    </conditions>
+	</conditions>
 </query>

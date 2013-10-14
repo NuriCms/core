@@ -12,13 +12,13 @@ jQuery(function($){
 		height: $(document).height()
 	});
 	$($.find("body")).append($foggyLayer);
-	
+
 	$(window).resize(function(){
 		$foggyLayer.css({
 			width: 0,
 			height: 0
 		});
-	
+
 		setTimeout(function(){
 			$foggyLayer.css({
 				width: $(document).width(),
@@ -26,6 +26,6 @@ jQuery(function($){
 			});
 		}, 0);
 	});
-	
+
 	$foggyLayer.show();
 });

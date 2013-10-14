@@ -3,7 +3,8 @@
 /**
  * Cache class for APC
  *
- * @author NHN (developer@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * */
 class CacheApc extends CacheBase
 {

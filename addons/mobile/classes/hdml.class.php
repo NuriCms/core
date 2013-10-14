@@ -1,7 +1,8 @@
 <?php
 /**
  * HDML Library ver 0.1
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class wap extends mobileXE {
 
@@ -61,7 +62,7 @@ class wap extends mobileXE {
 		else
 		{
 			printf('<wrap>%s<br>%s', $this->getContent(),"\n");
-		} 
+		}
 	}
 
 	/**

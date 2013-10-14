@@ -3,7 +3,8 @@
 /**
  * adminAdminModel class
  * admin model class of admin module
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/admin
  * @version 0.1
  */
@@ -818,10 +819,11 @@ class adminAdminModel extends admin
 
 	function iconUrlCheck($iconname, $default_icon_name)
 	{
-		$file_exsit = FileHandler::readFile(_XE_PATH_ . 'files/attach/xeicon/' . $iconname);
-		if(!$file_exsit)
+		$file_exist = FileHandler::getRealPath(_XE_PATH_ . 'files/attach/xeicon/' . $iconname);
+		$db_info = Context::getDBInfo();
+		if(!is_readable($file_exist))
 		{
-			$icon_url = './modules/admin/tpl/img/' . $default_icon_name;
+			$icon_url = $db_info->default_url . 'modules/admin/tpl/img/' . $default_icon_name;
 		}
 		else
 		{

@@ -1,20 +1,19 @@
-
 function doCancelDeclare() {
-    var comment_srl = new Array();
-    jQuery('#fo_list input[name=cart]:checked').each(function() {
-        comment_srl[comment_srl.length] = jQuery(this).val();
-    });
+	var comment_srl = new Array();
+	jQuery('#fo_list input[name=cart]:checked').each(function() {
+		comment_srl[comment_srl.length] = jQuery(this).val();
+	});
 
-    if(comment_srl.length<1) return;
+	if(comment_srl.length<1) return;
 
-    var params = new Array();
-    params['comment_srl'] = comment_srl.join(',');
+	var params = new Array();
+	params['comment_srl'] = comment_srl.join(',');
 
-    exec_xml('comment','procCommentAdminCancelDeclare', params, function() { location.reload(); });
+	exec_xml('comment','procCommentAdminCancelDeclare', params, function() { location.reload(); });
 }
 
 function insertSelectedModule(id, module_srl, mid, browser_title) {
-    location.href = current_url.setQuery('module_srl',module_srl);
+	location.href = current_url.setQuery('module_srl',module_srl);
 }
 
 function completeAddCart(ret_obj, response_tags)
@@ -26,14 +25,14 @@ function getCommentList()
 	var commentListTable = jQuery('#commentListTable');
 	var cartList = [];
 	commentListTable.find(':checkbox[name=cart]').each(function(){
-		if(this.checked) cartList.push(this.value); 
+		if(this.checked) cartList.push(this.value);
 	});
 
-    var params = new Array();
-    var response_tags = ['error','message', 'comment_list'];
+	var params = new Array();
+	var response_tags = ['error','message', 'comment_list'];
 	params["comment_srls"] = cartList.join(",");
 
-    exec_xml('comment','procCommentGetList',params, completeGetCommentList, response_tags);
+	exec_xml('comment','procCommentGetList',params, completeGetCommentList, response_tags);
 }
 
 function completeGetCommentList(ret_obj, response_tags)

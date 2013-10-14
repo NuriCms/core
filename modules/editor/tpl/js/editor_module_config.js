@@ -19,21 +19,21 @@ function resultGetEditorSkinColorList(ret_obj,response_tags, params) {
 		if(params.type == 'document'){
 			$("select[name=sel_editor_colorset]").hide()
 				.removeAttr('name');
-			selectbox.attr('name','sel_editor_colorset');			
+			selectbox.attr('name','sel_editor_colorset');
 		}else{
 			$("select[name=sel_comment_editor_colorset]").hide()
-				.removeAttr('name');			
-			selectbox.attr('name','sel_comment_editor_colorset');			
-		}	
+				.removeAttr('name');
+			selectbox.attr('name','sel_comment_editor_colorset');
+		}
 
-		if(ret_obj['error'] == 0 && ret_obj.colorset){	
+		if(ret_obj['error'] == 0 && ret_obj.colorset){
 			var it = new Array();
-			var items = ret_obj['colorset']['item'];	
+			var items = ret_obj['colorset']['item'];
 			if(typeof(items[0]) == 'undefined'){
 				it[0] = items;
 			}else{
 				it = items;
-			}			
+			}
 			var selectAttr = "";
 			for(var i=0;i<it.length;i++){
 				var $options = $('<option value="'+it[i].name+'" >'+it[i].title+'</option>');
@@ -42,7 +42,7 @@ function resultGetEditorSkinColorList(ret_obj,response_tags, params) {
 					$options.attr('selected', 'selected');
 				}
 
-				selectbox.append($options);				
+				selectbox.append($options);
 			}
 			selectbox.show();
 		}else{

@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  pointController
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief Controller class of point modules
  */
 class pointController extends point

@@ -3,7 +3,8 @@
 /**
  * Model class of counter module
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class counterModel extends counter
 {
@@ -54,7 +55,7 @@ class counterModel extends counter
 	}
 
 	/**
-	 * Check if a row of today's counter status exists 
+	 * Check if a row of today's counter status exists
 	 *
 	 * @param integer $site_srl Site_srl
 	 * @return bool
@@ -98,7 +99,7 @@ class counterModel extends counter
 	/**
 	 * Get access statistics for a given date
 	 *
-	 * @param mixed $selected_date Date(YYYYMMDD) list 
+	 * @param mixed $selected_date Date(YYYYMMDD) list
 	 * @param integer $site_srl Site_srl
 	 * @return Object
 	 */
@@ -393,7 +394,7 @@ class counterModel extends counter
 
 		$status->max = $max;
 		$status->sum = $sum;
-		
+
 		return $status;
 	}
 

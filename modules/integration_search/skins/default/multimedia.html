@@ -7,7 +7,7 @@
 <!--@else-->
     <ul class="searchImageResult">
     <!--@foreach($output->data as $no => $image)-->
-        <li>    
+        <li>
             <a href="{$image->url}">{$image->src}</a>
             <dl>
                 <dt><a href="{$image->url}">{$image->filename}</a></dt>
@@ -19,10 +19,10 @@
 
     <!--@if($where == 'multimedia' && $output->page_navigation)-->
         <div class="pagination a1">
-            <a href="{getUrl('page','')}" class="prevEnd">{$lang->first_page}</a> 
+            <a href="{getUrl('page','')}" class="prevEnd">{$lang->first_page}</a>
             <!--@while($page_no = $output->page_navigation->getNextPage())-->
                 <!--@if($page == $page_no)-->
-                    <strong>{$page_no}</strong> 
+                    <strong>{$page_no}</strong>
                 <!--@else-->
                     <a href="{getUrl('page',$page_no)}">{$page_no}</a>
                 <!--@end-->

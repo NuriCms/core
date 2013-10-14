@@ -3,7 +3,7 @@ var oldExecXml = null;
 var calledArgs = null;
 (function($){
     $(function() {
-	
+
         var captchaXE = null;
 
         function xeCaptcha() {
@@ -21,7 +21,7 @@ var calledArgs = null;
 							break;
 						}
 					}
-					
+
 				}
 
 				if (isSubmitHook)
@@ -58,7 +58,7 @@ var calledArgs = null;
 			});
             var body    = $(document.body);
             var captchaIma;
-			
+
             if (!captchaXE) {
 				var fc_isIE  = (navigator.appVersion.indexOf("MSIE") != -1) ? true : false;
 				var fc_isWin = (navigator.appVersion.toLowerCase().indexOf("win") != -1) ? true : false;
@@ -68,14 +68,14 @@ var calledArgs = null;
 				if(fc_isIE && fc_isWin && !fc_isOpera){
 					_object_ ='<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="0" height="0" id="captcha_audio" align="middle">';
 					_object_ += '<param name="allowScriptAccess" value="always" />';
-					_object_ += '<param name="quality" value="high" />'; 
+					_object_ += '<param name="quality" value="high" />';
 					_object_ += '<param name="movie" value="'+_swfURL_+'" />';
-					_object_ += '<param name="wmode" value="window" />'; 
+					_object_ += '<param name="wmode" value="window" />';
 					_object_ += '<param name="allowFullScreen" value="false">';
-					_object_ += '<param name="bgcolor" value="#fffff" />'; 
+					_object_ += '<param name="bgcolor" value="#fffff" />';
 					_object_ += '</object>';
 				}else{
-					_object_ = '<embed src="'+_swfURL_+'" quality="high" wmode="window" allowFullScreen="false" bgcolor="#ffffff" width="0" height="0" name="captcha_audio" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />'; 
+					_object_ = '<embed src="'+_swfURL_+'" quality="high" wmode="window" allowFullScreen="false" bgcolor="#ffffff" width="0" height="0" name="captcha_audio" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />';
 				}
 
 				captchaXE = $('<div id="captcha_layer" style="position:fixed; top:0; left:0; width:100%; height:100%;display:none;z-index:10">').appendTo(document.body);
@@ -100,7 +100,7 @@ var calledArgs = null;
 
 	              $div.find('button.cancel')
 					.click(function(){ $('#captcha_layer').hide(); });
-			   
+
 				  $div.find('button.play')
 					.click(function(){
 						var swf = window['captcha_audio'] || document['captcha_audio'];
@@ -122,7 +122,7 @@ var calledArgs = null;
                 captchaXE.exec = function(module, act, params, callback_func, response_tags, callback_func_arg, fo_obj) {
                     var doCheck = false;
 
-					$.each(captchaTargetAct || {}, function(key,val){ if (val == act){ doCheck = true; return false; } }); 
+					$.each(captchaTargetAct || {}, function(key,val){ if (val == act){ doCheck = true; return false; } });
 
 					if (doCheck) { /* captcha 를 사용하는 경우 */
 
@@ -133,7 +133,7 @@ var calledArgs = null;
 								$(this).find('input[type=text]').val('').focus();
 								return false;
 							}
-							captchaXE.compare(); return false; 
+							captchaXE.compare(); return false;
 						});
                         calledArgs = {'module':module,'act':act,'params':params,'callback_func':callback_func,'response_tags':response_tags,'callback_func_arg':callback_func_arg,'fo_obj':fo_obj};
                         var params = new Array();

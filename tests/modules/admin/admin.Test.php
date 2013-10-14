@@ -79,7 +79,7 @@ class adminAdminControllerTest extends PHPUnit_Framework_TestCase
 		$oContext->set('module_skin', $args->module_skin);
 		$oContext->set('skin_vars', $args->skin_vars);
 		$oContext->set('site_srl', $args->site_srl);
-		
+
 		$this->oAdminAdminController->updateDefaultDesignInfo($args);
 
 		$file = _XE_PATH_.'files/site_design/design_0.php';

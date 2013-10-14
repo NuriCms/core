@@ -1,7 +1,8 @@
 <?php
 /**
  * @class counter_status
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @version 0.1
  * @brief Display counter status by using data in the counter module
  */
@@ -21,7 +22,7 @@ class counter_status extends WidgetHandler
 		$output = $oCounterModel->getStatus(array('00000000', date('Ymd', time()-60*60*24), date('Ymd')), $site_module_info->site_srl);
 		if(count($output))
 		{
-			foreach($output as $key => $val) 
+			foreach($output as $key => $val)
 			{
 				if(!$key) Context::set('total_counter', $val);
 				elseif($key == date("Ymd")) Context::set('today_counter', $val);

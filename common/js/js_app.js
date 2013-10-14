@@ -244,11 +244,11 @@ function getTypeBase() {
 	var _base = function() {
 		var self = this;
 		var pool = null;
-		
+
 		if ($.isArray(this._plugins))   this._plugins   = [];
 		if (this._messages) this._messages = {};
 		else this._binded_fn = {};
-		
+
 		// bind functions
 		$.each(this, function(key, val){
 			if (!$.isFunction(val)) return true;

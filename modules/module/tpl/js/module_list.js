@@ -25,7 +25,7 @@ xe.ModuleListManager = xe.createApp("ModuleListManager", {
 
 		this.$selectedObj.nextAll('a').filter('.moduleTrigger').bind('moduleSelect', function(e, aSelected){
 			var sType, sName, sSrl;
-			
+
 			for(var i=0, nLen=aSelected.length; i<nLen; i++){
 				sType = aSelected[i].mid + ', ' + aSelected[i].type;
 				sName = aSelected[i].browser_title;

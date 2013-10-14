@@ -3,7 +3,8 @@
  * documentModel class
  * model class of the module document
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/document
  * @version 0.1
  */
@@ -726,7 +727,7 @@ class documentModel extends document
 		$list_order = array();
 		foreach($list as $key => $val)
 		{
-			$obj = null;
+			$obj = new stdClass();
 			$obj->mid = $val['mid'];
 			$obj->module_srl = $val['module_srl'];
 			$obj->category_srl = $val['category_srl'];

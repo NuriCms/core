@@ -5,7 +5,7 @@
  * @brief Constains all test method for insert statements, using Mysql SQL syntax
  * @developer Corina Udrescu (xe_dev@arnia.ro)
  */
-class MysqlInsertTest extends MysqlTest 
+class MysqlInsertTest extends MysqlTest
 {
 	/**
 	 * @brief _test - local helper method
@@ -47,13 +47,13 @@ class MysqlInsertTest extends MysqlTest
 	{
 		$xml_file = _TEST_PATH_ . "db/xml_query/mysql/data/insert_select.xml";
 		$argsString = '$args->condition_value = 7;';
-		$expected = 'insert into `xe_table1` (`column1`, `column2`, `column3`) 
-						select `column4`, `column5`, `column6` 
-							from `xe_table2` as `table2` 
+		$expected = 'insert into `xe_table1` (`column1`, `column2`, `column3`)
+						select `column4`, `column5`, `column6`
+							from `xe_table2` as `table2`
 							where `column4` >= 7';
 		$this->_test($xml_file, $argsString, $expected);
 	}
-	
+
 	function testInsertSelectStatement2()
 	{
 		$xml_file = _XE_PATH_ . "modules/wiki/queries/insertLinkedDocuments.xml";
@@ -61,14 +61,14 @@ class MysqlInsertTest extends MysqlTest
 						$args->module_srl = 10;
 						$args->alias_list = array("unu", "doi");
 			';
-		$expected = 'insert into `xe_wiki_links` 
-							(`cur_doc_srl`, `link_doc_srl`) 
-						select 7, `document_srl` 
-							from `xe_document_aliases` as `document_aliases` 
-							where `module_srl` = 10 
+		$expected = 'insert into `xe_wiki_links`
+							(`cur_doc_srl`, `link_doc_srl`)
+						select 7, `document_srl`
+							from `xe_document_aliases` as `document_aliases`
+							where `module_srl` = 10
 								and `alias_title` in (\'unu\',\'doi\')';
 		$this->_test($xml_file, $argsString, $expected);
-	}	
+	}
 }
 
 /* End of file MysqlInsertTest.php */

@@ -1,4 +1,4 @@
-@charset "utf-8";
+@charset "UTF-8";
 /* NHN (developers@xpressengine.com) */
 
 /* html{ overflow:auto;} */
@@ -16,7 +16,7 @@ a.skipToContent:focus{ height:auto; margin:0 0 10px 0; padding:5px;}
 /* Hr */
 hr{ display:none; position:absolute;}
 
-/* Heading 
+/* Heading
 h1{ position:relative; float:left; margin:0;}
 h2{ position:relative; margin:0 0 10px 0; border-bottom:2px solid;}
 h3{ position:relative; margin:0;}*/

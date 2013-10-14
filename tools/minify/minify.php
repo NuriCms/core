@@ -114,7 +114,7 @@ function execute($dir) {
 
 function read_config($dir) {
 	$default = array('option'=>array(), 'skip'=>array(), 'merge'=>array());
-	$file    = $dir.'minify.ini';
+	$file	= $dir.'minify.ini';
 
 	if(!is_readable($file)) return $default;
 

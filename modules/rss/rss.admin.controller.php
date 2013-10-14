@@ -2,7 +2,8 @@
 /**
  * The admin controller class of the rss module
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class rssAdminController extends rss
 {

@@ -43,9 +43,9 @@
 
                 <div class="item">
                     <!--@if($val->checkcount>1)-->
-                        <input type="checkbox" name="item_{$poll->poll_srl}_{$poll_srl_index}" value="{$item->poll_item_srl}" id="item_{$item->poll_item_srl}" /> 
+                        <input type="checkbox" name="item_{$poll->poll_srl}_{$poll_srl_index}" value="{$item->poll_item_srl}" id="item_{$item->poll_item_srl}" />
                     <!--@else-->
-                        <input type="radio" name="item_{$poll->poll_srl}_{$poll_srl_index}" value="{$item->poll_item_srl}" id="item_{$item->poll_item_srl}" /> 
+                        <input type="radio" name="item_{$poll->poll_srl}_{$poll_srl_index}" value="{$item->poll_item_srl}" id="item_{$item->poll_item_srl}" />
                     <!--@end-->
                         <label for="item_{$item->poll_item_srl}">{$item->title}</label>
                 </div>

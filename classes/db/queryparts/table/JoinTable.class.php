@@ -2,9 +2,10 @@
 
 /**
  * class JoinTable
- * 		$conditions in an array of Condition objects 
- * 
- * @author Arnia Software
+ * 		$conditions in an array of Condition objects
+ *
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /classes/db/queryparts/table
  * @version 0.1
  */

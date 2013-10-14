@@ -3,7 +3,8 @@
 /**
  * High class of counter module
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class counter extends ModuleObject
 {
@@ -16,7 +17,7 @@ class counter extends ModuleObject
 	{
 		$oCounterController = getController('counter');
 
-		// add a row for the total visit history 
+		// add a row for the total visit history
 		//$oCounterController->insertTotalStatus();
 
 		// add a row for today's status
@@ -77,7 +78,7 @@ class counter extends ModuleObject
 	 */
 	function recompileCache()
 	{
-		
+
 	}
 
 }

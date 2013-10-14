@@ -1,7 +1,8 @@
 <?php
 /**
  * Admin model class of the file module
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class fileAdminModel extends file
 {
@@ -18,25 +19,25 @@ class fileAdminModel extends file
 	 *
 	 * <pre>
 	 * Search options:
-	 * - s_module_srl:          int[] or int, search module_srl
-	 * - exclude_module_srl:    int[] or int, exclude module_srl
-	 * - isvalid:               Y or N
-	 * - direct_download:       Y or N
-	 * - s_filename:            string, like operation
-	 * - s_filesize_more:       int, more operation, byte unit
+	 * - s_module_srl:		  int[] or int, search module_srl
+	 * - exclude_module_srl:	int[] or int, exclude module_srl
+	 * - isvalid:			   Y or N
+	 * - direct_download:	   Y or N
+	 * - s_filename:			string, like operation
+	 * - s_filesize_more:	   int, more operation, byte unit
 	 * - s_filesize_mega_more:  int, more operation, mega unit
-	 * - s_filesize_less:       int, less operation, byte unit
+	 * - s_filesize_less:	   int, less operation, byte unit
 	 * - s_filesize_mega_less:  int, less operation, mega unit
-	 * - s_download_count:      int, more operation
-	 * - s_regdate:             string(YYYYMMDDHHMMSS), like prefix operation(STRING%)
-	 * - s_ipaddress:           string, like prefix operation
-	 * - s_user_id:             string
-	 * - s_user_name:           string
-	 * - s_nick_name:           string
-	 * - sort_index:            string. default: files.file_srl
-	 * - page :                 int
-	 * - list_count:            int. default: 20
-	 * - page_count:            int. default: 10
+	 * - s_download_count:	  int, more operation
+	 * - s_regdate:			 string(YYYYMMDDHHMMSS), like prefix operation(STRING%)
+	 * - s_ipaddress:		   string, like prefix operation
+	 * - s_user_id:			 string
+	 * - s_user_name:		   string
+	 * - s_nick_name:		   string
+	 * - sort_index:			string. default: files.file_srl
+	 * - page :				 int
+	 * - list_count:			int. default: 20
+	 * - page_count:			int. default: 10
 	 *
 	 * Result data:
 	 * - file_srl
@@ -54,7 +55,7 @@ class fileAdminModel extends file
 	 * - isvaild
 	 * - regdate
 	 * - ipaddress
-	 * 
+	 *
 	 * </pre>
 	 *
 	 * @param object $obj Search options
@@ -106,9 +107,9 @@ class fileAdminModel extends file
 	 * +---------+-------+
 	 * | isvalid | count |
 	 * +---------+-------+
-	 * | Y       | 00    |
+	 * | Y	   | 00	|
 	 * +---------+-------+
-	 * | N       | 00    |
+	 * | N	   | 00	|
 	 * +---------+-------+
 	 * </pre>
 	 *

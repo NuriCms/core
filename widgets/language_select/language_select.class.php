@@ -1,7 +1,8 @@
 <?php
 /**
- * @class language_select 
- * @author NHN (developers@xpressengine.com)
+ * @class language_select
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief Language selector
  * @version 0.1
  */

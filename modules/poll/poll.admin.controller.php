@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  pollAdminController
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief The admin controller class of the poll module
  */
 class pollAdminController extends poll
@@ -83,7 +84,7 @@ class pollAdminController extends poll
 	/**
 	 * @brief Delete the poll (when several questions are registered in one poll, delete this question)
 	 */
-	function deletePollTitle($poll_index_srl) 
+	function deletePollTitle($poll_index_srl)
 	{
 		$args->poll_index_srl = $poll_index_srl;
 

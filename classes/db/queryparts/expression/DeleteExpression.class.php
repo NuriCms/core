@@ -3,10 +3,11 @@
 /**
  * DeleteExpression
  *
- * @author Arnia Software
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /classes/db/queryparts/expression
  * @version 0.1
- * @todo Fix this class 
+ * @todo Fix this class
  */
 class DeleteExpression extends Expression
 {

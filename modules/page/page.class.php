@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  page
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief high class of the module page
  */
 class page extends ModuleObject

@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  documentController
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief controller class of the document module
  */
 class pageController extends page
@@ -66,7 +67,7 @@ class pageController extends page
 	}
 
 	/**
-	 * @brief Change the value of src, href in the content 
+	 * @brief Change the value of src, href in the content
 	 */
 	function replaceSrc($content, $path)
 	{

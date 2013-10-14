@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  moduleView
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief view class of the module module
  */
 class moduleView extends module
@@ -115,7 +116,7 @@ class moduleView extends module
 				$mid_list[$module]->title = $xml_info->title;
 			}
 		}
-		
+
 		// not show admin bar
 		Context::set('admin_bar', 'false');
 		Context::set('mid_list', $mid_list);

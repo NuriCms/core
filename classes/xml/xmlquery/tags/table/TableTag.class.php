@@ -5,15 +5,15 @@
  * Models the <table> tag inside an XML Query file
  * @abstract
  *   Example
- *      <table name="modules" />
- *      <table name="documents" alias="doc" />
+ *	  <table name="modules" />
+ *	  <table name="documents" alias="doc" />
  *   Attributes
- *      name - name of the table - table prefix will be automatically added
- *      alias - table alias. If no value is specified, the table name will be set as default alias
- *      join_type - in case the table is part of a join clause, this specifies the type of join: left, right etc.
- *                - permitted values: 'left join','left outer join','right join','right outer join'
+ *	  name - name of the table - table prefix will be automatically added
+ *	  alias - table alias. If no value is specified, the table name will be set as default alias
+ *	  join_type - in case the table is part of a join clause, this specifies the type of join: left, right etc.
+ *				- permitted values: 'left join','left outer join','right join','right outer join'
  *   Children
- *      Can have children of type <conditions>
+ *	  Can have children of type <conditions>
  *
  * @author Arnia Sowftare
  * @package /classes/xml/xmlquery/tags/table
@@ -110,9 +110,9 @@ class TableTag
 
 	/**
 	 * Returns string for printing in PHP query cache file
-	 * The string contains code for instantiation of either 
+	 * The string contains code for instantiation of either
 	 * a Table or a JoinTable object
-	 * @return string 
+	 * @return string
 	 */
 	function getTableString()
 	{

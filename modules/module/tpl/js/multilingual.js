@@ -16,7 +16,7 @@ $('#langList')
 		}
 
 		if($form.data('lang-loaded') == true) return;
-	
+
 		$form.data('lang-loaded', true);
 
 		function on_complete(ret) {

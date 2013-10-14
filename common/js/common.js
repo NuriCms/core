@@ -62,7 +62,7 @@ if(jQuery) jQuery.noConflict();
             } else {
                 var obj = $('input[name='+itemName+']:checkbox');
             }
-			
+
 			if(options.checked == 'toggle') {
                 obj.each(function() {
                     $(this).attr('checked', ($(this).attr('checked')) ? false : true);
@@ -71,7 +71,7 @@ if(jQuery) jQuery.noConflict();
                 (options.doClick == true) ? obj.click() : obj.attr('checked', options.checked);
             }
         },
-		
+
         /**
          * @brief 문서/회원 등 팝업 메뉴 출력
          */
@@ -190,16 +190,16 @@ jQuery(function($) {
             $(this).hide().prev('button').show().parent().next(fold_container).hide();
         });
     }
-	
+
 	jQuery('input[type="submit"],button[type="submit"]').click(function(ev){
 		var $el = jQuery(ev.currentTarget);
-		
+
 		setTimeout(function(){
 			return function(){
 				$el.attr('disabled', 'disabled');
 			};
 		}(), 0);
-		
+
 		setTimeout(function(){
 			return function(){
 				$el.removeAttr('disabled');

@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  pageAdminView
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief page admin view of the module class
  */
 class pageAdminView extends page

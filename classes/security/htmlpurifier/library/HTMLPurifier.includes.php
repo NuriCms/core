@@ -10,12 +10,12 @@
  * @version 4.4.0
  *
  * @warning
- *      You must *not* include any other HTML Purifier files before this file,
- *      because 'require' not 'require_once' is used.
+ *	  You must *not* include any other HTML Purifier files before this file,
+ *	  because 'require' not 'require_once' is used.
  *
  * @warning
- *      This file requires that the include path contains the HTML Purifier
- *      library directory; this is not auto-set.
+ *	  This file requires that the include path contains the HTML Purifier
+ *	  library directory; this is not auto-set.
  */
 
 require 'HTMLPurifier.php';
