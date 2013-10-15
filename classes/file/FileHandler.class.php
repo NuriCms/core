@@ -3,7 +3,8 @@
 /**
  * Contains methods for accessing file system
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class FileHandler
 {
@@ -25,9 +26,9 @@ class FileHandler
 	}
 
 	/**
-	 * Copy a directory to target 
+	 * Copy a directory to target
 	 *
-	 * If target directory does not exist, this function creates it 
+	 * If target directory does not exist, this function creates it
 	 *
 	 * @param string $source_dir Path of source directory
 	 * @param string $target_dir Path of target dir
@@ -95,7 +96,7 @@ class FileHandler
 	}
 
 	/**
-	 * Copy a file to target 
+	 * Copy a file to target
 	 *
 	 * @param string $source Path of source file
 	 * @param string $target Path of target file
@@ -123,7 +124,7 @@ class FileHandler
 	}
 
 	/**
-	 * Returns the content of the file 
+	 * Returns the content of the file
 	 *
 	 * @param string $file_name Path of target file
 	 * @return string The content of the file. If target file does not exist, this function returns nothing.
@@ -226,7 +227,7 @@ class FileHandler
 	}
 
 	/**
-	 * Move a directory 
+	 * Move a directory
 	 *
 	 * This function just wraps rename function.
 	 *
@@ -248,7 +249,7 @@ class FileHandler
 	 * @param string $filter If specified, return only files matching with the filter
 	 * @param bool $to_lower If true, file names will be changed into lower case.
 	 * @param bool $concat_prefix If true, return file name as absolute path
-	 * @return string[] Array of the filenames in the path 
+	 * @return string[] Array of the filenames in the path
 	 */
 	function readDir($path, $filter = '', $to_lower = false, $concat_prefix = false)
 	{
@@ -298,7 +299,7 @@ class FileHandler
 
 			$output[] = $file;
 		}
-		
+
 		if(!$output)
 		{
 			return array();
@@ -319,7 +320,7 @@ class FileHandler
 	{
 		static $oFtp = null;
 
-		// if safe_mode is on, use FTP 
+		// if safe_mode is on, use FTP
 		if(ini_get('safe_mode'))
 		{
 			$ftp_info = Context::getFTPInfo();
@@ -422,7 +423,7 @@ class FileHandler
 	}
 
 	/**
-	 * Remove a directory only if it is empty 
+	 * Remove a directory only if it is empty
 	 *
 	 * @param string $path Path of the target directory
 	 * @return void
@@ -460,7 +461,7 @@ class FileHandler
 	/**
 	 * Remove files in the target directory
 	 *
-	 * This function keeps the directory structure. 
+	 * This function keeps the directory structure.
 	 *
 	 * @param string $path Path of the target directory
 	 * @return void
@@ -528,7 +529,7 @@ class FileHandler
 	 *
 	 * If the target is moved (when return code is 300~399), this function follows the location specified response header.
 	 *
-	 * @param string $url The address of the target file 
+	 * @param string $url The address of the target file
 	 * @param string $body HTTP request body
 	 * @param int $timeout Connection timeout
 	 * @param string $method GET/POST
@@ -627,7 +628,7 @@ class FileHandler
 	 * @param string $method GET/POST
 	 * @param string $content_type Content type header of HTTP request
 	 * @param string[] $headers Headers key vaule array.
-	 * @return bool true: success, false: failed 
+	 * @return bool true: success, false: failed
 	 */
 	function getRemoteFile($url, $target_filename, $body = null, $timeout = 3, $method = 'GET', $content_type = null, $headers = array())
 	{
@@ -642,7 +643,7 @@ class FileHandler
 	}
 
 	/**
-	 * Convert size in string into numeric value 
+	 * Convert size in string into numeric value
 	 *
 	 * @see FileHandler::filesize()
 	 * @param $val Size in string (ex., 10, 10K, 10M, 10G )
@@ -673,10 +674,10 @@ class FileHandler
 	}
 
 	/**
-	 * Check available memory to load image file 
+	 * Check available memory to load image file
 	 *
-	 * @param array $imageInfo Image info retrieved by getimagesize function 
-	 * @return bool true: it's ok, false: otherwise 
+	 * @param array $imageInfo Image info retrieved by getimagesize function
+	 * @return bool true: it's ok, false: otherwise
 	 */
 	function checkMemoryLoadImage(&$imageInfo)
 	{
@@ -706,11 +707,11 @@ class FileHandler
 	 *
 	 * @param string $source_file Path of the source file
 	 * @param string $target_file Path of the target file
-	 * @param int $resize_width Width to resize 
+	 * @param int $resize_width Width to resize
 	 * @param int $resize_height Height to resize
 	 * @param string $target_type If $target_type is set (gif, jpg, png, bmp), result image will be saved as target type
 	 * @param string $thumbnail_type Thumbnail type(crop, ratio)
-	 * @return bool true: success, false: failed 
+	 * @return bool true: success, false: failed
 	 */
 	function createImageFile($source_file, $target_file, $resize_width = 0, $resize_height = 0, $target_type = '', $thumbnail_type = 'crop')
 	{
@@ -762,7 +763,7 @@ class FileHandler
 				break;
 		}
 
-		// if original image is larger than specified size to resize, calculate the ratio 
+		// if original image is larger than specified size to resize, calculate the ratio
 		if($resize_width > 0 && $width >= $resize_width)
 		{
 			$width_per = $resize_width / $width;
@@ -910,7 +911,7 @@ class FileHandler
 			return FALSE;
 		}
 
-		// create directory 
+		// create directory
 		$path = dirname($target_file);
 		if(!is_dir($path))
 		{
@@ -1043,13 +1044,13 @@ class FileHandler
 	}
 
 	/**
-	 * Returns a file object 
+	 * Returns a file object
 	 *
 	 * If the directory of the file does not exist, create it.
 	 *
 	 * @param string $filename Target file name
 	 * @param string $mode File mode for fopen
-	 * @return FileObject File object 
+	 * @return FileObject File object
 	 */
 	function openFile($filename, $mode)
 	{
@@ -1073,6 +1074,7 @@ class FileHandler
 	 */
 	function hasContent($filename)
 	{
+		$filename = FileHandler::getRealPath($filename);
 		return (is_readable($filename) && !!filesize($filename));
 	}
 

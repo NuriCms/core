@@ -3,7 +3,7 @@ require_once(_XE_PATH_.'modules/member/member.view.php');
 class memberMobile extends memberView
 {
 	/**
-	 * Support method are 
+	 * Support method are
 	 * dispMemberInfo, dispMemberSignUpForm, dispMemberFindAccount, dispMemberGetTempPassword, dispMemberModifyInfo, dispMemberModifyInfoBefore
 	 */
 	var $memberInfo;

@@ -1,7 +1,8 @@
 <?php
 /**
  * Controller class of the file module
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class fileController extends file
 {
@@ -113,7 +114,7 @@ class fileController extends file
 
 		if(FileHandler::createImageFile($source_src,$output_src,$width,$height,'','ratio'))
 		{
-			$output->info = getimagesize($output_src);	
+			$output->info = getimagesize($output_src);
 			$output->src = $output_src;
 		}
 		else
@@ -121,7 +122,7 @@ class fileController extends file
 			return new Object(-1,'msg_invalid_request');
 		}
 
-		$this->add('resized_info',$output);		
+		$this->add('resized_info',$output);
 	}
 
 	/**
@@ -292,13 +293,13 @@ class fileController extends file
 		$uploaded_filename = $file_obj->uploaded_filename;
 
 		if(!file_exists($uploaded_filename)) return $this->stop('msg_file_not_found');
-		
+
 		if(!$file_key || $_SESSION[$session_key][$file_srl] != $file_key)
 		{
 			unset($_SESSION[$session_key][$file_srl]);
 			return $this->stop('msg_invalid_request');
 		}
-		
+
 		$file_size = $file_obj->file_size;
 		$filename = $file_obj->source_filename;
 		if(strstr($_SERVER['HTTP_USER_AGENT'], "MSIE"))
@@ -320,13 +321,13 @@ class fileController extends file
 		if(!$fp) return $this->stop('msg_file_not_found');
 
 		header("Cache-Control: ");
-		header("Pragma: "); 
-		header("Content-Type: application/octet-stream"); 
+		header("Pragma: ");
+		header("Content-Type: application/octet-stream");
 		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 
-		header("Content-Length: " .(string)($file_size)); 
+		header("Content-Length: " .(string)($file_size));
 		header('Content-Disposition: attachment; filename="'.$filename.'"');
-		header("Content-Transfer-Encoding: binary\n"); 
+		header("Content-Transfer-Encoding: binary\n");
 
 		// if file size is lager than 10MB, use fread function (#18675748)
 		if(filesize($uploaded_filename) > 1024 * 1024)
@@ -336,7 +337,7 @@ class fileController extends file
 		}
 		else
 		{
-			fpassthru($fp); 
+			fpassthru($fp);
 		}
 
 		exit();
@@ -378,7 +379,7 @@ class fileController extends file
 			$file_info = $output->data;
 			if(!$file_info) continue;
 
-			$file_grant = $oFileModel->getFileGrant($file_info, $logged_info); 
+			$file_grant = $oFileModel->getFileGrant($file_info, $logged_info);
 
 			if(!$file_grant->is_deletable) continue;
 
@@ -554,7 +555,7 @@ class fileController extends file
 	}
 
 	/**
-	 * Set the attachements of the upload_target_srl to be valid 
+	 * Set the attachements of the upload_target_srl to be valid
 	 * By changing its state to valid when a document is inserted, it prevents from being considered as a unnecessary file
 	 *
 	 * @param int $upload_target_srl

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<lang>  
+<lang>
 	<item name="admin">
 		<value xml:lang="ko"><![CDATA[관리자]]></value>
 		<value xml:lang="en"><![CDATA[Admin]]></value>
@@ -954,7 +954,7 @@
 	<item name="local_ip_address">
 		<value xml:lang="ko"><![CDATA[로컬 IP 주소]]></value>
 		<value xml:lang="en"><![CDATA[Local IP address]]></value>
-		<value xml:lang="zh-CN"><![CDATA[本地IP地址]]></value>      
+		<value xml:lang="zh-CN"><![CDATA[本地IP地址]]></value>
 		<value xml:lang="tr"><![CDATA[Yerel IP adresi]]></value>
 	</item>
 	<item name="about_admin_ip_limit">
@@ -976,7 +976,7 @@
 		<value xml:lang="jp"><![CDATA[ファビコンを使用しますか?]]></value>
 		<value xml:lang="zh-CN"><![CDATA[是否启用自定义favicon?]]></value>
 		<value xml:lang="tr"><![CDATA[Favicon'u kullanmak istiyor musunuz?]]></value>
-	</item>	 
+	</item>
 	<item name="about_use_favicon">
 		<value xml:lang="ko"><![CDATA[16 x 16 크기의<em>*.ico</em> 파일 업로드 권장.]]></value>
 		<value xml:lang="en"><![CDATA[You can upload 16x16 size<em>*.ico</em> file only.]]></value>
@@ -1401,7 +1401,7 @@
 		<value xml:lang="zh-CN"><![CDATA[FTP连接成功。]]></value>
 		<value xml:lang="zh-TW"><![CDATA[FTP連線成功。]]></value>
 		<value xml:lang="fr"><![CDATA[FTP 접속 및 인증 성공하였습니다]]></value>
-		<value xml:lang="de"><![CDATA[Die Verbindung zu FTP ist erfolgreich und verifiziert.]]></value>	  
+		<value xml:lang="de"><![CDATA[Die Verbindung zu FTP ist erfolgreich und verifiziert.]]></value>
 		<value xml:lang="es"><![CDATA[conexión con éxito al FTP]]></value>
 		<value xml:lang="tr"><![CDATA[FTP sunucusu için bağlantı ve kimlik doğrulaması sağlandı.]]></value>
 		<value xml:lang="vi"><![CDATA[Đã xác nhận và kết nối thành công tới máy chủ bằng FTP.]]></value>

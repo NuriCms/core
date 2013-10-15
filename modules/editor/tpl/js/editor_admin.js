@@ -1,9 +1,9 @@
 /**
  * @author NHN (developers@xpressengine.com)
  * @version 0.1
- * @brief 에디터 관리자 페이지용 스크립트 
- **/ 
- 
+ * @brief 에디터 관리자 페이지용 스크립트
+ **/
+
 function doSetupComponent(component_name) {
     popopen(request_uri.setQuery('module','editor').setQuery('act','dispEditorAdminSetupComponent').setQuery('component_name',component_name), 'SetupComponent');
 }

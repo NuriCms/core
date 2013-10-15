@@ -25,7 +25,7 @@ var Uploader = xe.createApp('Uploader', {
 		if (!this.settings.browse.length) throw 'The parameter browseButton is not valid object or selector.';
 
 		var s = this.settings;
-	
+
 		if (s.dropzone) s.dropzone = $(s.dropzone);
 		if (s.upload) s.upload = $(s.upload);
 
@@ -161,7 +161,7 @@ runtimes.gears = {
 		if (!window.google) window.google = {};
 		if (!google.gears) {
 			google.gears = {};
-	
+
 			if (typeof(GearsFactory)!='undefined'){f = new GearsFactory()} // Firefox
 			else {
 				try{ // IE
@@ -232,7 +232,7 @@ runtimes.gears = {
 				uploader.request = null;
 
 				if (req.status == 200) {
-					file.status = 'DONE';	
+					file.status = 'DONE';
 				} else {
 					file.status = 'FAILED';
 				}
@@ -450,9 +450,9 @@ runtimes.html5 = {
 // Adobe Flash
 runtimes.flash = {
 	version   : 0,
-	object    : null,
+	object	: null,
 	uploaders : [],
-	create    : function(uploader, settings) {
+	create	: function(uploader, settings) {
 		var self = this;
 		var rand = random();
 		var name = 'xe_flashuploader_object'+rand;
@@ -684,7 +684,7 @@ runtimes.html4 = {
 
 		(function uploadNext(){
 			var file = files.shift();
-			var id     = 'tmp_upload_'+random();
+			var id	 = 'tmp_upload_'+random();
 			var iframe = $('<iframe src="about:blank" name="'+id+'"></iframe>').css(css).appendTo(document.documentElement);
 			var form   = $('<form method="post" enctype="multipart/form-data" target="'+id+'"></form>').css(css).appendTo(document.documentElement);
 
@@ -740,36 +740,36 @@ runtimes.html4 = {
 // }}} runtimes
 
 var mimetypes = {
-    'application/java-archive' : 'jar',
-    'application/java-vm'      : 'class',
-    'application/javascript'   : 'js',
-    'application/msword'       : 'doc dot',
-    'application/pdf'          : 'pdf',
-    'application/octet-stream' : 'bin lha lzh iso dmg dist pkg exe',
-    'application/postscript'   : 'ai eps ps',
-    'application/rtf'          : 'rtf',
-    'application/smil'         : 'smi smil',
-    'application/vnd.ms-excel' : 'xls xlm xla xlc xlt xlw',
-    'application/vnd.openxmlformats': 'docx pptx xlsx',
-    'application/vnd.ms-powerpoint' : 'ppt pps pot',
-    'application/zip'               : 'zip',
-    'application/x-shockwave-flash' : 'swf swfl',
-    'audio/mpeg'      : 'mpga mpega mp2 mp3',
-    'audio/x-wav'     : 'wav',
-    'image/bmp'       : 'bmp',
-    'image/gif'       : 'gif',
-    'image/jpeg'      : 'jpeg jpg jpe',
-    'image/png'       : 'png',
-    'image/svg+xml'   : 'svg svgz',
-    'image/tiff'      : 'tiff tif',
-    'text/html'       : 'htm html xhtml',
-    'text/plain'      : 'asc txt text diff log',
-    'video/mpeg'      : 'mpeg mpg mpe',
-    'video/quicktime' : 'qt mov',
-    'video/x-flv'     : 'flv',
-    'video/x-ms-asf'  : 'asf',
-    'video/x-ms-wmv'  : 'wmv',
-    'video/x-msvideo' : 'avi'
+	'application/java-archive' : 'jar',
+	'application/java-vm'	  : 'class',
+	'application/javascript'   : 'js',
+	'application/msword'	   : 'doc dot',
+	'application/pdf'		  : 'pdf',
+	'application/octet-stream' : 'bin lha lzh iso dmg dist pkg exe',
+	'application/postscript'   : 'ai eps ps',
+	'application/rtf'		  : 'rtf',
+	'application/smil'		 : 'smi smil',
+	'application/vnd.ms-excel' : 'xls xlm xla xlc xlt xlw',
+	'application/vnd.openxmlformats': 'docx pptx xlsx',
+	'application/vnd.ms-powerpoint' : 'ppt pps pot',
+	'application/zip'			   : 'zip',
+	'application/x-shockwave-flash' : 'swf swfl',
+	'audio/mpeg'	  : 'mpga mpega mp2 mp3',
+	'audio/x-wav'	 : 'wav',
+	'image/bmp'	   : 'bmp',
+	'image/gif'	   : 'gif',
+	'image/jpeg'	  : 'jpeg jpg jpe',
+	'image/png'	   : 'png',
+	'image/svg+xml'   : 'svg svgz',
+	'image/tiff'	  : 'tiff tif',
+	'text/html'	   : 'htm html xhtml',
+	'text/plain'	  : 'asc txt text diff log',
+	'video/mpeg'	  : 'mpeg mpg mpe',
+	'video/quicktime' : 'qt mov',
+	'video/x-flv'	 : 'flv',
+	'video/x-ms-asf'  : 'asf',
+	'video/x-ms-wmv'  : 'wmv',
+	'video/x-msvideo' : 'avi'
 };
 
 function File(obj, filesize) {

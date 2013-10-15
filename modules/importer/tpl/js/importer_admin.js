@@ -32,7 +32,7 @@ $('.checkxml')
 				$ttxml = $form.find('>.ttxml');
 
 				$message.text(data.result_message);
-					
+
 				// when the file doesn't exists or any other error occurs
 				if(data.error || data.exists != 'true') {
 					$message.attr('class', 'x_help-inline').fadeIn(300);
@@ -48,10 +48,10 @@ $('.checkxml')
 				$form.find(':submit').removeAttr('disabled');
 
 				$syncmember = $form.find('.syncmember:hidden');
-				
+
 				$input.prop('disabled', false).removeClass('loading');
 				$this.prop('disabled', false);
-				
+
 				if(data.type == 'XML') {
 					$xml.not(':visible').add($syncmember).slideDown(300);
 				} else if(data.type == 'TTXML') {
@@ -86,7 +86,7 @@ $('.syncmember').hide();
 function doSync(fo_obj) {
     exec_xml(
 		'importer',
-		'procImporterAdminSync', 
+		'procImporterAdminSync',
 		[],
 		function(ret){
 			alert(ret.message);
@@ -165,7 +165,7 @@ function doImport(formId) {
 
 	function on_complete(ret, response_tags) {
 		var i, c, key, fo_import;
-		
+
 		for(i=0,c=resp.length; i < c; i++) {
 			key = resp[i];
 			//elems[key]?elems[key].value=ret_obj[key]:0;

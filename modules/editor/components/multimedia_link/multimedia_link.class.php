@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  multimedia_link
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief The components connected to the body of multimedia data
  */
 class multimedia_link extends EditorHandler

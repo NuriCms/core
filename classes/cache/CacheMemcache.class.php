@@ -3,7 +3,8 @@
 /**
  * Cache class for memcache
  *
- * @author NHN (developer@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class CacheMemcache extends CacheBase
 {

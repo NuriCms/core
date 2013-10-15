@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  spamfilter
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief The parent class of the spamfilter module
  */
 class spamfilter extends ModuleObject

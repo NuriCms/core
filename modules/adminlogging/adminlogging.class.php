@@ -4,7 +4,8 @@
  * adminlogging class
  * Base class of adminlogging module
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/adminlogging
  * @version 0.1
  */
@@ -44,7 +45,7 @@ class adminlogging extends ModuleObject
 	 */
 	function recompileCache()
 	{
-		
+
 	}
 
 }

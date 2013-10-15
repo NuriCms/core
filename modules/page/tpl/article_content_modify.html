@@ -8,19 +8,19 @@
 		<input type="text" name="title" value="{htmlspecialchars($oDocument->getTitleText())}" title="{$lang->title}" style="width:100%" />
 	</div>
 
-    <div class="editor">{$oDocument->getEditor()}</div>
+	<div class="editor">{$oDocument->getEditor()}</div>
 
-    <div class="tag">
-        <input type="text" name="tags" value="{htmlspecialchars($oDocument->get('tags'))}" class="iText" title="Tag" />
+	<div class="tag">
+		<input type="text" name="tags" value="{htmlspecialchars($oDocument->get('tags'))}" class="iText" title="Tag" />
 		<p>{$lang->about_tag}</p>
-    </div>
+	</div>
 	<div class="btnArea">
-        <!--@if($is_logged)-->
+		<!--@if($is_logged)-->
 		<!--@if(!$oDocument->isExists() || $oDocument->get('status') == 'TEMP')-->
-        <button class="btn" type="button" onclick="doDocumentSave(this);">{$lang->cmd_temp_save}</button>
-        <button class="btn" type="button" onclick="doDocumentLoad(this);">{$lang->cmd_load}</button>
+		<button class="btn" type="button" onclick="doDocumentSave(this);">{$lang->cmd_temp_save}</button>
+		<button class="btn" type="button" onclick="doDocumentLoad(this);">{$lang->cmd_load}</button>
 		<!--@end-->
-        <!--@end-->
+		<!--@end-->
 		<input class="btn" type="submit" value="{$lang->cmd_registration}" />
 	</div>
 </form>

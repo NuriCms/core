@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  widgetAdminView
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief admin view class for widget modules
  */
 class widgetAdminView extends widget

@@ -380,7 +380,7 @@
 위젯은 내부 페이지 또는 외부 open api와 연동될 수도 있고, 설정을 통해 다양하게 응용될 수 있습니다.
 XE의 페이지나 레이아웃 모듈을 사용하지 않더라도 [코드생성] 기능을 통해 직접 위젯 추가도 할 수 있습니다.]]></value>
 		<value xml:lang="en"><![CDATA[A widget is a small free-standing application used in a layout or page module.
- It can be linked with internal module or external Open API. Through its configuration setting, wide application is possible. 
+ It can be linked with internal module or external Open API. Through its configuration setting, wide application is possible.
  You can directly add a widget by using the [Generate Code] function without using the XE page module or layout module.]]></value>
 		<value xml:lang="jp"><![CDATA[ウィジェット、またはページモジュールに用いられる単体の構成要素です。内部モジュールまたは外部のOPEN API と連動ができ、設定によって様々な応用が可能です。XEのページモジュールまたはレイアウトモジュールを使用しなくても、「コード生成」機能で直接ウィジェットも追加できます。]]></value>
 		<value xml:lang="zh-CN"><![CDATA[控件是在布局或页面模块中使用的一种小部件。
@@ -389,13 +389,13 @@ XE의 페이지나 레이아웃 모듈을 사용하지 않더라도 [코드생�
 		<value xml:lang="zh-TW"><![CDATA[Widget是在版面或頁面模組中使用的一種元件。
 不僅可以連結內部模組或外部 Open API，而且通過設置可以有許多種用途。
 即使不使用 XE 的頁面或版面設計模組，也可以通過『建立原始碼』功能直接新增相對應 Widget。]]></value>
-		<value xml:lang="fr"><![CDATA[Un gadjet est un petit application indépendant qui est utilisé dans une Mise en Page ou dans une module de Page. Un gajet peut être lié avec un module intérieur ou avec un API extérieur ouvert. L'application divers est possible par la configuration. 
+		<value xml:lang="fr"><![CDATA[Un gadjet est un petit application indépendant qui est utilisé dans une Mise en Page ou dans une module de Page. Un gajet peut être lié avec un module intérieur ou avec un API extérieur ouvert. L'application divers est possible par la configuration.
 Vous pouvez directement ajouter un gadget en utilisant la fonction [Générer le Code] sans utiliser un module de Page de XE ni un module de Mise en Page.]]></value>
 		<value xml:lang="es"><![CDATA[Un Widget es una pequena aplicación para ser usados en los diseños o en el módulo de páginas.
  Puede ser enlazados con un módulo interno o con open api externo y con la configuración de ella puede utilizar en variadas aplicaciones.
 Sin la necesidad de utilizar los módulos de página o del diseño de XE, Usted puede directamente añadir un widget usando la función de [Generar Códigos].]]></value>
 		<value xml:lang="tr"><![CDATA[Widget, yerleşim düzeninde veya sayfa modülünde kullanılan küçük bir serbest uygulamadır.
- Dahili modüle bağlanabileceği gibi, harici açık apilerle de bağlantı kurabilir. Yapılandırma ayarları yoluyla, geniş bir uygulama alanı vardır. 
+ Dahili modüle bağlanabileceği gibi, harici açık apilerle de bağlantı kurabilir. Yapılandırma ayarları yoluyla, geniş bir uygulama alanı vardır.
   [Kod Üret] fonksiyonunu kullanarak, XE sayfa modülüne veya yerleşim düzeni modülüne ihtiyaç duymadan widget ekleyebilirsiniz.]]></value>
 		<value xml:lang="vi"><![CDATA[Widget là một ứng dụng nhỏ có thể đặt ở bất kì vị trí nào do người dùng lựa chọn.<br />Nó có thể kết nối với những Module trong Website hay Open API bên ngoài và hiển thị nội dung của Module đó.<br />Thông qua sự thiết lập cấu hình, nó có thể là một ứng dụng rộng dãi.<br />Bạn có thể thêm một Widget bằng cách bấm nút [<b>Tạo Code</b>] để lấy Code thêm vào một Module hay trang nào đó.]]></value>
 	</item>

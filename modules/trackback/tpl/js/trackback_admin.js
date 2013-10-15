@@ -1,17 +1,17 @@
 function doCheckAll(bToggle) {
-    var fo_obj = jQuery('#fo_list')[0], el = null;
+	var fo_obj = jQuery('#fo_list')[0], el = null;
 	if(typeof(bToggle) == "undefined") bToggle = false;
-    for(var i=0; i<fo_obj.elements.length; i++) {
+	for(var i=0; i<fo_obj.elements.length; i++) {
 		el = fo_obj.elements[i];
-        if(el.name == 'cart'){
+		if(el.name == 'cart'){
 			if(!el.checked || !bToggle) el.checked = true;
 			else el.checked = false;
 		}
-    }
+	}
 }
 
 function insertSelectedModule(id, module_srl, mid, browser_title) {
-    location.href = current_url.setQuery('module_srl',module_srl);
+	location.href = current_url.setQuery('module_srl',module_srl);
 }
 
 function getTrackbackList()
@@ -19,14 +19,14 @@ function getTrackbackList()
 	var trackbackListTable = jQuery('#trackbackListTable');
 	var cartList = [];
 	trackbackListTable.find(':checkbox[name=cart]').each(function(){
-		if(this.checked) cartList.push(this.value); 
+		if(this.checked) cartList.push(this.value);
 	});
 
-    var params = new Array();
-    var response_tags = ['error','message', 'trackback_list'];
+	var params = new Array();
+	var response_tags = ['error','message', 'trackback_list'];
 	params["trackback_srls"] = cartList.join(",");
 
-    exec_xml('trackback','procTrackbackGetList',params, completeGetTrackbackList, response_tags);
+	exec_xml('trackback','procTrackbackGetList',params, completeGetTrackbackList, response_tags);
 }
 
 function completeGetTrackbackList(ret_obj, response_tags)

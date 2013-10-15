@@ -8,159 +8,159 @@ var show_waiting_message = true;
 
 /*  This work is licensed under Creative Commons GNU LGPL License.
 
-    License: http://creativecommons.org/licenses/LGPL/2.1/
+	License: http://creativecommons.org/licenses/LGPL/2.1/
    Version: 0.9
-    Author:  Stefan Goessner/2006
-    Web:     http://goessner.net/
+	Author:  Stefan Goessner/2006
+	Web:	 http://goessner.net/
 */
 function xml2json(xml, tab, ignoreAttrib) {
    var X = {
-      toObj: function(xml) {
-         var o = {};
-         if (xml.nodeType==1) {   // element node ..
-            if (ignoreAttrib && xml.attributes.length)   // element with attributes  ..
-               for (var i=0; i<xml.attributes.length; i++)
-                  o["@"+xml.attributes[i].nodeName] = (xml.attributes[i].nodeValue||"").toString();
-            if (xml.firstChild) { // element has child nodes ..
-               var textChild=0, cdataChild=0, hasElementChild=false;
-               for (var n=xml.firstChild; n; n=n.nextSibling) {
-                  if (n.nodeType==1) hasElementChild = true;
-                  else if (n.nodeType==3 && n.nodeValue.match(/[^ \f\n\r\t\v]/)) textChild++; // non-whitespace text
-                  else if (n.nodeType==4) cdataChild++; // cdata section node
-               }
-               if (hasElementChild) {
-                  if (textChild < 2 && cdataChild < 2) { // structured element with evtl. a single text or/and cdata node ..
-                     X.removeWhite(xml);
-                     for (var n=xml.firstChild; n; n=n.nextSibling) {
-                        if (n.nodeType == 3)  // text node
-                           o = X.escape(n.nodeValue);
-                        else if (n.nodeType == 4)  // cdata node
-//                           o["#cdata"] = X.escape(n.nodeValue);
-                            o = X.escape(n.nodeValue);
-                        else if (o[n.nodeName]) {  // multiple occurence of element ..
-                           if (o[n.nodeName] instanceof Array)
-                              o[n.nodeName][o[n.nodeName].length] = X.toObj(n);
-                           else
-                              o[n.nodeName] = [o[n.nodeName], X.toObj(n)];
-                        }
-                        else  // first occurence of element..
-                           o[n.nodeName] = X.toObj(n);
-                     }
-                  }
-                  else { // mixed content
-                     if (!xml.attributes.length)
-                        o = X.escape(X.innerXml(xml));
-                     else
-                        o["#text"] = X.escape(X.innerXml(xml));
-                  }
-               }
-               else if (textChild) { // pure text
-                  if (!xml.attributes.length)
-                     o = X.escape(X.innerXml(xml));
-                  else
-                     o["#text"] = X.escape(X.innerXml(xml));
-               }
-               else if (cdataChild) { // cdata
-                  if (cdataChild > 1)
-                     o = X.escape(X.innerXml(xml));
-                  else
-                     for (var n=xml.firstChild; n; n=n.nextSibling){
-                        //o["#cdata"] = X.escape(n.nodeValue);
-                        o = X.escape(n.nodeValue);
-                  }
-               }
-            }
-            if (!xml.attributes.length && !xml.firstChild) o = null;
-         }
-         else if (xml.nodeType==9) { // document.node
-            o = X.toObj(xml.documentElement);
-         }
-         else
-            alert("unhandled node type: " + xml.nodeType);
-         return o;
-      },
-      toJson: function(o, name, ind) {
-         var json = name ? ("\""+name+"\"") : "";
-         if (o instanceof Array) {
-            for (var i=0,n=o.length; i<n; i++)
-               o[i] = X.toJson(o[i], "", ind+"\t");
-            json += (name?":[":"[") + (o.length > 1 ? ("\n"+ind+"\t"+o.join(",\n"+ind+"\t")+"\n"+ind) : o.join("")) + "]";
-         }
-         else if (o == null)
-            json += (name&&":") + "null";
-         else if (typeof(o) == "object") {
-            var arr = [];
-            for (var m in o)
-               arr[arr.length] = X.toJson(o[m], m, ind+"\t");
-            json += (name?":{":"{") + (arr.length > 1 ? ("\n"+ind+"\t"+arr.join(",\n"+ind+"\t")+"\n"+ind) : arr.join("")) + "}";
-         }
-         else if (typeof(o) == "string")
-            json += (name&&":") + "\"" + o.toString() + "\"";
-         else
-            json += (name&&":") + o.toString();
-         return json;
-      },
-      innerXml: function(node) {
-         var s = ""
-         if ("innerHTML" in node)
-            s = node.innerHTML;
-         else {
-            var asXml = function(n) {
-               var s = "";
-               if (n.nodeType == 1) {
-                  s += "<" + n.nodeName;
-                  for (var i=0; i<n.attributes.length;i++)
-                     s += " " + n.attributes[i].nodeName + "=\"" + (n.attributes[i].nodeValue||"").toString() + "\"";
-                  if (n.firstChild) {
-                     s += ">";
-                     for (var c=n.firstChild; c; c=c.nextSibling)
-                        s += asXml(c);
-                     s += "</"+n.nodeName+">";
-                  }
-                  else
-                     s += "/>";
-               }
-               else if (n.nodeType == 3)
-                  s += n.nodeValue;
-               else if (n.nodeType == 4)
-                  s += "<![CDATA[" + n.nodeValue + "]]>";
-               return s;
-            };
-            for (var c=node.firstChild; c; c=c.nextSibling)
-               s += asXml(c);
-         }
-         return s;
-      },
-      escape: function(txt) {
-         return txt.replace(/[\\]/g, "\\\\")
-                   .replace(/[\"]/g, '\\"')
-                   .replace(/[\n]/g, '\\n')
-                   .replace(/[\r]/g, '\\r');
-      },
-      removeWhite: function(e) {
-         e.normalize();
-         for (var n = e.firstChild; n; ) {
-            if (n.nodeType == 3) {  // text node
-               if (!n.nodeValue.match(/[^ \f\n\r\t\v]/)) { // pure whitespace text node
-                  var nxt = n.nextSibling;
-                  e.removeChild(n);
-                  n = nxt;
-               }
-               else
-                  n = n.nextSibling;
-            }
-            else if (n.nodeType == 1) {  // element node
-               X.removeWhite(n);
-               n = n.nextSibling;
-            }
-            else                      // any other node
-               n = n.nextSibling;
-         }
-         return e;
-      }
+	  toObj: function(xml) {
+		 var o = {};
+		 if (xml.nodeType==1) {   // element node ..
+			if (ignoreAttrib && xml.attributes.length)   // element with attributes  ..
+			   for (var i=0; i<xml.attributes.length; i++)
+				  o["@"+xml.attributes[i].nodeName] = (xml.attributes[i].nodeValue||"").toString();
+			if (xml.firstChild) { // element has child nodes ..
+			   var textChild=0, cdataChild=0, hasElementChild=false;
+			   for (var n=xml.firstChild; n; n=n.nextSibling) {
+				  if (n.nodeType==1) hasElementChild = true;
+				  else if (n.nodeType==3 && n.nodeValue.match(/[^ \f\n\r\t\v]/)) textChild++; // non-whitespace text
+				  else if (n.nodeType==4) cdataChild++; // cdata section node
+			   }
+			   if (hasElementChild) {
+				  if (textChild < 2 && cdataChild < 2) { // structured element with evtl. a single text or/and cdata node ..
+					 X.removeWhite(xml);
+					 for (var n=xml.firstChild; n; n=n.nextSibling) {
+						if (n.nodeType == 3)  // text node
+						   o = X.escape(n.nodeValue);
+						else if (n.nodeType == 4)  // cdata node
+//						   o["#cdata"] = X.escape(n.nodeValue);
+							o = X.escape(n.nodeValue);
+						else if (o[n.nodeName]) {  // multiple occurence of element ..
+						   if (o[n.nodeName] instanceof Array)
+							  o[n.nodeName][o[n.nodeName].length] = X.toObj(n);
+						   else
+							  o[n.nodeName] = [o[n.nodeName], X.toObj(n)];
+						}
+						else  // first occurence of element..
+						   o[n.nodeName] = X.toObj(n);
+					 }
+				  }
+				  else { // mixed content
+					 if (!xml.attributes.length)
+						o = X.escape(X.innerXml(xml));
+					 else
+						o["#text"] = X.escape(X.innerXml(xml));
+				  }
+			   }
+			   else if (textChild) { // pure text
+				  if (!xml.attributes.length)
+					 o = X.escape(X.innerXml(xml));
+				  else
+					 o["#text"] = X.escape(X.innerXml(xml));
+			   }
+			   else if (cdataChild) { // cdata
+				  if (cdataChild > 1)
+					 o = X.escape(X.innerXml(xml));
+				  else
+					 for (var n=xml.firstChild; n; n=n.nextSibling){
+						//o["#cdata"] = X.escape(n.nodeValue);
+						o = X.escape(n.nodeValue);
+				  }
+			   }
+			}
+			if (!xml.attributes.length && !xml.firstChild) o = null;
+		 }
+		 else if (xml.nodeType==9) { // document.node
+			o = X.toObj(xml.documentElement);
+		 }
+		 else
+			alert("unhandled node type: " + xml.nodeType);
+		 return o;
+	  },
+	  toJson: function(o, name, ind) {
+		 var json = name ? ("\""+name+"\"") : "";
+		 if (o instanceof Array) {
+			for (var i=0,n=o.length; i<n; i++)
+			   o[i] = X.toJson(o[i], "", ind+"\t");
+			json += (name?":[":"[") + (o.length > 1 ? ("\n"+ind+"\t"+o.join(",\n"+ind+"\t")+"\n"+ind) : o.join("")) + "]";
+		 }
+		 else if (o == null)
+			json += (name&&":") + "null";
+		 else if (typeof(o) == "object") {
+			var arr = [];
+			for (var m in o)
+			   arr[arr.length] = X.toJson(o[m], m, ind+"\t");
+			json += (name?":{":"{") + (arr.length > 1 ? ("\n"+ind+"\t"+arr.join(",\n"+ind+"\t")+"\n"+ind) : arr.join("")) + "}";
+		 }
+		 else if (typeof(o) == "string")
+			json += (name&&":") + "\"" + o.toString() + "\"";
+		 else
+			json += (name&&":") + o.toString();
+		 return json;
+	  },
+	  innerXml: function(node) {
+		 var s = ""
+		 if ("innerHTML" in node)
+			s = node.innerHTML;
+		 else {
+			var asXml = function(n) {
+			   var s = "";
+			   if (n.nodeType == 1) {
+				  s += "<" + n.nodeName;
+				  for (var i=0; i<n.attributes.length;i++)
+					 s += " " + n.attributes[i].nodeName + "=\"" + (n.attributes[i].nodeValue||"").toString() + "\"";
+				  if (n.firstChild) {
+					 s += ">";
+					 for (var c=n.firstChild; c; c=c.nextSibling)
+						s += asXml(c);
+					 s += "</"+n.nodeName+">";
+				  }
+				  else
+					 s += "/>";
+			   }
+			   else if (n.nodeType == 3)
+				  s += n.nodeValue;
+			   else if (n.nodeType == 4)
+				  s += "<![CDATA[" + n.nodeValue + "]]>";
+			   return s;
+			};
+			for (var c=node.firstChild; c; c=c.nextSibling)
+			   s += asXml(c);
+		 }
+		 return s;
+	  },
+	  escape: function(txt) {
+		 return txt.replace(/[\\]/g, "\\\\")
+				   .replace(/[\"]/g, '\\"')
+				   .replace(/[\n]/g, '\\n')
+				   .replace(/[\r]/g, '\\r');
+	  },
+	  removeWhite: function(e) {
+		 e.normalize();
+		 for (var n = e.firstChild; n; ) {
+			if (n.nodeType == 3) {  // text node
+			   if (!n.nodeValue.match(/[^ \f\n\r\t\v]/)) { // pure whitespace text node
+				  var nxt = n.nextSibling;
+				  e.removeChild(n);
+				  n = nxt;
+			   }
+			   else
+				  n = n.nextSibling;
+			}
+			else if (n.nodeType == 1) {  // element node
+			   X.removeWhite(n);
+			   n = n.nextSibling;
+			}
+			else					  // any other node
+			   n = n.nextSibling;
+		 }
+		 return e;
+	  }
    };
    if (xml.nodeType == 9) // document node
-      xml = xml.documentElement;
+	  xml = xml.documentElement;
 
    var json_obj = X.toObj(X.removeWhite(xml)), json_str;
 
@@ -181,15 +181,15 @@ function xml2json(xml, tab, ignoreAttrib) {
  **/
 $.exec_xml = window.exec_xml = function(module, act, params, callback_func, response_tags, callback_func_arg, fo_obj) {
 	var xml_path = request_uri+"index.php"
-    if(!params) params = {};
+	if(!params) params = {};
 
 	// {{{ set parameters
 	if($.isArray(params)) params = arr2obj(params);
 	params['module'] = module;
-	params['act']    = act;
+	params['act']	= act;
 
-    if(typeof(xeVid)!='undefined') params['vid'] = xeVid;
-    if(typeof(response_tags)=="undefined" || response_tags.length<1) response_tags = ['error','message'];
+	if(typeof(xeVid)!='undefined') params['vid'] = xeVid;
+	if(typeof(response_tags)=="undefined" || response_tags.length<1) response_tags = ['error','message'];
 	else {
 		response_tags.push('error', 'message');
 	}
@@ -198,9 +198,9 @@ $.exec_xml = window.exec_xml = function(module, act, params, callback_func, resp
 	// use ssl?
 	if ($.isArray(ssl_actions) && params['act'] && $.inArray(params['act'], ssl_actions) >= 0)
 	{
-		var url    = default_url || request_uri;
+		var url	= default_url || request_uri;
 		var port   = window.https_port || 443;
-		var _ul    = $('<a>').attr('href', url)[0];
+		var _ul	= $('<a>').attr('href', url)[0];
 		var target = 'https://' + _ul.hostname.replace(/:\d+$/, '');
 
 		if(port != 443) target += ':'+port;
@@ -217,7 +217,7 @@ $.exec_xml = window.exec_xml = function(module, act, params, callback_func, resp
 	if(_u1.protocol != _u2.protocol || _u1.port != _u2.port) return send_by_form(xml_path, params);
 
 	var xml = [], i = 0;
-	xml[i++] = '<?xml version="1.0" encoding="utf-8" ?>';
+	xml[i++] = '<?xml version="1.0" encoding="UTF-8" ?>';
 	xml[i++] = '<methodCall>';
 	xml[i++] = '<params>';
 
@@ -256,8 +256,8 @@ $.exec_xml = window.exec_xml = function(module, act, params, callback_func, resp
 		}
 
 		$.each(response_tags, function(key, val){ tags[val] = true; });
-        tags["redirect_url"] = true;
-        tags["act"] = true;
+		tags["redirect_url"] = true;
+		tags["act"] = true;
 		$.each(resp_obj, function(key, val){ if(tags[key]) ret[key] = val; });
 
 		if(ret['error'] != 0) {
@@ -281,14 +281,14 @@ $.exec_xml = window.exec_xml = function(module, act, params, callback_func, resp
 	// 모든 xml데이터는 POST방식으로 전송. try-catch문으로 오류 발생시 대처
 	try {
 		$.ajax({
-			url         : xml_path,
-			type        : 'POST',
-			dataType    : 'xml',
-			data        : xml.join('\n'),
+			url		 : xml_path,
+			type		: 'POST',
+			dataType	: 'xml',
+			data		: xml.join('\n'),
 			contentType : 'text/plain',
 			beforeSend  : function(xhr){ _xhr = xhr; },
-			success     : onsuccess,
-			error       : function(xhr, textStatus) {
+			success	 : onsuccess,
+			error	   : function(xhr, textStatus) {
 				waiting_obj.css('display', 'none');
 
 				var msg = '';
@@ -313,7 +313,7 @@ $.exec_xml = window.exec_xml = function(module, act, params, callback_func, resp
 	// ajax 통신중 대기 메세지 출력 (show_waiting_message값을 false로 세팅시 보이지 않음)
 	var waiting_obj = $('.wfsr');
 	if(show_waiting_message && waiting_obj.length) {
-	
+
 		var timeoutId = $(".wfsr").data('timeout_id');
 		if(timeoutId) clearTimeout(timeoutId);
 		$(".wfsr").css('opacity', 0.0);
@@ -334,15 +334,15 @@ function send_by_form(url, params) {
 
 	$('#'+form_id).remove();
 	var form = $('<form id="%id%"></form>'.replace(/%id%/g, form_id)).attr({
-		'id'     : form_id,
+		'id'	 : form_id,
 		'method' : 'post',
 		'action' : url,
 		'target' : frame_id
 	});
 
 	params['xeVirtualRequestMethod'] = 'xml';
-	params['xeRequestURI']           = location.href.replace(/#(.*)$/i,'');
-	params['xeVirtualRequestUrl']    = request_uri;
+	params['xeRequestURI']		   = location.href.replace(/#(.*)$/i,'');
+	params['xeVirtualRequestUrl']	= request_uri;
 
 	$.each(params, function(key, value){
 		$('<input type="hidden">').attr('name', key).attr('value', value).appendTo(form);
@@ -363,9 +363,9 @@ function arr2obj(arr) {
  * @brief exec_json (exec_xml와 같은 용도)
  **/
 $.exec_json = function(action,data,func,f_error){
-    if(typeof(data) == 'undefined') data = {};
-    action = action.split(".");
-    if(action.length == 2){
+	if(typeof(data) == 'undefined') data = {};
+	action = action.split(".");
+	if(action.length == 2){
 		// The cover can be disturbing if it consistently blinks (because ajax call usually takes very short time). So make it invisible for the 1st 0.5 sec and then make it visible.
 		var timeoutId = $(".wfsr").data('timeout_id');
 		if(timeoutId) clearTimeout(timeoutId);
@@ -373,19 +373,19 @@ $.exec_json = function(action,data,func,f_error){
 		$(".wfsr").data('timeout_id', setTimeout(function(){
 			$(".wfsr").css('opacity', '');
 		}, 1000));
-        if(show_waiting_message) $(".wfsr").html(waiting_message).show();
+		if(show_waiting_message) $(".wfsr").html(waiting_message).show();
 
-        $.extend(data,{module:action[0],act:action[1]});
-        if(typeof(xeVid)!='undefined') $.extend(data,{vid:xeVid});
-        $.ajax({
-            type:"POST"
-            ,dataType:"json"
-            ,url:request_uri
-            ,contentType:"application/json"
-            ,data:$.param(data)
-            ,success : function(data){
-                $(".wfsr").hide().trigger('cancel_confirm');
-                if(data.error != 0 && data.error > -1000){
+		$.extend(data,{module:action[0],act:action[1]});
+		if(typeof(xeVid)!='undefined') $.extend(data,{vid:xeVid});
+		$.ajax({
+			type:"POST"
+			,dataType:"json"
+			,url:request_uri
+			,contentType:"application/json"
+			,data:$.param(data)
+			,success : function(data){
+				$(".wfsr").hide().trigger('cancel_confirm');
+				if(data.error != 0 && data.error > -1000){
 					if(data.error == -1 && data.message == 'msg_is_not_administrator'){
 						alert('You are not logged in as an administrator');
 	//					window.location.reload();
@@ -397,40 +397,40 @@ $.exec_json = function(action,data,func,f_error){
 						return;
 					}
 				}
-                if($.isFunction(func)) func(data);
-            }
-        });
-    }
+				if($.isFunction(func)) func(data);
+			}
+		});
+	}
 };
 
 $.fn.exec_html = function(action,data,type,func,args){
-    if(typeof(data) == 'undefined') data = {};
-    if(!$.inArray(type, ['html','append','prepend'])) type = 'html';
+	if(typeof(data) == 'undefined') data = {};
+	if(!$.inArray(type, ['html','append','prepend'])) type = 'html';
 
-    var self = $(this);
-    action = action.split(".");
-    if(action.length == 2){
+	var self = $(this);
+	action = action.split(".");
+	if(action.length == 2){
 		var timeoutId = $(".wfsr").data('timeout_id');
 		if(timeoutId) clearTimeout(timeoutId);
 		$(".wfsr").css('opacity', 0.0);
 		$(".wfsr").data('timeout_id', setTimeout(function(){
 			$(".wfsr").css('opacity', '');
 		}, 1000));
-        if(show_waiting_message) $(".wfsr").html(waiting_message).show();
+		if(show_waiting_message) $(".wfsr").html(waiting_message).show();
 
-        $.extend(data,{module:action[0],act:action[1]});
-        $.ajax({
-            type:"POST"
-            ,dataType:"html"
-            ,url:request_uri
-            ,data:$.param(data)
-            ,success : function(html){
-                $(".wfsr").hide().trigger('cancel_confirm');
-                self[type](html);
-                if($.isFunction(func)) func(args);
-            }
-        });
-    }
+		$.extend(data,{module:action[0],act:action[1]});
+		$.ajax({
+			type:"POST"
+			,dataType:"html"
+			,url:request_uri
+			,data:$.param(data)
+			,success : function(html){
+				$(".wfsr").hide().trigger('cancel_confirm');
+				self[type](html);
+				if($.isFunction(func)) func(args);
+			}
+		});
+	}
 };
 
 function beforeUnloadHandler(){

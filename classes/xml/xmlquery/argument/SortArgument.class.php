@@ -2,7 +2,8 @@
 
 /**
  * SortArgument class
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /classes/xml/xmlquery/argument
  * @version 0.1
  */

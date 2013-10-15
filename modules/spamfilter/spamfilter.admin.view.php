@@ -1,10 +1,11 @@
 <?php
 /**
  * @class  spamfilterAdminView
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief The admin view class of the spamfilter module
  */
-class spamfilterAdminView extends spamfilter 
+class spamfilterAdminView extends spamfilter
 {
 	/**
 	 * @brief Initialization

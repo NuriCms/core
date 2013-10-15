@@ -8,7 +8,7 @@ jQuery(function($){
 
 $('button.calc_point').click(function(){
 	var $this, form, elems, reset, el, fn, i=0;
-	
+
 	$this = $(this);
 	$expr = $('input.level_expression');
 	form  = this.form;
@@ -55,7 +55,7 @@ function doPointRecal() {
 		}
 	}
 
-    exec_xml(
+	exec_xml(
 		'point', // module
 		'procPointAdminReCal', // procedure
 		{}, // parameters
@@ -70,13 +70,13 @@ function updatePoint(member_srl)
 	get_by_id('update_member_srl').value = member_srl;
 	get_by_id('update_point').value = $point.val();
 
-    var hF = get_by_id('updateForm');
+	var hF = get_by_id('updateForm');
 	hF.submit();
 }
 
 
 function doPointReset(module_srls) {
-    exec_xml(
+	exec_xml(
 		'point',
 		'procPointAdminReset',
 		{module_srls : module_srls},

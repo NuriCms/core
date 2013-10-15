@@ -2,12 +2,13 @@
 
 /**
  * @class ModuleHandler
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * Handling modules
  *
  * @remarks This class is to excute actions of modules.
- *          Constructing an instance without any parameterconstructor, it finds the target module based on Context.
- *          If there is no act on the found module, excute an action referencing action_forward.
+ *			Constructing an instance without any parameterconstructor, it finds the target module based on Context.
+ *			If there is no act on the found module, excute an action referencing action_forward.
  * */
 class ModuleHandler extends Handler
 {
@@ -125,7 +126,7 @@ class ModuleHandler extends Handler
 				throw new Exception('msg_default_url_is_null');
 			}
 		}
-		
+
 		$oModuleModel = getModel('module');
 		$site_module_info = Context::get('site_module_info');
 

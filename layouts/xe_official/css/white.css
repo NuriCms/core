@@ -1,12 +1,14 @@
-@charset "utf-8";
-/* NHN (developers@xpressengine.com) */
+@charset "UTF-8";
+/* Original author NHN,
+ * Adapter Nuri Project (developer@nuricms.org) */
 /* Site Layout - Body Wrap */
 body{background:#fff}
-.xe{position:relative;width:960px;margin:0 auto;padding:1.5em 0 0 0;font-family:Tahoma, Geneva, sans-serif}
+.xe{position:relative;width:960px;margin:0 auto;padding:1.5em 0 0 0;font-family:'나눔고딕','맑은 고딕',Tahoma, Geneva, sans-serif}
 /* Site Layout - Header */
 .header{position:relative;width:958px;height:114px;border-top:6px solid #323232;border-left:1px solid #d9d9d9;border-right:1px solid #d9d9d9;background:url(../images/white/bgHeader.png) no-repeat right bottom;margin-bottom:10px;z-index:2}
-.header h1{margin:0;position:absolute;top:32px;left:25px}
+.header h1{margin:0;position:absolute;top:17px;left:25px}
 .header h1 a{color:#333;text-decoration:none}
+.header h1 a img{border:0;}
 .language{position:absolute;top:12px;right:19px;z-index:100}
 .language strong{display:inline-block;height:15px;color:#5c5c5c;font:.75em/15px Tahoma;margin-right:3px;vertical-align:top}
 .language .toggle{background:none;border:0;cursor:pointer;vertical-align:top;padding:0;height:15px}

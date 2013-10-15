@@ -1,7 +1,7 @@
 /* After Login */
 function completeLogin(ret_obj, response_tags, params, fo_obj) {
-    var url =  current_url.setQuery('act','');
-    location.href = url;
+	var url =  current_url.setQuery('act','');
+	location.href = url;
 }
 
 jQuery(function($){
@@ -12,7 +12,7 @@ jQuery(function($){
 	// Toggle
 	var $acTog = $('a[href="#acField"]');
 	var $acField = $('#acField');
-	$acTog.click(function(){ 
+	$acTog.click(function(){
 		$this = $(this);
 		$acField.slideToggle(200, function(){
 			var $user_id = $(this).find('input[name="user_id"]:eq(0)');

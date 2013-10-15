@@ -50,43 +50,43 @@ function doShowSkinColorset()
 }
 
 function completeGenerateCodeInPage(widget_code) {
-    if(!opener || !widget_code) {
-        window.close();
-        return;
-    }
+	if(!opener || !widget_code) {
+		window.close();
+		return;
+	}
 
-    opener.doAddWidgetCode(widget_code);
-    window.close();
+	opener.doAddWidgetCode(widget_code);
+	window.close();
 }
 
 var selected_node = null;
 
 function getWidgetVars() {
-    if(!opener || !opener.selectedWidget || !opener.selectedWidget.getAttribute("widget")) return;
-    selected_node = opener.selectedWidget;
+	if(!opener || !opener.selectedWidget || !opener.selectedWidget.getAttribute("widget")) return;
+	selected_node = opener.selectedWidget;
 
-    if(!xGetElementById('fo_widget').widgetstyle.value) {
-        xGetElementById('fo_widget').widgetstyle.value = selected_node.getAttribute('widgetstyle');
-    }
+	if(!xGetElementById('fo_widget').widgetstyle.value) {
+		xGetElementById('fo_widget').widgetstyle.value = selected_node.getAttribute('widgetstyle');
+	}
 
-    doFillWidgetVars();
+	doFillWidgetVars();
 }
 
 function doFillWidgetVars() {
-    if(!opener || !opener.selectedWidget || !opener.selectedWidget.getAttribute("widget")) return;
-    selected_node = opener.selectedWidget;
+	if(!opener || !opener.selectedWidget || !opener.selectedWidget.getAttribute("widget")) return;
+	selected_node = opener.selectedWidget;
 
-    // 스킨과 컬러셋은 기본
-    var skin = selected_node.getAttribute("skin");
-    var colorset = selected_node.getAttribute("colorset");
-    var widget_sequence = parseInt(selected_node.getAttribute("widget_sequence"),10);
+	// 스킨과 컬러셋은 기본
+	var skin = selected_node.getAttribute("skin");
+	var colorset = selected_node.getAttribute("colorset");
+	var widget_sequence = parseInt(selected_node.getAttribute("widget_sequence"),10);
 
-    var fo_widget = jQuery("#fo_widget");
-    var fo_obj = xGetElementById("fo_widget");
-    jQuery('#widget_skin').val(skin);
+	var fo_widget = jQuery("#fo_widget");
+	var fo_obj = xGetElementById("fo_widget");
+	jQuery('#widget_skin').val(skin);
 
-    // 위젯 스타일 유지를 위한 hidden input 추가하고 값을 저장
-    var attrs = selected_node.attributes;
+	// 위젯 스타일 유지를 위한 hidden input 추가하고 값을 저장
+	var attrs = selected_node.attributes;
 
 	//  IE7에서 발생하는 jQuery 용 attribute를 걸러내기 위해 추가
 	var attrFilters = ['style', 'sizset', 'draggable', 'class'];
@@ -102,85 +102,85 @@ function doFillWidgetVars() {
 		var dummy = jQuery('<input type="hidden" name="'+name+'" />').val(value).appendTo("#fo_widget").get(0);
 	}
 
-    // 위젯의 속성 설정
-    var obj_list = new Array();
-    jQuery('input,select,textarea','#fo_widget').each( function() {
-            obj_list.push(this);
-    });
+	// 위젯의 속성 설정
+	var obj_list = new Array();
+	jQuery('input,select,textarea','#fo_widget').each( function() {
+			obj_list.push(this);
+	});
 
-    for(var j=0;j<obj_list.length;j++) {
-        var node = obj_list[j];
-        if(node.name.indexOf('_')==0) continue;
-        if(node.name == 'widgetstyle') continue;
-        if(node.type == 'button') continue;
-        if(node.name == '') continue;
+	for(var j=0;j<obj_list.length;j++) {
+		var node = obj_list[j];
+		if(node.name.indexOf('_')==0) continue;
+		if(node.name == 'widgetstyle') continue;
+		if(node.type == 'button') continue;
+		if(node.name == '') continue;
 
-        var length = node.length;
-        var type = node.type;
-        if((typeof(type)=='undefined'||!type) && typeof(length)!='undefined' && typeof(node[0])!='undefined' && length>0) type = node[0].type;
-        else length = 0;
-        var name = node.name;
+		var length = node.length;
+		var type = node.type;
+		if((typeof(type)=='undefined'||!type) && typeof(length)!='undefined' && typeof(node[0])!='undefined' && length>0) type = node[0].type;
+		else length = 0;
+		var name = node.name;
 
-        switch(type) {
-            case "hidden" :
-            case "text" :
-            case "textarea" :
-                    var val = selected_node.getAttribute(name);
-                    if(!val) continue;
-                    var unescaped_val = unescape(val);
-                    if(!unescaped_val) node.value = val;
-                    else node.value = unescaped_val;
+		switch(type) {
+			case "hidden" :
+			case "text" :
+			case "textarea" :
+					var val = selected_node.getAttribute(name);
+					if(!val) continue;
+					var unescaped_val = unescape(val);
+					if(!unescaped_val) node.value = val;
+					else node.value = unescaped_val;
 					jQuery('#'+name).val(node.value);
-                break;
-            case "checkbox" :
-                    if(selected_node.getAttribute(name)) {
-                        var val = selected_node.getAttribute(name).split(',');
-                        if(fo_obj[name].length) {
-                            for(var i=0;i<fo_obj[name].length;i++) {
-                                var v = fo_obj[name][i].value;
-                                for(var k=0;k<val.length;k++) {
-                                    if(v == val[k]) {
-                                        fo_obj[name][i].checked=true;
-                                        break;
-                                    }
-                                }
-                            }
-                        } else {
-                            if(fo_obj[name].value == val) fo_obj[name].checked =true;
-                        }
-                    }
-                break;
-            case "select" :
-            case "select-one" :
-                    var val = selected_node.getAttribute(name);
-                    var sel = fo_obj[name];
-                    if(!val) break;
-                    for(var i=0;i<sel.options.length;i++) {
-                        if(sel.options[i].value == val) sel.options[i].selected = true;
-                        else sel.options[i].selected = false;
-                    }
-                break;
-        }
+				break;
+			case "checkbox" :
+					if(selected_node.getAttribute(name)) {
+						var val = selected_node.getAttribute(name).split(',');
+						if(fo_obj[name].length) {
+							for(var i=0;i<fo_obj[name].length;i++) {
+								var v = fo_obj[name][i].value;
+								for(var k=0;k<val.length;k++) {
+									if(v == val[k]) {
+										fo_obj[name][i].checked=true;
+										break;
+									}
+								}
+							}
+						} else {
+							if(fo_obj[name].value == val) fo_obj[name].checked =true;
+						}
+					}
+				break;
+			case "select" :
+			case "select-one" :
+					var val = selected_node.getAttribute(name);
+					var sel = fo_obj[name];
+					if(!val) break;
+					for(var i=0;i<sel.options.length;i++) {
+						if(sel.options[i].value == val) sel.options[i].selected = true;
+						else sel.options[i].selected = false;
+					}
+				break;
+		}
 
-    }
+	}
 
-    var style = selected_node.getAttribute("style");
-    if(typeof(style)=="object") style = style["cssText"];
-    fo_obj.style.value = style;
+	var style = selected_node.getAttribute("style");
+	if(typeof(style)=="object") style = style["cssText"];
+	fo_obj.style.value = style;
 
-    fo_obj.widget_padding_left.value = selected_node.getAttribute("widget_padding_left");
-    fo_obj.widget_padding_right.value = selected_node.getAttribute("widget_padding_right");
-    fo_obj.widget_padding_bottom.value = selected_node.getAttribute("widget_padding_bottom");
-    fo_obj.widget_padding_top.value = selected_node.getAttribute("widget_padding_top");
+	fo_obj.widget_padding_left.value = selected_node.getAttribute("widget_padding_left");
+	fo_obj.widget_padding_right.value = selected_node.getAttribute("widget_padding_right");
+	fo_obj.widget_padding_bottom.value = selected_node.getAttribute("widget_padding_bottom");
+	fo_obj.widget_padding_top.value = selected_node.getAttribute("widget_padding_top");
 
 
-    //  컬러셋 설정
-    if(skin && xGetElementById("widget_colorset") && xGetElementById("widget_colorset").options.length<1 && colorset) {
-        doDisplaySkinColorset(colorset);
-    }
+	//  컬러셋 설정
+	if(skin && xGetElementById("widget_colorset") && xGetElementById("widget_colorset").options.length<1 && colorset) {
+		doDisplaySkinColorset(colorset);
+	}
 
-    // widget sequence 설정
-    fo_obj.widget_sequence.value = widget_sequence;
+	// widget sequence 설정
+	fo_obj.widget_sequence.value = widget_sequence;
 
 	xe.broadcast('MULTIORDER_SYNC');
 	xe.broadcast('MODULELIST_SYNC');
@@ -191,7 +191,7 @@ function doFillWidgetVars() {
 		.each(function(){
 			var $this = jQuery(this);
 			var src = $this.siblings('input').eq(0).val().split(',');
-			
+
 			if (src) $this.trigger('filebox.selected', [src]);
 		})
 }
@@ -243,7 +243,7 @@ jQuery(document).ready(function($){
 		}
 		$(this).before(htmlCode);
 
-		
+
 
 		$('.filebox_del').bind('click', function(){
 			var filename = $(this).prev('img').attr("src");

@@ -5,7 +5,8 @@ if(!defined('__XE__'))
 
 /**
  * @file blogapicounter.addon.php
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief Add blogAPI
  *
  * It enables to write a post by using an external tool such as ms live writer, firefox performancing, zoundry and so on.
@@ -18,7 +19,7 @@ if($called_position == 'after_module_proc')
 	$site_module_info = Context::get('site_module_info');
 	$rsd_url = getFullSiteUrl($site_module_info->domain, '', 'mid', $this->module_info->mid, 'act', 'api');
 	// Insert rsd tag into the header
-	Context::addHtmlHeader("    " . '<link rel="EditURI" type="application/rsd+xml" title="RSD" href="' . $rsd_url . '" />');
+	Context::addHtmlHeader('	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="' . $rsd_url . '" />');
 }
 // If act isnot api, just return
 if($_REQUEST['act'] != 'api')
@@ -71,7 +72,7 @@ if($called_position == 'before_module_init')
 // Before module processing, handle requests from blogapi tool and then terminate.
 if($called_position == 'before_module_proc')
 {
-	// Check writing permission 
+	// Check writing permission
 	if(!$this->grant->write_document)
 	{
 		printContent(getXmlRpcFailure(1, 'no permission'));
@@ -219,7 +220,7 @@ if($called_position == 'before_module_proc')
 									'</value>' .
 								'</param>' .
 							'</params>' .
-							'</methodResponse>', 
+							'</methodResponse>',
 							$category,
 							date("Ymd", $oDocument->getRegdateTime()) . 'T' . date("H:i:s", $oDocument->getRegdateTime()),
 							$oDocument->getContent(false, false, true, false),
@@ -300,7 +301,7 @@ if($called_position == 'before_module_proc')
 			$oDocumentController = getController('document');
 			$obj->commentStatus = 'ALLOW';
 			$obj->allow_trackback = 'Y';
-			
+
 			$logged_info = Context::get('logged_info');
 			$obj->member_srl = $logged_info->member_srl;
 			$obj->user_id = $logged_info->user_id;
@@ -513,12 +514,12 @@ if($called_position == 'before_module_proc')
 <?xml version="1.0" ?>
 <rsd version="1.0" xmlns="http://archipelago.phrasewise.com/rsd" >
 <service>
-    <engineName>XpressEngine</engineName>
-    <engineLink>http://www.xpressengine.com/ </engineLink>
-    <homePageLink>{$homepagelink}</homePageLink>
-    <apis>
-        <api name="MetaWeblog" preferred="true" apiLink="{$api_url}" blogID="" />
-    </apis>
+	<engineName>XpressEngine</engineName>
+	<engineLink>http://www.xpressengine.com/ </engineLink>
+	<homePageLink>{$homepagelink}</homePageLink>
+	<apis>
+		<api name="MetaWeblog" preferred="true" apiLink="{$api_url}" blogID="" />
+	</apis>
 </service>
 </rsd>
 RSDContent;

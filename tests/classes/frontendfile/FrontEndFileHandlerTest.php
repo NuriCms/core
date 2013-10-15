@@ -40,7 +40,7 @@ class FrontEndFileHandlerTest extends PHPUnit_Framework_TestCase
 		$handler->loadFile(array('./common/js/common.js', 'body'));
 		$handler->loadFile(array('./common/js/xml_handler.js', 'body'));
 		$handler->loadFile(array('./common/js/xml_js_filter.js', 'body'));
-		
+
 		$expected[] = array('file' => '/xe/common/js/jquery.js', 'targetie' => '');
 		$expected[] = array('file' => '/xe/common/js/js_app.js', 'targetie' => '');
 		$expected[] = array('file' => '/xe/common/js/common.js', 'targetie' => '');
@@ -55,7 +55,7 @@ class FrontEndFileHandlerTest extends PHPUnit_Framework_TestCase
 		// css
 		$handler->loadFile(array('./common/css/xe.css'));
 		$handler->loadFile(array('./common/css/common.css'));
-		
+
 		$expected[] = array('file' => '/xe/common/css/xe.css', 'media' => 'all', 'targetie' => '');
 		$expected[] = array('file' => '/xe/common/css/common.css', 'media' => 'all', 'targetie' => '');
 		$this->assertEquals($handler->getCssFileList(), $expected);

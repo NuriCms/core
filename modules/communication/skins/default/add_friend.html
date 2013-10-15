@@ -22,7 +22,7 @@
 					<select name="friend_group_srl" id="friend_group_srl">
 						<option value="">{$lang->default_friend_group}</option>
 						<option loop="$friend_group_list => $key,$val" value="{$val->friend_group_srl}">{$val->title}</option>
-					</select> 
+					</select>
 					<a href="{getUrl('act','dispCommunicationAddFriendGroup')}" class="btn" onclick="popopen(this.href);return false;">{$lang->cmd_add_friend_group}</a>
 				</td>
 			</tr>

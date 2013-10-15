@@ -5,7 +5,8 @@ if(!defined('__XE__'))
 
 /**
  * @file mobile.addon.php
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief Mobile XE add-on
  *
  * If a mobile connection is made (see the header information), display contents with WAP tags
@@ -39,7 +40,7 @@ if(!$oMobile)
 {
 	return;
 }
-// Specify charset on the add-on settings 
+// Specify charset on the add-on settings
 $oMobile->setCharSet($addon_info->charset);
 // Set module information
 $oMobile->setModuleInfo($this->module_info);

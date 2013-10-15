@@ -2,7 +2,8 @@
 /**
  * The view class of the rss module
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class rssView extends rss
 {
@@ -19,7 +20,7 @@ class rssView extends rss
 	 * Feed output.
 	 * When trying to directly print out the RSS, the results variable can be directly specified through $oRssView->rss($document_list)
 	 *
-	 * @param Object $document_list Document list 
+	 * @param Object $document_list Document list
 	 * @param string $rss_title Rss title
 	 * @param string $add_description Add description
 	 */
@@ -48,7 +49,7 @@ class rssView extends rss
 				$config = $oModuleModel->getModulePartConfig('rss', $module_srl);
 				if($config->open_rss && $config->open_rss != 'N')
 				{
-					$module_srls[] = $module_srl; 
+					$module_srls[] = $module_srl;
 					$open_rss_config[$module_srl] = $config->open_rss;
 				}
 				// If mid is not selected, then get all
@@ -90,7 +91,7 @@ class rssView extends rss
 				if($start_date == 0) unset($start_date);
 				if($end_date == 0) unset($end_date);
 
-				$args->sort_index = 'list_order'; 
+				$args->sort_index = 'list_order';
 				$args->order_type = 'asc';
 				$output = $oDocumentModel->getDocumentList($args);
 				$document_list = $output->data;

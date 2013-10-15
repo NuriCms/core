@@ -2,7 +2,8 @@
 
 /**
  * @class  communicationView
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * View class of communication module
  */
 class communicationView extends communication

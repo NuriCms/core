@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  layoutAdminController
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * admin controller class of the layout module
  */
 class layoutAdminController extends layout
@@ -17,7 +18,7 @@ class layoutAdminController extends layout
 	/**
 	 * Create a new layout
 	 * Insert a title into "layouts" table in order to create a layout
-	 * @deprecated 
+	 * @deprecated
 	 * @return void|Object (void : success, Object : fail)
 	 */
 	function procLayoutAdminInsert()
@@ -63,7 +64,7 @@ class layoutAdminController extends layout
 	 * Initiate if it is faceoff layout
 	 * @param int $layout_srl
 	 * @param string $layout_name
-	 * @return void 
+	 * @return void
 	 */
 	function initLayout($layout_srl, $layout_name)
 	{
@@ -355,7 +356,7 @@ class layoutAdminController extends layout
 		$layout_srl = Context::get('layout_srl');
 		$code = Context::get('code');
 		$code_css   = Context::get('code_css');
-		$is_post    = ($_SERVER['REQUEST_METHOD'] == 'POST');
+		$is_post	= ($_SERVER['REQUEST_METHOD'] == 'POST');
 
 		if(!$layout_srl || !$code || !$is_post)
 		{
@@ -667,7 +668,7 @@ class layoutAdminController extends layout
 		header("Pragma: ");
 		header("Content-Type: application/x-compressed");
 		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-		//            header("Content-Length: " .strlen($stream)); ?? why??
+		//			header("Content-Length: " .strlen($stream)); ?? why??
 		header('Content-Disposition: attachment; filename="'. $filename .'"');
 		header("Content-Transfer-Encoding: binary\n");
 		echo $stream;
@@ -741,7 +742,7 @@ class layoutAdminController extends layout
 		$args = new stdClass();
 		$args->extra_vars = $output->extra_vars;
 		$extra_vars = unserialize($args->extra_vars);
-		
+
 		if($layout->extra_var_count) {
 			$reg = "/^.\/files\/attach\/images\/([0-9]+)\/(.*)/";
 			foreach($extra_vars as $key => $val) {

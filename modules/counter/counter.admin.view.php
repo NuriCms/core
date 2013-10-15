@@ -3,7 +3,8 @@
 /**
  * Admin view class of counter module
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  */
 class counterAdminView extends counter
 {
@@ -20,7 +21,7 @@ class counterAdminView extends counter
 	}
 
 	/**
-	 * Admin page 
+	 * Admin page
 	 *
 	 * @return Object
 	 */

@@ -1,21 +1,21 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<lang>	
+<lang>
 	<item name="msg_avail_install">
 		<value xml:lang="ko"><![CDATA[DB Table 생성을 해야 설치가 완료됩니다.]]></value>
 		<value xml:lang="en"><![CDATA[You have to create db table, if you want to finish to install this iteam]]></value>
-    </item>
+	</item>
 	<item name="msg_avail_update">
 		<value xml:lang="ko"><![CDATA[이 항목 업데이트가 가능합니다.]]></value>
 		<value xml:lang="en"><![CDATA[You can update this item.]]></value>
 		<value xml:lang="jp"><![CDATA[この項目のアップデートが可能です。]]></value>
 		<value xml:lang="zh-TW"><![CDATA[可更新此項目]]></value>
-    </item>
+	</item>
 	<item name="msg_avail_easy_update">
 		<value xml:lang="ko"><![CDATA[이 항목의 새로운 버전이 있습니다.]]></value>
 		<value xml:lang="en"><![CDATA[There is new version for this item.]]></value>
 		<value xml:lang="jp"><![CDATA[この項目の新しいバージョンがあります。]]></value>
 		<value xml:lang="zh-TW"><![CDATA[此項目有新版本]]></value>
-    </item>
+	</item>
 	<item name="msg_do_you_like_install">
 		<value xml:lang="ko"><![CDATA[생성하시겠습니까?]]></value>
 		<value xml:lang="en"><![CDATA[Would you like to create?]]></value>
@@ -936,7 +936,7 @@ Le module [Administration des Modules] montera tous les modules installés et vo
  Управление модулем покажет все установленные модули и поможет управлять ими.]]></value>
 		<value xml:lang="es"><![CDATA[XE consiste de módulos excepto la librería básica.
  Módulo del Manejo del Módulo muestra todos los módulos instalados y ayuda el manejo de ellos.]]></value>
-		<value xml:lang="tr"><![CDATA[XE, temel kitaplık dışında, modüllerden oluşmaktadır. 
+		<value xml:lang="tr"><![CDATA[XE, temel kitaplık dışında, modüllerden oluşmaktadır.
  [Modül Yönetimi] modülü, size kurulu tüm modülleri gösterecek ve onları yönetmenize yardımcı olacaktır.]]></value>
 		<value xml:lang="vi"><![CDATA[Khu vực Module trong XE ngoại trừ Library là tại [Module Manage]. Tất cả những Module đang có sẽ hiển thị, giúp bạn quản lý một cách dễ dàng.]]></value>
 	</item>

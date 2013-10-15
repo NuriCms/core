@@ -1,7 +1,7 @@
 
 .simpleTree
 {
-	
+
 	margin:0;
 	padding:0;
 	/*
@@ -34,7 +34,7 @@
 
 .simpleTree ul
 {
-	margin:0; 
+	margin:0;
 	padding:0;
 }
 .simpleTree .root
@@ -117,7 +117,7 @@
 .simpleTree .ajax li
 {
 	display:none;
-	margin:0; 
+	margin:0;
 	padding:0;
 }
 .simpleTree .trigger

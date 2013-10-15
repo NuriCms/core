@@ -1,10 +1,10 @@
 <query id="getSiteAdminMemberSrls" action="select">
-    <tables>
-        <table name="site_admin" />
-    </tables>
-    <columns>
-        <column name="member_srl" />
-    </columns>
+	<tables>
+		<table name="site_admin" />
+	</tables>
+	<columns>
+		<column name="member_srl" />
+	</columns>
 	<groups>
 		<group column="member_srl" />
 	</groups>

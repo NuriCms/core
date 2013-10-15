@@ -3,7 +3,8 @@
  * documentAdminView class
  * Document admin view of the module class
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/document
  * @version 0.1
  */
@@ -157,7 +158,7 @@ class documentAdminView extends document
 		}
 		else
 		{
-			$aliases = $output->data; 
+			$aliases = $output->data;
 		}
 
 		Context::set('aliases', $aliases);

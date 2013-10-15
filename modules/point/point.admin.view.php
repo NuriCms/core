@@ -1,7 +1,8 @@
 <?php
 /**
  * @class  pointAdminView
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @brief The admin view class of the point module
  */
 class pointAdminView extends point
@@ -67,7 +68,7 @@ class pointAdminView extends point
 
 		Context::set('module_config', $oModuleModel->getModulePartConfigs('point'));
 		//Security
-		$security = new Security();			
+		$security = new Security();
 		$security->encodeHTML('mid_list..browser_title','mid_list..mid');
 
 		// Set the template
@@ -101,7 +102,7 @@ class pointAdminView extends point
 
 		$columnList = array('member.member_srl', 'member.user_id', 'member.email_address', 'member.nick_name', 'point.point');
 		$output = $oPointModel->getMemberList($args, $columnList);
-		// context::set for writing into a template 
+		// context::set for writing into a template
 		Context::set('total_count', $output->total_count);
 		Context::set('total_page', $output->total_page);
 		Context::set('page', $output->page);
@@ -113,7 +114,7 @@ class pointAdminView extends point
 		$this->group_list = $oMemberModel->getGroups();
 		Context::set('group_list', $this->group_list);
 		//Security
-		$security = new Security();			
+		$security = new Security();
 		$security->encodeHTML('group_list..title','group_list..description');
 		$security->encodeHTML('member_list..');
 

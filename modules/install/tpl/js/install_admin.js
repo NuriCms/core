@@ -69,7 +69,7 @@ function completeInstallCheckFtpInfo(ret_obj) {
 }
 
 function completeFtpPath(ret_obj){
-   location.reload(); 
+   location.reload();
 }
 
 function getFTPList(pwd)
@@ -122,14 +122,14 @@ function completeGetFtpInfo(ret_obj)
         target = arr.join("/");
         list = list + "<li><a href='#ftpSetup' onclick=\"getFTPList('"+target+"')\">../</a></li>";
     }
-    
+
     for(var i=0;i<ret_obj['list']['item'].length;i++)
-    {   
+    {
         var v = ret_obj['list']['item'][i];
         if(v == "../")
         {
             continue;
-        } 
+        }
         else if( v == "./")
         {
             continue;

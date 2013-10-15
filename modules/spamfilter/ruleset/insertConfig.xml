@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ruleset version="1.5.0">
-    <fields>
+	<fields>
    		<field name="limits" required="true" />
  		<field name="check_trackback" required="true" />
 	</fields>

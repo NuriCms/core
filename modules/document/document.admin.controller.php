@@ -3,7 +3,8 @@
  * documentAdminController class
  * Document the module's admin controller class
  *
- * @author NHN (developers@xpressengine.com)
+ * @Original_author NHN
+ * @Adaptor NURI Project (developer@nuricms.org)
  * @package /modules/document
  * @version 0.1
  */
