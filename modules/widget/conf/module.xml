@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <module>
-<<<<<<< HEAD
 	<grants />
 	<permissions />
 	<actions>
@@ -8,11 +7,9 @@
 		<action name="dispWidgetGenerateCode" type="view" />
 		<action name="dispWidgetGenerateCodeInPage" type="view" />
 		<action name="dispWidgetStyleGenerateCodeInPage" type="view" />
-
 		<action name="dispWidgetAdminDownloadedList" type="view" admin_index="true" menu_name="installedWidget" menu_index="true" />
 		<action name="dispWidgetAdminAddContent" type="view" />
 		<action name="dispWidgetAdminGenerateCode" type="view" menu_name="installedWidget" />
-
 		<action name="procWidgetGenerateCode" type="controller" />
 		<action name="procWidgetStyleExtraImageUpload" type="controller" />
 		<action name="procWidgetStyleGenerateCodeInPage" type="controller" />
@@ -22,7 +19,6 @@
 		<action name="procWidgetDeleteDocument" type="controller" />
 		<action name="procWidgetGenerateCodeInPage" type="controller" ruleset="generateCodeInPage" />
 		<action name="procWidgetGetColorsetList" type="controller" />
-
 		<action name="procWidgetStyleExtraImageUpload" type="controller" />
 		<action name="procWidgetStyleGenerateCodeInPage" type="controller" />
 	</actions>

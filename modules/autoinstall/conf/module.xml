@@ -1,5 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <module>
+	<permissions>
+		<permission action="procAutoinstallAdminUninstallPackage" target="root" />
+		<permission action="procAutoinstallAdminUpdateinfo" target="root" />
+		<permission action="procAutoinstallAdminPackageinstall" target="root" />
+	</permissions>
 	<actions>
 		<action name="dispAutoinstallAdminInstall" type="view" menu_name="easyInstall" />
 		<action name="dispAutoinstallAdminUninstall" type="view" menu_name="easyInstall" />

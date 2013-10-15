@@ -1,7 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <module>
 	<grants />
 	<permissions>
+		<permission action="procMemberAdminInsert" target="root" />
+		<permission action="procMemberAdminInsert" target="root" />
+		<permission action="procMemberAdminDelete" target="root" />
+		<permission action="procMemberAdminInsertDefaultConfig" target="root" />
+		<permission action="procMemberAdminInsertSignupConfig" target="root" />
+		<permission action="procMemberAdminInsertLoginConfig" target="root" />
+		<permission action="procMemberAdminInsertDesignConfig" target="root" />
+		<permission action="procMemberAdminInsertGroup" target="root" />
+		<permission action="procMemberAdminUpdateGroup" target="root" />
+		<permission action="procMemberAdminDeleteGroup" target="root" />
+		<permission action="procMemberAdminUpdateMembersGroup" target="root" />
+		<permission action="procMemberAdminDeleteMembers" target="root" />
+		<permission action="procMemberAdminInsertJoinForm" target="root" />
+		<permission action="procMemberAdminUpdateJoinForm" target="root" />
+		<permission action="procMemberAdminDeleteJoinForm" target="root" />
+		<permission action="procMemberAdminUpdateDeniedNickName" target="root" />
+		<permission action="procMemberAdminInsertDeniedID" target="root" />
+		<permission action="procMemberAdminUpdateDeniedID" target="root" />
+		<permission action="procMemberAdminUpdateGroupOrder" target="root" />
+		<permission action="procMemberAdminSelectedMemberManage" target="root" />
+		<permission action="procMemberAdminGroupConfig" target="root" />
 		<permission action="getApiGroups" target="manager" />
 	</permissions>
 	<actions>
@@ -20,8 +41,7 @@
 		<action name="dispMemberGetTempPassword" type="view" />
 		<action name="dispMemberResendAuthMail" type="view" />
 		<action name="dispSavedDocumentList" type="view" />
-
-		<action name="dispMemberAdminList" type="view" index="true" admin_index="true" menu_name="userList" menu_index="true"/>
+		<action name="dispMemberAdminList" type="view" index="true" admin_index="true" menu_name="userList" menu_index="true" />
 		<action name="dispMemberAdminConfig" type="view" menu_name="userSetting" menu_index="true" />
 		<action name="dispMemberAdminSignUpConfig" type="view" menu_name="userSetting" />
 		<action name="dispMemberAdminLoginConfig" type="view" menu_name="userSetting" />
@@ -30,13 +50,11 @@
 		<action name="dispMemberAdminGroupList" type="view" menu_name="userGroup" menu_index="true" />
 		<action name="dispMemberAdminInfo" type="view" menu_name="userList" />
 		<action name="dispMemberAdminInsertJoinForm" type="view" />
-
 		<action name="getMemberMenu" type="model" />
 		<action name="getMemberAdminColorset" type="model" />
 		<action name="getMemberAdminInsertJoinForm" type="model" />
 		<action name="getMemberAdminIPCheck" type="model" />
 		<action name="getApiGroups" type="model" />
-
 		<action name="procMemberLogin" type="controller" ruleset="@login" />
 		<action name="procMemberLogout" type="controller" />
 		<action name="procMemberCheckValue" type="controller" />
@@ -54,12 +72,10 @@
 		<action name="procMemberDeleteImageMark" type="controller" />
 		<action name="procMemberSiteSignUp" type="controller" />
 		<action name="procMemberSiteLeave" type="controller" />
-
 		<action name="procMemberScrapDocument" type="controller" />
 		<action name="procMemberDeleteScrap" type="controller" />
 		<action name="procMemberSaveDocument" type="controller" />
 		<action name="procMemberDeleteSavedDocument" type="controller" />
-
 		<action name="procMemberFindAccount" type="controller" />
 		<action name="procMemberFindAccountByQuestion" type="controller" />
 		<action name="procMemberAuthAccount" type="controller" method="GET|POST" />
@@ -67,7 +83,6 @@
 		<action name="procMemberUpdateAuthMail" type="controller" />
 		<action name="procMemberResendAuthMail" type="controller" ruleset="resendAuthMail" />
 		<action name="procMemberResetAuthMail" type="controller" ruleset="resetAuthMail" />
-
 		<action name="procMemberAdminInsert" type="controller" ruleset="insertAdminMember" />
 		<action name="procMemberAdminDelete" type="controller" />
 		<action name="procMemberAdminInsertDefaultConfig" type="controller" ruleset="insertDefaultConfig" />
@@ -86,7 +101,6 @@
 		<action name="procMemberAdminInsertDeniedID" type="controller" ruleset="insertDeniedId" />
 		<action name="procMemberAdminUpdateDeniedID" type="controller" />
 		<action name="procMemberAdminUpdateGroupOrder" type="controller" />
-
 		<action name="procMemberAdminSelectedMemberManage" type="controller" ruleset="updateSeletecdMemberInfo" />
 		<action name="procMemberAdminGroupConfig" type="controller" />
 	</actions>

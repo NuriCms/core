@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
 	<grants />
-	<permissions />
+	<permissions>
+		<permission action="procMessageAdminInsertConfig" target="root" />
+	</permissions>
 	<actions>
 		<action name="dispMessage" type="view" index="true" />
 		<action name="dispMessageAdminConfig" type="view" admin_index="true" />

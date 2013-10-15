@@ -2,10 +2,14 @@
 <module>
 	<grants />
 	<permissions>
-		<permission action="procPageAdminRemoveWidgetCache" target="manager" />
-		<permission action="dispPageAdminContentModify" target="manager" />
-		<permission action="procPageAdminInsert" target="manager" />
-		<permission action="procPageAdminInsertContent" target="manager" />
+		<permission action="procPageAdminRemoveWidgetCache" target="root" />
+		<permission action="procPageAdminInsert" target="root" />
+		<permission action="procPageAdminUpdate" target="root" />
+		<permission action="procPageAdminInsertContent" target="root" />
+		<permission action="procPageAdminDelete" target="root" />
+		<permission action="procPageAdminInsertConfig" target="root" />
+		<permission action="procPageAdminAddContent" target="root" />
+		<permission action="procPageAdminArticleDocumentInsert" target="root" />
 	</permissions>
 	<actions>
 		<action name="dispPageIndex" type="view" index="true" />
@@ -20,7 +24,6 @@
 		<action name="dispPageAdminMobileContent" type="view" />
 		<action name="dispPageAdminSkinInfo" type="view" />
 		<action name="dispPageAdminMobileSkinInfo" type="view" />
-
 		<action name="procPageAdminRemoveWidgetCache" type="controller" />
 		<action name="procPageAdminInsert" type="controller" ruleset="insertPage" />
 		<action name="procPageAdminUpdate" type="controller" ruleset="updatePage" />

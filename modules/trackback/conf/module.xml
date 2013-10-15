@@ -1,13 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <module>
 	<grants />
-	<permissions />
+	<permissions>
+		<permission action="procTrackbackAdminDeleteChecked" target="root" />
+		<permission action="procTrackbackAdminInsertConfig" target="root" />
+		<permission action="procTrackbackAdminInsertModuleConfig" target="root" />
+	</permissions>
 	<actions>
 		<action name="dispTrackbackSend" type="view" />
 		<action name="dispTrackbackAdminList" type="view" admin_index="true" menu_name="trackback" menu_index="true" />
-
 		<action name="trackback" type="controller" />
-
 		<action name="procTrackbackSend" type="controller" ruleset="sendTrackback" />
 		<action name="procTrackbackGetList" type="controller" />
 		<action name="procTrackbackAdminDeleteChecked" type="controller" ruleset="deleteChecked" />

@@ -1,20 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <module>
 	<grants />
-		<permission action="getMenuAdminSiteMap" target="manager" />
-		<permission action="procMenuAdminUpdateAuth" target="manager" />
-	<permissions />
+	<permissions>
+		<permission action="procMenuAdminInsert" target="root" />
+		<permission action="procMenuAdminUpdate" target="root" />
+		<permission action="procMenuAdminDelete" target="root" />
+		<permission action="procMenuAdminInsertItem" target="root" />
+		<permission action="procMenuAdminUpdateItem" target="root" />
+		<permission action="procMenuAdminButtonUpload" target="root" />
+		<permission action="procMenuAdminInsertItemForAdminMenu" target="root" />
+		<permission action="procMenuAdminDeleteItem" target="root" />
+		<permission action="procMenuAdminMakeXmlFile" target="root" />
+		<permission action="procMenuAdminMoveItem" target="root" />
+		<permission action="procMenuAdminCopyItem" target="root" />
+		<permission action="procMenuAdminArrangeItem" target="root" />
+		<permission action="procMenuAdminUploadButton" target="root" />
+		<permission action="procMenuAdminDeleteButton" target="root" />
+		<permission action="procMenuAdminAllActList" target="root" />
+		<permission action="procMenuAdminUpdateAuth" target="root" />
+	</permissions>
 	<actions>
 		<action name="dispMenuAdminMidList" type="view" />
 		<action name="dispMenuAdminSiteMap" type="view" admin_index="true" menu_name="siteMap" menu_index="true" />
 		<action name="dispMenuAdminSiteDesign" type="view" menu_name="siteDesign" menu_index="true" />
-
 		<action name="getMenuAdminTplInfo" type="model" />
 		<action name="getMenuAdminItemInfo" type="model" />
 		<action name="getMenuAdminSiteMap" type="model" />
 		<action name="getMenuAdminInstalledMenuType" type="model" />
 		<action name="getMenuAdminDetailSetup" type="model" />
-
 		<action name="procMenuAdminInsert" type="controller" ruleset="insertMenu" />
 		<action name="procMenuAdminUpdate" type="controller" ruleset="updateMenuTitle" />
 		<action name="procMenuAdminDelete" type="controller" />
@@ -27,12 +40,10 @@
 		<action name="procMenuAdminMoveItem" type="controller" />
 		<action name="procMenuAdminCopyItem" type="controller" />
 		<action name="procMenuAdminArrangeItem" type="controller" />
-
 		<action name="procMenuAdminUploadButton" type="controller" />
 		<action name="procMenuAdminDeleteButton" type="controller" />
 		<action name="procMenuAdminAllActList" type="controller" />
 		<action name="procMenuAdminUpdateAuth" type="controller" />
-
 		<action name="dispMenuMenu" type="mobile" />
 	</actions>
 	<menus>

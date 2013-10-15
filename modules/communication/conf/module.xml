@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
 	<grants />
-	<permissions />
+	<permissions>
+		<permission action="procCommunicationAdminInsertConfig" target="root" />
+	</permissions>
 	<actions>
 		<action name="dispCommunicationMessages" type="view" />
 		<action name="dispCommunicationSendMessage" type="view" />
 		<action name="dispCommunicationNewMessage" type="view" />
-
 		<action name="dispCommunicationFriend" type="view" />
 		<action name="dispCommunicationAddFriend" type="view" />
 		<action name="dispCommunicationAddFriendGroup" type="view" />
 		<action name="dispCommunicationMessageBoxList" type="mobile" />
-
 		<action name="procCommunicationUpdateAllowMessage" type="controller" />
 		<action name="procCommunicationSendMessage" type="controller" ruleset="sendMessage" />
 		<action name="procCommunicationStoreMessage" type="controller" />
 		<action name="procCommunicationDeleteMessage" type="controller" />
 		<action name="procCommunicationDeleteMessages" type="controller" />
-
 		<action name="procCommunicationAddFriend" type="controller" ruleset="addFriend" />
 		<action name="procCommunicationMoveFriend" type="controller" ruleset="deleteCheckedFriend" />
 		<action name="procCommunicationDeleteFriend" type="controller" ruleset="deleteCheckedFriend" />
-
 		<action name="procCommunicationAddFriendGroup" type="controller" ruleset="addFriendGroup" />
 		<action name="procCommunicationRenameFriendGroup" type="controller" />
 		<action name="procCommunicationDeleteFriendGroup" type="controller" />
-
 		<action name="getCommunicationAdminColorset" type="model" />
 		<action name="procCommunicationAdminInsertConfig" type="controller" ruleset="insertConfig" />
 		<action name="dispCommunicationAdminConfig" type="view" admin_index="true" />

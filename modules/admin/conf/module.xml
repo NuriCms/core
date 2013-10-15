@@ -1,13 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <module>
 	<grants />
-	<permissions />
+	<permissions>
+		<permission action="procAdminRemoveIcons" target="root" />
+		<permission action="procAdminInsertDefaultDesignInfo" target="root" />
+		<permission action="procAdminEnviromentGatheringAgreement" target="root" />
+		<permission action="procAdminUpdateConfig" target="root" />
+		<permission action="procAdminDeleteLogo" target="root" />
+		<permission action="procAdminMenuReset" target="root" />
+	</permissions>
 	<actions>
 		<action name="dispAdminIndex" type="view" index="true" />
 		<action name="dispAdminConfigGeneral" type="view" menu_name="adminConfigurationGeneral" menu_index="true" />
 		<action name="dispAdminConfigFtp" type="view" menu_name="adminConfigurationFtp" menu_index="true" />
 		<action name="dispAdminSetup" type="view" menu_name="adminMenuSetup" menu_index="true" />
-
 		<action name="procAdminRemoveIcons" type="controller" />
 		<action name="procAdminRecompileCacheFile" type="controller" />
 		<action name="procAdminLogout" type="controller" method="GET|POST" />
@@ -17,7 +23,6 @@
 		<action name="procAdminUpdateConfig" type="controller" />
 		<action name="procAdminDeleteLogo" type="controller" />
 		<action name="procAdminMenuReset" type="controller" />
-
 		<action name="getAdminFTPList" type="model" />
 		<action name="getAdminFTPPath" type="model" />
 		<action name="getSiteAllList" type="model" />
