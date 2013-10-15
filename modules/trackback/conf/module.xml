@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <module>
-    <grants />
-    <permissions />
-    <actions>
-        <action name="dispTrackbackSend" type="view" />
-        <action name="dispTrackbackAdminList" type="view" admin_index="true" menu_name="trackback" menu_index="true" />
-
-        <action name="trackback" type="controller" />
-
-        <action name="procTrackbackSend" type="controller" ruleset="sendTrackback" />
-        <action name="procTrackbackGetList" type="controller" />
-        <action name="procTrackbackAdminDeleteChecked" type="controller" ruleset="deleteChecked" />
-        <action name="procTrackbackAdminInsertConfig" type="controller" />
-        <action name="procTrackbackAdminInsertModuleConfig" type="controller" />
-        <action name="procTrackbackAdminAddCart" type="controller" />
-    </actions>
+	<grants />
+	<permissions>
+		<permission action="procTrackbackAdminDeleteChecked" target="root" />
+		<permission action="procTrackbackAdminInsertConfig" target="root" />
+		<permission action="procTrackbackAdminInsertModuleConfig" target="root" />
+	</permissions>
+	<actions>
+		<action name="dispTrackbackSend" type="view" />
+		<action name="dispTrackbackAdminList" type="view" admin_index="true" menu_name="trackback" menu_index="true" />
+		<action name="trackback" type="controller" />
+		<action name="procTrackbackSend" type="controller" ruleset="sendTrackback" />
+		<action name="procTrackbackGetList" type="controller" />
+		<action name="procTrackbackAdminDeleteChecked" type="controller" ruleset="deleteChecked" />
+		<action name="procTrackbackAdminInsertConfig" type="controller" />
+		<action name="procTrackbackAdminInsertModuleConfig" type="controller" />
+		<action name="procTrackbackAdminAddCart" type="controller" />
+	</actions>
 	<menus>
 		<menu name="trackback">
 			<title xml:lang="en">Trackback</title>

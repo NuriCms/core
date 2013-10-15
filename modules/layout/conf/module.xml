@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <module>
-    <grants />
-    <permissions />
-    <actions>
-        <action name="dispLayoutInfo" type="view" />
-        <action name="dispLayoutAdminContent" type="view" />
-        <action name="dispLayoutAdminInfo" type="view" />
-        <action name="dispLayoutAdminLayoutModify" type="view" />
-        <action name="dispLayoutAdminLayoutImageList" type="view" />
+	<grants />
+	<permissions>
+		<permission action="procLayoutAdminUpdate" target="root" />
+		<permission action="procLayoutAdminCodeUpdate" target="root" />
+		<permission action="procLayoutAdminUserImageUpload" target="root" />
+		<permission action="procLayoutAdminUserImageDelete" target="root" />
+		<permission action="procLayoutAdminConfigImageUpload" target="root" />
+		<permission action="procLayoutAdminConfigImageDelete" target="root" />
+		<permission action="procLayoutAdminDelete" target="root" />
+		<permission action="procLayoutAdminInsert" target="root" />
+		<permission action="procLayoutAdminCodeReset" target="root" />
+		<permission action="procLayoutAdminUserValueInsert" target="root" />
+		<permission action="procLayoutAdminUserLayoutExport" target="root" />
+		<permission action="procLayoutAdminUserLayoutImport" target="root" />
+		<permission action="procLayoutAdminCopyLayout" target="root" />
+	</permissions>
+	<actions>
+		<action name="dispLayoutInfo" type="view" />
+		<action name="dispLayoutAdminContent" type="view" />
+		<action name="dispLayoutAdminInfo" type="view" />
+		<action name="dispLayoutAdminLayoutModify" type="view" />
+		<action name="dispLayoutAdminLayoutImageList" type="view" />
 		<action name="dispLayoutAdminMobileContent" type="view" />
-
 		<action name="dispLayoutAdminInstalledList" type="view" admin_index="true" menu_name="installedLayout" menu_index="true" />
 		<action name="dispLayoutAdminInstanceList" type="view" menu_name="installedLayout" />
 		<action name="dispLayoutAdminAllInstanceList" type="view" menu_name="installedLayout" />
@@ -17,14 +30,11 @@
 		<action name="dispLayoutAdminModify" type="view" menu_name="installedLayout" />
 		<action name="dispLayoutAdminEdit" type="view" menu_name="installedLayout" />
 		<action name="dispLayoutAdminCopyLayout" type="view" />
-
 		<action name="getLayoutAdminSetInfoView" type="model" />
 		<action name="getLayoutAdminSetHTMLCSS" type="model" />
 		<action name="getLayoutAdminSiteDefaultLayout" type="model" />
-
 		<action name="dispLayoutPreview" type="view" />
 		<action name="dispLayoutPreviewWithModule" type="view" />
-
 		<action name="procLayoutAdminUpdate" type="controller" ruleset="updateLayout" />
 		<action name="procLayoutAdminCodeUpdate" type="controller" ruleset="codeUpdate" />
 		<action name="procLayoutAdminUserImageUpload" type="controller" ruleset="imageUpload" />
@@ -32,19 +42,14 @@
 		<action name="procLayoutAdminConfigImageUpload" type="controller" />
 		<action name="procLayoutAdminConfigImageDelete" type="controller" />
 		<action name="procLayoutAdminDelete" type="controller" ruleset="deleteLayout" />
-
-        <action name="procLayoutAdminInsert" type="controller" ruleset="insertLayout" />
-
-        <action name="procLayoutAdminCodeReset" type="controller" />
-
-        <action name="procLayoutAdminUserValueInsert" type="controller" />
-        <action name="procLayoutAdminUserLayoutExport" type="controller" />
-        <action name="procLayoutAdminUserLayoutImport" type="controller" ruleset="userLayoutImport" />
-        <action name="procLayoutAdminCopyLayout" type="controller" />
-
+		<action name="procLayoutAdminInsert" type="controller" ruleset="insertLayout" />
+		<action name="procLayoutAdminCodeReset" type="controller" />
+		<action name="procLayoutAdminUserValueInsert" type="controller" />
+		<action name="procLayoutAdminUserLayoutExport" type="controller" />
+		<action name="procLayoutAdminUserLayoutImport" type="controller" ruleset="userLayoutImport" />
+		<action name="procLayoutAdminCopyLayout" type="controller" />
 		<action name="getLayoutInstanceListForJSONP" type="model" />
-
-    </actions>
+	</actions>
 	<menus>
 		<menu name="installedLayout">
 			<title xml:lang="en">Layouts</title>

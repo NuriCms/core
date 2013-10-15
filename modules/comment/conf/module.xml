@@ -2,7 +2,11 @@
 <module>
 	<grants />
 	<permissions>
-		<permission action="procCommentAdminAddCart" target="manager" />
+		<permission action="procCommentAdminDeleteChecked" target="root" />
+		<permission action="procCommentAdminChangeStatus" target="root" />
+		<permission action="procCommentAdminChangePublishedStatusChecked" target="root" />
+		<permission action="procCommentAdminCancelDeclare" target="root" />
+		<permission action="procCommentAdminAddCart" target="root" />
 		<permission action="procCommentGetList" target="manager" />
 	</permissions>
 	<actions>
@@ -15,7 +19,7 @@
 		<action name="getCommentVotedMemberList" type="model" />
 		<action name="procCommentInsertModuleConfig" type="controller" ruleset="insertCommentModuleConfig" />
 		<action name="procCommentAdminDeleteChecked" type="controller" ruleset="deleteChecked" />
-		<action name="procCommentAdminChangeStatus" type="controller"/>
+		<action name="procCommentAdminChangeStatus" type="controller" />
 		<action name="procCommentAdminChangePublishedStatusChecked" type="controller" />
 		<action name="isModuleUsingPublishValidation" type="controller" />
 		<action name="procCommentAdminCancelDeclare" type="controller" />
