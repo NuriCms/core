@@ -12,7 +12,6 @@
 		<permission action="procDocumentAdminInsertConfig" target="root" />
 		<permission action="procDocumentAdminDeleteAllThumbnail" target="root" />
 		<permission action="procDocumentAdminCancelDeclare" target="root" />
-		<permission action="dispDocumentAdminList" target="manager" />
 		<permission action="dispDocumentManageDocument" target="member" />
 		<permission action="getDocumentCategories" target="member" />
 		<permission action="getDocumentCategoryTplInfo" target="member" />
