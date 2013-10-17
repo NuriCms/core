@@ -184,12 +184,9 @@ class ModuleObject extends Object
 		// get permission types(guest, member, manager, root) of the currently requested action
 		$permission_target = $xml_info->permission->{$this->act};
 		// check CSRF If a root permission in module.xml
-		if($permission_target == 'root')
+		if($permission_target == 'root' && !checkCSRF())
 		{
-			if(!checkCSRF())
-			{
-				return $this->stop('msg_invalid_request');
-			}
+			return $this->stop('msg_invalid_request');
 		}
 
 		// checks permission and action if you don't have an admin privilege
