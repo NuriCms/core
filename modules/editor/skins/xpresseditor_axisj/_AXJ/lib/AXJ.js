@@ -1261,7 +1261,7 @@ var AXMask = Class.create(AXJ, {
 		this.blinkTrack = [];
 	},
 	init: function () {
-		this.mask = $("<div class=\"" + this.config.maskClassName + "\" style=\"z_index:" + this.config.maskZindex + "\"></div>");
+		this.mask = jQuery("<div class=\"" + this.config.maskClassName + "\" style=\"z_index:" + this.config.maskZindex + "\"></div>");
 	},
 	open: function (val) {
 		$(document.body).append(this.mask);
@@ -1333,9 +1333,9 @@ var AXNotification = Class.create(AXJ, {
 	init: function () {
 		var config = this.config;
 		if (config.type == "toast") {
-			this.toastTray = $("<div class=\"AXNotificationTray\" id=\"" + config.targetID + "\"></div>");
+			this.toastTray = jQuery("<div class=\"AXNotificationTray\" id=\"" + config.targetID + "\"></div>");
 		} else if (config.type == "dialog") {
-			this.dialogTray = $("<div class=\"AXNotificationTrayDialog\" id=\"" + config.targetID + "\"></div>");
+			this.dialogTray = jQuery("<div class=\"AXNotificationTrayDialog\" id=\"" + config.targetID + "\"></div>");
 			//dialog type display center;
 		}
 	},
@@ -1411,11 +1411,11 @@ var AXNotification = Class.create(AXJ, {
 		}
 
 		if (config.type == "toast") {
-			if (!$M(config.targetID)) $(document.body).append(this.toastTray);
+			if (!$M(config.targetID)) jQuery(document.body).append(this.toastTray);
 			this.bread.push({ breadID: breadID, type: obj.type, html: po.join('').enc() });
 			this.insertBread();
 		} else if (config.type == "dialog") {
-			if (!$M(config.targetID)) $(document.body).append(this.dialogTray);
+			if (!$M(config.targetID)) jQuery(document.body).append(this.dialogTray);
 			this.dialogTray.prepend(po.join(''));
 
 			mask.open();
@@ -3195,7 +3195,7 @@ jQuery.fn.extend({
 	}
 });
 
-$(document.body).ready(function(){
+jQuery(document.body).ready(function(){
 	$("input[type=text]").bind("mousedown", function(){this.focus();});
 	$("textarea").bind("mousedown", function(){this.focus();});
 });

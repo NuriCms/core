@@ -9,6 +9,7 @@ var loaded_images    = [];
 var swfUploadObjs    = [];
 var uploadSettingObj = [];
 var uploadAutosaveChecker = false;
+var $ = jQuery.noConflict();
 
 // NuriCms: AXUpload5의 추가 객체생성
 var AXUpload5forNuri = Class.create(AXUpload5, {

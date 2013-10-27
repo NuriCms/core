@@ -421,7 +421,7 @@ if(jQuery) jQuery.noConflict();
 jQuery(function($) {
 
 	/* select - option의 disabled=disabled 속성을 IE에서도 체크하기 위한 함수 */
-	if($.browser.msie) {
+	if(navigator.appName == 'Microsoft Internet Explorer') {
 		$('select').each(function(i, sels) {
 			var disabled_exists = false;
 			var first_enable = new Array();
