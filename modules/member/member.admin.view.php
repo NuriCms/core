@@ -191,7 +191,14 @@ class memberAdminView extends member
 		// get denied NickName List
 		$deniedNickNames = $oMemberModel->getDeniedNickNames();
 		Context::set('deniedNickNames', $deniedNickNames);
-			$oSecurity->encodeHTML('deniedNickNames..nick_name');
+		$oSecurity->encodeHTML('deniedNickNames..nick_name');
+
+
+		//get managed Email Hosts
+		$managedEmailHost = $oMemberModel->getManagedEmailHosts();
+		Context::set('managedEmailHost', $managedEmailHost);
+		$oSecurity->encodeHTML('managedEmailHost..email_host');
+
 		$this->setTemplateFile('signup_config');
 	}
 

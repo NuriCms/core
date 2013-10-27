@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
 	<grants />
-	<permissions />
+	<permissions>
+		<permission action="procImporterAdminImport" tareget="root" />
+		<permission action="procImporterAdminPreProcessing" tareget="root" />
+		<permission action="procImporterAdminSync" tareget="root" />
+		<permission action="procImporterAdminMemberImport" tareget="root" />
+		<permission action="procImporterAdminMessageImport" tareget="root" />
+		<permission action="procImporterAdminModuleImport" tareget="root" />
+		<permission action="procImporterAdminTTXMLImport" tareget="root" />
+		<permission action="procImporterAdminCheckXmlFile" tareget="root" />
+	</permissions>
 	<actions>
-		<action name="dispImporterAdminImportForm" type="view" standalone="true" admin_index="true" menu_name="importer" menu_index="true" />
-
-		<action name="procImporterAdminImport" type="controller" standalone="true" />
-		<action name="procImporterAdminPreProcessing" type="controller" standalone="true" />
-
-		<action name="procImporterAdminSync" type="controller" standalone="true" />
-		<action name="procImporterAdminMemberImport" type="controller" standalone="true" />
-		<action name="procImporterAdminMessageImport" type="controller" standalone="true" />
-		<action name="procImporterAdminModuleImport" type="controller" standalone="true" />
-		<action name="procImporterAdminTTXMLImport" type="controller" standalone="true" />
-		<action name="procImporterAdminCheckXmlFile" type="controller" standalone="true" />
+		<action name="dispImporterAdminImportForm" type="view" admin_index="true" menu_name="importer" menu_index="true" />
+		<action name="procImporterAdminImport" type="controller" />
+		<action name="procImporterAdminPreProcessing" type="controller" />
+		<action name="procImporterAdminSync" type="controller" />
+		<action name="procImporterAdminMemberImport" type="controller" />
+		<action name="procImporterAdminMessageImport" type="controller" />
+		<action name="procImporterAdminModuleImport" type="controller" />
+		<action name="procImporterAdminTTXMLImport" type="controller" />
+		<action name="procImporterAdminCheckXmlFile" type="controller" />
 	</actions>
 	<menus>
 		<menu name="importer">

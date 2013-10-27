@@ -7,8 +7,8 @@
 
 /* 휴지통 비우기 후 */
 function completeEmptyTrash(ret_obj) {
-    var error = ret_obj['error'];
-    var message = ret_obj['message'];
+	var error = ret_obj['error'];
+	var message = ret_obj['message'];
 
 	alert(message);
 	if(error == '0') window.location.reload();
@@ -25,8 +25,8 @@ function goRestore(trash_srl)
 
 function completeRestore(ret_obj)
 {
-    var error = ret_obj['error'];
-    var message = ret_obj['message'];
+	var error = ret_obj['error'];
+	var message = ret_obj['message'];
 
 	alert(message);
 	if(error == '0') window.location.reload();
@@ -40,11 +40,11 @@ function getTrashList()
 		if(this.checked) cartList.push(this.value);
 	});
 
-    var params = new Array();
-    var response_tags = ['error','message', 'trash_list'];
+	var params = new Array();
+	var response_tags = ['error','message', 'trash_list'];
 	params["trash_srls"] = cartList.join(",");
 
-    exec_xml('trash','procTrashAdminGetList',params, completeGetTrashList, response_tags);
+	exec_xml('trash','procTrashAdminGetList',params, completeGetTrashList, response_tags);
 }
 
 function completeGetTrashList(ret_obj, response_tags)

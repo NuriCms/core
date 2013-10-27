@@ -5,10 +5,10 @@
 <!--%load_js_plugin("ui.datepicker")-->
 
 <script>
-    function moveDate() {
+	function moveDate() {
 		document.forms['calendar'].submit();
-        return true;
-    }
+		return true;
+	}
 </script>
 
 <div class="x_page-header">
@@ -16,9 +16,9 @@
 </div>
 
 <form action="./index.php" method="get" name="calendar" id="fo_calendar" style="margin-bottom:30px">
-    <input type="hidden" name="module" value="{$module}" />
-    <input type="hidden" name="act" value="{$act}" />
-    <input type="hidden" name="selected_date" id="selected_date" value="{zDate('Ymd',$selected_date)}" />
+	<input type="hidden" name="module" value="{$module}" />
+	<input type="hidden" name="act" value="{$act}" />
+	<input type="hidden" name="selected_date" id="selected_date" value="{zDate('Ymd',$selected_date)}" />
 
 	<table class="x_table x_table-striped x_table-hover">
 		<thead>
@@ -30,7 +30,9 @@
 					<script>
 					(function($){
 						$(function(){
-							var option = {
+							var option = $.datepicker.regional['{Context::getLangType(TRUE)}'];
+
+							$.extend(option,{
 								changeMonth: true
 								,changeYear: true
 								,gotoCurrent: false
@@ -45,9 +47,7 @@
 									$("#selected_date").val(this.value.replace(/-/g,''));
 									moveDate();
 								}
-							};
-
-							$.extend(option,$.datepicker.regional['{$lang_type}']);
+							});
 							$(".inputDate").datepicker(option);
 						});
 					})(jQuery);

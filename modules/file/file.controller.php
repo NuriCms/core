@@ -713,6 +713,15 @@ class fileController extends file
 		$output->add('source_filename', $args->source_filename);
 		$output->add('upload_target_srl', $upload_target_srl);
 		$output->add('uploaded_filename', $args->uploaded_filename);
+
+		$this->add('file_srl', $args->file_srl);
+		$this->add('file_size', $args->file_size);
+		$this->add('sid', $args->sid);
+		$this->add('direct_download', $args->direct_download);
+		$this->add('source_filename', $args->source_filename);
+		$this->add('upload_target_srl', $upload_target_srl);
+		$this->add('uploaded_filename', $args->uploaded_filename);
+
 		return $output;
 	}
 
