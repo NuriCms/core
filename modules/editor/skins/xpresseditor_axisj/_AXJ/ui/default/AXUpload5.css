@@ -134,4 +134,6 @@ x.AXUpload5{
 		line-height:2000px;overflow:hidden;
 	}
 
-.AXlogo {float:right;margin-top:-5px;padding-right:5px;}
+.AXlogo {
+	float:right;margin-top:-5px;padding-right:5px;
+}
