@@ -180,11 +180,18 @@ class ModuleObject extends Object
 		}
 		// display no permission if the current module doesn't have an access privilege
 		//if(!$grant->access) return $this->stop("msg_not_permitted");
+
+		// get permission types(guest, member, manager, root) of the currently requested action
+		$permission_target = $xml_info->permission->{$this->act};
+		// check CSRF If a root permission in module.xml
+		if($permission_target == 'root' && !checkCSRF())
+		{
+			return $this->stop('msg_invalid_request');
+		}
+
 		// checks permission and action if you don't have an admin privilege
 		if(!$grant->manager)
 		{
-			// get permission types(guest, member, manager, root) of the currently requested action
-			$permission_target = $xml_info->permission->{$this->act};
 			// check manager if a permission in module.xml otherwise action if no permission
 			if(!$permission_target && substr_count($this->act, 'Admin'))
 			{
@@ -194,6 +201,8 @@ class ModuleObject extends Object
 			switch($permission_target)
 			{
 				case 'root' :
+					$this->stop('msg_is_not_administrator');
+					return;
 				case 'manager' :
 					$this->stop('msg_is_not_administrator');
 					return;
@@ -203,7 +212,7 @@ class ModuleObject extends Object
 						$this->stop('msg_not_permitted_act');
 						return;
 					}
-					break;
+				break;
 			}
 		}
 		// permission variable settings
@@ -391,7 +400,7 @@ class ModuleObject extends Object
 		$called_position = 'before_module_proc';
 		$oAddonController = getController('addon');
 		$addon_file = $oAddonController->getCacheFilePath(Mobile::isFromMobilePhone() ? "mobile" : "pc");
-		@include($addon_file);
+		if(is_readable($addon_file)) include($addon_file);
 
 		if(isset($this->xml_info->action->{$this->act}) && method_exists($this, $this->act))
 		{
@@ -450,7 +459,7 @@ class ModuleObject extends Object
 		$called_position = 'after_module_proc';
 		$oAddonController = getController('addon');
 		$addon_file = $oAddonController->getCacheFilePath(Mobile::isFromMobilePhone() ? "mobile" : "pc");
-		@include($addon_file);
+		if(is_readable($addon_file)) include($addon_file);
 
 		if(is_a($output, 'Object') || is_subclass_of($output, 'Object'))
 		{

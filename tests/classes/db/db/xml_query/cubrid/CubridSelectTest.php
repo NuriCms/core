@@ -2,8 +2,8 @@
 
 	class CubridSelectTest extends CubridTest {
 
-                function _test($xml_file, $argsString, $expected, $columnList = null){
-                    $this->_testQuery($xml_file, $argsString, $expected, 'getSelectSql', $columnList);
+				function _test($xml_file, $argsString, $expected, $columnList = null){
+					$this->_testQuery($xml_file, $argsString, $expected, 'getSelectSql', $columnList);
 		}
 
 		function testSelectStar(){
@@ -141,7 +141,7 @@
 		function test_syndication_getGrantedModules(){
 			$xml_file = _TEST_PATH_ . "db/xml_query/cubrid/data/syndication.getGrantedModules.xml";
 			$argsString = '$args->module_srl = 12;
-                                       $args->name = array(\'access\',\'view\',\'list\');';
+									   $args->name = array(\'access\',\'view\',\'list\');';
 			$expected = 'select "module_srl"
 						 from "xe_module_grants" as "module_grants"
 						 where "name" in (\'access\',\'view\',\'list\')
@@ -152,254 +152,254 @@
 			$this->_test($xml_file, $argsString, $expected);
 		}
 
-                function test_document_getDocumentList(){
-                    $xml_file = _XE_PATH_ . "modules/document/queries/getDocumentList.xml";
-                    $argsString = '$args->sort_index = \'list_order\';
-                                    $args->order_type = \'asc\';
-                                    $args->page = 1;
-                                    $args->list_count = 30;
-                                    $args->page_count = 10;
-                                    $args->s_member_srl = 4;';
-                    $expected = 'select *
-                                    from "xe_documents" as "documents"
-                                    where ("member_srl" = 4)
-                                        and "list_order" <= 2100000000
-                                    order by "list_order" asc
-                                    limit 0, 30';
-                    $this->_test($xml_file, $argsString, $expected);
+				function test_document_getDocumentList(){
+					$xml_file = _XE_PATH_ . "modules/document/queries/getDocumentList.xml";
+					$argsString = '$args->sort_index = \'list_order\';
+									$args->order_type = \'asc\';
+									$args->page = 1;
+									$args->list_count = 30;
+									$args->page_count = 10;
+									$args->s_member_srl = 4;';
+					$expected = 'select *
+									from "xe_documents" as "documents"
+									where ("member_srl" = 4)
+										and "list_order" <= 2100000000
+									order by "list_order" asc
+									limit 0, 30';
+					$this->_test($xml_file, $argsString, $expected);
 
 
-                }
+				}
 
-                /**
-                 * Test column list
-                 */
-                function test_session_getSession(){
-                    $xml_file = _XE_PATH_ . "modules/session/queries/getSession.xml";
-                    $argsString = '$args->session_key = \'session_key\';';
-                    $columnList = array('session_key', 'cur_mid', 'val');
+				/**
+				 * Test column list
+				 */
+				function test_session_getSession(){
+					$xml_file = _XE_PATH_ . "modules/session/queries/getSession.xml";
+					$argsString = '$args->session_key = \'session_key\';';
+					$columnList = array('session_key', 'cur_mid', 'val');
 
-                    $expected = 'select "session_key", "cur_mid", "val"
-                                 from "xe_session" as "session"
-                                 where "session_key" = \'session_key\'';
+					$expected = 'select "session_key", "cur_mid", "val"
+								 from "xe_session" as "session"
+								 where "session_key" = \'session_key\'';
 
-                    $this->_test($xml_file, $argsString, $expected, $columnList);
-                }
+					$this->_test($xml_file, $argsString, $expected, $columnList);
+				}
 
-                function test_module_getModuleInfoByDocument(){
-                    $xml_file = _XE_PATH_ . "modules/module/queries/getModuleInfoByDocument.xml";
-                    $argsString = '$args->document_srl = 10;';
-                    $expected = 'SELECT "modules".*
-                        FROM "xe_modules" as "modules"
-                                , "xe_documents" as "documents"
-                        WHERE  "documents"."document_srl" = 10
-                                and "modules"."module_srl" = "documents"."module_srl"';
-                    $this->_test($xml_file, $argsString, $expected);
-                }
+				function test_module_getModuleInfoByDocument(){
+					$xml_file = _XE_PATH_ . "modules/module/queries/getModuleInfoByDocument.xml";
+					$argsString = '$args->document_srl = 10;';
+					$expected = 'SELECT "modules".*
+						FROM "xe_modules" as "modules"
+								, "xe_documents" as "documents"
+						WHERE  "documents"."document_srl" = 10
+								and "modules"."module_srl" = "documents"."module_srl"';
+					$this->_test($xml_file, $argsString, $expected);
+				}
 
-                function test_member_getMemberList(){
-                    $xml_file = _XE_PATH_ . "modules/member/queries/getMemberList.xml";
-                    $argsString = '$args->is_admin = \'\';
-                                    $args->is_denied = \'\';
-                                    $args->sort_index = "list_order";
-                                    $args->sort_order = \'asc\';
-                                    $args->list_count = 40;
-                                    $args->page_count = 10;';
-                    $expected = 'select *
-                                    from "xe_member" as "member"
-                                    where "list_order" <= 2100000000
-                                 order by "list_order" asc
-                                 limit 0, 40';
-                    $this->_test($xml_file, $argsString, $expected);
-                }
+				function test_member_getMemberList(){
+					$xml_file = _XE_PATH_ . "modules/member/queries/getMemberList.xml";
+					$argsString = '$args->is_admin = \'\';
+									$args->is_denied = \'\';
+									$args->sort_index = "list_order";
+									$args->sort_order = \'asc\';
+									$args->list_count = 40;
+									$args->page_count = 10;';
+					$expected = 'select *
+									from "xe_member" as "member"
+									where "list_order" <= 2100000000
+								 order by "list_order" asc
+								 limit 0, 40';
+					$this->_test($xml_file, $argsString, $expected);
+				}
 
-                /**
-                 * Tests "not in" query condition
-                 * Query argument is a single value - not in (12)
-                 */
-                function test_module_getModules_Notin_Single_Value(){
-                    $xml_file = _TEST_PATH_ . "db/xml_query/cubrid/data/syndication.getModules.xml";
-                    $argsString = '$args->except_module_srls = 12;';
-                    $expected = 'select "modules"."site_srl" as "site_srl"
-                                    , "modules"."module_srl" as "module_srl"
-                                    , "sites"."domain" as "domain"
-                                    , "modules"."mid" as "mid"
-                                    , "modules"."module" as "module"
-                                    , "modules"."browser_title" as "browser_title"
-                                    , "modules"."description" as "description"
-                                from "xe_sites" as "sites"
-                                    , "xe_modules" as "modules"
-                                        left join "xe_syndication_except_modules" as "except_modules"
-                                            on "modules"."module_srl" = "except_modules"."module_srl"
-                                where "modules"."module_srl" not in (12)
-                                    and "sites"."site_srl" = "modules"."site_srl"
-                                    and "except_modules"."module_srl" is null';
-                    $this->_test($xml_file, $argsString, $expected);
-                }
+				/**
+				 * Tests "not in" query condition
+				 * Query argument is a single value - not in (12)
+				 */
+				function test_module_getModules_Notin_Single_Value(){
+					$xml_file = _TEST_PATH_ . "db/xml_query/cubrid/data/syndication.getModules.xml";
+					$argsString = '$args->except_module_srls = 12;';
+					$expected = 'select "modules"."site_srl" as "site_srl"
+									, "modules"."module_srl" as "module_srl"
+									, "sites"."domain" as "domain"
+									, "modules"."mid" as "mid"
+									, "modules"."module" as "module"
+									, "modules"."browser_title" as "browser_title"
+									, "modules"."description" as "description"
+								from "xe_sites" as "sites"
+									, "xe_modules" as "modules"
+										left join "xe_syndication_except_modules" as "except_modules"
+											on "modules"."module_srl" = "except_modules"."module_srl"
+								where "modules"."module_srl" not in (12)
+									and "sites"."site_srl" = "modules"."site_srl"
+									and "except_modules"."module_srl" is null';
+					$this->_test($xml_file, $argsString, $expected);
+				}
 
-                function test_module_getModules_Notin_Multiple_Value_String(){
-                    $xml_file = _TEST_PATH_ . "db/xml_query/cubrid/data/syndication.getModules.xml";
-                    $argsString = '$args->except_module_srls = "12, 13, 14";';
-                    $expected = 'select "modules"."site_srl" as "site_srl"
-                                    , "modules"."module_srl" as "module_srl"
-                                    , "sites"."domain" as "domain"
-                                    , "modules"."mid" as "mid"
-                                    , "modules"."module" as "module"
-                                    , "modules"."browser_title" as "browser_title"
-                                    , "modules"."description" as "description"
-                                from "xe_sites" as "sites"
-                                    , "xe_modules" as "modules"
-                                        left join "xe_syndication_except_modules" as "except_modules"
-                                            on "modules"."module_srl" = "except_modules"."module_srl"
-                                where "modules"."module_srl" not in (12,13,14)
-                                    and "sites"."site_srl" = "modules"."site_srl"
-                                    and "except_modules"."module_srl" is null';
-                    $this->_test($xml_file, $argsString, $expected);
-                }
+				function test_module_getModules_Notin_Multiple_Value_String(){
+					$xml_file = _TEST_PATH_ . "db/xml_query/cubrid/data/syndication.getModules.xml";
+					$argsString = '$args->except_module_srls = "12, 13, 14";';
+					$expected = 'select "modules"."site_srl" as "site_srl"
+									, "modules"."module_srl" as "module_srl"
+									, "sites"."domain" as "domain"
+									, "modules"."mid" as "mid"
+									, "modules"."module" as "module"
+									, "modules"."browser_title" as "browser_title"
+									, "modules"."description" as "description"
+								from "xe_sites" as "sites"
+									, "xe_modules" as "modules"
+										left join "xe_syndication_except_modules" as "except_modules"
+											on "modules"."module_srl" = "except_modules"."module_srl"
+								where "modules"."module_srl" not in (12,13,14)
+									and "sites"."site_srl" = "modules"."site_srl"
+									and "except_modules"."module_srl" is null';
+					$this->_test($xml_file, $argsString, $expected);
+				}
 
-                function test_module_getModules_Notin_Multiple_Value_Array(){
-                    $xml_file = _TEST_PATH_ . "db/xml_query/cubrid/data/syndication.getModules.xml";
-                    $argsString = '$args->except_module_srls = array(12, 13, 14);';
-                    $expected = 'select "modules"."site_srl" as "site_srl"
-                                    , "modules"."module_srl" as "module_srl"
-                                    , "sites"."domain" as "domain"
-                                    , "modules"."mid" as "mid"
-                                    , "modules"."module" as "module"
-                                    , "modules"."browser_title" as "browser_title"
-                                    , "modules"."description" as "description"
-                                from "xe_sites" as "sites"
-                                    , "xe_modules" as "modules"
-                                        left join "xe_syndication_except_modules" as "except_modules"
-                                            on "modules"."module_srl" = "except_modules"."module_srl"
-                                where "modules"."module_srl" not in (12,13,14)
-                                    and "sites"."site_srl" = "modules"."site_srl"
-                                    and "except_modules"."module_srl" is null';
-                    $this->_test($xml_file, $argsString, $expected);
-                }
+				function test_module_getModules_Notin_Multiple_Value_Array(){
+					$xml_file = _TEST_PATH_ . "db/xml_query/cubrid/data/syndication.getModules.xml";
+					$argsString = '$args->except_module_srls = array(12, 13, 14);';
+					$expected = 'select "modules"."site_srl" as "site_srl"
+									, "modules"."module_srl" as "module_srl"
+									, "sites"."domain" as "domain"
+									, "modules"."mid" as "mid"
+									, "modules"."module" as "module"
+									, "modules"."browser_title" as "browser_title"
+									, "modules"."description" as "description"
+								from "xe_sites" as "sites"
+									, "xe_modules" as "modules"
+										left join "xe_syndication_except_modules" as "except_modules"
+											on "modules"."module_srl" = "except_modules"."module_srl"
+								where "modules"."module_srl" not in (12,13,14)
+									and "sites"."site_srl" = "modules"."site_srl"
+									and "except_modules"."module_srl" is null';
+					$this->_test($xml_file, $argsString, $expected);
+				}
 
-               function test_module_getModules_In_Single_Value(){
-                    $xml_file = _TEST_PATH_ . "db/xml_query/cubrid/data/syndication.getModules.xml";
-                    $argsString = '$args->module_srls = 12;';
-                    $expected = 'select "modules"."site_srl" as "site_srl"
-                                    , "modules"."module_srl" as "module_srl"
-                                    , "sites"."domain" as "domain"
-                                    , "modules"."mid" as "mid"
-                                    , "modules"."module" as "module"
-                                    , "modules"."browser_title" as "browser_title"
-                                    , "modules"."description" as "description"
-                                from "xe_sites" as "sites"
-                                    , "xe_modules" as "modules"
-                                        left join "xe_syndication_except_modules" as "except_modules"
-                                            on "modules"."module_srl" = "except_modules"."module_srl"
-                                where "modules"."module_srl" in (12)
-                                    and "sites"."site_srl" = "modules"."site_srl"
-                                    and "except_modules"."module_srl" is null';
-                    $this->_test($xml_file, $argsString, $expected);
-                }
+			   function test_module_getModules_In_Single_Value(){
+					$xml_file = _TEST_PATH_ . "db/xml_query/cubrid/data/syndication.getModules.xml";
+					$argsString = '$args->module_srls = 12;';
+					$expected = 'select "modules"."site_srl" as "site_srl"
+									, "modules"."module_srl" as "module_srl"
+									, "sites"."domain" as "domain"
+									, "modules"."mid" as "mid"
+									, "modules"."module" as "module"
+									, "modules"."browser_title" as "browser_title"
+									, "modules"."description" as "description"
+								from "xe_sites" as "sites"
+									, "xe_modules" as "modules"
+										left join "xe_syndication_except_modules" as "except_modules"
+											on "modules"."module_srl" = "except_modules"."module_srl"
+								where "modules"."module_srl" in (12)
+									and "sites"."site_srl" = "modules"."site_srl"
+									and "except_modules"."module_srl" is null';
+					$this->_test($xml_file, $argsString, $expected);
+				}
 
-                function test_module_getModules_In_Multiple_Value_String(){
-                    $xml_file = _TEST_PATH_ . "db/xml_query/cubrid/data/syndication.getModules.xml";
-                    $argsString = '$args->module_srls = "12, 13, 14";';
-                    $expected = 'select "modules"."site_srl" as "site_srl"
-                                    , "modules"."module_srl" as "module_srl"
-                                    , "sites"."domain" as "domain"
-                                    , "modules"."mid" as "mid"
-                                    , "modules"."module" as "module"
-                                    , "modules"."browser_title" as "browser_title"
-                                    , "modules"."description" as "description"
-                                from "xe_sites" as "sites"
-                                    , "xe_modules" as "modules"
-                                        left join "xe_syndication_except_modules" as "except_modules"
-                                            on "modules"."module_srl" = "except_modules"."module_srl"
-                                where "modules"."module_srl" in (12,13,14)
-                                    and "sites"."site_srl" = "modules"."site_srl"
-                                    and "except_modules"."module_srl" is null';
-                    $this->_test($xml_file, $argsString, $expected);
-                }
+				function test_module_getModules_In_Multiple_Value_String(){
+					$xml_file = _TEST_PATH_ . "db/xml_query/cubrid/data/syndication.getModules.xml";
+					$argsString = '$args->module_srls = "12, 13, 14";';
+					$expected = 'select "modules"."site_srl" as "site_srl"
+									, "modules"."module_srl" as "module_srl"
+									, "sites"."domain" as "domain"
+									, "modules"."mid" as "mid"
+									, "modules"."module" as "module"
+									, "modules"."browser_title" as "browser_title"
+									, "modules"."description" as "description"
+								from "xe_sites" as "sites"
+									, "xe_modules" as "modules"
+										left join "xe_syndication_except_modules" as "except_modules"
+											on "modules"."module_srl" = "except_modules"."module_srl"
+								where "modules"."module_srl" in (12,13,14)
+									and "sites"."site_srl" = "modules"."site_srl"
+									and "except_modules"."module_srl" is null';
+					$this->_test($xml_file, $argsString, $expected);
+				}
 
-                function test_module_getModules_In_Multiple_Value_Array(){
-                    $xml_file = _TEST_PATH_ . "db/xml_query/cubrid/data/syndication.getModules.xml";
-                    $argsString = '$args->module_srls = array(12, 13, 14);';
-                    $expected = 'select "modules"."site_srl" as "site_srl"
-                                    , "modules"."module_srl" as "module_srl"
-                                    , "sites"."domain" as "domain"
-                                    , "modules"."mid" as "mid"
-                                    , "modules"."module" as "module"
-                                    , "modules"."browser_title" as "browser_title"
-                                    , "modules"."description" as "description"
-                                from "xe_sites" as "sites"
-                                    , "xe_modules" as "modules"
-                                        left join "xe_syndication_except_modules" as "except_modules"
-                                            on "modules"."module_srl" = "except_modules"."module_srl"
-                                where "modules"."module_srl" in (12,13,14)
-                                    and "sites"."site_srl" = "modules"."site_srl"
-                                    and "except_modules"."module_srl" is null';
-                    $this->_test($xml_file, $argsString, $expected);
-                }
+				function test_module_getModules_In_Multiple_Value_Array(){
+					$xml_file = _TEST_PATH_ . "db/xml_query/cubrid/data/syndication.getModules.xml";
+					$argsString = '$args->module_srls = array(12, 13, 14);';
+					$expected = 'select "modules"."site_srl" as "site_srl"
+									, "modules"."module_srl" as "module_srl"
+									, "sites"."domain" as "domain"
+									, "modules"."mid" as "mid"
+									, "modules"."module" as "module"
+									, "modules"."browser_title" as "browser_title"
+									, "modules"."description" as "description"
+								from "xe_sites" as "sites"
+									, "xe_modules" as "modules"
+										left join "xe_syndication_except_modules" as "except_modules"
+											on "modules"."module_srl" = "except_modules"."module_srl"
+								where "modules"."module_srl" in (12,13,14)
+									and "sites"."site_srl" = "modules"."site_srl"
+									and "except_modules"."module_srl" is null';
+					$this->_test($xml_file, $argsString, $expected);
+				}
 
-                function test_module_getModuleSrlByMid_In_Multiple_Value_Array_Strings(){
-                    $xml_file = _XE_PATH_ . "modules/module/queries/getModuleSrlByMid.xml";
-                    $argsString = '$args->mid = "\'mid1\', \'mid2\'";';
-                    $expected = 'select "module_srl" from "xe_modules" as "modules" where "mid" in (\'mid1\',\'mid2\')';
-                    $this->_test($xml_file, $argsString, $expected);
-                }
+				function test_module_getModuleSrlByMid_In_Multiple_Value_Array_Strings(){
+					$xml_file = _XE_PATH_ . "modules/module/queries/getModuleSrlByMid.xml";
+					$argsString = '$args->mid = "\'mid1\', \'mid2\'";';
+					$expected = 'select "module_srl" from "xe_modules" as "modules" where "mid" in (\'mid1\',\'mid2\')';
+					$this->_test($xml_file, $argsString, $expected);
+				}
 
 
-               function test_file_getFileList_In_Empty_Array_Value(){
-                    $xml_file = _XE_PATH_ . "modules/file/queries/getFileList.xml";
-                    $argsString = '$args->exclude_module_srl = 12; $args->s_module_srl = array(); ';
-                    $expected = 'select "files".*
-                                    from "xe_files" as "files"
-                                        left join "xe_member" as "member" on "files"."member_srl" = "member"."member_srl"
-                                    where "files"."module_srl" not in (12)
-                                    order by "files"."file_srl" desc
-                                    limit 0, 20';
-                    $this->_test($xml_file, $argsString, $expected);
-                }
+			   function test_file_getFileList_In_Empty_Array_Value(){
+					$xml_file = _XE_PATH_ . "modules/file/queries/getFileList.xml";
+					$argsString = '$args->exclude_module_srl = 12; $args->s_module_srl = array(); ';
+					$expected = 'select "files".*
+									from "xe_files" as "files"
+										left join "xe_member" as "member" on "files"."member_srl" = "member"."member_srl"
+									where "files"."module_srl" not in (12)
+									order by "files"."file_srl" desc
+									limit 0, 20';
+					$this->_test($xml_file, $argsString, $expected);
+				}
 
-               function test_file_getFileList_Not_In_Empty_String_Value(){
-                    $xml_file = _XE_PATH_ . "modules/file/queries/getFileList.xml";
-                    $argsString = '$args->exclude_module_srl = ""; $args->s_module_srl = array(12); ';
-                    $expected = 'select "files".*
-                                    from "xe_files" as "files"
-                                        left join "xe_member" as "member" on "files"."member_srl" = "member"."member_srl"
-                                    where "files"."module_srl" in (12)
-                                    order by "files"."file_srl" desc
-                                    limit 0, 20';
-                    $this->_test($xml_file, $argsString, $expected);
-                }
+			   function test_file_getFileList_Not_In_Empty_String_Value(){
+					$xml_file = _XE_PATH_ . "modules/file/queries/getFileList.xml";
+					$argsString = '$args->exclude_module_srl = ""; $args->s_module_srl = array(12); ';
+					$expected = 'select "files".*
+									from "xe_files" as "files"
+										left join "xe_member" as "member" on "files"."member_srl" = "member"."member_srl"
+									where "files"."module_srl" in (12)
+									order by "files"."file_srl" desc
+									limit 0, 20';
+					$this->_test($xml_file, $argsString, $expected);
+				}
 
-                function test_document_getDeclaredList_In_Query(){
-                    $xml_file = _XE_PATH_ . "modules/document/queries/getDeclaredList.xml";
-                    $argsString = "\$args->list_count = 30;
-                                    \$args->page_count = 10;
-                                    \$args->sort_index = 'document_declared.declared_count';
-                                    \$args->order_type = 'desc';";
-                    $expected = 'select * from "xe_documents" as "documents"
-                                    , "xe_document_declared" as "document_declared"
-                                    where "documents"."document_srl"
-                                        in ("document_declared"."document_srl")
-                                    order by "document_declared"."declared_count" desc
-                                    limit 0, 30';
-                    $this->_test($xml_file, $argsString, $expected);
-                }
+				function test_document_getDeclaredList_In_Query(){
+					$xml_file = _XE_PATH_ . "modules/document/queries/getDeclaredList.xml";
+					$argsString = "\$args->list_count = 30;
+									\$args->page_count = 10;
+									\$args->sort_index = 'document_declared.declared_count';
+									\$args->order_type = 'desc';";
+					$expected = 'select * from "xe_documents" as "documents"
+									, "xe_document_declared" as "document_declared"
+									where "documents"."document_srl"
+										in ("document_declared"."document_srl")
+									order by "document_declared"."declared_count" desc
+									limit 0, 30';
+					$this->_test($xml_file, $argsString, $expected);
+				}
 
-                function test_getExpiredSession_curdate(){
-                    $xml_file = _XE_PATH_ . "modules/session/queries/getExpiredSessions.xml";
-                    $argsString = '';
-                    $expected = 'select "session_key"
-                                        from "xe_session" as "session"
-                                        where "expired" <= \'' . date("YmdHis") . '\'';
-                    $this->_test($xml_file, $argsString, $expected);
-                }
+				function test_getExpiredSession_curdate(){
+					$xml_file = _XE_PATH_ . "modules/session/queries/getExpiredSessions.xml";
+					$argsString = '';
+					$expected = 'select "session_key"
+										from "xe_session" as "session"
+										where "expired" <= \'' . date("YmdHis") . '\'';
+					$this->_test($xml_file, $argsString, $expected);
+				}
 
-                function test_rlike_1(){
-                    $xml_file = _TEST_PATH_ . "db/xml_query/cubrid/data/rlike1.xml";
-                    $argsString = '$args->title = "aaa";';
-                    $expected = 'select * from "xe_modules" as "modules" where "title" rlike \'aaa\'';
+				function test_rlike_1(){
+					$xml_file = _TEST_PATH_ . "db/xml_query/cubrid/data/rlike1.xml";
+					$argsString = '$args->title = "aaa";';
+					$expected = 'select * from "xe_modules" as "modules" where "title" rlike \'aaa\'';
 					define('__CUBRID_VERSION__', '8.4.1');
-                    $this->_test($xml_file, $argsString, $expected);
-                }
+					$this->_test($xml_file, $argsString, $expected);
+				}
 
 
 		function test_resource_getLatestItem(){

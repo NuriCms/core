@@ -12,14 +12,14 @@
 abstract class HTMLPurifier_Strategy
 {
 
-    /**
-     * Executes the strategy on the tokens.
-     *
-     * @param $tokens Array of HTMLPurifier_Token objects to be operated on.
-     * @param $config Configuration options
-     * @returns Processed array of token objects.
-     */
-    abstract public function execute($tokens, $config, $context);
+	/**
+	 * Executes the strategy on the tokens.
+	 *
+	 * @param $tokens Array of HTMLPurifier_Token objects to be operated on.
+	 * @param $config Configuration options
+	 * @returns Processed array of token objects.
+	 */
+	abstract public function execute($tokens, $config, $context);
 
 }
 

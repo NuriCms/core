@@ -3,11 +3,11 @@
 <!--%load_js_plugin("ui")-->
 <!--%load_js_plugin("ui.datepicker")-->
 <include target="./common_header.html" />
-    <h1 style="border-bottom:1px solid #ccc">{$lang->cmd_signup}</h1>
+	<h1 style="border-bottom:1px solid #ccc">{$lang->cmd_signup}</h1>
 	<div cond="$XE_VALIDATOR_MESSAGE && $XE_VALIDATOR_ID == 'modules/member/skins/default/signup_form/1'" class="message {$XE_VALIDATOR_MESSAGE_TYPE}">
 		<p>{$XE_VALIDATOR_MESSAGE}</p>
 	</div>
-    <form ruleset="@insertMember" id="fo_insert_member" action="./" method="post" enctype="multipart/form-data" class="form-horizontal">
+	<form ruleset="@insertMember" id="fo_insert_member" action="./" method="post" enctype="multipart/form-data" class="form-horizontal">
 		<input type="hidden" name="act" value="procMemberInsert" />
 		<input type="hidden" name="xe_validator_id" value="modules/member/skins/default/signup_form/1" />
 		<div class="agreement" cond="$member_config->agreement">
@@ -74,11 +74,11 @@ jQuery(function($){
 });
 (function($){
 	$(function(){
-		var option = { changeMonth: true, changeYear: true, gotoCurrent: false,yearRange:'-100:+10', dateFormat:'yy-mm-dd', onSelect:function(){
+		var option = $.datepicker.regional['{Context::getLangType(TRUE)}'];
+		$.extend(option,{ changeMonth: true, changeYear: true, gotoCurrent: false,yearRange:'-100:+10', dateFormat:'yy-mm-dd', onSelect:function(){
 
 			$(this).prev('input[type="hidden"]').val(this.value.replace(/-/g,""))}
-		};
-		$.extend(option,$.datepicker.regional['{$lang_type}']);
+		});
 		$(".inputDate").datepicker(option);
 		$(".dateRemover").click(function() {
 			$(this).parent().prevAll('input').val('');

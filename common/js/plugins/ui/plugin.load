@@ -1,3 +1,4 @@
 jquery-ui.min.js
-jquery-ui.css
-jquery.ui.datepicker-ko.js
+jquery-ui.min.css
+jquery-ui-i18n.js
+jquery-ui-i18n-nuri-custom.js

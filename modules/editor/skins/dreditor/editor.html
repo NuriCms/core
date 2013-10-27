@@ -14,9 +14,9 @@
 
 <!--// 글감 모듈 유무 판단 -->
 <!--@if(file_exists(_XE_PATH_.'modules/material/material.class.php'))-->
-    {@$material_exists = true}
+	{@$material_exists = true}
 <!--@else-->
-    {@$material_exists = false}
+	{@$material_exists = false}
 <!--@end-->
 
 {@$cookie_tool=explode(',', $_COOKIE['DrEditorToolbar'])}
@@ -402,8 +402,8 @@
 			<!--%import("js/uploader.js",optimized=false)-->
 			<!--%import("../../tpl/js/swfupload.js",optimized=false)-->
 			<script>//<![CDATA[
-                uploaderSettings=
-                    {
+				uploaderSettings=
+					{
 					"editorSequence" : {$editor_sequence},
 					"sessionName" : "{session_name()}",
 					"allowedFileSize" : "{$file_config->allowed_filesize}",
@@ -421,7 +421,7 @@
 			<!-- class="wArea file" | class="wArea file open" -->
 				<fieldset>
 				<legend>{$lang->edit->file}</legend>
-                 <span id="swfUploadButton{$editor_sequence}" class="buttonFileUpload"><button type="button">{$lang->edit->file_select}</button></span>
+				 <span id="swfUploadButton{$editor_sequence}" class="buttonFileUpload"><button type="button">{$lang->edit->file_select}</button></span>
 					<p class="info">{sprintf($lang->edit->file_uploadinfo,($file_config->allowed_filesize/(1024*1024)),($file_config->allowed_attach_size/(1024*1024)))} <!--button type="button" class="help">파일 업로드에 문제가 발생하는 경우 클릭.</button--></p>
 					<!--input name="" type="file" class="inputFile" title="파일 찾기" /-->
 					<!-- class="inputFile" | class="inputFile open" -->

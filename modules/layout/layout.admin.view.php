@@ -319,7 +319,7 @@ class layoutAdminView extends layout
 		{
 			foreach($layout_info->menu as $menu_id => $menu)
 			{
-				if(file_exists($menu->php_file)) @include($menu->php_file);
+				if(is_readable($menu->php_file)) include($menu->php_file);
 				Context::set($menu_id, $menu);
 			}
 		}

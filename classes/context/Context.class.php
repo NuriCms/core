@@ -33,6 +33,18 @@ class Context
 	var $js_callback_func = '';
 
 	/**
+	 * json callback function name.
+	 * @var string
+	 */
+	var $json_callback_func = '';
+
+	/**
+	 * xml callback function name.
+	 * @var string
+	 */
+	var $xml_callback_func = '';
+
+	/**
 	 * Response method.If it's not set, it follows request method.
 	 * @var string HTML|XMLRPC
 	 */
@@ -302,9 +314,9 @@ class Context
 			);
 		}
 		session_start();
-		if($sess = $_POST[session_name()])
+		if(isset($_POST[session_name()]))
 		{
-			session_id($sess);
+			session_id($_POST[session_name()]);
 		}
 
 		// set authentication information in Context and session
@@ -419,7 +431,7 @@ class Context
 		$config_file = $self->getConfigFile();
 		if(is_readable($config_file))
 		{
-			@include($config_file);
+			include($config_file);
 		}
 
 		// If master_db information does not exist, the config file needs to be updated
@@ -816,7 +828,7 @@ class Context
 		if($filename && is_readable($filename))
 		{
 			$self->loaded_lang_files[] = $filename;
-			@include($filename);
+			include($filename);
 		}
 		else
 		{
@@ -926,10 +938,32 @@ class Context
 	 *
 	 * @return string Language type
 	 */
-	function getLangType()
+	function getLangType($iso639 = FALSE)
 	{
 		is_a($this, 'Context') ? $self = $this : $self = Context::getInstance();
-		return $self->lang_type;
+		if(!$iso639) return $self->lang_type;
+		else
+		{
+			$lang_code = array(
+				/*
+				Nuri Lang Type => ISO639 Lang Code
+				*/
+				'en' => 'en',
+				'ko' => 'ko',
+				'jp' => 'ja',
+				'zh-CN' => 'zh-CN', //Macrolanguage
+				'zh-TW' => 'zh-TW', //Macrolanguage
+				'fr' => 'fr',
+				'de' => 'de',
+				'ru' => 'ru',
+				'es' => 'es',
+				'tr' => 'tr',
+				'vi' => 'vi',
+				'mn' => 'mn'
+				);
+			if($lang_code[$self->lang_type]) return $lang_code[$self->lang_type];
+			else return $self->lang_type;
+		}
 	}
 
 	/**
@@ -1108,12 +1142,21 @@ class Context
 	{
 		is_a($this, 'Context') ? $self = $this : $self = Context::getInstance();
 
-		$self->js_callback_func = isset($_GET['xe_js_callback']) ? $_GET['xe_js_callback'] : $_POST['xe_js_callback'];
+		(isset($_GET['xe_js_callback']) && $self->js_callback_func = isset($_GET['xe_js_callback'])) or
+			(isset($_POST['xe_js_callback']) && $self->js_callback_func = isset($_POST['xe_js_callback']));
+
+		(isset($_GET['xe_json_callback']) && $self->json_callback_func = isset($_GET['xe_json_callback'])) or
+			(isset($_POST['xe_json_callback']) && $self->json_callback_func = isset($_POST['xe_json_callback']));
+
+		(isset($_GET['xe_xml_callback']) && $self->xml_callback_func = isset($_GET['xe_xml_callback'])) or
+			(isset($_POST['xe_xml_callback']) && $self->xml_callback_func = isset($_POST['xe_xml_callback']));
 
 		($type && $self->request_method = $type) or
 				(strpos($_SERVER['CONTENT_TYPE'], 'json') && $self->request_method = 'JSON') or
-				($GLOBALS['HTTP_RAW_POST_DATA'] && $self->request_method = 'XMLRPC') or
+				(isset($GLOBALS['HTTP_RAW_POST_DATA']) && $self->request_method = 'XMLRPC') or
 				($self->js_callback_func && $self->request_method = 'JS_CALLBACK') or
+				($self->json_callback_func && $self->request_method = 'JSON') or
+				($self->xml_callback_func && $self->request_method = 'XMLRPC') or
 				($self->request_method = $_SERVER['REQUEST_METHOD']);
 	}
 
@@ -1570,9 +1613,9 @@ class Context
 							$queries[] = $key . '[' . $k . ']=' . urlencode($v);
 						}
 					}
-					else
+					elseif(is_string($val))
 					{
-						$queries[] = $key . '=' . @urlencode($val);
+						$queries[] = $key . '=' . urlencode($val);
 					}
 				}
 				if(count($queries))
@@ -1767,7 +1810,7 @@ class Context
 			unset($self->get_vars->{$key});
 			return;
 		}
-		if($set_to_get_vars || $self->get_vars->{$key})
+		if($set_to_get_vars || isset($self->get_vars->{$key}))
 		{
 			$self->get_vars->{$key} = $val;
 		}
@@ -2302,7 +2345,7 @@ class Context
 			}
 			if(preg_match('/\.js$/i', $filename))
 			{
-				$self->loadFile(array($plugin_path . $filename, 'body', '', 0), true);
+				$self->loadFile(array($plugin_path . $filename, '', '', 0), true);
 			}
 			elseif(preg_match('/\.css$/i', $filename))
 			{

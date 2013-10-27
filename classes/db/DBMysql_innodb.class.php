@@ -44,7 +44,7 @@ class DBMysql_innodb extends DBMysql
 	function _close($connection)
 	{
 		$this->_query("commit", $connection);
-		@mysql_close($connection);
+		mysql_close($connection);
 	}
 
 	/**
@@ -112,10 +112,10 @@ class DBMysql_innodb extends DBMysql
 	{
 		if(!$connection)
 		{
-			exit('XE cannot handle DB connection.');
+			exit('NURI cannot handle DB connection.');
 		}
 		// Run the query statement
-		$result = @mysql_query($query, $connection);
+		$result = mysql_query($query, $connection);
 		// Error Check
 		if(mysql_error($connection))
 		{

@@ -13,13 +13,13 @@
  * modification, are permitted provided that the following conditions
  * are met:
  *
- *    * Redistributions of source code must retain the above copyright
- *      notice, this list of conditions and the following disclaimer.
- *    * Redistributions in binary form must reproduce the above copyright
- *      notice, this list of conditions and the following disclaimer in the
- *      documentation and/or other materials provided with the distribution.
- *    * The names of the authors may not be used to endorse or promote products
- *      derived from this software without specific prior written permission.
+ *	* Redistributions of source code must retain the above copyright
+ *	  notice, this list of conditions and the following disclaimer.
+ *	* Redistributions in binary form must reproduce the above copyright
+ *	  notice, this list of conditions and the following disclaimer in the
+ *	  documentation and/or other materials provided with the distribution.
+ *	* The names of the authors may not be used to endorse or promote products
+ *	  derived from this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
@@ -34,11 +34,11 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @category   HTTP
- * @package    HTTP_Request2
- * @author     Alexey Borzov <avb@php.net>
- * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    SVN: $Id: Adapter.php 291118 2009-11-21 17:58:23Z avb $
- * @link       http://pear.php.net/package/HTTP_Request2
+ * @package	HTTP_Request2
+ * @author	 Alexey Borzov <avb@php.net>
+ * @license	http://opensource.org/licenses/bsd-license.php New BSD License
+ * @version	SVN: $Id: Adapter.php 291118 2009-11-21 17:58:23Z avb $
+ * @link	   http://pear.php.net/package/HTTP_Request2
  */
 
 /**
@@ -54,101 +54,101 @@ require_once 'HTTP/Request2/Response.php';
  * receiving its response is performed by adapters.
  *
  * @category   HTTP
- * @package    HTTP_Request2
- * @author     Alexey Borzov <avb@php.net>
- * @version    Release: 0.5.2
+ * @package	HTTP_Request2
+ * @author	 Alexey Borzov <avb@php.net>
+ * @version	Release: 0.5.2
  */
 abstract class HTTP_Request2_Adapter
 {
    /**
-    * A list of methods that MUST NOT have a request body, per RFC 2616
-    * @var  array
-    */
-    protected static $bodyDisallowed = array('TRACE');
+	* A list of methods that MUST NOT have a request body, per RFC 2616
+	* @var  array
+	*/
+	protected static $bodyDisallowed = array('TRACE');
 
    /**
-    * Methods having defined semantics for request body
-    *
-    * Content-Length header (indicating that the body follows, section 4.3 of
-    * RFC 2616) will be sent for these methods even if no body was added
-    *
-    * @var  array
-    * @link http://pear.php.net/bugs/bug.php?id=12900
-    * @link http://pear.php.net/bugs/bug.php?id=14740
-    */
-    protected static $bodyRequired = array('POST', 'PUT');
+	* Methods having defined semantics for request body
+	*
+	* Content-Length header (indicating that the body follows, section 4.3 of
+	* RFC 2616) will be sent for these methods even if no body was added
+	*
+	* @var  array
+	* @link http://pear.php.net/bugs/bug.php?id=12900
+	* @link http://pear.php.net/bugs/bug.php?id=14740
+	*/
+	protected static $bodyRequired = array('POST', 'PUT');
 
    /**
-    * Request being sent
-    * @var  HTTP_Request2
-    */
-    protected $request;
+	* Request being sent
+	* @var  HTTP_Request2
+	*/
+	protected $request;
 
    /**
-    * Request body
-    * @var  string|resource|HTTP_Request2_MultipartBody
-    * @see  HTTP_Request2::getBody()
-    */
-    protected $requestBody;
+	* Request body
+	* @var  string|resource|HTTP_Request2_MultipartBody
+	* @see  HTTP_Request2::getBody()
+	*/
+	protected $requestBody;
 
    /**
-    * Length of the request body
-    * @var  integer
-    */
-    protected $contentLength;
+	* Length of the request body
+	* @var  integer
+	*/
+	protected $contentLength;
 
    /**
-    * Sends request to the remote server and returns its response
-    *
-    * @param    HTTP_Request2
-    * @return   HTTP_Request2_Response
-    * @throws   HTTP_Request2_Exception
-    */
-    abstract public function sendRequest(HTTP_Request2 $request);
+	* Sends request to the remote server and returns its response
+	*
+	* @param	HTTP_Request2
+	* @return   HTTP_Request2_Response
+	* @throws   HTTP_Request2_Exception
+	*/
+	abstract public function sendRequest(HTTP_Request2 $request);
 
    /**
-    * Calculates length of the request body, adds proper headers
-    *
-    * @param    array   associative array of request headers, this method will
-    *                   add proper 'Content-Length' and 'Content-Type' headers
-    *                   to this array (or remove them if not needed)
-    */
-    protected function calculateRequestLength(&$headers)
-    {
-        $this->requestBody = $this->request->getBody();
+	* Calculates length of the request body, adds proper headers
+	*
+	* @param	array   associative array of request headers, this method will
+	*				   add proper 'Content-Length' and 'Content-Type' headers
+	*				   to this array (or remove them if not needed)
+	*/
+	protected function calculateRequestLength(&$headers)
+	{
+		$this->requestBody = $this->request->getBody();
 
-        if (is_string($this->requestBody)) {
-            $this->contentLength = strlen($this->requestBody);
-        } elseif (is_resource($this->requestBody)) {
-            $stat = fstat($this->requestBody);
-            $this->contentLength = $stat['size'];
-            rewind($this->requestBody);
-        } else {
-            $this->contentLength = $this->requestBody->getLength();
-            $headers['content-type'] = 'multipart/form-data; boundary=' .
-                                       $this->requestBody->getBoundary();
-            $this->requestBody->rewind();
-        }
+		if (is_string($this->requestBody)) {
+			$this->contentLength = strlen($this->requestBody);
+		} elseif (is_resource($this->requestBody)) {
+			$stat = fstat($this->requestBody);
+			$this->contentLength = $stat['size'];
+			rewind($this->requestBody);
+		} else {
+			$this->contentLength = $this->requestBody->getLength();
+			$headers['content-type'] = 'multipart/form-data; boundary=' .
+									   $this->requestBody->getBoundary();
+			$this->requestBody->rewind();
+		}
 
-        if (in_array($this->request->getMethod(), self::$bodyDisallowed) ||
-            0 == $this->contentLength
-        ) {
-            // No body: send a Content-Length header nonetheless (request #12900),
-            // but do that only for methods that require a body (bug #14740)
-            if (in_array($this->request->getMethod(), self::$bodyRequired)) {
-                $headers['content-length'] = 0;
-            } else {
-                unset($headers['content-length']);
-                // if the method doesn't require a body and doesn't have a
-                // body, don't send a Content-Type header. (request #16799)
-                unset($headers['content-type']);
-            }
-        } else {
-            if (empty($headers['content-type'])) {
-                $headers['content-type'] = 'application/x-www-form-urlencoded';
-            }
-            $headers['content-length'] = $this->contentLength;
-        }
-    }
+		if (in_array($this->request->getMethod(), self::$bodyDisallowed) ||
+			0 == $this->contentLength
+		) {
+			// No body: send a Content-Length header nonetheless (request #12900),
+			// but do that only for methods that require a body (bug #14740)
+			if (in_array($this->request->getMethod(), self::$bodyRequired)) {
+				$headers['content-length'] = 0;
+			} else {
+				unset($headers['content-length']);
+				// if the method doesn't require a body and doesn't have a
+				// body, don't send a Content-Type header. (request #16799)
+				unset($headers['content-type']);
+			}
+		} else {
+			if (empty($headers['content-type'])) {
+				$headers['content-type'] = 'application/x-www-form-urlencoded';
+			}
+			$headers['content-length'] = $this->contentLength;
+		}
+	}
 }
 ?>

@@ -785,10 +785,10 @@ class JSParser
 			return $n;
 
 			case KEYWORD_WHILE:
-			        $n = new JSNode($this->t);
-			        $n->isLoop = true;
-			        $n->condition = $this->ParenExpression($x);
-			        $n->body = $this->nest($x, $n);
+					$n = new JSNode($this->t);
+					$n->isLoop = true;
+					$n->condition = $this->ParenExpression($x);
+					$n->body = $this->nest($x, $n);
 			return $n;
 
 			case KEYWORD_DO:
@@ -908,7 +908,7 @@ class JSParser
 
 			case KEYWORD_VAR:
 			case KEYWORD_CONST:
-			        $n = $this->Variables($x);
+					$n = $this->Variables($x);
 			break;
 
 			case TOKEN_CONDCOMMENT_START:
@@ -1692,7 +1692,7 @@ class JSTokenizer
 
 	public function mustMatch($tt)
 	{
-	        if (!$this->match($tt))
+			if (!$this->match($tt))
 			throw $this->newSyntaxError('Unexpected token; token ' . $tt . ' expected');
 
 		return $this->currentToken();

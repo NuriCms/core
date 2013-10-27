@@ -24,16 +24,16 @@ gallery.cast('SET_STYLE', [{$gallery_info->srl}, 'slide']);
 </script>
 
 <div id="zone_slide_gallery_{$gallery_info->srl}" align="{$gallery_info->gallery_align}">
-    <div class="slide_gallery_navigator_box">
-        <a href="#" class="__prev"><img src="./images/prev.gif" alt="{$lang->cmd_gallery_prev}" title="{$lang->cmd_gallery_prev}" border="0" /></a>
-        <span class="zone_gallery_navigator_status" title="{$lang->cmd_gallery_thumbnail}" id="zone_gallery_navigator_status_{$gallery_info->srl}">1/1</span>
-        <a href="#" class="__next"><img src="./images/next.gif" alt="{$lang->cmd_gallery_next}" title="{$lang->cmd_gallery_next}" border="0" /></a>
-    </div>
-    <div style="width:{$gallery_info->width}px;background-color:{$gallery_info->bg_color};border:{$gallery_info->border_thickness}px solid {$gallery_info->border_color};text-align:left;">
-        <div class="slide_gallery_thumbnail_image_box" style="display:none"></div>
-        <div class="slide_gallery_loading_text">Loading images...</div>
+	<div class="slide_gallery_navigator_box">
+		<a href="#" class="__prev"><img src="./images/prev.gif" alt="{$lang->cmd_gallery_prev}" title="{$lang->cmd_gallery_prev}" border="0" /></a>
+		<span class="zone_gallery_navigator_status" title="{$lang->cmd_gallery_thumbnail}" id="zone_gallery_navigator_status_{$gallery_info->srl}">1/1</span>
+		<a href="#" class="__next"><img src="./images/next.gif" alt="{$lang->cmd_gallery_next}" title="{$lang->cmd_gallery_next}" border="0" /></a>
+	</div>
+	<div style="width:{$gallery_info->width}px;background-color:{$gallery_info->bg_color};border:{$gallery_info->border_thickness}px solid {$gallery_info->border_color};text-align:left;">
+		<div class="slide_gallery_thumbnail_image_box" style="display:none"></div>
+		<div class="slide_gallery_loading_text">Loading images...</div>
 		<div class="slide_gallery_placeholder"></div>
-        <img border="0" style="display:none" alt="slide_gallery" src="./images/blank.gif" />
-    </div>
-    <div class="slide_gallery_filename"></div>
+		<img border="0" style="display:none" alt="slide_gallery" src="./images/blank.gif" />
+	</div>
+	<div class="slide_gallery_filename"></div>
 </div>

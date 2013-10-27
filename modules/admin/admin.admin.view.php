@@ -30,14 +30,6 @@ class adminAdminView extends admin
 	 */
 	function init()
 	{
-		// forbit access if the user is not an administrator
-		$oMemberModel = getModel('member');
-		$logged_info = $oMemberModel->getLoggedInfo();
-		if($logged_info->is_admin != 'Y')
-		{
-			return $this->stop("msg_is_not_administrator");
-		}
-
 		// change into administration layout
 		$this->setTemplatePath($this->module_path . 'tpl');
 		$this->setLayoutPath($this->getTemplatePath());
@@ -434,7 +426,6 @@ class adminAdminView extends admin
 		$config = $oModuleModel->getModuleConfig('module');
 		Context::set('siteTitle', $config->siteTitle);
 		Context::set('htmlFooter', $config->htmlFooter);
-
 
 		$columnList = array('modules.mid', 'modules.browser_title', 'sites.index_module_srl');
 		$start_module = $oModuleModel->getSiteInfo(0, $columnList);
