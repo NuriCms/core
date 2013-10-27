@@ -33,6 +33,18 @@ class Context
 	var $js_callback_func = '';
 
 	/**
+	 * json callback function name.
+	 * @var string
+	 */
+	var $json_callback_func = '';
+
+	/**
+	 * xml callback function name.
+	 * @var string
+	 */
+	var $xml_callback_func = '';
+
+	/**
 	 * Response method.If it's not set, it follows request method.
 	 * @var string HTML|XMLRPC
 	 */
@@ -1133,10 +1145,18 @@ class Context
 		(isset($_GET['xe_js_callback']) && $self->js_callback_func = isset($_GET['xe_js_callback'])) or
 			(isset($_POST['xe_js_callback']) && $self->js_callback_func = isset($_POST['xe_js_callback']));
 
+		(isset($_GET['xe_json_callback']) && $self->json_callback_func = isset($_GET['xe_json_callback'])) or
+			(isset($_POST['xe_json_callback']) && $self->json_callback_func = isset($_POST['xe_json_callback']));
+
+		(isset($_GET['xe_xml_callback']) && $self->xml_callback_func = isset($_GET['xe_xml_callback'])) or
+			(isset($_POST['xe_xml_callback']) && $self->xml_callback_func = isset($_POST['xe_xml_callback']));
+
 		($type && $self->request_method = $type) or
 				(strpos($_SERVER['CONTENT_TYPE'], 'json') && $self->request_method = 'JSON') or
 				(isset($GLOBALS['HTTP_RAW_POST_DATA']) && $self->request_method = 'XMLRPC') or
 				($self->js_callback_func && $self->request_method = 'JS_CALLBACK') or
+				($self->json_callback_func && $self->request_method = 'JSON') or
+				($self->xml_callback_func && $self->request_method = 'XMLRPC') or
 				($self->request_method = $_SERVER['REQUEST_METHOD']);
 	}
 
