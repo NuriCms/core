@@ -35,6 +35,25 @@ function doUpdateDeniedNickName(nick_name, mode, message)
 	);
 }
 
+/* managed E-mail Address functions */
+function doUpdateManagedEmailHost(email_host, mode, message)
+{
+	if(typeof(message)!='undefined' && !confirm(message)) return;
+
+	exec_xml(
+		'member',
+		'procMemberAdminUpdateManagedEmailHosts',
+		{email_hosts:email_host, mode:mode, email_hosts_count:jQuery('#managedEmailHost li').length},
+		function(){
+			if (mode == 'delete'){
+				jQuery('#managed_'+email_host.replace(/\./g,'\_\_')).remove();
+				jQuery('._managededEmailHostCount').html(jQuery('#managedEmailHost li').length);
+			}
+		},
+		['error','message','tpl']
+	);
+}
+
 jQuery(function($){
 	// hide form if enable_join is setted "No"
 	var suForm = $('table.__join_form'); // 회원가입 양식
@@ -117,7 +136,6 @@ jQuery(function($){
 			return;
 		}
 
-
 		ids = ids.replace(/\n/g, ',');
 
 		var tag;
@@ -135,6 +153,35 @@ jQuery(function($){
 		}
 
 		jQuery.exec_json('member.procMemberAdminInsertDeniedID', {'user_id': ids}, on_complete);
+
+	});
+	$('button._addManagedEmailHost').click(function(){
+		var hosts = $('#manage_email_host').val();
+		if(hosts == ''){
+			alert(xe.lang.msg_null_managed_emailhost);
+			$('#manage_email_host').focus();
+			return;
+		}
+
+		var tag;
+		function on_complete(data)
+		{
+			$('#manage_email_host').val('');
+
+			var hosts = $.trim(data.email_hosts);
+			if(hosts == '') return;
+			var uids = hosts.split("\n");
+			for (var i=0; i<uids.length; i++)
+			{
+				uids[i] = $.trim(uids[i]);
+				tag = '<li id="managed_'+uids[i].replace(/\./g,'\_\_')+'">'+uids[i]+' <button type="button" class="x_icon-remove" onclick="doUpdateManagedEmailHost(\''+uids[i]+'\',\'delete\',\''+xe.lang.confirm_delete+'\');return false;">'+xe.lang.cmd_delete+'</button></li>';
+				$('#managedEmailHost').append($(tag));
+			}
+
+			$('._managededEmailHostCount').html($('#managedEmailHost li').length);
+		}
+
+		$.exec_json('member.procMemberAdminUpdateManagedEmailHosts', {'email_hosts': hosts}, on_complete);
 
 	});
 

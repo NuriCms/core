@@ -166,7 +166,7 @@ class adminAdminController extends admin
 		$buff = '';
 		if(is_readable($siteDesignFile))
 		{
-			@include($siteDesignFile);
+			include($siteDesignFile);
 		}
 		else
 		{
@@ -461,10 +461,10 @@ class adminAdminController extends admin
 	function procAdminRemoveIcons()
 	{
 		$iconname = Context::get('iconname');
-		$file_exist = FileHandler::readFile(_XE_PATH_ . 'files/attach/xeicon/' . $iconname);
+		$file_exist = FileHandler::hasContent(_XE_PATH_ . 'files/attach/xeicon/' . $iconname);
 		if($file_exist)
 		{
-			@FileHandler::removeFile(_XE_PATH_ . 'files/attach/xeicon/' . $iconname);
+			FileHandler::removeFile(_XE_PATH_ . 'files/attach/xeicon/' . $iconname);
 		}
 		else
 		{

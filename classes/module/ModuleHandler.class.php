@@ -96,7 +96,7 @@ class ModuleHandler extends Handler
 		$called_position = 'before_module_init';
 		$oAddonController = getController('addon');
 		$addon_file = $oAddonController->getCacheFilePath(Mobile::isFromMobilePhone() ? 'mobile' : 'pc');
-		@include($addon_file);
+		if(is_readable($addon_file)) include($addon_file);
 	}
 
 	/**
@@ -881,9 +881,9 @@ class ModuleHandler extends Handler
 								$oMenuAdminController = getAdminController('menu');
 								$homeMenuCacheFile = $oMenuAdminController->getHomeMenuCacheFile();
 
-								if(file_exists($homeMenuCacheFile))
+								if(is_readable($homeMenuCacheFile))
 								{
-									@include($homeMenuCacheFile);
+									include($homeMenuCacheFile);
 								}
 
 								if(!$menu->menu_srl)
@@ -898,9 +898,9 @@ class ModuleHandler extends Handler
 									$menu->php_file = str_replace($menu->menu_srl, $homeMenuSrl, $menu->php_file);
 								}
 							}
-							if(file_exists($menu->php_file))
+							if(is_readable($menu->php_file))
 							{
-								@include($menu->php_file);
+								include($menu->php_file);
 							}
 							Context::set($menu_id, $menu);
 						}
@@ -1037,10 +1037,10 @@ class ModuleHandler extends Handler
 			$oModule->setModulePath($class_path);
 
 			// If the module has a constructor, run it.
-			if(!isset($GLOBALS['_called_constructor'][$instance_name]))
+			if(!isset($GLOBALS['_called_constructor'][$instance_name]) && trim($instance_name))
 			{
 				$GLOBALS['_called_constructor'][$instance_name] = TRUE;
-				if(@method_exists($oModule, $instance_name))
+				if(method_exists($oModule, $instance_name))
 				{
 					$oModule->{$instance_name}();
 				}
