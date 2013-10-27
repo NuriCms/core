@@ -458,7 +458,7 @@
 					<input type="button" value="{$lang->edit->delete_selected}" class="AXButton" onclick="myUpload.deleteSelect();" />
 					<input type="button" value="{$lang->AXdelete_all}" class="AXButton" onclick="myUpload.deleteSelect('all');" />
 					<input type="button" value="{$lang->edit->link_file}" class="AXButton Classic" onclick="myUpload.reloadNuri.insertUploadedFile('{$editor_sequence}');" />
-					<div class="AXlogo"><a href=-"http://www.axisj.com/" title="Awesome UI library AXISJ" target="_blank"><img src="{$tpl_path}/_AXJ/ui/default/img/axisj_logo.png" alt="axisJ"/></a></div>
+					<div class="AXlogo"><a href="http://www.axisj.com/" title="Awesome UI library AXISJ" target="_blank"><img src="{$tpl_path}/_AXJ/ui/default/img/axisj_logo.png" alt="axisJ"/></a></div>
 					<div class="file_attach_info" id="uploader_status_{$editor_sequence}">
 						{$lang->allowed_attach_size} : {FileHandler::filesize($attached_size)} / {FileHandler::filesize($file_config->allowed_attach_size)} <br />
 						{$lang->allowed_filesize} : (max {FileHandler::filesize($file_config->allowed_filesize)}) ({$lang->allowed_filetypes} : {$file_config->allowed_filetypes})
