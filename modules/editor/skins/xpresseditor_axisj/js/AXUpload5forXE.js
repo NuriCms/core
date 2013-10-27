@@ -454,7 +454,7 @@ var fnObj = {
 			if(!is_def(seq)) return;
 
 			cfg = $.extend({
-				url : request_uri.replace(/^https/i, 'http')+'index.php',
+				url : request_uri+'index.php',
 				sessionName : "PHPSESSID"
 			}, cfg);
 		

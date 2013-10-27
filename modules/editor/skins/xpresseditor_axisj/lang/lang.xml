@@ -2,32 +2,42 @@
 <lang>
 	<item name="AXupload_cancel">
 		<value xml:lang="ko"><![CDATA[전송 중지]]></value>
+		<value xml:lang="en"><![CDATA[Stop sending]]></value>
 	</item>
 	<item name="AXdelete_all">
 		<value xml:lang="ko"><![CDATA[모두 삭제]]></value>
+		<value xml:lang="en"><![CDATA[Remove all]]></value>
 	</item>
 	<item name="AXerror_fileSize">
 		<value xml:lang="ko"><![CDATA[파일사이즈가 초과된 파일을 업로드 할 수 없습니다. 업로드 목록에서 제외 합니다.\n(%s : %s)]]></value>
+		<value xml:lang="en"><![CDATA[File is too big, excluded from the que.\n(%s : %s)]]></value>
 	</item>
 	<item name="AXerror_html5Support">
-		<value xml:lang="ko"><![CDATA[The File APIs are not fully supported in this browser.]]></value>
+		<value xml:lang="ko"><![CDATA[이 브라우저는 HTML5 파일 전송을 지원하지 않습니다.]]></value>
+		<value xml:lang="en"><![CDATA[The File APIs are not fully supported in this browser.]]></value>
 	</item>
 	<item name="AXerror_deleteQueue">
 		<value xml:lang="ko"><![CDATA[등록된 파일이 없습니다.]]></value>
+		<value xml:lang="en"><![CDATA[There is no file.]]></value>
 	</item>
 	<item name="AXuploadSelectTxt">
 		<value xml:lang="ko"><![CDATA[업로드 하실 파일을 선택해주세요.]]></value>
+		<value xml:lang="en"><![CDATA[Select files to upload.]]></value>
 	</item>
 	<item name="AXdropZoneTxt">
 		<value xml:lang="ko"><![CDATA[업로드할 파일을 여기에 놓습니다.]]></value>
+		<value xml:lang="en"><![CDATA[Drag and Drop files to upload, here.]]></value>
 	</item>
 	<item name="AXcancelMsg">
 		<value xml:lang="ko"><![CDATA[프로세스를 취소 하시겠습니까?]]></value>
+		<value xml:lang="en"><![CDATA[Are you sure to cancel?]]></value>
 	</item>
 	<item name="AXallowed_filetypes">
-		<value xml:lang="ko"><![CDATA[허용확장자가 아닙니다.]]></value>
+		<value xml:lang="ko"><![CDATA[허용된 확장자가 아닙니다.]]></value>
+		<value xml:lang="en"><![CDATA[Invalid File Type.]]></value>
 	</item>
 	<item name="AXuploadFileSize">
 		<value xml:lang="ko"><![CDATA[허용하는 파일 사이즈를 초과하였습니다.]]></value>
+		<value xml:lang="en"><![CDATA[Upload limit exceeded.]]></value>
 	</item>	
 </lang>
