@@ -87,10 +87,10 @@ class DBMysql extends DB
 		}
 
 		// Attempt to connect
-		$result = @mysql_connect($connection["db_hostname"], $connection["db_userid"], $connection["db_password"]);
+		$result = mysql_connect($connection["db_hostname"], $connection["db_userid"], $connection["db_password"]);
 		if(!$result)
 		{
-			exit('XE cannot connect to DB.');
+			exit('NURI cannot connect to DB.');
 		}
 
 		if(mysql_error())
@@ -101,11 +101,15 @@ class DBMysql extends DB
 		// Error appears if the version is lower than 4.1
 		if(mysql_get_server_info($result) < "4.1")
 		{
-			$this->setError(-1, "XE cannot be installed under the version of mysql 4.1. Current mysql version is " . mysql_get_server_info());
+			$this->setError(-1, "NURI cannot be installed under the version of mysql 4.1. Current mysql version is " . mysql_get_server_info());
 			return;
 		}
 		// select db
-		@mysql_select_db($connection["db_database"], $result);
+		$output = mysql_select_db($connection["db_database"], $result);
+		if(!$output)
+		{
+			exit('NURI cannot select database.');
+		}
 		if(mysql_error())
 		{
 			$this->setError(mysql_errno(), mysql_error());
@@ -135,7 +139,7 @@ class DBMysql extends DB
 	 */
 	function _close($connection)
 	{
-		@mysql_close($connection);
+		mysql_close($connection);
 	}
 
 	/**

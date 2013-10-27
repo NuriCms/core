@@ -419,7 +419,7 @@ class Context
 		$config_file = $self->getConfigFile();
 		if(is_readable($config_file))
 		{
-			@include($config_file);
+			include($config_file);
 		}
 
 		// If master_db information does not exist, the config file needs to be updated
@@ -816,7 +816,7 @@ class Context
 		if($filename && is_readable($filename))
 		{
 			$self->loaded_lang_files[] = $filename;
-			@include($filename);
+			include($filename);
 		}
 		else
 		{
@@ -1593,9 +1593,9 @@ class Context
 							$queries[] = $key . '[' . $k . ']=' . urlencode($v);
 						}
 					}
-					else
+					elseif(is_string($val))
 					{
-						$queries[] = $key . '=' . @urlencode($val);
+						$queries[] = $key . '=' . urlencode($val);
 					}
 				}
 				if(count($queries))
