@@ -33,7 +33,7 @@
 	<item name="AXdropZoneTxt">
 		<value xml:lang="ko"><![CDATA[업로드 하실 파일을 여기에 놓습니다.]]></value>
 		<value xml:lang="en"><![CDATA[Drag and Drop files to upload, here.]]></value>
-		<value xml:lang="jp"><![CDATA[アップロードするファイルをここのドロップしてください。]]></value>
+		<value xml:lang="jp"><![CDATA[アップロードするファイルをここへドロップしてください。]]></value>
 	</item>
 	<item name="AXcancelMsg">
 		<value xml:lang="ko"><![CDATA[프로세스를 취소 하시겠습니까?]]></value>
