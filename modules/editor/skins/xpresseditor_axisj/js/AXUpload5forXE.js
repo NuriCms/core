@@ -1,7 +1,7 @@
  /**
  * @Original_author axisJ Javascript Library (tom@axisj.com)
  * @Adaptor NURI Project (developer@nuricms.org)
- * @brief axisJ Html5 Multiple Uploader for NurlCms
+ * @brief HTML5 file uploader based on AXISJ(www.axisj.com) AXUpload5
  */
 var uploadedFiles    = [];
 var uploaderSettings = [];
@@ -12,8 +12,8 @@ var uploadAutosaveChecker = false;
 var $ = jQuery.noConflict();
 
 // NuriCms: AXUpload5의 추가 객체생성
-var AXUpload5forNuri = Class.create(AXUpload5, {
-	reloadNuri: {
+var AXUpload5 = Class.create(AXUpload5, {
+	custom: {
 		axDeleteQueue: 0, // 삭제 발생시의 큐
 		reloadFileList: function(cfg) { // 서버로부터 파일리스트 요청(임시저장 처리용)
 			var params = {
@@ -29,7 +29,7 @@ var AXUpload5forNuri = Class.create(AXUpload5, {
 					'file',
 					'getFileList',
 					params,
-					myUpload.reloadNuri.on_complete,
+					myUpload.custom.on_complete,
 					'error,message,files,upload_status,upload_target_srl,editor_sequence,left_size'.split(',')
 				);
 			}
@@ -51,14 +51,14 @@ var AXUpload5forNuri = Class.create(AXUpload5, {
 			if(target_srl) {
 				if(editorRelKeys[seq].primary.value != target_srl) {
 					editorRelKeys[seq].primary.value = target_srl;
-					myUpload.reloadNuri.autosave();
+					myUpload.custom.autosave();
 				}
 
 				editorRelKeys[seq].primary.value = target_srl;
 			}
 	
 			// 문서 강제 자동저장 1번만 사용 ( 첨부파일 target_srl로 자동 저장문서를 저장하기 위한 용도일 뿐 )
-			if(!uploadAutosaveChecker) myUpload.reloadNuri.autosave();
+			if(!uploadAutosaveChecker) myUpload.custom.autosave();
 		},
 		insertUploadedFile: function(editorSequence, files) { // 본문 삽입
 			var settings = uploadSettingObj[editorSequence],
@@ -161,12 +161,13 @@ var AXUpload5forNuri = Class.create(AXUpload5, {
 		if(!this.supportHtml5){
 			inputFileMultiple = '';
 		}
-		
+
+		//* NuriCms(bug fix) : form안에 AXUpload5가 선언되어 있으면 파일첨부 동작이 안되는 증상 해결 *//
 		var po = [];
 		po.push('<div style="position:relative;">');
 		po.push('	<table style="table-layout:fixed;width:100%;"><tbody><tr><td id="'+cfg.targetID+'_AX_selectorTD">');
 		po.push('	<input type="file" id="'+cfg.targetID+'_AX_files" '+inputFileMultiple+' accept="'+inputFileAccept+'" style="position:absolute;left:0px;top:0px;margin:0px;padding:0px;-moz-opacity: 0.0;opacity:.00;filter: alpha(opacity=0);" />');
-		po.push('	<button class="AXButton '+cfg.targetButtonClass+'" id="'+cfg.targetID+'_AX_selector"><span class="AXFileSelector">'+(AXConfig.AXUpload5.buttonTxt||"Upload files")+'</span></button>');
+		po.push('	<button class="AXButton '+cfg.targetButtonClass+'" id="'+cfg.targetID+'_AX_selector" type="button"><span class="AXFileSelector">'+(AXConfig.AXUpload5.buttonTxt||"Upload files")+'</span></button>');
 		po.push('	</td>');
 		
 		if(cfg.isSingleUpload){
@@ -187,7 +188,6 @@ var AXUpload5forNuri = Class.create(AXUpload5, {
 		$('#'+cfg.targetID+'_AX_selector').click(function(){
 			pauseQueue();
 			$('#'+cfg.targetID+'_AX_files').click();
-			return false; //* NuriCms(bug fix) : form안에 AXUpload5가 선언되어 있으면 파일첨부 동작이 안되는 증상 해결 *//
 		});
 		
 		var onFileSelect = this.onFileSelect.bind(this);
@@ -230,6 +230,274 @@ var AXUpload5forNuri = Class.create(AXUpload5, {
 					beselectClassName : "beSelected"
 				});
 			}
+		}
+	},
+	swfinit: function(reset){ // AXUpload5 swfinit (버그 처리를 위해 선언)
+		var cfg = this.config;
+		this.target = $("#"+cfg.targetID);
+		
+		var po = [];
+		po.push('<div style="position:relative;">');
+		po.push('	<table style="table-layout:fixed;width:100%;"><tbody><tr><td id="'+cfg.targetID+'_AX_selectorTD">');
+		po.push('	<button class="AXButton '+cfg.targetButtonClass+'" id="'+cfg.targetID+'_AX_selector" type="button"><span class="AXFileSelector">'+(AXConfig.AXUpload5.buttonTxt||"Upload files")+'</span></button>');
+		po.push('	<span id="spanButtonPlaceholder" class="AXUpload5flashUploadButton"></span>');
+		po.push('	</td>');
+		
+		if(cfg.isSingleUpload){
+			po.push('<td>');
+			po.push('<div class="AXFileDisplay" id="'+cfg.targetID+'_AX_display">'+AXConfig.AXUpload5.uploadSelectTxt+'</div>');
+			po.push('</td>');
+		}
+		
+		po.push('	<tr></tbody></table>');
+		po.push('</div>');
+		this.target.empty();
+		this.target.append(po.join(''));		
+		
+		$('#'+cfg.targetID+'_AX_selectorTD').css({width:$('#'+cfg.targetID+'_AX_selector').outerWidth()+5});
+		
+		var btnW = $('#'+cfg.targetID+'_AX_selector').outerWidth();
+		var btnH = $('#'+cfg.targetID+'_AX_selector').outerHeight();
+		
+		// functions --------------------------------------------------------------- s
+		var uploadSuccess = this.uploadSuccess.bind(this);
+		var onClickDeleteButton = this.onClickDeleteButton.bind(this);
+		var onClickFileTitle = this.onClickFileTitle.bind(this);
+		
+		var file_dialog_complete_handler = function(numFilesSelected, numFilesQueued){
+			if (numFilesSelected > 0) {
+				if (this.swfu.getStats().files_queued > 0) {
+					//if(this.settings.onStartUpload) this.settings.onStartUpload();
+					if(cfg.onStart) cfg.onStart.call(this.queue);
+				}
+			}
+			this.swfu.startUpload();
+		};
+		var file_dialog_complete_handler_bind = file_dialog_complete_handler.bind(this);
+		//--
+		var file_queued_handler = function(file){
+			if(cfg.isSingleUpload){
+				var myFile = this.uploadedList.first();
+				if(myFile){
+					if(!confirm(AXConfig.AXUpload5.deleteConfirm)){
+						this.cancelUpload();
+					};
+					var uploadFn = function(){
+						var itemID = 'AX_'+ file.id;
+						this.queue.push({id:itemID, file:file});
+						$("#" + cfg.targetID+'_AX_display').empty();
+						$("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, file));
+					};
+					this.deleteFile(myFile, uploadFn.bind(this));
+					return;
+				}else{
+					var itemID = 'AX_'+ file.id;
+					this.queue.push({id:itemID, file:file});
+					$("#" + cfg.targetID+'_AX_display').empty();
+					$("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, file));
+				}
+			}else{
+				//cfg.uploadMaxFileCount
+				var uploadedCount = this.uploadedList.length;
+				if(cfg.uploadMaxFileCount != 0){ //* NuriCms(bug fix) : 0은 무제한 처리가 안되던 문제 해결 *//
+					if(uploadedCount >= cfg.uploadMaxFileCount){
+						cfg.onError("fileCount");
+						this.cancelUpload();
+						return;
+					}
+				}
+				
+				//trace(file);
+				//{"filestatus":-1, "name":"20130708175735_1.jpg", "type":".jpg", "id":"SWFUpload_0_0", "index":0, "modificationdate":"2013-10-04T08:51:27Z", "uploadtype":0, "post":{}, "size":891324, "creationdate":"2013-10-04T08:52:02Z"} 
+				var itemID = 'AX_'+ file.id;
+				this.queue.push({id:itemID, file:file});
+				//큐박스에 아이템 추가
+				$("#" + cfg.queueBoxID).prepend(this.getItemTag(itemID, file));
+				$("#" + cfg.queueBoxID).find("#"+itemID).fadeIn();
+			}
+		};
+		var file_queued_handler_bind = file_queued_handler.bind(this);
+		//--
+		var file_queue_error_handler = function(file, errorCode, message){
+			try {
+				if (errorCode === SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED) {
+					alert("You have attempted to queue too many files.\n" + (message === 0 ? "You have reached the upload limit." : "You may select " + (message > 1 ? "up to " + message + " files." : "one file.")));
+					return;
+				}
+				this.cancelUpload();
+				if(cfg.onComplete) cfg.onComplete.call(this.uploadedList, this.uploadedList);
+
+				switch (errorCode) {
+				case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
+					this.showMSG("File is too big.");
+					this.swfu.debug("Error Code: File too big, File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
+					break;
+				case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
+					this.showMSG("Cannot upload Zero Byte files.");
+					this.swfu.debug("Error Code: Zero byte file, File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
+					break;
+				case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
+					this.showMSG("Invalid File Type.");
+					this.swfu.debug("Error Code: Invalid File Type, File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
+					break;
+				default:
+					if (file !== null) {
+						this.showMSG("Unhandled Error");
+					}
+					this.swfu.debug("Error Code: " + errorCode + ", File name: " + file.name + ", File size: " + file.size + ", Message: " + message);
+					break;
+				}
+			} catch (ex) {
+			    this.debug(ex);
+			}
+		};
+		var file_queue_error_handler_bind = file_queue_error_handler.bind(this);
+		//--
+		var upload_start_handler = function(){
+			if(this.isSingleUpload){
+
+			}else{
+				if(cfg.uploadMaxFileCount != 0){
+					if(cfg.uploadMaxFileCount <= this.uploadedList.length){
+						this.cancelUpload();
+					}
+				}
+			}
+		};
+		var upload_start_handler_bind = upload_start_handler.bind(this);
+		//--
+		var upload_progress_handler = function(file, bytesLoaded, bytesTotal){
+			var itemID = 'AX_'+ file.id;
+			if(cfg.isSingleUpload){
+				$("#"+itemID).find(".AXUploadProcessBar").width( ((bytesLoaded / bytesTotal) * 100).round(2)+"%" );
+			}else{
+				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcessBar").width( ((bytesLoaded / bytesTotal) * 100).round(2)+"%" );
+			}
+		};
+		var upload_progress_handler_bind = upload_progress_handler.bind(this);
+		//--
+		var upload_success_handler = function(file, res){
+			var itemID = 'AX_'+ file.id;
+			
+			try{if(typeof res == "string") res = res.object();}catch(e){trace(e);}
+			if(cfg.isSingleUpload){
+				
+				$("#"+itemID+" .AXUploadBtns").show();
+				$("#"+itemID+" .AXUploadLabel").show();
+				$("#"+itemID+" .AXUploadTit").show();
+				
+				$("#"+itemID+" .AXUploadProcess").hide();
+								
+				uploadSuccess(file, itemID, res);
+				// --------------------- s
+				$("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
+					onClickDeleteButton(itemID);
+				});
+				if(cfg.onClickUploadedItem){
+					$("#"+itemID+" .AXUploadDownload").bind("click", function(){
+						onClickFileTitle(itemID);
+					});
+				}
+				
+			}else{
+				
+				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show();
+				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
+				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
+				
+				if(res[cfg.fileKeys.thumbPath]){
+					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
+						"background-image":"url('"+(res[cfg.fileKeys.thumbPath]||"").dec()+"')",
+						"background-size":"100% auto",
+						"background-position":"center center"
+					});
+				}else{
+					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({"background-image":"url()"});
+					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").html((res[cfg.fileKeys.type]||"").dec().replace(".", ""));
+				}
+				
+				uploadSuccess(file, itemID, res);
+				// --------------------- s
+				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
+					onClickDeleteButton(itemID);
+				});
+				if(cfg.onClickUploadedItem){
+					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadDownload").bind("click", function(){
+						onClickFileTitle(itemID);
+					});
+				}
+			}
+			
+			//큐에서 제거
+			var updateQueue = [];
+			$.each(this.queue, function(){
+				if(this.id != itemID) updateQueue.push(this);
+			});
+			this.queue = updateQueue;			
+		};
+		var upload_success_handler_bind = upload_success_handler.bind(this);
+		//--
+		var upload_complete_handler = function(){
+			if(this.isSingleUpload){
+				this.uploadComplete();
+			}else{
+				if (this.swfu.getStats().files_queued === 0) {
+					this.uploadComplete();
+				}else{
+					this.swfu.startUpload();		
+				}
+			}
+		};
+		var upload_complete_handler_bind = upload_complete_handler.bind(this);
+		//--
+		var queue_complete_handler = function(){
+			//alert("end");
+		};
+		var queue_complete_handler_bind = queue_complete_handler.bind(this);
+		// functions --------------------------------------------------------------- e
+		
+		var settings = {
+			flash_url : cfg.flash_url,
+			flash9_url : cfg.flash9_url,
+			upload_url: cfg.uploadUrl,
+			file_post_name: cfg.uploadFileName,
+			post_params: cfg.uploadPars,
+			file_size_limit : cfg.uploadMaxFileSize,
+			file_types : "*.*",
+			file_types_description : "All Files",
+			file_upload_limit : 0, //cfg.uploadMaxFileCount,
+			file_queue_limit : 0,
+			debug: false,
+	
+			// Button Settings
+			button_image_url : "null",
+			button_placeholder_id : "spanButtonPlaceholder",
+			button_width: btnW,
+			button_height: btnH,
+	
+			// The event handler functions are defined in handlers.js
+			swfupload_preload_handler : function(){},
+			swfupload_load_failed_handler : function(){},
+			swfupload_loaded_handler : function(){},
+			file_queued_handler : file_queued_handler_bind,
+			file_queue_error_handler : file_queue_error_handler_bind,
+			file_dialog_complete_handler : file_dialog_complete_handler_bind,
+			upload_start_handler : upload_start_handler_bind,
+			upload_progress_handler : upload_progress_handler_bind,
+			upload_error_handler : function(){},
+			upload_success_handler : upload_success_handler_bind,
+			upload_complete_handler : upload_complete_handler_bind,
+			queue_complete_handler : queue_complete_handler_bind	// Queue plugin event
+		};
+		this.swfu = new SWFUpload(settings);
+		
+		if(cfg.queueBoxID){
+			this.multiSelector = new AXMultiSelect();
+			this.multiSelector.setConfig({
+				selectStage       : cfg.queueBoxID,
+				selectClassName   : "readyselect",
+				beselectClassName : "beSelected"
+			});
 		}
 	},
 	setUploadedList: function(files){ // 파일박스 리스트 추가
@@ -389,8 +657,8 @@ var AXUpload5forNuri = Class.create(AXUpload5, {
 					if(onEnd) onEnd();
 
 					// NuriCms: delete 큐가 종료 될때 onComplete를 호출
-					myUpload.reloadNuri.axDeleteQueue -= 1;
-					if(myUpload.reloadNuri.axDeleteQueue < 1) {
+					myUpload.custom.axDeleteQueue -= 1;
+					if(myUpload.custom.axDeleteQueue < 1) {
 						if(cfg.onComplete) cfg.onComplete.call(true, true);
 					}
 				}else{
@@ -418,7 +686,7 @@ var AXUpload5forNuri = Class.create(AXUpload5, {
 				deleteQueue.push(this.id);
 			});
 			this.ccDelete(deleteQueue, 0);
-			myUpload.reloadNuri.axDeleteQueue = deleteQueue.length; // NuriCms: delete 큐 생성
+			myUpload.custom.axDeleteQueue = deleteQueue.length; // NuriCms: delete 큐 생성
 			deleteQueue = null;
 		}else{
 			if(!this.multiSelector) toast.push({body:uploadSettingObj[editorSequence].lang.msg_file_cart_is_null, type:'Warning'}); // NuriCms: 삭제 대상이 없으면 메시지를 출력
@@ -432,7 +700,7 @@ var AXUpload5forNuri = Class.create(AXUpload5, {
 					deleteQueue.push(this.id);
 				});
 				this.ccDelete(deleteQueue, 0);
-				myUpload.reloadNuri.axDeleteQueue = deleteQueue.length; // NuriCms: delete 큐 생성
+				myUpload.custom.axDeleteQueue = deleteQueue.length; // NuriCms: delete 큐 생성
 				deleteQueue = null;
 			}else{
 				toast.push({body:uploadSettingObj[editorSequence].lang.msg_file_cart_is_null, type:'Warning'}); // NuriCms: 삭제 대상이 없으면 메시지를 출력
@@ -442,7 +710,7 @@ var AXUpload5forNuri = Class.create(AXUpload5, {
 });
 
  // NuriCms: 설정용 객체
-var myUpload = new AXUpload5forNuri();
+var myUpload = new AXUpload5();
 
 var fnObj = {
 	pageStart: function(cfg){
@@ -487,11 +755,11 @@ var fnObj = {
 				dropBoxID:"uploadQueueBox",
 				queueBoxID:"uploadQueueBox",
 				// html 5를 지원하지 않는 브라우저를 위한 swf upload 설정 원치 않는 경우엔 선언 하지 않아도 됩니다. ------- s
-				flash_url : "_AXJ/lib/swfupload.swf",
-				flash9_url : "_AXJ/lib/swfupload_fp9.swf",
+				flash_url : request_uri+"modules/editor/skins/xpresseditor_axisj/_AXJ/lib/swfupload.swf",
+				flash9_url : request_uri+"modules/editor/skins/xpresseditor_axisj/_AXJ/lib/swfupload_fp9.swf",
 				// --------- e
 				onClickUploadedItem: function(){ // 업로드된 목록을 클릭했을 때.
-					myUpload.reloadNuri.insertUploadedFile(cfg.editorSequence, this);
+					myUpload.custom.insertUploadedFile(cfg.editorSequence, this);
 				},
 				uploadMaxFileSize:cfg.uploadMaxFileSize, // 업로드될 개별 파일 사이즈 (클라이언트에서 제한하는 사이즈 이지 서버에서 설정되는 값이 아닙니다.)
 				uploadMaxFileCount:0, // 업로드될 파일갯수 제한 0 은 무제한
@@ -524,7 +792,7 @@ var fnObj = {
 					$("#uploadCancelBtn").get(0).disabled = true; // 전송중지 버튼 제어
 					
 					// NuriCms: 업로드, 삭제 등 프로세스가 정상종료될 경우 서버로부터 정보를 받아옴(임시저장 처리용)
-					myUpload.reloadNuri.reloadFileList(uploadSettingObj[cfg.editorSequence]);
+					myUpload.custom.reloadFileList(uploadSettingObj[cfg.editorSequence]);
 
 					if(data == true){
 						fnObj.upload.getFileList(cfg, true); // NuriCms: 삭제 완료 시 동작
@@ -561,6 +829,9 @@ var fnObj = {
 				},
 				onError: function(errorType, extData){ // NuriCms: 각종 에러 메시지 처리
 					if(errorType == "html5Support"){
+						// 브라우저 접근당 1회만 알림을 발생
+						if(AXUtil.getCookie('AXUpload5mode')) return false;
+						AXUtil.setCookie('AXUpload5mode', 'SWFUpload');
 						toast.push({body:cfg.lang.error_html5Support, type:'Caution'});
 					}else if(errorType == "fileSize"){
 						toast.push({body:sprintf(cfg.lang.error_fileSize, extData.name, extData.size.byte()), type:'Warning'});
