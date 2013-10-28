@@ -319,7 +319,7 @@ var DrEditor = xe.createApp('DrEditor', {
 				.appendTo(par.eq(0));
 		}
 
-		if ($.browser.msie) {
+		if (navigator.appName == 'Microsoft Internet Explorer') {
 			try { document.selection.createRange().collapse(true) } catch(e) {};
 		}
 	},
@@ -1443,7 +1443,7 @@ var ImageWriter = xe.createPlugin('ImageWriter', {
 		}
 
 		cfg.editor.show();
-		(($.browser.msie||$.browser.opera)?cfg.desc:cfg.file).focus();
+		((navigator.appName == 'Microsoft Internet Explorer'||navigator.userAgent.indexOf("Opera") > -1)?cfg.desc:cfg.file).focus();
 		this.cast('SCROLL_INTO_VIEW', [seq, cfg.editor]);
 	},
 	API_CLOSE_IMG_EDITOR : function(sender, params) {
@@ -2084,8 +2084,8 @@ var ListWriter = xe.createPlugin('ListWriter', {
 						prev = lis.eq(n_li - 1);
 						val  = prev.val();
 
-						prev.focus().val( val + ($.browser.opera?' ':'') + obj.val() );
-						this.set_pos(prev, val.length + ($.browser.opera?1:0));
+						prev.focus().val( val + ((navigator.userAgent.indexOf("Opera") > -1)?' ':'') + obj.val() );
+						this.set_pos(prev, val.length + ((navigator.userAgent.indexOf("Opera") > -1)?1:0));
 
 						// remove current item
 						obj.parent().remove();
@@ -2104,7 +2104,7 @@ var ListWriter = xe.createPlugin('ListWriter', {
 						next = lis.eq(n_li + 1);
 						val  = obj.val();
 
-						obj.val( val + ($.browser.opera?' ':'') + next.val() );
+						obj.val( val + ((navigator.userAgent.indexOf("Opera") > -1)?' ':'') + next.val() );
 						this.set_pos(obj, val.length);
 
 						// remove next item
@@ -2588,7 +2588,7 @@ function translate_cite(str) {
 }
 
 function is_left_click(event) {
-	var ie = $.browser.msie;
+	var ie = (navigator.appName == 'Microsoft Internet Explorer');
 	return (typeof(event.button)=='undefined' || (ie && event.button == 1) || (!ie && event.button == 0));
 }
 

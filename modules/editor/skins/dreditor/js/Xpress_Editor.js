@@ -33,7 +33,7 @@ $.extend({
 	}
 });
 
-$.browser.nVersion = parseFloat($.browser.version);
+//$.browser.nVersion = parseFloat($.browser.version);
 
 function Class_extend(superDef) {
 	var Super = superDef.prototype;
@@ -1597,7 +1597,7 @@ xe.SimpleSelection = function(win){
 
 	this.init(win);
 
-	if(jQuery.browser.msie)
+	if(navigator.appName == 'Microsoft Internet Explorer')
 		xe.SimpleSelectionImpl_IE.apply(this);
 	else
 		xe.SimpleSelectionImpl_FF.apply(this);
@@ -1848,7 +1848,7 @@ xe.SimpleSelectionImpl_IE = function(){
 
 xe.DOMFix = new (jQuery.Class({
 	$init : function(){
-		if(jQuery.browser.msie || jQuery.browser.opera){
+		if(navigator.appName == 'Microsoft Internet Explorer' || jQuery.browser.opera){
 			this.childNodes = this._childNodes_Fix;
 			this.parentNode = this._parentNode_Fix;
 		}else{
@@ -1907,11 +1907,13 @@ xe.FindReplace = jQuery.Class({
 		this.document = this.window.document;
 
 		if(this.document.domain != this.document.location.hostname){
+			/*
 			if(jQuery.browser.mozilla && jQuery.browser.nVersion < 3){
 				this.bBrowserSupported = false;
 				this.find = function(){return 3};
 				return;
 			}
+			*/
 		}
 
 		this.bBrowserSupported = true;
@@ -2201,11 +2203,13 @@ xe.CorePlugin = jQuery.Class({
 	name : "Utils",
 
 	$init : function(){
-		if(jQuery.browser.msie && jQuery.browser.nVersion == 6){
+		/*
+		if(navigator.appName == 'Microsoft Internet Explorer' && jQuery.browser.nVersion == 6){
 			try{
 				document.execCommand('BackgroundImageCache', false, true);
 			}catch(e){}
 		}
+		*/
 	},
 
 	$ON_ATTACH_HOVER_EVENTS : function(aElms, sHoverClass){
@@ -2303,7 +2307,7 @@ xe.Hotkey = jQuery.Class({
 			equal	 : 61
 		};
 
-		if (jQuery.browser.msie || jQuery.browser.safari) {
+		if (navigator.appName == 'Microsoft Internet Explorer' || jQuery.browser.safari) {
 			this.keyhash.hyphen = 189; // (-)
 			this.keyhash.equal = 187;  // (=)
 			this.keyhash.meta  = 91;   // meta
@@ -3130,7 +3134,7 @@ xe.XE_EditingArea_WYSIWYG = jQuery.Class({
 		// uncomment this line if you wish to use the IE-style cursor in FF
 		this.getDocument().body.style.cursor = "text";
 
-		if(jQuery.browser.msie){
+		if(navigator.appName == 'Microsoft Internet Explorer'){
 			jQuery(this.doc)
 				.unbind('keydown.ea')
 				.bind('keydown.ea', jQuery.fnBind(
@@ -3217,7 +3221,7 @@ xe.XE_EditingArea_WYSIWYG = jQuery.Class({
 		oSelection.pasteHTML(sHTML);
 
 		// every browser except for IE may modify the innerHTML when it is inserted
-		if(!jQuery.browser.msie){
+		if(!(navigator.appName == 'Microsoft Internet Explorer')){
 			var sTmpBookmark = oSelection.placeStringBookmark();
 			this.oApp.getWYSIWYGDocument().body.innerHTML = this.oApp.getWYSIWYGDocument().body.innerHTML;
 			oSelection.moveToBookmark(sTmpBookmark);
@@ -3310,7 +3314,7 @@ xe.XE_EditingArea_WYSIWYG = jQuery.Class({
 	},
 
 	_enableWYSIWYG : function(){
-		if (jQuery.browser.msie){
+		if (navigator.appName == 'Microsoft Internet Explorer'){
 			var fake = jQuery('<input type="text" style="position:absolute;width:1px;height:1px;left:-9px">');
 			jQuery(document.body).prepend(fake);
 			fake.focus();
@@ -3324,7 +3328,7 @@ xe.XE_EditingArea_WYSIWYG = jQuery.Class({
 	},
 
 	_disableWYSIWYG : function(){
-		if (jQuery.browser.msie){
+		if (navigator.appName == 'Microsoft Internet Explorer'){
 			this.getDocument().body.contentEditable = false;
 		} else {
 			this.getDocument().designMode = "off";
@@ -3491,8 +3495,10 @@ xe.XE_WYSIWYGStyler = jQuery.Class({
 			oSelection.select();
 
 			// FF3 will actually display %uFEFF when it is followed by a number AND certain font-family is used(like Gulim), so remove the chcaracter for FF3
-			if(jQuery.browser.mozilla && jQuery.browser.nVersion == 3)
+			/*
+			if(navigator.userAgent.indexOf('Firefox') > -1 && jQuery.browser.nVersion == 3)
 				oSpan.innerHTML = "";
+			*/
 
 			return;
 		}
@@ -4368,7 +4374,7 @@ xe.XE_SCharacter = jQuery.Class({
 	name : "XE_SCharacter",
 
 	$init : function(oAppContainer){
-		this.bIE = jQuery.browser.msie;
+		this.bIE = (navigator.appName == 'Microsoft Internet Explorer');
 
 		this._assignHTMLObjects(oAppContainer);
 
@@ -5256,7 +5262,7 @@ xe.XE_Table = jQuery.Class({
 		var sBGColorCode = this.oBGColorInput.value;
 		var iBorderWidth = this.oBorderWidthInput.value;
 		var sTD = "";
-		if(jQuery.browser.msie){
+		if(navigator.appName == 'Microsoft Internet Explorer'){
 			sTD = "<td><p></p></td>";
 		}else{
 			if(jQuery.browser.firefox){
@@ -5420,7 +5426,7 @@ xe.XE_XHTMLFormatter = $.Class({
 		// remove all scripts
 		sContent = sContent.replace(regex_script, '');
 
-		if (jQuery.browser.msie) {
+		if (navigator.appName == 'Microsoft Internet Explorer') {
 			// remove jQuery attributes
 			sContent = sContent.replace(regex_jquery, '');
 
@@ -5600,7 +5606,7 @@ xe.XE_FormatWithSelectUI = jQuery.Class({
 		var blockName = this.oApp.getWYSIWYGDocument().queryCommandValue("FormatBlock");
 
 		if (!blockName) return (this.elFormatSelect.selectedIndex = 0);
-		if (jQuery.browser.msie && /([0-9])/.test(blockName)) blockName = 'h'+(RegExp.$1);
+		if (navigator.appName == 'Microsoft Internet Explorer' && /([0-9])/.test(blockName)) blockName = 'h'+(RegExp.$1);
 
 		this.elFormatSelect.value = blockName.toLowerCase();
 		if(this.elFormatSelect.selectedIndex < 0) this.elFormatSelect.selectedIndex = 0;
@@ -5609,7 +5615,7 @@ xe.XE_FormatWithSelectUI = jQuery.Class({
 	$ON_SET_FORMAT_FROM_SELECT_UI : function(){
 		var sFormat = this.elFormatSelect.value;
 		if(!sFormat) return;
-		if(jQuery.browser.msie) sFormat = '<'+sFormat+'>';
+		if(navigator.appName == 'Microsoft Internet Explorer') sFormat = '<'+sFormat+'>';
 
 		this.oApp.exec("EXECCOMMAND", ["FormatBlock", false, sFormat]);
 		this.oApp.exec("CHECK_STYLE_CHANGE", []);
@@ -5749,7 +5755,7 @@ xe.XE_Table = jQuery.Class({
 				});
 
 				// 새 줄을 추가한다.
-				if (jQuery.browser.msie) {
+				if (navigator.appName == 'Microsoft Internet Explorer') {
 					// Fix bug for IE
 					row.after(row.clone().empty().get(0).outerHTML);
 				} else {
@@ -5767,7 +5773,7 @@ xe.XE_Table = jQuery.Class({
 					return ( self._getRect(jQuery(this)).left > rect.left );
 				});
 
-				if (jQuery.browser.msie) {
+				if (navigator.appName == 'Microsoft Internet Explorer') {
 					next_sib.length?
 						next_sib.eq(0).before(clone.get(0).outerHTML):
 						rows.eq(topspan-1).append(clone.get(0).outerHTML);
@@ -5842,7 +5848,7 @@ xe.XE_Table = jQuery.Class({
 				clone.attr('colSpan', 1);
 			}
 
-			if (jQuery.browser.msie) {
+			if (navigator.appName == 'Microsoft Internet Explorer') {
 				// Fix for IE bug
 				t.after(clone.get(0).outerHTML);
 			} else {
@@ -5974,7 +5980,7 @@ xe.XE_Table = jQuery.Class({
 	},
 
 	_isLeftClicked : function(value) {
-		return jQuery.browser.msie?!!(value & 1):(value == 0);
+		return (navigator.appName == 'Microsoft Internet Explorer')?!!(value & 1):(value == 0);
 	},
 
 	_getRect : function(obj) {
@@ -6021,7 +6027,7 @@ xe.XE_WYSIWYGEnterKey = $.Class({
 			this.sLineBreaker = "P";
 		}
 
-		if(($.browser.msie || $.browser.opera) && this.sLineBreaker == "P"){
+		if((navigator.appName == 'Microsoft Internet Explorer' || $.browser.opera) && this.sLineBreaker == "P"){
 			this.$ON_MSG_APP_READY = function(){};
 		}
 	},
@@ -6097,7 +6103,7 @@ xe.XE_WYSIWYGEnterKey = $.Class({
 		oSelection.selectNode(elBR);
 		oSelection.collapseToEnd();
 
-		if(!$.browser.msie){
+		if(!(navigator.appName == 'Microsoft Internet Explorer')){
 			var oLineInfo = oSelection.getLineInfo();
 			var oStart = oLineInfo.oStart;
 			var oEnd = oLineInfo.oEnd;

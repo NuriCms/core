@@ -1857,7 +1857,7 @@ xe.SimpleSelectionImpl_IE = function(){
 
 xe.DOMFix = new ($.Class({
 	$init : function(){
-		if(navigator.appName == 'Microsoft Internet Explorer' || navigator.userAgent.indexOf("Opera") > 0 ){
+		if(navigator.appName == 'Microsoft Internet Explorer' || navigator.userAgent.indexOf("Opera") > -1 ){
 			this.childNodes = this._childNodes_Fix;
 			this.parentNode = this._parentNode_Fix;
 		}else{
@@ -3005,7 +3005,7 @@ xe.XE_EditingArea_WYSIWYG = $.Class({
 	},
 
 	$ON_REFRESH_WYSIWYG : function(){
-		if(!navigator.userAgent.indexOf('Mozilla') > -1) return;
+		if(!(navigator.userAgent.indexOf('Mozilla') > -1)) return;
 
 		this._disableWYSIWYG();
 		this._enableWYSIWYG();
@@ -4450,7 +4450,7 @@ xe.XE_UndoRedo = $.Class({
 	},
 
 	$ON_MSG_APP_READY : function(){
-		this.bFF = navigator.userAgent.indexOf('Firefox') > -1;
+		this.bFF = (navigator.userAgent.indexOf('Firefox') > -1);
 
 		this.oApp.exec("ADD_APP_PROPERTY", ["getUndoHistory", $.fnBind(this.getUndoHistory, this)]);
 		this.oApp.exec("ADD_APP_PROPERTY", ["getUndoStateIdx", $.fnBind(this.getUndoStateIdx, this)]);
@@ -5773,7 +5773,7 @@ xe.XE_Table = $.Class({
 		} while(selected.length);
 
 		// 브라우저의 기본 선택영역 해제 : FF 제외 - 기본 기능이 충분히 좋아서 + 이 부분을 실행하면 오류가 발생해서
-		if (!navigator.userAgent.indexOf('Firefox') > -1) {
+		if (!(navigator.userAgent.indexOf('Firefox') > -1)) {
 			function delayed() {
 				var sel = self.oApp.getSelection();
 
@@ -5929,7 +5929,7 @@ function editorStart_xe(editor_sequence, primary_key, content_key, editor_height
 	}
 	//oEditor.registerPlugin(new xe.XE_Preview(elAppContainer));
 
-	if (!navigator.appName == 'Microsoft Internet Explorer' && !navigator.userAgent.indexOf("Presto") > -1) {
+	if (!(navigator.appName == 'Microsoft Internet Explorer') && !(navigator.userAgent.indexOf("Presto") > -1)) {
 		oEditor.registerPlugin(new xe.XE_WYSIWYGEnterKey(oWYSIWYGIFrame));
 	}
 
