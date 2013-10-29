@@ -3,10 +3,10 @@
  *
  * mmSWFUpload 1.0: Flash upload dialog - http://profandesign.se/swfupload/,  http://www.vinterwebb.se/
  *
- * SWFUpload is © 2006-2007 Lars Huring, Olov Nilz? and Mammon Media and is released under the MIT License:
+ * SWFUpload is (c) 2006-2007 Lars Huring, Olov Nilz? and Mammon Media and is released under the MIT License:
  * http://www.opensource.org/licenses/mit-license.php
  *
- * SWFUpload 2 is © 2007-2008 Jake Roberts and is released under the MIT License:
+ * SWFUpload 2 is (c) 2007-2008 Jake Roberts and is released under the MIT License:
  * http://www.opensource.org/licenses/mit-license.php
  *
  * SWFObject v2.2 <http://code.google.com/p/swfobject/> 
@@ -1595,4 +1595,636 @@ var AXUpload5 = Class.create(AXJ, {
 				var returnStr = cfg.formatter.call(uf, uf);
 				if (returnStr) po.push(returnStr);
 			}
-			po.push('		<a href="#AXExecption" id="'+itemID+'_AXUploadLabel_download" class="AXUploadDownload">download</a
+			po.push('		<a href="#AXExecption" id="'+itemID+'_AXUploadLabel_download" class="AXUploadDownload">download</a>');
+			po.push('	</div>');
+		}
+		return po.join('');
+	},
+	onFileSelect: function(evt){
+		var cfg = this.config;
+		if(this.supportHtml5){
+			var files = evt.target.files; // FileList object
+			if(cfg.isSingleUpload){
+				
+				var myFile = this.uploadedList.first();
+				if(myFile){
+					if(!confirm(AXConfig.AXUpload5.deleteConfirm)) return;
+					var uploadFn = function(){
+						var i = 0;
+						var f = files[i];
+						var itemID = 'AX'+AXUtil.timekey()+'_AX_'+i;
+						this.queue.push({id:itemID, file:f});
+						$("#" + cfg.targetID+'_AX_display').empty();
+						$("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, f));
+						
+						this.queueLive = true;
+						if(cfg.onStart) cfg.onStart.call(this.queue, this.queue);
+						this.uploadQueue();
+					};
+					this.deleteFile(myFile, uploadFn.bind(this));
+					return;
+				}else{
+					var i = 0;
+					var f = files[i];
+					var itemID = 'AX'+AXUtil.timekey()+'_AX_'+i;
+					this.queue.push({id:itemID, file:f});
+					$("#" + cfg.targetID+'_AX_display').empty();
+					$("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, f));					
+				}
+
+			}else{
+				var hasSizeOverFile = false;
+				var sizeOverFile;
+				for (var i = 0, f; f = files[i]; i++) {
+					if(f.size > cfg.uploadMaxFileSize){
+						hasSizeOverFile = true;
+						sizeOverFile = f;
+						break;
+					}
+				}
+				if(hasSizeOverFile) cfg.onError("fileSize", {name:sizeOverFile.name, size:sizeOverFile.size});
+				
+				var uploadedCount = this.uploadedList.length;
+				for (var i = 0, f; f = files[i]; i++) {
+					if(f.size <= cfg.uploadMaxFileSize){
+						uploadedCount++;
+						if(uploadedCount-1 < cfg.uploadMaxFileCount || cfg.uploadMaxFileCount == 0){
+							var itemID = 'AX'+AXUtil.timekey()+'_AX_'+i;
+							this.queue.push({id:itemID, file:f});
+							//큐박스에 아이템 추가
+							$("#" + cfg.queueBoxID).prepend(this.getItemTag(itemID, f));
+							$("#" + cfg.queueBoxID).find("#"+itemID).fadeIn();
+						}else{
+							cfg.onError("fileCount");
+							break;
+						}
+					}
+				};
+			}
+		}else{
+			alert("not support HTML5");
+		}
+		this.queueLive = true;
+		if(cfg.onStart) cfg.onStart.call(this.queue, this.queue);
+		this.uploadQueue();
+	},
+	onFileDragOver: function(evt){
+		var cfg = this.config;
+		$("#"+cfg.dropBoxID).addClass("onDrop");
+		$("#"+cfg.dropBoxID+"_dropZoneBox").show();
+		/*$("#"+cfg.dropBoxID+"_dropZoneBox").css({height:$("#"+cfg.dropBoxID).innerHeight()-6, width:$("#"+cfg.dropBoxID).innerWidth()-6}); 라르게덴 2013-10-29 오후 3:21:45 */
+		$("#"+cfg.dropBoxID+"_dropZoneBox").css({height:$("#"+cfg.dropBoxID).prop("scrollHeight")-6, width:$("#"+cfg.dropBoxID).innerWidth()-6});
+		
+		var dropZone = document.getElementById(cfg.dropBoxID+"_dropZoneBox");
+		dropZone.addEventListener('dragleave', function(evt){
+			$("#"+cfg.dropBoxID).removeClass("onDrop");
+			$("#"+cfg.dropBoxID+"_dropZoneBox").hide();
+		}, false);
+
+		evt.stopPropagation();
+		evt.preventDefault();
+		evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+	},
+	onFileDrop: function(evt){
+		var cfg = this.config;
+		evt.stopPropagation();
+		evt.preventDefault();
+		$("#"+cfg.dropBoxID).removeClass("onDrop");
+		$("#"+cfg.dropBoxID+"_dropZoneBox").hide()
+		
+		var files = evt.dataTransfer.files; // FileList object.
+		
+		var hasSizeOverFile = false;
+		var sizeOverFile;
+		for (var i = 0, f; f = files[i]; i++) {
+			if(f.size > cfg.uploadMaxFileSize){
+				hasSizeOverFile = true;
+				sizeOverFile = f;
+				break;
+			}
+		}
+		if(hasSizeOverFile) cfg.onError("fileSize", {name:sizeOverFile.name, size:sizeOverFile.size});
+		
+		var uploadedCount = this.uploadedList.length;
+		for (var i = 0, f; f = files[i]; i++) {
+			if(f.size <= cfg.uploadMaxFileSize){
+				uploadedCount++;
+				if(uploadedCount-1 < cfg.uploadMaxFileCount || cfg.uploadMaxFileCount == 0){
+					var itemID = 'AX'+AXUtil.timekey()+'_AX_'+i;
+					this.queue.push({id:itemID, file:f});
+					//큐박스에 아이템 추가
+					$("#" + cfg.queueBoxID).prepend(this.getItemTag(itemID, f));
+					$("#" + cfg.queueBoxID).find("#"+itemID).fadeIn();
+				}else{
+					cfg.onError("fileCount");
+					break;
+				}
+			}
+		};
+
+		this.queueLive = true;
+		if(cfg.onStart) cfg.onStart.call(this.queue);
+		this.uploadQueue();
+	},
+	pauseQueue: function(){
+		this.queueLive = false;
+	},
+	uploadQueue: function(){
+		var cfg = this.config;
+		if(!this.queueLive) return;
+		if(this.queue.length == 0){
+			//trace("uploadEnd");
+			this.uploadComplete();
+			return;
+		}
+		
+		var uploadQueue = this.uploadQueue.bind(this);
+		var cancelUpload = this.cancelUpload.bind(this);
+		var uploadSuccess = this.uploadSuccess.bind(this);
+		var onClickDeleteButton = this.onClickDeleteButton.bind(this);
+		var onClickFileTitle = this.onClickFileTitle.bind(this);
+		
+		var obj = this.queue.shift();
+		this.uploadingObj = obj;
+		var formData = new FormData();
+		//서버로 전송해야 할 추가 파라미터 정보 설정
+		$.each(cfg.uploadPars, function(k, v){
+			formData.append(k, v); 
+		});
+		//formData.append(obj.file.name, obj.file);
+		formData.append(cfg.uploadFileName, obj.file);
+		
+		//obj.id
+		var itemID = obj.id;
+		
+		this.xhr = new XMLHttpRequest();
+		this.xhr.open('POST', cfg.uploadUrl, true);
+		this.xhr.onload = function(e) {
+			var res = e.target.response;
+			try { if (typeof res == "string") res = res.object(); } catch (e) {
+				trace(e);
+				cancelUpload();
+				return;
+			}
+
+			if (res.result == "err" || res.error) {
+				alert("파일전송에 실패 하였습니다. 서버에서 에러가 리턴되었습니다. 콘솔창을 확인 하세요.");
+				trace(res);
+				$("#" + itemID).fadeOut("slow");
+				cancelUpload();
+				return;
+			}
+			
+			if(cfg.isSingleUpload){
+				
+				$("#"+itemID+" .AXUploadBtns").show();
+				$("#"+itemID+" .AXUploadLabel").show();
+				$("#"+itemID+" .AXUploadTit").show();
+				
+				$("#"+itemID+" .AXUploadProcess").hide();
+								
+				uploadSuccess(obj.file, itemID, res);
+				// --------------------- s
+				$("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
+					onClickDeleteButton(itemID);
+				});
+				if(cfg.onClickUploadedItem){
+					$("#"+itemID+" .AXUploadDownload").bind("click", function(){
+						onClickFileTitle(itemID);
+					});
+				}
+				
+			}else{
+				
+				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show();
+				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
+				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
+				
+				if(res[cfg.fileKeys.thumbPath]){
+					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
+						"background-image":"url('"+(res[cfg.fileKeys.thumbPath]||"").dec()+"')",
+						"background-size":"100% auto",
+						"background-position":"center center"
+					});
+				}else{
+					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({"background-image":"url()"});
+					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").html((res[cfg.fileKeys.type]||"").dec().replace(".", ""));
+				}
+				
+				uploadSuccess(obj.file, itemID, res);
+				// --------------------- s
+				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
+					onClickDeleteButton(itemID);
+				});
+				if(cfg.onClickUploadedItem){
+					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadDownload").bind("click", function(){
+						onClickFileTitle(itemID);
+					});
+				}
+			}
+
+			// --------------------- e
+			uploadQueue();
+		};
+		var setUploadingObj = function(){
+			this.uploadingObj = null;
+		};
+		var setUploadingObjBind = setUploadingObj.bind(this);
+		this.xhr.upload.onprogress = function(e) {
+			if(cfg.isSingleUpload){
+				if (e.lengthComputable) { $("#"+itemID).find(".AXUploadProcessBar").width( ((e.loaded / e.total) * 100).round(2)+"%" ); }	
+			}else{
+				if (e.lengthComputable) { $("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcessBar").width( ((e.loaded / e.total) * 100).round(2)+"%" ); }	
+			}
+			if (e.lengthComputable) {
+				if(	e.loaded > e.total*0.9 ){
+					setUploadingObjBind();
+				}
+			}
+		};
+		this.xhr.send(formData);  // multipart/form-data
+	},
+	uploadSuccess: function(file, itemID, res){ // 업로드 아이템별 이벤트
+		var cfg = this.config;
+		var uploadedItem = {id:itemID};
+		$.each(res, function(k, v){
+			uploadedItem[k] = v;
+		});
+		this.uploadedList.push(uploadedItem);
+		$("#"+itemID).addClass("readyselect");
+		if(cfg.onUpload) cfg.onUpload.call(uploadedItem, uploadedItem);
+	},
+	clearQueue: function(){
+		//큐제거
+		$.each(this.queue, function(){
+			$("#"+this.id).hide(function(){
+				$(this).remove();
+			});
+		});
+		this.queue = [];
+	},
+	uploadComplete: function(){
+		var cfg = this.config;
+		//trace("uploadComplete");
+		if(cfg.queueBoxID){
+			this.multiSelector.collect();
+		}
+		if(cfg.onComplete) cfg.onComplete.call(this.uploadedList, this.uploadedList);
+	},
+	cancelUpload: function(){
+		var cfg = this.config;
+		if(this.swfu){
+			this.swfu.stopUpload();
+			var stats = this.swfu.getStats();
+			while (stats.files_queued > 0) {
+				this.swfu.cancelUpload();
+				stats = this.swfu.getStats();
+			}
+			stats = null;
+			this.pauseQueue();
+			this.clearQueue();			
+		}else{
+			if(this.uploadingObj){
+				this.xhr.abort();
+				$("#"+this.uploadingObj.id).remove();
+				this.uploadingObj = null;
+			}
+			this.pauseQueue();
+			this.clearQueue();
+		}
+		if(cfg.onComplete) cfg.onComplete.call(this.uploadedList, this.uploadedList);
+	},
+	onClickDeleteButton: function(itemID){
+		var cfg = this.config;
+		if(cfg.isSingleUpload){
+			var myFile;
+			$.each(this.uploadedList, function(){
+				if(this.id == itemID){
+					myFile = this;
+					return false;
+				}
+			});
+			if(myFile){
+				this.deleteFile(myFile);
+			}
+			myFile = null;
+			//trace("a");
+			this.init("reset");
+		}else{
+			var myFile;
+			$.each(this.uploadedList, function(){
+				if(this.id == itemID){
+					myFile = this;
+					return false;
+				}
+			});
+			if(myFile){
+				this.deleteFile(myFile);
+				if(cfg.queueBoxID){
+					this.multiSelector.clearSelects();
+				}
+			}
+			myFile = null;
+		}
+		
+	},
+	onClickFileTitle: function(itemID){
+		var cfg = this.config;
+		//trace(itemID);
+		if(cfg.onClickUploadedItem){
+			
+			var myFile;
+			$.each(this.uploadedList, function(){
+				if(this.id == itemID){
+					myFile = this;
+					return false;
+				}
+			});
+			cfg.onClickUploadedItem.call(myFile, myFile);
+		}
+	},
+	deleteFile: function(file, onEnd){
+		var cfg = this.config;
+		if(!onEnd) if(!confirm(AXConfig.AXUpload5.deleteConfirm)) return;
+		var removeUploadedList = this.removeUploadedList.bind(this);
+		
+		//trace(file);
+		//{"id":"AXA220125984_AX_0", "name":"38540011%2EJPG", "type":"%2EJPG", "saveName":"0DA0316011A0001%2EJPG", "fileSize":"3172720", "uploadedPath":"%2F%5Ffile%2F1%2F", "thumbPath":"%2F%5Ffile%2F1%2FT%5F0DA0316011A0001%2EJPG"}
+		if (file != undefined){
+			var pars = [];
+			var sendPars = "";
+			$.each(file, function(k, v){
+				pars.push(k + '=' + v);
+			});
+			
+			if (typeof(cfg.deletePars) === "object") {
+				$.each(cfg.deletePars, function(k, v){
+					pars.push(k + '=' + v);
+				});
+				sendPars = pars.join("&");
+			}else{
+				sendPars = pars.join("&") + "&" + cfg.deletePars;
+			}
+
+			if(cfg.isSingleUpload){
+				$("#"+file.id+" .AXUploadBtns").hide();
+			}else{
+				$("#" + cfg.queueBoxID).find("#"+file.id+" .AXUploadBtns").hide();
+			}
+			
+			new AXReq(cfg.deleteUrl, {debug:false, pars:sendPars, onsucc:function(res){
+				if(res.result == AXConfig.AXReq.okCode){
+					if(cfg.isSingleUpload){
+						$('#'+cfg.targetID+'_AX_display').html(AXConfig.AXUpload5.uploadSelectTxt);
+					}else{
+						$("#"+file.id).hide(function(){
+							$(this).remove();
+						});
+					}
+					
+					removeUploadedList(file.id);
+					if(cfg.onDelete) cfg.onDelete.call(file, file);
+					if(onEnd) onEnd();
+				}else{
+					$("#" + cfg.queueBoxID).find("#"+file.id+" .AXUploadBtns").show();
+				}
+			}});
+
+		}else{
+			trace("file undefined");
+		}
+	},
+	deleteSelect: function(arg){
+		if(arg == "all"){
+			var deleteQueue = [];
+			$.each(this.uploadedList, function(){
+				deleteQueue.push(this.id);
+			});
+			this.ccDelete(deleteQueue, 0);
+			deleteQueue = null;
+		}else{
+			if(!this.multiSelector) return;
+			var selectObj = this.multiSelector.getSelects();	
+			if (selectObj.length > 0){
+				var deleteQueue = [];
+				$.each(selectObj, function(){
+					deleteQueue.push(this.id);
+				});
+				this.ccDelete(deleteQueue, 0);
+				deleteQueue = null;
+			}else{
+				alert("삭제하실 파일을 선택해 주세요");
+			}
+		}
+	},
+	ccDelete: function(deleteQueue, index){
+		if(deleteQueue.length > index){
+			var myFile;
+			$.each(this.uploadedList, function(){
+				if(this.id == deleteQueue[index]){
+					myFile = this;
+					return false;
+				}
+			});
+			var ccDelete = this.ccDelete.bind(this);
+			this.deleteFile(myFile, function(){
+				ccDelete(deleteQueue, (index+1));
+			});
+		}
+	},
+	removeUploadedList: function(fid){
+		var newUploadedList = [];
+		$.each(this.uploadedList, function(){
+			if(this.id != fid) newUploadedList.push(this);
+		});
+		this.uploadedList = newUploadedList;
+		newUploadedList = null;
+	},
+	showMSG: function(msg){
+		dialog.push(msg);
+	},
+	setUploadedList: function(files){
+		var cfg = this.config;
+		
+		var getItemTag = this.getItemTag.bind(this);
+		var onClickDeleteButton = this.onClickDeleteButton.bind(this);
+		var onClickFileTitle = this.onClickFileTitle.bind(this);
+		
+		if(cfg.isSingleUpload){
+
+			var f;
+			if($.isArray(files)){
+				this.uploadedList.push(files.first());
+				f = files.first();
+			}else{
+				this.uploadedList.push(files);
+				f = files;
+			}
+			if(!f) return;
+			var itemID = f.id;
+			
+			var uf = {
+				id:itemID,
+				name:f[cfg.fileKeys.name],
+				size:f[cfg.fileKeys.fileSize]
+			};
+			
+			$("#" + cfg.targetID+'_AX_display').empty();
+			$("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, uf));
+			
+			$("#"+itemID+" .AXUploadBtns").show();
+			$("#"+itemID+" .AXUploadLabel").show();
+			$("#"+itemID+" .AXUploadTit").show();
+			$("#"+itemID+" .AXUploadProcess").hide();
+			
+			$("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
+				onClickDeleteButton(itemID);
+			});
+			if(cfg.onClickUploadedItem){
+				$("#"+itemID+" .AXUploadDownload").bind("click", function(){
+					onClickFileTitle(itemID);
+				});
+			}
+			
+		}else{
+			this.uploadedList = files;
+			if(cfg.queueBoxID){
+				$.each(this.uploadedList, function(fidx, f){
+					if(f.id == undefined){
+						trace("id key는 필수 항목 입니다.");
+						return false;	
+					}
+					var itemID = f.id;
+					var uf = {
+						id:itemID,
+						name:f[cfg.fileKeys.name],
+						size:f[cfg.fileKeys.fileSize]
+					};
+					$("#" + cfg.queueBoxID).prepend(getItemTag(itemID, uf));
+					$("#" + cfg.queueBoxID).find("#"+itemID).fadeIn();
+					
+					// --------------------- s
+					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show();
+					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
+					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
+		
+					if(f[cfg.fileKeys.thumbPath]){
+						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
+							"background-image":"url('"+(f[cfg.fileKeys.thumbPath]||"").dec()+"')",
+							"background-size":"100% auto",
+							"background-position":"center center"
+						});
+					}else{				
+						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({"background-image":"url()"});
+						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").html((f[cfg.fileKeys.type]||"").dec().replace(".", ""));
+					}
+		
+					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
+						onClickDeleteButton(itemID);
+					});
+					if(cfg.onClickUploadedItem){
+						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadDownload").bind("click", function(){
+							onClickFileTitle(itemID);
+						});
+					}
+					// --------------------- e
+								
+					$("#"+itemID).addClass("readyselect");
+					
+				});
+				this.multiSelector.collect();
+			}
+		}
+	},
+	getUploadedList: function(arg){
+		if(arg == "param"){
+			var pars = [];
+			$.each(this.uploadedList, function(){
+				pars.push(jQuery.param(this));
+			});
+			return pars.join("&");
+			pars = null;
+		}else{
+			return this.uploadedList;
+		}
+	},
+	getSelectUploadedList: function(arg){
+		if(!this.multiSelector) return;
+		var selectObj = this.multiSelector.getSelects();
+		if(arg == "param"){
+			var pars = [];
+			$.each(this.uploadedList, function(){
+				for(var a=0;a<selectObj.length;a++){
+					if(this.id == selectObj[a].id) pars.push(jQuery.param(this));
+				}
+			});
+			return pars.join("&");
+			pars = null;
+		}else{
+			var pars = [];
+			$.each(this.uploadedList, function(){
+				for(var a=0;a<selectObj.length;a++){
+					if(this.id == selectObj[a].id) pars.push(this);
+				}
+			});
+			return pars;
+			pars = null;
+		}
+	},
+	setUploadedFile: function(file){
+		
+		this.uploadedList = [];
+		this.uploadedList.push(file);
+		fileNameMaxLen = this.settings.fileNameMaxLen;
+		var po = [];
+		
+		var dfileicon = this.settings.dfileicon;
+
+		var UploadDisplay_id = this.settings.UploadDisplay_id;
+		var onClickButton = this.onClickButton.bind(this);		
+		var AXfile = this.uploadedList.first();
+		
+		var po = [];
+		po.push("<div class='AXFileTitleBlock'>");
+		po.push("<a href='#AXexec' class='AXFileTitle'>"+AXfile.ti.dec()+"</a>");
+		po.push("<a href='#AXexec' class='AXFileDelete'>X</a>");
+		po.push("</div>"); 
+		$("#"+UploadDisplay_id).html(po.join(''));			
+		$("#"+UploadDisplay_id).find(".AXFileDelete").bind("click", onClickButton);
+
+		if(this.settings.onclick){
+			var onclick = this.settings.onclick.bind(this);
+			$("#"+UploadDisplay_id).find(".AXFileTitle").bind("click", function(){
+				onclick(AXfile);
+			});
+		}
+
+		po = null;
+		fileNameMaxLen = null;
+	},
+	getUploadedFile: function(){
+		return this.uploadedList.first();
+	},
+	
+	addKeyInUploadedListItem: function(objID, obj){
+		var uploadedList = this.uploadedList;
+		
+		$.each(uploadedList, function(idx, o){
+			if (o.id == objID){
+				$.each(obj, function(k, v){
+					o[k] = v;
+				});
+			}else{
+				$.each(obj, function(k, v){
+					o[k] = '';
+				});
+			}
+		});
+	},
+	
+	nothing: function(){
+
+	}
+});
+
+// jquery extend
