@@ -45,9 +45,9 @@
 		<value xml:lang="en"><![CDATA[Invalid File Type.]]></value>
 		<value xml:lang="jp"><![CDATA[許可されてない拡張名です。]]></value>
 	</item>
-	<item name="AXuploadFileSize">
-		<value xml:lang="ko"><![CDATA[허용하는 파일 사이즈를 초과하였습니다.]]></value>
-		<value xml:lang="en"><![CDATA[Upload limit exceeded.]]></value>
-		<value xml:lang="jp"><![CDATA[許可されたファイルサイズを超えました。]]></value>
+	<item name="AXres_error">
+		<value xml:lang="ko"><![CDATA[파일전송에 실패 하였습니다. 서버에서 에러가 리턴되었습니다. 콘솔창을 확인 하세요.]]></value>
+		<value xml:lang="en"><![CDATA[File transfer failed.]]></value>
+		<value xml:lang="jp"><![CDATA[ファイル送信に失敗しました。サーバからエラーがリタンーされました。コンソールを確認してください。]]></value>
 	</item>
 </lang>

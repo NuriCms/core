@@ -68,6 +68,18 @@ x.AXUpload5{
 	text-align:center;line-height:70px;
 	font-size:14px;color:#888;font-weight:bold;
 }
+.AXUpload5QueueBox .AXUploadItem .AXUploadPreview{
+	background-size:contain;
+	background-position:center center;
+	background-repeat:no-repeat;
+	background-color:transparent;
+}
+.AXUpload5QueueBox .AXUploadItem .AXUploadPreviewOrigin{
+	background-position:center center;
+	background-repeat:no-repeat;
+	background-color:transparent;
+}
+
 .AXUpload5QueueBox .AXUploadItem .AXUploadType{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px;line-height:1.3em;padding-top:3px;text-align:right;}
 .AXUpload5QueueBox .AXUploadItem .AXUploadTit{font-size:7.5pt;line-height:1.3em;word-break:break-all;height:28px;overflow:hidden;}
 .AXUpload5QueueBox .AXUploadItem .AXUploadSize{font-size:7.5pt;}

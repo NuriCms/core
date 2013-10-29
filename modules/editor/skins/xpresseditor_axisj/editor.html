@@ -460,7 +460,7 @@
 				<input type="button" value="{$lang->edit->link_file}" class="AXButton Classic" onclick="myUpload.custom.insertUploadedFile('{$editor_sequence}');" />
 				<div class="AXlogo"><a href="http://www.axisj.com/" title="Awesome UI library AXISJ" target="_blank"><img src="{$tpl_path}/_AXJ/ui/default/img/axisj_logo.png" alt="axisJ"/></a></div>
 				<div class="file_attach_info" id="uploader_status_{$editor_sequence}">
-					{$lang->allowed_attach_size} : {FileHandler::filesize($attached_size)} / {FileHandler::filesize($file_config->allowed_attach_size)} <br />
+					{$lang->allowed_attach_size} : <span class="attach_size">{FileHandler::filesize($attached_size)}</span> / {FileHandler::filesize($file_config->allowed_attach_size)} <br />
 					{$lang->allowed_filesize} : (max {FileHandler::filesize($file_config->allowed_filesize)}) ({$lang->allowed_filetypes} : {$file_config->allowed_filetypes})
 				</div>
 			</div>
@@ -481,6 +481,7 @@
 		<load target="_AXJ/ui/default/AXButton.css" />
 		<load target="_AXJ/ui/default/AXUpload5.css" />
 
+		<load target="_AXJ/jquery/jquery.js" index="-99999" />
 		<load target="_AXJ/lib/AXJ.js" />
 		<load target="_AXJ/lib/AXUpload5.js" />
 		<load target="js/AXUpload5forXE.js" />
@@ -499,7 +500,7 @@
 						"previewAreaID" : "preview_uploaded_{$editor_sequence}",
 						"uploaderStatusID" : "uploader_status_{$editor_sequence}",
 						"uploadMaxTotalFileSize" : {$file_config->allowed_attach_size},
-						"uploadLeftFileSize" : {$file_config->allowed_attach_size},
+						"uploadLeftFileSize" : {($file_config->allowed_attach_size-$attached_size)},
 						"uploadMaxFileSize" : {$file_config->allowed_filesize},
 						"allowed_filetypes" : "{$file_config->allowed_filetypes}",
 						"lang" : {
@@ -515,7 +516,9 @@
 							"dropZoneTxt" : "{$lang->AXdropZoneTxt}",
 							"cancelMsg" : "{$lang->AXcancelMsg}",
 							"allowed_filetypes" : "{$lang->AXallowed_filetypes}",
-							"uploadFileSize" : "{$lang->AXuploadFileSize}"
+							"uploadFileSize" : "{$lang->AXuploadFileSize}",
+							"res_error" : "{$lang->AXres_error}",
+							
 						}
 				});
 			}, 1);
