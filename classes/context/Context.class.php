@@ -1192,6 +1192,14 @@ class Context
 			{
 				$set_to_vars = true;
 			}
+			elseif($this->getRequestMethod() == 'JSON' && (isset($_GET[$key]) || isset($_POST[$key])))
+			{
+				$set_to_vars = true;
+			}
+			elseif($this->getRequestMethod() == 'XML' && (isset($_GET[$key]) || isset($_POST[$key])))
+			{
+				$set_to_vars = true;
+			}
 			else
 			{
 				$set_to_vars = false;
