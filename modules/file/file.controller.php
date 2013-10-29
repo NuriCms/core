@@ -613,13 +613,14 @@ class fileController extends file
 			$file_info['name'] = base64_decode(strtr($match[1], ':', '/'));
 		}
 
+		$oFileModel = &getModel('file');
+
 		if(!$manual_insert)
 		{
 			// Get the file configurations
 			$logged_info = Context::get('logged_info');
 			if($logged_info->is_admin != 'Y')
 			{
-				$oFileModel = &getModel('file');
 				$config = $oFileModel->getFileConfig($module_srl);
 				$allowed_filesize = $config->allowed_filesize * 1024 * 1024;
 				$allowed_attach_size = $config->allowed_attach_size * 1024 * 1024;
@@ -682,6 +683,7 @@ class fileController extends file
 				if(!@move_uploaded_file($file_info['tmp_name'], $filename))  return new Object(-1,'msg_file_upload_error');
 			}
 		}
+
 		// Get member information
 		$oMemberModel = &getModel('member');
 		$member_srl = $oMemberModel->getLoggedMemberSrl();
@@ -714,6 +716,25 @@ class fileController extends file
 		$output->add('upload_target_srl', $upload_target_srl);
 		$output->add('uploaded_filename', $args->uploaded_filename);
 
+		// json, xml request option
+		if(Context::get('image_size'))
+		{
+			$image_size = $oFileModel->getFileImageSize($filename);
+			$this->add('width', $image_size->width);
+			$this->add('height', $image_size->height);
+			$this->add('type', $image_size->type);
+		}
+		if(Context::get('uploaded_count'))
+		{
+			$this->add('uploaded_count', $oFileModel->getFilesCount($upload_target_srl));
+		}
+		if(Context::get('file_list'))
+		{
+			$this->add('files', $file_list->files);
+			$this->add("editor_sequence", $file_list->editor_sequence);
+			$this->add("upload_status", $file_list->upload_status);
+			$this->add("left_size", $file_list->left_size);
+		}
 		$this->add('file_srl', $args->file_srl);
 		$this->add('file_size', $args->file_size);
 		$this->add('sid', $args->sid);
@@ -797,6 +818,20 @@ class fileController extends file
 		}
 
 		$oDocumentController->updateUploaedCount($documentSrlList);
+
+		// json, xml request option
+		$oFileModel = &getModel('file');
+		if(Context::get('uploaded_count'))
+		{
+			$this->add('uploaded_count', $oFileModel->getFilesCount(Context::get('upload_target_srl')));
+		}
+		if(Context::get('file_list'))
+		{
+			$this->add('files', $file_list->files);
+			$this->add("editor_sequence", $file_list->editor_sequence);
+			$this->add("upload_status", $file_list->upload_status);
+			$this->add("left_size", $file_list->left_size);
+		}
 
 		return $output;
 	}

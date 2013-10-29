@@ -49,6 +49,10 @@ class fileModel extends file
 				if($file_info->direct_download=='N') $obj->download_url = $this->getDownloadUrl($file_info->file_srl, $file_info->sid);
 				else $obj->download_url = str_replace('./', '', $file_info->uploaded_filename);
 				$obj->direct_download = $file_info->direct_download;
+				$image_size = $this->getFileImageSize($file_info->uploaded_filename);
+				$obj->width = $image_size->width;
+				$obj->height = $image_size->height;
+				$obj->type = $image_size->type;
 				$files[] = $obj;
 				$attached_size += $file_info->file_size;
 			}
@@ -72,6 +76,14 @@ class fileModel extends file
 		$this->add("upload_target_srl",$upload_target_srl);
 		$this->add("upload_status",$upload_status);
 		$this->add("left_size",$left_size);
+
+		$output->files = $files;
+		$output->editor_sequence = $editor_sequence;
+		$output->upload_target_srl = $upload_target_srl;
+		$output->upload_status = $upload_status;
+		$output->left_size = $left_size;
+		
+		return $output;
 	}
 
 	/**
@@ -308,6 +320,58 @@ class fileModel extends file
 		$file_grant->is_deletable = ($document_grant || $member_info->is_admin == 'Y' || $member_info->member_srl == $file_info->member_srl || $grant->manager);
 
 		return $file_grant;
+	}
+
+	/**
+	 * Returns a Information of image
+	 * 
+	 * @param string $source_file Path of the source file
+	 * @return object
+	 */
+	function getFileImageSize($source_file)
+	{
+		if(!file_exists($source_file))
+		{
+			return;
+		}
+
+		// retrieve source image's information
+		$imageInfo = getimagesize($source_file);
+		if(!FileHandler::checkMemoryLoadImage($imageInfo))
+		{
+			return;
+		}
+
+		list($width, $height, $type, $attrs) = $imageInfo;
+
+		if($width > 0 || $height > 0)
+		{
+			switch($type)
+			{
+				case '1' :
+					$type = 'gif';
+					break;
+				case '2' :
+					$type = 'jpg';
+					break;
+				case '3' :
+					$type = 'png';
+					break;
+				case '6' :
+					$type = 'bmp';
+					break;
+				default :
+					return;
+					break;
+			}
+		}
+
+		$image_status = new stdClass();
+		$image_status->width = $width;
+		$image_status->height = $height;
+		$image_status->type = $type;
+
+		return $image_status;
 	}
 }
 /* End of file file.model.php */
