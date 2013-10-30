@@ -27,6 +27,7 @@ class fileModel extends file
 		$oModuleModel = &getModel('module');
 
 		$mid = Context::get('mid');
+		$width = Context::get('width');
 		$editor_sequence = Context::get('editor_sequence');
 		$upload_target_srl = Context::get('upload_target_srl');
 		if(!$upload_target_srl) $upload_target_srl = $_SESSION['upload_info'][$editor_sequence]->upload_target_srl;
@@ -48,11 +49,8 @@ class fileModel extends file
 				$obj->disp_file_size = FileHandler::filesize($file_info->file_size);
 				if($file_info->direct_download=='N') $obj->download_url = $this->getDownloadUrl($file_info->file_srl, $file_info->sid);
 				else $obj->download_url = str_replace('./', '', $file_info->uploaded_filename);
+				if($width) $obj->thumbnail_src = $this->getFileThumbnail($file_info, $width);
 				$obj->direct_download = $file_info->direct_download;
-				$image_size = $this->getFileImageSize($file_info->uploaded_filename);
-				$obj->width = $image_size->width;
-				$obj->height = $image_size->height;
-				$obj->type = $image_size->type;
 				$files[] = $obj;
 				$attached_size += $file_info->file_size;
 			}
@@ -82,7 +80,7 @@ class fileModel extends file
 		$output->upload_target_srl = $upload_target_srl;
 		$output->upload_status = $upload_status;
 		$output->left_size = $left_size;
-		
+
 		return $output;
 	}
 
@@ -328,50 +326,29 @@ class fileModel extends file
 	 * @param string $source_file Path of the source file
 	 * @return object
 	 */
-	function getFileImageSize($source_file)
+	function getFileThumbnail($file_info, $width)
 	{
-		if(!file_exists($source_file))
+		if(!$file_info->file_srl || !$width || $file_info->direct_download != 'Y')
 		{
-			return;
+			return false;
 		}
 
-		// retrieve source image's information
-		$imageInfo = getimagesize($source_file);
-		if(!FileHandler::checkMemoryLoadImage($imageInfo))
+		$source_src = $file_info->uploaded_filename;
+		$output_src = $source_src.'_'.$width.'x'.$height.'.resized'.strrchr($source_src,'.');
+		if(file_exists($output_src))
 		{
-			return;
+			return $output_src;
 		}
 
-		list($width, $height, $type, $attrs) = $imageInfo;
+		$type = 'ratio';
+		if(!$height) $height = $width-1;
 
-		if($width > 0 || $height > 0)
+		if(!FileHandler::createImageFile($source_src,$output_src, $width, $height,'','ratio'))
 		{
-			switch($type)
-			{
-				case '1' :
-					$type = 'gif';
-					break;
-				case '2' :
-					$type = 'jpg';
-					break;
-				case '3' :
-					$type = 'png';
-					break;
-				case '6' :
-					$type = 'bmp';
-					break;
-				default :
-					return;
-					break;
-			}
+			return false;
 		}
 
-		$image_status = new stdClass();
-		$image_status->width = $width;
-		$image_status->height = $height;
-		$image_status->type = $type;
-
-		return $image_status;
+		return $output_src;
 	}
 }
 /* End of file file.model.php */

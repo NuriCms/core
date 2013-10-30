@@ -717,12 +717,11 @@ class fileController extends file
 		$output->add('uploaded_filename', $args->uploaded_filename);
 
 		// json, xml request option
-		if(Context::get('image_size'))
+		if(Context::get('width'))
 		{
-			$image_size = $oFileModel->getFileImageSize($filename);
-			$this->add('width', $image_size->width);
-			$this->add('height', $image_size->height);
-			$this->add('type', $image_size->type);
+			$thumbnail_src = $oFileModel->getFileThumbnail($args, Context::get('width'));
+
+			if($thumbnail_src) $this->add('thumbnail_src', $thumbnail_src);
 		}
 		if(Context::get('uploaded_count'))
 		{
