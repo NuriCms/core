@@ -205,17 +205,12 @@ var AXUpload5 = Class.create(AXUpload5, {
 				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
 				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
 
-				if(/\.(jpg|jpeg|png|gif)$/i.test(res[cfg.fileKeys.thumbPath])){ // NuriCms: 이미지 확장자구분
-					if(res[cfg.fileKeys.width] != null && (Number(res[cfg.fileKeys.width])<70&&Number(res[cfg.fileKeys.height])<70)){ // NuriCms: 70px 이하일 경우 원본을 출력
-						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
-							"background-image":"url('"+(res[cfg.fileKeys.thumbPath]||"").dec()+"')"
-						}).addClass("AXUploadPreviewOrigin");
-					}else{
+				if(!res[cfg.fileKeys.thumbPath]) res[cfg.fileKeys.thumbPath] = res[cfg.fileKeys.uploaded_filename]; // NuriCms: 섬네일 이미지가 없으면 기본 주소 호출
 
-						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
-							"background-image":"url('"+(res[cfg.fileKeys.thumbPath]||"").dec()+"')"
-						}).addClass("AXUploadPreview");
-					}
+				if(/\.(jpg|jpeg|png|gif)$/i.test(res[cfg.fileKeys.thumbPath])){ // NuriCms: 이미지 확장자구분
+					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
+						"background-image":"url('"+(res[cfg.fileKeys.thumbPath]||"").dec()+"')"
+					}).addClass("AXUploadPreview");
 				}else{
 					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({"background-image":"url()"});
 						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").html((
@@ -322,16 +317,12 @@ var AXUpload5 = Class.create(AXUpload5, {
 					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
 					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
 
+					if(!f[cfg.fileKeys.thumbPath]) f[cfg.fileKeys.thumbPath] = f[cfg.fileKeys.download_url]; // NuriCms: 섬네일 이미지가 없으면 기본 주소 호출\
+
 					if(/\.(jpg|jpeg|png|gif)$/i.test(f[cfg.fileKeys.thumbPath])){ // NuriCms: 이미지 확장자구분
-						if(f[cfg.fileKeys.width] != null && (Number(f[cfg.fileKeys.width])<70&&Number(f[cfg.fileKeys.height])<70)){ // NuriCms: 70px 이하일 경우 원본을 출력
-							$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
-								"background-image":"url('"+(f[cfg.fileKeys.thumbPath]||"").dec()+"')"
-							}).addClass("AXUploadPreviewOrigin");
-						}else{
-							$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
-								"background-image":"url('"+(f[cfg.fileKeys.thumbPath]||"").dec()+"')"
-							}).addClass("AXUploadPreview");
-						}
+						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
+							"background-image":"url('"+(f[cfg.fileKeys.thumbPath]||"").dec()+"')"
+						}).addClass("AXUploadPreview");
 					}else{
 						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({"background-image":"url()"});
 						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").html((
@@ -537,7 +528,7 @@ var fnObj = {
 					upload_target_srl : editorRelKeys[cfg.editorSequence].primary.value,
 					xe_json_callback : "xe_json_callback", // NuriCms: 결과를 json으로 받는다
 					uploaded_count : true, // 등록된 파일 수를 받는다
-					image_size : true, // 이미지파일의 사이즈 정보를 받는다
+					width : 70, // 이미지파일의 사이즈 정보를 받는다
 //					file_list : true // 등록된 파일 목록과 설정정보를 받는다
 				},
 				deleteUrl:cfg.url,
@@ -548,20 +539,17 @@ var fnObj = {
 					upload_target_srl : editorRelKeys[cfg.editorSequence].primary.value,
 					xe_json_callback : "xe_json_callback", // NuriCms: 결과를 json으로 받는다
 					uploaded_count : true, // 등록된 파일 수를 받는다
-					image_size : true, // 이미지파일의 사이즈 정보를 받는다
 //					file_list : true // 등록된 파일 목록과 설정정보를 받는다
 				},
 				fileKeys:{ // 서버에서 리턴하는 json key 정의 (id는 예약어 사용할 수 없음)
 					name:"source_filename",
 					fileSize:"file_size",
-					type:"type",
-					width:"width",
-					height:"height",
-					uploadedPath:"download_url",
+					download_url:"download_url",
+					uploaded_filename:"uploaded_filename",
 					file_srl:"file_srl",
-					thumbPath:"uploaded_filename",
+					thumbPath:"thumbnail_src",
 					uploaded_count:"uploaded_count",
-					files:"files",
+//					files:"files",
 					editor_sequence:"editor_sequence",
 					upload_status:"upload_status",
 					left_size:"left_size",
@@ -656,18 +644,15 @@ var fnObj = {
 					res[i] = file;
 				});
 
-				fnObj.upload.changeOption('download_url'); // NuriCms: 파일 업로드결과 값과 파일 리스트 요청값의 리턴 Key가 달라서 별도 요청
-
 				myUpload.setUploadedList(res);
-
-				fnObj.upload.changeOption('uploaded_filename'); // NuriCms: 기본 요청 Key상태로 돌림
 			}
 
 			var params = {
 					mid : current_mid,
 					module : 'file',
 					act : 'getFileList',
-					editor_sequence   : cfg.editorSequence
+					editor_sequence   : cfg.editorSequence,
+					width : 70
 				};
 
 			exec_xml(
@@ -684,13 +669,11 @@ var fnObj = {
 				fileKeys:{
 					name:"source_filename",
 					fileSize:"file_size",
-					uploadedPath:"download_url",
-					type:"type",
-					width:"width",
-					height:"height",
-					thumbPath:thumbvar,
+					download_url:"download_url",
+					uploaded_filename:"uploaded_filename",
+					thumbPath:"thumbnail_src",
 					uploaded_count:"uploaded_count",
-					files:"files",
+//					files:"files",
 					editor_sequence:"editor_sequence",
 					upload_status:"upload_status",
 					left_size:"left_size"

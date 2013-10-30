@@ -321,7 +321,7 @@ class fileModel extends file
 	}
 
 	/**
-	 * Returns a Information of image
+	 * Returns a Thumbnail of image
 	 * 
 	 * @param string $source_file Path of the source file
 	 * @return object
