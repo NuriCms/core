@@ -590,6 +590,7 @@ class fileController extends file
 	 * - comment
 	 * - member_srl
 	 * - sid
+	 * - download_url	 
 	 * </pre>
 	 *
 	 * @param object $file_info PHP file information array
@@ -699,6 +700,8 @@ class fileController extends file
 		$args->comment = NULL;
 		$args->member_srl = $member_srl;
 		$args->sid = md5(rand(rand(1111111,4444444),rand(4444445,9999999)));
+		if($args->direct_download=='N') $args->download_url = $oFileModel->getDownloadUrl($args->file_srl, $args->sid);
+		else $args->download_url = str_replace('./', '', $args->uploaded_filename);
 
 		$output = executeQuery('file.insertFile', $args);
 		if(!$output->toBool()) return $output;
@@ -715,6 +718,7 @@ class fileController extends file
 		$output->add('source_filename', $args->source_filename);
 		$output->add('upload_target_srl', $upload_target_srl);
 		$output->add('uploaded_filename', $args->uploaded_filename);
+		$output->add('download_url', $args->download_url);
 
 		// json, xml request option
 		if(Context::get('width'))
@@ -729,6 +733,7 @@ class fileController extends file
 		}
 		if(Context::get('file_list'))
 		{
+			$file_list = $oFileModel->getFileList();
 			$this->add('files', $file_list->files);
 			$this->add("editor_sequence", $file_list->editor_sequence);
 			$this->add("upload_status", $file_list->upload_status);
@@ -741,6 +746,7 @@ class fileController extends file
 		$this->add('source_filename', $args->source_filename);
 		$this->add('upload_target_srl', $upload_target_srl);
 		$this->add('uploaded_filename', $args->uploaded_filename);
+		$this->add('download_url', $args->download_url);
 
 		return $output;
 	}
@@ -826,6 +832,7 @@ class fileController extends file
 		}
 		if(Context::get('file_list'))
 		{
+			$file_list = $oFileModel->getFileList();
 			$this->add('files', $file_list->files);
 			$this->add("editor_sequence", $file_list->editor_sequence);
 			$this->add("upload_status", $file_list->upload_status);

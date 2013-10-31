@@ -639,6 +639,7 @@ var fnObj = {
 				// NuriCms: AXUpload5 element ID insert
 				var res = [];
 				jQuery.each(response_tags.files.item, function(i, file){
+					if(file == null) return true;
 					file.id = 'AX'+AXUtil.timekey()+'_AX_'+(response_tags.files.item.length - i-1);
 					res[i] = file;
 				});
