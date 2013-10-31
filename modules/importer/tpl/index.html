@@ -77,15 +77,15 @@
 </form>
 <a href="#process" class="modalAnchor"></a>
 <div class="x_modal" id="process">
-    <form action="./" method="get" onsubmit="return doImport()" id="fo_process">
-        <input type="hidden" name="type" value="" />
-        <input type="hidden" name="total" value="" />
-        <input type="hidden" name="cur" value="" />
-        <input type="hidden" name="key" value="" />
-        <input type="hidden" name="target_module" value="" />
-        <input type="hidden" name="guestbook_target_module" value="" />
-        <input type="hidden" name="unit_count" value="100" />
-        <input type="hidden" name="user_id" value="" />
+	<form action="./" method="get" onsubmit="return doImport()" id="fo_process">
+		<input type="hidden" name="type" value="" />
+		<input type="hidden" name="total" value="" />
+		<input type="hidden" name="cur" value="" />
+		<input type="hidden" name="key" value="" />
+		<input type="hidden" name="target_module" value="" />
+		<input type="hidden" name="guestbook_target_module" value="" />
+		<input type="hidden" name="unit_count" value="100" />
+		<input type="hidden" name="user_id" value="" />
 		<div class="x_modal-header">
 			<h1 id="preProgressMsg">{$lang->preprocessing}</h1>
 			<h1 id="progressMsg" hidden>{$lang->import_step_desc[99]}</h1>
@@ -97,7 +97,7 @@
 			<strong id="progressPercent">0%</strong>
 			(<span id="completeCount">0</span>/<span id="totalCount">0</span>)
 		</div>
-    </form>
+	</form>
 </div>
 <script>
 jQuery('a.modalAnchor')

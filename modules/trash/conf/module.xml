@@ -2,15 +2,15 @@
 <module>
 	<grants />
 	<permissions>
-		<permission action="dispTrashAdminList" target="manager" />
-		<permission action="procTrashAdminRestore" target="manager" />
+		<permission action="procTrashAdminEmptyTrash" target="root" />
+		<permission action="procTrashAdminRestore" target="root" />
+		<permission action="procTrashAdminGetList" target="root" />
 	</permissions>
 	<actions>
-		<action name="dispTrashAdminList" type="view" standalone="true" admin_index="true" menu_name="trash" menu_index="true" />
-
-		<action name="procTrashAdminEmptyTrash" type="controller" standalone="true" ruleset="emptyTrash" />
-		<action name="procTrashAdminRestore" type="controller" standalone="true" />
-		<action name="procTrashAdminGetList" type="controller" standalone="true" />
+		<action name="dispTrashAdminList" type="view" admin_index="true" menu_name="trash" menu_index="true" />
+		<action name="procTrashAdminEmptyTrash" type="controller" ruleset="emptyTrash" />
+		<action name="procTrashAdminRestore" type="controller" />
+		<action name="procTrashAdminGetList" type="controller" />
 	</actions>
 	<menus>
 		<menu name="trash">

@@ -33,7 +33,7 @@ $.extend({
 	}
 });
 
-$.browser.nVersion = parseFloat($.browser.version);
+//$.browser.nVersion = parseFloat($.browser.version);
 
 function Class_extend(superDef) {
 	var Super = superDef.prototype;
@@ -1597,7 +1597,7 @@ xe.SimpleSelection = function(win){
 
 	this.init(win);
 
-	if(jQuery.browser.msie)
+	if(navigator.appName == 'Microsoft Internet Explorer')
 		xe.SimpleSelectionImpl_IE.apply(this);
 	else
 		xe.SimpleSelectionImpl_FF.apply(this);
@@ -1848,7 +1848,7 @@ xe.SimpleSelectionImpl_IE = function(){
 
 xe.DOMFix = new (jQuery.Class({
 	$init : function(){
-		if(jQuery.browser.msie || jQuery.browser.opera){
+		if(navigator.appName == 'Microsoft Internet Explorer' || jQuery.browser.opera){
 			this.childNodes = this._childNodes_Fix;
 			this.parentNode = this._parentNode_Fix;
 		}else{
@@ -1907,11 +1907,13 @@ xe.FindReplace = jQuery.Class({
 		this.document = this.window.document;
 
 		if(this.document.domain != this.document.location.hostname){
+			/*
 			if(jQuery.browser.mozilla && jQuery.browser.nVersion < 3){
 				this.bBrowserSupported = false;
 				this.find = function(){return 3};
 				return;
 			}
+			*/
 		}
 
 		this.bBrowserSupported = true;
@@ -2201,11 +2203,13 @@ xe.CorePlugin = jQuery.Class({
 	name : "Utils",
 
 	$init : function(){
-		if(jQuery.browser.msie && jQuery.browser.nVersion == 6){
+		/*
+		if(navigator.appName == 'Microsoft Internet Explorer' && jQuery.browser.nVersion == 6){
 			try{
 				document.execCommand('BackgroundImageCache', false, true);
 			}catch(e){}
 		}
+		*/
 	},
 
 	$ON_ATTACH_HOVER_EVENTS : function(aElms, sHoverClass){
@@ -2281,10 +2285,10 @@ xe.Hotkey = jQuery.Class({
 			backspace : 8,
 			tab		  : 9,
 			enter	  : 13,
-			shift     : 16,
-			ctrl      : 17,
-			alt       : 18,
-			meta      : 224,
+			shift	 : 16,
+			ctrl	  : 17,
+			alt	   : 18,
+			meta	  : 224,
 			esc		  : 27,
 			space	  : 32,
 			pageup	  : 33,
@@ -2299,11 +2303,11 @@ xe.Hotkey = jQuery.Class({
 			comma	  : 188,//(,)
 			period	  : 190,//(.)
 			slash	  : 191,//(/)
-			hyphen    : 109,
-			equal     : 61
+			hyphen	: 109,
+			equal	 : 61
 		};
 
-		if (jQuery.browser.msie || jQuery.browser.safari) {
+		if (navigator.appName == 'Microsoft Internet Explorer' || jQuery.browser.safari) {
 			this.keyhash.hyphen = 189; // (-)
 			this.keyhash.equal = 187;  // (=)
 			this.keyhash.meta  = 91;   // meta
@@ -3130,7 +3134,7 @@ xe.XE_EditingArea_WYSIWYG = jQuery.Class({
 		// uncomment this line if you wish to use the IE-style cursor in FF
 		this.getDocument().body.style.cursor = "text";
 
-		if(jQuery.browser.msie){
+		if(navigator.appName == 'Microsoft Internet Explorer'){
 			jQuery(this.doc)
 				.unbind('keydown.ea')
 				.bind('keydown.ea', jQuery.fnBind(
@@ -3217,7 +3221,7 @@ xe.XE_EditingArea_WYSIWYG = jQuery.Class({
 		oSelection.pasteHTML(sHTML);
 
 		// every browser except for IE may modify the innerHTML when it is inserted
-		if(!jQuery.browser.msie){
+		if(!(navigator.appName == 'Microsoft Internet Explorer')){
 			var sTmpBookmark = oSelection.placeStringBookmark();
 			this.oApp.getWYSIWYGDocument().body.innerHTML = this.oApp.getWYSIWYGDocument().body.innerHTML;
 			oSelection.moveToBookmark(sTmpBookmark);
@@ -3310,7 +3314,7 @@ xe.XE_EditingArea_WYSIWYG = jQuery.Class({
 	},
 
 	_enableWYSIWYG : function(){
-		if (jQuery.browser.msie){
+		if (navigator.appName == 'Microsoft Internet Explorer'){
 			var fake = jQuery('<input type="text" style="position:absolute;width:1px;height:1px;left:-9px">');
 			jQuery(document.body).prepend(fake);
 			fake.focus();
@@ -3324,7 +3328,7 @@ xe.XE_EditingArea_WYSIWYG = jQuery.Class({
 	},
 
 	_disableWYSIWYG : function(){
-		if (jQuery.browser.msie){
+		if (navigator.appName == 'Microsoft Internet Explorer'){
 			this.getDocument().body.contentEditable = false;
 		} else {
 			this.getDocument().designMode = "off";
@@ -3491,8 +3495,10 @@ xe.XE_WYSIWYGStyler = jQuery.Class({
 			oSelection.select();
 
 			// FF3 will actually display %uFEFF when it is followed by a number AND certain font-family is used(like Gulim), so remove the chcaracter for FF3
-			if(jQuery.browser.mozilla && jQuery.browser.nVersion == 3)
+			/*
+			if(navigator.userAgent.indexOf('Firefox') > -1 && jQuery.browser.nVersion == 3)
 				oSpan.innerHTML = "";
+			*/
 
 			return;
 		}
@@ -4368,7 +4374,7 @@ xe.XE_SCharacter = jQuery.Class({
 	name : "XE_SCharacter",
 
 	$init : function(oAppContainer){
-		this.bIE = jQuery.browser.msie;
+		this.bIE = (navigator.appName == 'Microsoft Internet Explorer');
 
 		this._assignHTMLObjects(oAppContainer);
 
@@ -4965,38 +4971,38 @@ xe.XE_Hyperlink = jQuery.Class({
 		this.oSelection = this.oApp.getSelection();
 
 		//if(this._validateURL(sURL)){
-        var sTarget = "";
-        if(this.oCbNewWin.checked)
-            sTarget = "_blank";
-        else
-            sTarget = "_self";
+		var sTarget = "";
+		if(this.oCbNewWin.checked)
+			sTarget = "_blank";
+		else
+			sTarget = "_self";
 
-        if(this.oSelection.collapsed){
-            var str = "<a href='" + sURL + "' target="+sTarget+">" + sURL + "</a>";
-            this.oSelection.pasteHTML(str);
-        }else{
-            var nSession = Math.ceil(Math.random()*10000);
-            var arg = ( sURL == "" ? ["unlink"] : ["createLink", false, this.sATagMarker+nSession+sURL] );
-            this.oApp.exec("EXECCOMMAND", arg);
+		if(this.oSelection.collapsed){
+			var str = "<a href='" + sURL + "' target="+sTarget+">" + sURL + "</a>";
+			this.oSelection.pasteHTML(str);
+		}else{
+			var nSession = Math.ceil(Math.random()*10000);
+			var arg = ( sURL == "" ? ["unlink"] : ["createLink", false, this.sATagMarker+nSession+sURL] );
+			this.oApp.exec("EXECCOMMAND", arg);
 
-            this.oSelection.setFromSelection();
+			this.oSelection.setFromSelection();
 
-            var oDoc = this.oApp.getWYSIWYGDocument();
-            var aATags = oDoc.body.getElementsByTagName("A");
-            var nLen = aATags.length;
-            var rxMarker = new RegExp(this.sRXATagMarker+nSession, "i");
-            var elATag;
-            for(var i=0; i<nLen; i++){
-                elATag = aATags[i];
-                if(elATag.href && elATag.href.match(rxMarker)){
-                    elATag.href = elATag.href.replace(rxMarker, "");
-                    elATag.target = sTarget;
-                }
-            }
-        }
-        this.oApp.exec("HIDE_ACTIVE_LAYER");
+			var oDoc = this.oApp.getWYSIWYGDocument();
+			var aATags = oDoc.body.getElementsByTagName("A");
+			var nLen = aATags.length;
+			var rxMarker = new RegExp(this.sRXATagMarker+nSession, "i");
+			var elATag;
+			for(var i=0; i<nLen; i++){
+				elATag = aATags[i];
+				if(elATag.href && elATag.href.match(rxMarker)){
+					elATag.href = elATag.href.replace(rxMarker, "");
+					elATag.target = sTarget;
+				}
+			}
+		}
+		this.oApp.exec("HIDE_ACTIVE_LAYER");
 
-        setTimeout(jQuery.fnBind(function(){this.oSelection.select()}, this), 0);
+		setTimeout(jQuery.fnBind(function(){this.oSelection.select()}, this), 0);
 		//}else{
 			//alert(this.oApp.$MSG("XE_Hyperlink.invalidURL"));
 			//this.oLinkInput.focus();
@@ -5256,7 +5262,7 @@ xe.XE_Table = jQuery.Class({
 		var sBGColorCode = this.oBGColorInput.value;
 		var iBorderWidth = this.oBorderWidthInput.value;
 		var sTD = "";
-		if(jQuery.browser.msie){
+		if(navigator.appName == 'Microsoft Internet Explorer'){
 			sTD = "<td><p></p></td>";
 		}else{
 			if(jQuery.browser.firefox){
@@ -5393,8 +5399,8 @@ xe.XE_XHTMLFormatter = $.Class({
 	TO_IR : function(sContent) {
 		var stack = [];
 
-        // remove xeHandled attrs
-        sContent = sContent.replace(/xeHandled="YES"/ig,'');
+		// remove xeHandled attrs
+		sContent = sContent.replace(/xeHandled="YES"/ig,'');
 
 
 		// remove all useless styles
@@ -5420,7 +5426,7 @@ xe.XE_XHTMLFormatter = $.Class({
 		// remove all scripts
 		sContent = sContent.replace(regex_script, '');
 
-		if (jQuery.browser.msie) {
+		if (navigator.appName == 'Microsoft Internet Explorer') {
 			// remove jQuery attributes
 			sContent = sContent.replace(regex_jquery, '');
 
@@ -5429,7 +5435,7 @@ xe.XE_XHTMLFormatter = $.Class({
 				return '<'+m1+' '+
 					m2.replace(regex_quote_attr, function(s0,s1,s2,s3){
 						if (s1) return s1;
-                        if(/^"/.test(s3)||/"$/.test(s3)) return s2+'='+s3;
+						if(/^"/.test(s3)||/"$/.test(s3)) return s2+'='+s3;
 						return s2+'="'+s3+'"';
 					}) + '>';
 			});
@@ -5600,7 +5606,7 @@ xe.XE_FormatWithSelectUI = jQuery.Class({
 		var blockName = this.oApp.getWYSIWYGDocument().queryCommandValue("FormatBlock");
 
 		if (!blockName) return (this.elFormatSelect.selectedIndex = 0);
-		if (jQuery.browser.msie && /([0-9])/.test(blockName)) blockName = 'h'+(RegExp.$1);
+		if (navigator.appName == 'Microsoft Internet Explorer' && /([0-9])/.test(blockName)) blockName = 'h'+(RegExp.$1);
 
 		this.elFormatSelect.value = blockName.toLowerCase();
 		if(this.elFormatSelect.selectedIndex < 0) this.elFormatSelect.selectedIndex = 0;
@@ -5609,7 +5615,7 @@ xe.XE_FormatWithSelectUI = jQuery.Class({
 	$ON_SET_FORMAT_FROM_SELECT_UI : function(){
 		var sFormat = this.elFormatSelect.value;
 		if(!sFormat) return;
-		if(jQuery.browser.msie) sFormat = '<'+sFormat+'>';
+		if(navigator.appName == 'Microsoft Internet Explorer') sFormat = '<'+sFormat+'>';
 
 		this.oApp.exec("EXECCOMMAND", ["FormatBlock", false, sFormat]);
 		this.oApp.exec("CHECK_STYLE_CHANGE", []);
@@ -5698,7 +5704,7 @@ xe.XE_Table = jQuery.Class({
 		this.oApp.exec("RECORD_UNDO_ACTION", ["Cell:Split By Row"]);
 
 		// 선택 영역의 상하 좌표 구함
-		var _top    = this._getRect(cell.eq(0)).top;
+		var _top	= this._getRect(cell.eq(0)).top;
 		var _bottom = this._getRect(cell.eq(cell.length-1)).bottom;
 
 		// 테이블의 모든 셀에서 선택영역에 해당하는 셀을 구한다(상하 기준).
@@ -5707,10 +5713,10 @@ xe.XE_Table = jQuery.Class({
 
 			return !(rect.bottom <= _top || rect.top >= _bottom);
 		})).filter('.xe_selected_cell').each(function(){
-			var t       = $(this);
-			var row     = t.parent('tr');
+			var t	   = $(this);
+			var row	 = t.parent('tr');
 			var rowspan = self._getSpan(t, 'row');
-			var rect    = self._getRect(t);
+			var rect	= self._getRect(t);
 			var queue   = [];
 			var clone   = t.clone().html('<br />');
 			var topspan = 1, botspan = 1;
@@ -5749,7 +5755,7 @@ xe.XE_Table = jQuery.Class({
 				});
 
 				// 새 줄을 추가한다.
-				if (jQuery.browser.msie) {
+				if (navigator.appName == 'Microsoft Internet Explorer') {
 					// Fix bug for IE
 					row.after(row.clone().empty().get(0).outerHTML);
 				} else {
@@ -5767,7 +5773,7 @@ xe.XE_Table = jQuery.Class({
 					return ( self._getRect(jQuery(this)).left > rect.left );
 				});
 
-				if (jQuery.browser.msie) {
+				if (navigator.appName == 'Microsoft Internet Explorer') {
 					next_sib.length?
 						next_sib.eq(0).before(clone.get(0).outerHTML):
 						rows.eq(topspan-1).append(clone.get(0).outerHTML);
@@ -5807,7 +5813,7 @@ xe.XE_Table = jQuery.Class({
 
 			return !(rect.right <= _left || rect.left >= _right);
 		})).filter('.xe_selected_cell').each(function(idx){
-			var t       = jQuery(this);
+			var t	   = jQuery(this);
 			var colspan = self._getSpan(t, 'col');
 			var clone   = t.clone().html('<br />');
 
@@ -5842,7 +5848,7 @@ xe.XE_Table = jQuery.Class({
 				clone.attr('colSpan', 1);
 			}
 
-			if (jQuery.browser.msie) {
+			if (navigator.appName == 'Microsoft Internet Explorer') {
 				// Fix for IE bug
 				t.after(clone.get(0).outerHTML);
 			} else {
@@ -5914,7 +5920,7 @@ xe.XE_Table = jQuery.Class({
 		this._getRect(this._endSel = cell);
 
 		// 선택 범위를 구한다
-		var _top    = Math.min(this._startSel.rect.top,  this._endSel.rect.top);
+		var _top	= Math.min(this._startSel.rect.top,  this._endSel.rect.top);
 		var _left   = Math.min(this._startSel.rect.left, this._endSel.rect.left);
 		var _bottom = Math.max(this._startSel.rect.bottom, this._endSel.rect.bottom);
 		var _right  = Math.max(this._startSel.rect.right,  this._endSel.rect.right);
@@ -5933,7 +5939,7 @@ xe.XE_Table = jQuery.Class({
 				// 영역 재계산
 				if (rect.right  > _right)  _right  = rect.right;
 				if (rect.left   < _left)   _left   = rect.left;
-				if (rect.top    < _top)    _top    = rect.top;
+				if (rect.top	< _top)	_top	= rect.top;
 				if (rect.bottom > _bottom) _bottom = rect.bottom;
 			});
 
@@ -5974,14 +5980,14 @@ xe.XE_Table = jQuery.Class({
 	},
 
 	_isLeftClicked : function(value) {
-		return jQuery.browser.msie?!!(value & 1):(value == 0);
+		return (navigator.appName == 'Microsoft Internet Explorer')?!!(value & 1):(value == 0);
 	},
 
 	_getRect : function(obj) {
 		var el = obj.get(0);
 
 		obj.rect = {};
-		obj.rect.top    = el.offsetTop;
+		obj.rect.top	= el.offsetTop;
 		obj.rect.left   = el.offsetLeft;
 		obj.rect.bottom = obj.rect.top  + el.offsetHeight;
 		obj.rect.right  = obj.rect.left + el.offsetWidth;
@@ -6021,7 +6027,7 @@ xe.XE_WYSIWYGEnterKey = $.Class({
 			this.sLineBreaker = "P";
 		}
 
-		if(($.browser.msie || $.browser.opera) && this.sLineBreaker == "P"){
+		if((navigator.appName == 'Microsoft Internet Explorer' || $.browser.opera) && this.sLineBreaker == "P"){
 			this.$ON_MSG_APP_READY = function(){};
 		}
 	},
@@ -6097,7 +6103,7 @@ xe.XE_WYSIWYGEnterKey = $.Class({
 		oSelection.selectNode(elBR);
 		oSelection.collapseToEnd();
 
-		if(!$.browser.msie){
+		if(!(navigator.appName == 'Microsoft Internet Explorer')){
 			var oLineInfo = oSelection.getLineInfo();
 			var oStart = oLineInfo.oStart;
 			var oEnd = oLineInfo.oEnd;

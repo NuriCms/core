@@ -91,7 +91,7 @@ class moduleModel extends module
 		// Set up
 		// test.xe.com
 		$domain = '';
-		if($default_url && $default_url_parse['host'] != $request_url_parse['host'])
+		if($default_url_parse['host'] != $request_url_parse['host'])
 		{
 			$url_info = parse_url($request_url);
 			$hostname = $url_info['host'];
@@ -831,8 +831,6 @@ class moduleModel extends module
 					$name = $action->attrs->name;
 
 					$type = $action->attrs->type;
-					$grant = $action->attrs->grant?$action->attrs->grant:'guest';
-					$standalone = $action->attrs->standalone=='true'?'true':'false';
 					$ruleset = $action->attrs->ruleset?$action->attrs->ruleset:'';
 					$method = $action->attrs->method?$action->attrs->method:'';
 
@@ -844,8 +842,6 @@ class moduleModel extends module
 
 					$info->action->{$name} = new stdClass();
 					$info->action->{$name}->type = $type;
-					$info->action->{$name}->grant = $grant;
-					$info->action->{$name}->standalone = $standalone=='true'?true:false;
 					$info->action->{$name}->ruleset = $ruleset;
 					$info->action->{$name}->method = $method;
 					if($action->attrs->menu_name)
@@ -857,8 +853,8 @@ class moduleModel extends module
 						}
 						if(is_array($info->menu->{$action->attrs->menu_name}->acts))
 						{
-							@array_push($info->menu->{$action->attrs->menu_name}->acts, $name);
-							$currentKey = @array_search($name, $info->menu->{$action->attrs->menu_name}->acts);
+							array_push($info->menu->{$action->attrs->menu_name}->acts, $name);
+							$currentKey = array_search($name, $info->menu->{$action->attrs->menu_name}->acts);
 						}
 
 						$buff .= sprintf('$info->menu->%s->acts[%d]=\'%s\';', $action->attrs->menu_name, $currentKey, $name);
@@ -866,8 +862,6 @@ class moduleModel extends module
 					}
 
 					$buff .= sprintf('$info->action->%s->type=\'%s\';', $name, $type);
-					$buff .= sprintf('$info->action->%s->grant=\'%s\';', $name, $grant);
-					$buff .= sprintf('$info->action->%s->standalone=%s;', $name, $standalone);
 					$buff .= sprintf('$info->action->%s->ruleset=\'%s\';', $name, $ruleset);
 					$buff .= sprintf('$info->action->%s->method=\'%s\';', $name, $method);
 
@@ -1710,7 +1704,7 @@ class moduleModel extends module
 		$designInfoFile = sprintf(_XE_PATH_.'files/site_design/design_%s.php', $site_srl);
 		if(is_readable($designInfoFile))
 		{
-			@include($designInfoFile);
+			include($designInfoFile);
 
 			$skinName = $designInfo->module->{$module_name}->{$target};
 		}

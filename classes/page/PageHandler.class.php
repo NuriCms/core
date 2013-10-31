@@ -8,7 +8,7 @@
  * @version 0.1
  *
  * @remarks Getting total counts, number of pages, current page number, number of items per page,
- *          this class implements methods and contains variables for page navigation
+ *			this class implements methods and contains variables for page navigation
  */
 class PageHandler extends Handler
 {

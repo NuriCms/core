@@ -174,6 +174,7 @@ class editorAdminController extends editor
 		if($enabled) $enabled = 'Y';
 		else $enabled = 'N';
 
+		$args = new stdClass();
 		$args->component_name = $component_name;
 		$args->enabled = $enabled;
 		$args->site_srl = $site_srl;

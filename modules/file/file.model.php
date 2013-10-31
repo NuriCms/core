@@ -27,6 +27,7 @@ class fileModel extends file
 		$oModuleModel = &getModel('module');
 
 		$mid = Context::get('mid');
+		$width = Context::get('width');
 		$editor_sequence = Context::get('editor_sequence');
 		$upload_target_srl = Context::get('upload_target_srl');
 		if(!$upload_target_srl) $upload_target_srl = $_SESSION['upload_info'][$editor_sequence]->upload_target_srl;
@@ -48,6 +49,7 @@ class fileModel extends file
 				$obj->disp_file_size = FileHandler::filesize($file_info->file_size);
 				if($file_info->direct_download=='N') $obj->download_url = $this->getDownloadUrl($file_info->file_srl, $file_info->sid);
 				else $obj->download_url = str_replace('./', '', $file_info->uploaded_filename);
+				if($width) $obj->thumbnail_src = $this->getFileThumbnail($file_info, $width);
 				$obj->direct_download = $file_info->direct_download;
 				$files[] = $obj;
 				$attached_size += $file_info->file_size;
@@ -72,6 +74,14 @@ class fileModel extends file
 		$this->add("upload_target_srl",$upload_target_srl);
 		$this->add("upload_status",$upload_status);
 		$this->add("left_size",$left_size);
+
+		$output->files = $files;
+		$output->editor_sequence = $editor_sequence;
+		$output->upload_target_srl = $upload_target_srl;
+		$output->upload_status = $upload_status;
+		$output->left_size = $left_size;
+
+		return $output;
 	}
 
 	/**
@@ -308,6 +318,37 @@ class fileModel extends file
 		$file_grant->is_deletable = ($document_grant || $member_info->is_admin == 'Y' || $member_info->member_srl == $file_info->member_srl || $grant->manager);
 
 		return $file_grant;
+	}
+
+	/**
+	 * Returns a Thumbnail of image
+	 * 
+	 * @param string $source_file Path of the source file
+	 * @return object
+	 */
+	function getFileThumbnail($file_info, $width)
+	{
+		if(!$file_info->file_srl || !$width || $file_info->direct_download != 'Y')
+		{
+			return false;
+		}
+
+		$source_src = $file_info->uploaded_filename;
+		$output_src = $source_src.'_'.$width.'x'.$height.'.resized'.strrchr($source_src,'.');
+		if(file_exists($output_src))
+		{
+			return $output_src;
+		}
+
+		$type = 'ratio';
+		if(!$height) $height = $width-1;
+
+		if(!FileHandler::createImageFile($source_src,$output_src, $width, $height,'','ratio'))
+		{
+			return false;
+		}
+
+		return $output_src;
 	}
 }
 /* End of file file.model.php */

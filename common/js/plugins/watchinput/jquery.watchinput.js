@@ -22,7 +22,7 @@ $.fn.watch_input = function(settings)
 	return this;
 };
 
-var timer = null, val = '', ie=$.browser.msie;
+var timer = null, val = '', ie=(navigator.appName == 'Microsoft Internet Explorer');
 
 function _onkeydown(event)
 {

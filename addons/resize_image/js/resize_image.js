@@ -241,7 +241,7 @@ $(window).load(function(){
 		});
 
 		/* live 이벤트로 적용 (image_gallery 컴포넌트와의 호환 위함) */
-		$('img[rel=xe_gallery]', this).live('mouseover', function() {
+		$(document).on('mouseover', 'img[rel=xe_gallery]', function() {
 			var $img = $(this);
 			if(!$img.parent('a').length && !$img.attr('onclick')) {
 				$img.css('cursor', 'pointer').click(slideshow);

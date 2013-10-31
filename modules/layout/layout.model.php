@@ -496,7 +496,7 @@ class layoutModel extends layout
 		}
 		if(file_exists($cache_file)&&filemtime($cache_file)>filemtime($xml_file))
 		{
-			@include($cache_file);
+			include($cache_file);
 
 			if($layout_info->extra_var && $vars)
 			{
@@ -760,7 +760,7 @@ class layoutModel extends layout
 
 		$buff = '<?php if(!defined("__XE__")) exit(); '.$buff.' ?>';
 		FileHandler::writeFile($cache_file, $buff);
-		if(file_exists($cache_file)) @include($cache_file);
+		if(is_readable($cache_file)) include($cache_file);
 
 		if(!$layout_info->title)
 		{

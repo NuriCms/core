@@ -279,16 +279,6 @@ class pageAdminController extends page
 
 	function procPageAdminArticleDocumentInsert()
 	{
-		$logged_info = Context::get('logged_info');
-
-		$oModuleModel = &getModel('module');
-		$grant = $oModuleModel->getGrant($this->module_info, $logged_info);
-
-		if (!$grant->manager)
-		{
-			return new Object(-1, 'msg_not_permitted');
-		}
-
 		$obj = Context::getRequestVars();
 		$obj->module_srl = $this->module_info->module_srl;
 		$obj->is_notice = 'N';

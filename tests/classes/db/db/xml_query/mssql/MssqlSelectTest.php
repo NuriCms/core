@@ -3,7 +3,7 @@
 	class MssqlSelectTest extends MssqlTest {
 
 		function _test($xml_file, $argsString, $expected, $expectedArgs = NULL){
-                    $this->_testPreparedQuery($xml_file, $argsString, $expected, 'getSelectSql', $expectedArgs);
+					$this->_testPreparedQuery($xml_file, $argsString, $expected, 'getSelectSql', $expectedArgs);
 		}
 
 		function testSelectStar(){
@@ -126,10 +126,10 @@
 			$this->_test($xml_file, $argsString, $expected, array("'10'"));
 		}
 
-                /**
-                 * Query fails because XML is wrong - title column does not exist
-                 * in xe_modules. Maybe the developer ment "browser_title"
-                 */
+				/**
+				 * Query fails because XML is wrong - title column does not exist
+				 * in xe_modules. Maybe the developer ment "browser_title"
+				 */
 		function test_opage_getOpageList(){
 			$xml_file = _TEST_PATH_ . "db/xml_query/mssql/data/opage.getOpageList.xml";
 			$argsString = '$args->s_title = "yuhuu";
@@ -141,30 +141,30 @@
 			$this->_test($xml_file, $argsString, $expected, array("'%yuhuu%'"));
 		}
 
-                function test_module_getExtraVars(){
-                        $xml_file = _XE_PATH_ . "modules/module/queries/getModuleExtraVars.xml";
+				function test_module_getExtraVars(){
+						$xml_file = _XE_PATH_ . "modules/module/queries/getModuleExtraVars.xml";
 			$argsString = '$args->module_srl = 25;';
 			$expected = 'SELECT *  FROM [xe_module_extra_vars] as [module_extra_vars] WHERE  [module_srl] in (?)';
 			$this->_test($xml_file, $argsString, $expected, array(array(25)));
-                }
+				}
 
-                function test_module_getModuleSites(){
-                        $xml_file = _XE_PATH_ . "modules/module/queries/getModuleSites.xml";
-                        $argsString = '$args->module_srls = "67, 65";';
+				function test_module_getModuleSites(){
+						$xml_file = _XE_PATH_ . "modules/module/queries/getModuleSites.xml";
+						$argsString = '$args->module_srls = "67, 65";';
 			$expected = 'SELECT [modules].[module_srl] as [module_srl], [sites].[domain] as [domain]  FROM [xe_modules] as [modules] , [xe_sites] as [sites]   WHERE  [modules].[module_srl] in (?,?) and [sites].[site_srl] = [modules].[site_srl]';
 			$this->_test($xml_file, $argsString, $expected, array(array(67, 65)));
-                }
+				}
 
-                function test_syndication_getGrantedModule(){
-                        $xml_file = _TEST_PATH_ . "db/xml_query/mssql/data/syndication.getGrantedModule.xml";
+				function test_syndication_getGrantedModule(){
+						$xml_file = _TEST_PATH_ . "db/xml_query/mssql/data/syndication.getGrantedModule.xml";
 			$argsString = '$args->module_srl = 67;';
 			$expected = 'select count(*) as [count]
-                                        from [xe_module_grants] as [module_grants]
-                                        where [module_srl] = ?
-                                            and [name] in (\'access\',\'view\',\'list\')
-                                            and ([group_srl] >= 1
-                                                    or [group_srl] = -1
-                                                    or [group_srl] = -2)';
+										from [xe_module_grants] as [module_grants]
+										where [module_srl] = ?
+											and [name] in (\'access\',\'view\',\'list\')
+											and ([group_srl] >= 1
+													or [group_srl] = -1
+													or [group_srl] = -2)';
 			$this->_test($xml_file, $argsString, $expected, array(67));
-                }
+				}
 	}

@@ -593,14 +593,14 @@ class editorModel extends editor
 	function getComponentList($filter_enabled = true, $site_srl=0, $from_db=false)
 	{
 		$cache_file = $this->getCacheFile(false, $site_srl);
-		if($from_db || !file_exists($cache_file))
+		if($from_db || !is_readable($cache_file))
 		{
 			$oEditorController = &getController('editor');
 			$oEditorController->makeCache(false, $site_srl);
 		}
 
 		if(!file_exists($cache_file)) return;
-		@include($cache_file);
+		include($cache_file);
 		$logged_info = Context::get('logged_info');
 		if($logged_info && is_array($logged_info->group_list))
 		{

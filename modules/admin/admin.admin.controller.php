@@ -17,13 +17,6 @@ class adminAdminController extends admin
 	 */
 	function init()
 	{
-		// forbit access if the user is not an administrator
-		$oMemberModel = getModel('member');
-		$logged_info = $oMemberModel->getLoggedInfo();
-		if($logged_info->is_admin != 'Y')
-		{
-			return $this->stop("msg_is_not_administrator");
-		}
 	}
 
 	/**
@@ -173,7 +166,7 @@ class adminAdminController extends admin
 		$buff = '';
 		if(is_readable($siteDesignFile))
 		{
-			@include($siteDesignFile);
+			include($siteDesignFile);
 		}
 		else
 		{
@@ -468,10 +461,10 @@ class adminAdminController extends admin
 	function procAdminRemoveIcons()
 	{
 		$iconname = Context::get('iconname');
-		$file_exist = FileHandler::readFile(_XE_PATH_ . 'files/attach/xeicon/' . $iconname);
+		$file_exist = FileHandler::hasContent(_XE_PATH_ . 'files/attach/xeicon/' . $iconname);
 		if($file_exist)
 		{
-			@FileHandler::removeFile(_XE_PATH_ . 'files/attach/xeicon/' . $iconname);
+			FileHandler::removeFile(_XE_PATH_ . 'files/attach/xeicon/' . $iconname);
 		}
 		else
 		{

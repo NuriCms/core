@@ -1303,11 +1303,6 @@ class commentController extends comment
 	 */
 	function procCommentGetList()
 	{
-		if(!Context::get('is_logged'))
-		{
-			return new Object(-1, 'msg_not_permitted');
-		}
-
 		$commentSrls = Context::get('comment_srls');
 
 		if($commentSrls)

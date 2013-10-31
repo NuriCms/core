@@ -13,13 +13,13 @@
  * modification, are permitted provided that the following conditions
  * are met:
  *
- *    * Redistributions of source code must retain the above copyright
- *      notice, this list of conditions and the following disclaimer.
- *    * Redistributions in binary form must reproduce the above copyright
- *      notice, this list of conditions and the following disclaimer in the
- *      documentation and/or other materials provided with the distribution.
- *    * The names of the authors may not be used to endorse or promote products
- *      derived from this software without specific prior written permission.
+ *	* Redistributions of source code must retain the above copyright
+ *	  notice, this list of conditions and the following disclaimer.
+ *	* Redistributions in binary form must reproduce the above copyright
+ *	  notice, this list of conditions and the following disclaimer in the
+ *	  documentation and/or other materials provided with the distribution.
+ *	* The names of the authors may not be used to endorse or promote products
+ *	  derived from this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
  * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
@@ -34,11 +34,11 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  * @category   HTTP
- * @package    HTTP_Request2
- * @author     Alexey Borzov <avb@php.net>
- * @license    http://opensource.org/licenses/bsd-license.php New BSD License
- * @version    SVN: $Id: Exception.php 290192 2009-11-03 21:29:32Z avb $
- * @link       http://pear.php.net/package/HTTP_Request2
+ * @package	HTTP_Request2
+ * @author	 Alexey Borzov <avb@php.net>
+ * @license	http://opensource.org/licenses/bsd-license.php New BSD License
+ * @version	SVN: $Id: Exception.php 290192 2009-11-03 21:29:32Z avb $
+ * @link	   http://pear.php.net/package/HTTP_Request2
  */
 
 /**
@@ -53,8 +53,8 @@ require_once 'PEAR/Exception.php';
  * http://pear.php.net/pepr/pepr-proposal-show.php?id=132
  *
  * @category   HTTP
- * @package    HTTP_Request2
- * @version    Release: 0.5.2
+ * @package	HTTP_Request2
+ * @version	Release: 0.5.2
  */
 class HTTP_Request2_Exception extends PEAR_Exception
 {
