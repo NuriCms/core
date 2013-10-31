@@ -34,6 +34,7 @@
 	<!--@if($enable_autosave)-->
 	<input type="hidden" name="_saved_doc_title" value="{htmlspecialchars($saved_doc->title)}" />
 	<input type="hidden" name="_saved_doc_content" value="{htmlspecialchars($saved_doc->content)}" />
+	<input type="hidden" name="_saved_doc_document_srl" value="{htmlspecialchars($saved_doc->document_srl)}" />
 	<input type="hidden" name="_saved_doc_message" value="{$lang->msg_load_saved_doc}" />
 	<!--@end-->
 	<!-- 에디터 -->
@@ -483,9 +484,9 @@
 
 		<load target="_AXJ/lib/AXJ.js" />
 		<load target="_AXJ/lib/AXUpload5.js" />
-		<load target="js/AXUpload5forXE.js" />
+		<load target="js/AXUpload5forNuri.js" />
 
-		$(document.body).ready(function(){
+		jQuery(document.body).ready(function(){
 			setTimeout(function(){
 				editorUploadInit({
 						"editorSequence" : {$editor_sequence},

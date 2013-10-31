@@ -9,7 +9,6 @@ var loaded_images    = [];
 var swfUploadObjs    = [];
 var uploadSettingObj = [];
 var uploadAutosaveChecker = false;
-var $ = jQuery.noConflict();
 
 // NuriCms: AXUpload5의 추가 객체생성
 var AXUpload5 = Class.create(AXUpload5, {
@@ -75,11 +74,11 @@ var AXUpload5 = Class.create(AXUpload5, {
 				targetFiles = myUpload.multiSelector.getSelects();
 				if(targetFiles.length < 1) return false;
 	
-				$.each(targetFiles, function(i, file){
+				jQuery.each(targetFiles, function(i, file){
 					targetfileID[file.id] = file.id;
 				});
 	
-				$.each(myUpload.uploadedList, function(i, file){
+				jQuery.each(myUpload.uploadedList, function(i, file){
 					if(!targetfileID[file.id]) return true;
 					uploadFile.push(file);
 				});
@@ -89,7 +88,7 @@ var AXUpload5 = Class.create(AXUpload5, {
 	
 			editorFocus(editorSequence);
 
-			$.each(uploadFile, function(){
+			jQuery.each(uploadFile, function(){
 				if(!this.file_srl) return true;
 				// 바로 링크 가능한 파일의 경우 (이미지, 플래쉬, 동영상 등..)
 				if(this.direct_download == 'Y') {
@@ -153,7 +152,7 @@ var AXUpload5 = Class.create(AXUpload5, {
 		this.uploadingObj = obj;
 		var formData = new FormData();
 		//서버로 전송해야 할 추가 파라미터 정보 설정
-		$.each(cfg.uploadPars, function(k, v){
+		jQuery.each(cfg.uploadPars, function(k, v){
 			formData.append(k, v); 
 		});
 		//formData.append(obj.file.name, obj.file);
@@ -175,45 +174,45 @@ var AXUpload5 = Class.create(AXUpload5, {
 			if (res.result == "err" || res.error) {
 				cfg.onError("res_error");
 				trace(res);
-				$("#" + itemID).fadeOut("slow");
+				jQuery("#" + itemID).fadeOut("slow");
 				cancelUpload();
 				return;
 			}
 			
 			if(cfg.isSingleUpload){
 				
-				$("#"+itemID+" .AXUploadBtns").show();
-				$("#"+itemID+" .AXUploadLabel").show();
-				$("#"+itemID+" .AXUploadTit").show();
+				jQuery("#"+itemID+" .AXUploadBtns").show();
+				jQuery("#"+itemID+" .AXUploadLabel").show();
+				jQuery("#"+itemID+" .AXUploadTit").show();
 				
-				$("#"+itemID+" .AXUploadProcess").hide();
+				jQuery("#"+itemID+" .AXUploadProcess").hide();
 								
 				uploadSuccess(obj.file, itemID, res);
 				// --------------------- s
-				$("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
+				jQuery("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
 					onClickDeleteButton(itemID);
 				});
 				if(cfg.onClickUploadedItem){
-					$("#"+itemID+" .AXUploadDownload").bind("click", function(){
+					jQuery("#"+itemID+" .AXUploadDownload").bind("click", function(){
 						onClickFileTitle(itemID);
 					});
 				}
 				
 			}else{
 				
-//				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show();
-				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
-				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
+//				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show();
+				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
+				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
 
 				if(!res[cfg.fileKeys.thumbPath]) res[cfg.fileKeys.thumbPath] = res[cfg.fileKeys.uploaded_filename]; // NuriCms: 섬네일 이미지가 없으면 기본 주소 호출
 
 				if(/\.(jpg|jpeg|png|gif)$/i.test(res[cfg.fileKeys.thumbPath])){ // NuriCms: 이미지 확장자구분
-					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
 						"background-image":"url('"+(res[cfg.fileKeys.thumbPath]||"").dec()+"')"
 					}).addClass("AXUploadPreview");
 				}else{
-					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({"background-image":"url()"});
-						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").html((
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({"background-image":"url()"});
+						jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").html((
 							res[cfg.fileKeys.name].substring(res[cfg.fileKeys.name].lastIndexOf('.')+1,res[cfg.fileKeys.name].length).toLowerCase()
 							||"none"
 						).dec().replace(".", "")); // NuriCms: 일반 파일 확장자명 추가
@@ -221,11 +220,11 @@ var AXUpload5 = Class.create(AXUpload5, {
 				
 				uploadSuccess(obj.file, itemID, res);
 				// --------------------- s
-				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
+				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
 					onClickDeleteButton(itemID);
 				});
 				if(cfg.onClickUploadedItem){
-					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadDownload").bind("click", function(){
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadDownload").bind("click", function(){
 						onClickFileTitle(itemID);
 					});
 				}
@@ -240,9 +239,9 @@ var AXUpload5 = Class.create(AXUpload5, {
 		var setUploadingObjBind = setUploadingObj.bind(this);
 		this.xhr.upload.onprogress = function(e) {
 			if(cfg.isSingleUpload){
-				if (e.lengthComputable) { $("#"+itemID).find(".AXUploadProcessBar").width( ((e.loaded / e.total) * 100).round(2)+"%" ); }	
+				if (e.lengthComputable) { jQuery("#"+itemID).find(".AXUploadProcessBar").width( ((e.loaded / e.total) * 100).round(2)+"%" ); }	
 			}else{
-				if (e.lengthComputable) { $("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcessBar").width( ((e.loaded / e.total) * 100).round(2)+"%" ); }	
+				if (e.lengthComputable) { jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcessBar").width( ((e.loaded / e.total) * 100).round(2)+"%" ); }	
 			}
 			if (e.lengthComputable) {
 				if(	e.loaded > e.total*0.9 ){
@@ -262,7 +261,7 @@ var AXUpload5 = Class.create(AXUpload5, {
 		if(cfg.isSingleUpload){
 
 			var f;
-			if($.isArray(files)){
+			if(jQuery.isArray(files)){
 				this.uploadedList.push(files.first());
 				f = files.first();
 			}else{
@@ -278,19 +277,19 @@ var AXUpload5 = Class.create(AXUpload5, {
 				size:f[cfg.fileKeys.fileSize]
 			};
 			
-			$("#" + cfg.targetID+'_AX_display').empty();
-			$("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, uf));
+			jQuery("#" + cfg.targetID+'_AX_display').empty();
+			jQuery("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, uf));
 			
-			$("#"+itemID+" .AXUploadBtns").show();
-			$("#"+itemID+" .AXUploadLabel").show();
-			$("#"+itemID+" .AXUploadTit").show();
-			$("#"+itemID+" .AXUploadProcess").hide();
+			jQuery("#"+itemID+" .AXUploadBtns").show();
+			jQuery("#"+itemID+" .AXUploadLabel").show();
+			jQuery("#"+itemID+" .AXUploadTit").show();
+			jQuery("#"+itemID+" .AXUploadProcess").hide();
 			
-			$("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
+			jQuery("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
 				onClickDeleteButton(itemID);
 			});
 			if(cfg.onClickUploadedItem){
-				$("#"+itemID+" .AXUploadDownload").bind("click", function(){
+				jQuery("#"+itemID+" .AXUploadDownload").bind("click", function(){
 					onClickFileTitle(itemID);
 				});
 			}
@@ -298,7 +297,7 @@ var AXUpload5 = Class.create(AXUpload5, {
 		}else{
 			this.uploadedList = files;
 			if(cfg.queueBoxID){
-				$.each(this.uploadedList, function(fidx, f){
+				jQuery.each(this.uploadedList, function(fidx, f){
 					if(f.id == undefined){
 						trace("id key is required.");
 						return false;	
@@ -309,40 +308,40 @@ var AXUpload5 = Class.create(AXUpload5, {
 						name:f[cfg.fileKeys.name],
 						size:f[cfg.fileKeys.fileSize]
 					};
-					$("#" + cfg.queueBoxID).prepend(getItemTag(itemID, uf));
-					$("#" + cfg.queueBoxID).find("#"+itemID).fadeIn();
+					jQuery("#" + cfg.queueBoxID).prepend(getItemTag(itemID, uf));
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID).fadeIn();
 
 					// --------------------- s
-//					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show(); // 삭제버튼은 비표시
-					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
-					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
+//					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show(); // 삭제버튼은 비표시
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
 
 					if(!f[cfg.fileKeys.thumbPath]) f[cfg.fileKeys.thumbPath] = f[cfg.fileKeys.download_url]; // NuriCms: 섬네일 이미지가 없으면 기본 주소 호출\
 
 					if(/\.(jpg|jpeg|png|gif)$/i.test(f[cfg.fileKeys.thumbPath])){ // NuriCms: 이미지 확장자구분
-						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
+						jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
 							"background-image":"url('"+(f[cfg.fileKeys.thumbPath]||"").dec()+"')"
 						}).addClass("AXUploadPreview");
 					}else{
-						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({"background-image":"url()"});
-						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").html((
+						jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({"background-image":"url()"});
+						jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").html((
 							f[cfg.fileKeys.name].substring(f[cfg.fileKeys.name].lastIndexOf('.')+1,f[cfg.fileKeys.name].length).toLowerCase()
 							||"none"
 						).dec().replace(".", "")); // NuriCms: 일반 파일 확장자명 추가
 					}
 		
-					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
 						onClickDeleteButton(itemID);
 					});
 					if(cfg.onClickUploadedItem){
-						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadDownload").attr("title", uploadSettingObj[editorSequence].lang.uploadButtonEditor); // NuriCms: 본문 첨부설명
-						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadDownload").bind("click", function(){
+						jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadDownload").attr("title", uploadSettingObj[editorSequence].lang.uploadButtonEditor); // NuriCms: 본문 첨부설명
+						jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadDownload").bind("click", function(){
 							onClickFileTitle(itemID);
 						});
 					}
 					// --------------------- e
 
-					$("#"+itemID).addClass("readyselect");
+					jQuery("#"+itemID).addClass("readyselect");
 				});
 				this.multiSelector.collect();
 			}
@@ -350,16 +349,16 @@ var AXUpload5 = Class.create(AXUpload5, {
 	},
 	onFileDragOver: function(evt){ // AXUpload5 onFileDragOver (버그 처리를 위해 선언)
 		var cfg = this.config;
-		$("#"+cfg.dropBoxID).addClass("onDrop");
-		$("#"+cfg.dropBoxID+"_dropZoneBox").show();
+		jQuery("#"+cfg.dropBoxID).addClass("onDrop");
+		jQuery("#"+cfg.dropBoxID+"_dropZoneBox").show();
 
-		/*$("#"+cfg.dropBoxID+"_dropZoneBox").css({height:$("#"+cfg.dropBoxID).innerHeight()-6, width:$("#"+cfg.dropBoxID).innerWidth()-6}); 라르게덴 2013-10-29 오후 3:21:45 */
-		$("#"+cfg.dropBoxID+"_dropZoneBox").css({height:$("#"+cfg.dropBoxID).prop("scrollHeight")-6, width:$("#"+cfg.dropBoxID).innerWidth()-6});
+		/*jQuery("#"+cfg.dropBoxID+"_dropZoneBox").css({height:jQuery("#"+cfg.dropBoxID).innerHeight()-6, width:jQuery("#"+cfg.dropBoxID).innerWidth()-6}); 라르게덴 2013-10-29 오후 3:21:45 */
+		jQuery("#"+cfg.dropBoxID+"_dropZoneBox").css({height:jQuery("#"+cfg.dropBoxID).prop("scrollHeight")-6, width:jQuery("#"+cfg.dropBoxID).innerWidth()-6});
 
 		var dropZone = document.getElementById(cfg.dropBoxID+"_dropZoneBox");
 		dropZone.addEventListener('dragleave', function(evt){
-			$("#"+cfg.dropBoxID).removeClass("onDrop");
-			$("#"+cfg.dropBoxID+"_dropZoneBox").hide();
+			jQuery("#"+cfg.dropBoxID).removeClass("onDrop");
+			jQuery("#"+cfg.dropBoxID+"_dropZoneBox").hide();
 		}, false);
 
 		evt.stopPropagation();
@@ -374,12 +373,12 @@ var AXUpload5 = Class.create(AXUpload5, {
 		if (file != undefined){
 			var pars = [];
 			var sendPars = "";
-			$.each(file, function(k, v){
+			jQuery.each(file, function(k, v){
 				pars.push(k + '=' + v);
 			});
 			
 			if (typeof(cfg.deletePars) === "object") {
-				$.each(cfg.deletePars, function(k, v){
+				jQuery.each(cfg.deletePars, function(k, v){
 					pars.push(k + '=' + v);
 				});
 				sendPars = pars.join("&");
@@ -388,17 +387,17 @@ var AXUpload5 = Class.create(AXUpload5, {
 			}
 
 			if(cfg.isSingleUpload){
-				$("#"+file.id+" .AXUploadBtns").hide();
+				jQuery("#"+file.id+" .AXUploadBtns").hide();
 			}else{
-				$("#" + cfg.queueBoxID).find("#"+file.id+" .AXUploadBtns").hide();
+				jQuery("#" + cfg.queueBoxID).find("#"+file.id+" .AXUploadBtns").hide();
 			}
 			new AXReq(cfg.deleteUrl, {debug:false, pars:sendPars, contentType:"application/json", onsucc:function(res){
 				if(res.message == AXConfig.AXReq.okCode){
 					if(cfg.isSingleUpload){
-						$('#'+cfg.targetID+'_AX_display').html(AXConfig.AXUpload5.uploadSelectTxt);
+						jQuery('#'+cfg.targetID+'_AX_display').html(AXConfig.AXUpload5.uploadSelectTxt);
 					}else{
-						$("#"+file.id).hide(function(){
-							$(this).remove();
+						jQuery("#"+file.id).hide(function(){
+							jQuery(this).remove();
 						});
 					}
 
@@ -418,7 +417,7 @@ var AXUpload5 = Class.create(AXUpload5, {
 						if(cfg.onComplete) cfg.onComplete.call(response_tags, response_tags);
 					}
 				}else{
-					$("#" + cfg.queueBoxID).find("#"+file.id+" .AXUploadBtns").show();
+					jQuery("#" + cfg.queueBoxID).find("#"+file.id+" .AXUploadBtns").show();
 				}
 			}});
 
@@ -438,7 +437,7 @@ var AXUpload5 = Class.create(AXUpload5, {
 			if(this.uploadedList.length == 0){
 				toast.push({body:uploadSettingObj[editorSequence].lang.error_deleteQueue, type:'Warning'});
 			}
-			$.each(this.uploadedList, function(){
+			jQuery.each(this.uploadedList, function(){
 				deleteQueue.push(this.id);
 			});
 			this.ccDelete(deleteQueue, 0);
@@ -452,7 +451,7 @@ var AXUpload5 = Class.create(AXUpload5, {
 					return false;
 				}
 				var deleteQueue = [];
-				$.each(selectObj, function(){
+				jQuery.each(selectObj, function(){
 					deleteQueue.push(this.id);
 				});
 				this.ccDelete(deleteQueue, 0);
@@ -478,7 +477,7 @@ var fnObj = {
 		
 			if(!is_def(seq)) return;
 
-			cfg = $.extend({
+			cfg = jQuery.extend({
 				url : request_uri+'index.php',
 				sessionName : "PHPSESSID"
 			}, cfg);
@@ -486,11 +485,11 @@ var fnObj = {
 			uploadSettingObj[seq] = cfg; // editor 설정정보 저장
 
 			// 파일 박스안의 우클릭, 드래그 방지
-			$("#uploadQueueBox").bind("contextmenu", function(event){event.preventDefault();});
-			$("#uploadQueueBox").bind("selectstart", function(event){event.preventDefault();});
-			$("#uploadQueueBox").bind("dragstart", function(event){event.preventDefault();});
-			$("#uploadQueueBox").css('MozUserSelect','none');
-			$("#uploadQueueBox").mousedown(function(){return false;});
+			jQuery("#uploadQueueBox").bind("contextmenu", function(event){event.preventDefault();});
+			jQuery("#uploadQueueBox").bind("selectstart", function(event){event.preventDefault();});
+			jQuery("#uploadQueueBox").bind("dragstart", function(event){event.preventDefault();});
+			jQuery("#uploadQueueBox").css('MozUserSelect','none');
+			jQuery("#uploadQueueBox").mousedown(function(){return false;});
 
 			// NuriCms : XE는 결과값이 ok가 아닌 success
 			AXConfig.AXReq.okCode = "success";
@@ -556,10 +555,10 @@ var fnObj = {
 				},
 				onUpload: function(uploadedItem){ // 업로드 완료시 현재 등록파일의 총용량을 계산해서 화면에 반영
 					cfg.insertedFiles = uploadedItem.uploaded_count;
-					$('#'+cfg.uploaderStatusID+' .attach_size').html(filesize(cfg.uploadMaxFileSize - cfg.uploadLeftFileSize));
+					jQuery('#'+cfg.uploaderStatusID+' .attach_size').html(filesize(cfg.uploadMaxFileSize - cfg.uploadLeftFileSize));
 				},
 				onComplete: function(data, ee){
-					$("#uploadCancelBtn").get(0).disabled = true; // 전송중지 버튼 제어
+					jQuery("#uploadCancelBtn").get(0).disabled = true; // 전송중지 버튼 제어
 
 					if(cfg.insertedFiles != myUpload.uploadedList.length){ // NuriCms: 파일박스에 등록된 파일수와 서버에 등록된 수가 불일치 할 경우 리로딩
 						fnObj.upload.getFileList(cfg, true); 
@@ -571,7 +570,7 @@ var fnObj = {
 				onStart: function(){
 					//*-- NuriCms: 파일을 업로드 하기 전에 검사 ----------s
 
-					$.each(myUpload.queue, function(i, obj){
+					jQuery.each(myUpload.queue, function(i, obj){
 						// 확장자 검사
 						if(cfg.allowed_filetypes != "*.*" &&
 							cfg.allowed_filetypes.indexOf(obj.file.name.substring(obj.file.name.lastIndexOf('.')+1,obj.file.name.length).toLowerCase()) < 0){
@@ -590,12 +589,12 @@ var fnObj = {
 					});
 					//*-- NuriCms: 파일을 업로드 하기 전에 검사 ----------e
 
-					$("#uploadCancelBtn").get(0).disabled = false; // 전송중지 버튼 제어
+					jQuery("#uploadCancelBtn").get(0).disabled = false; // 전송중지 버튼 제어
 				},
 				onDelete: function(deletedItem){ // 삭제 완료시 현재 등록파일의 총용량을 계산해서 화면에 반영
 					cfg.uploadLeftFileSize = Number(cfg.uploadLeftFileSize) + Number(deletedItem.file.file_size); // NuriCms: 파일삭제시 허용 파일사이즈 재계산
 					cfg.insertedFiles = deletedItem.res.uploaded_count;
-					$('#'+cfg.uploaderStatusID+' .attach_size').html(filesize(cfg.uploadMaxFileSize - cfg.uploadLeftFileSize));
+					jQuery('#'+cfg.uploaderStatusID+' .attach_size').html(filesize(cfg.uploadMaxFileSize - cfg.uploadLeftFileSize));
 				},
 				onError: function(errorType, extData){ // NuriCms: 각종 에러 메시지 처리
 					if(errorType == "html5Support"){
@@ -624,12 +623,12 @@ var fnObj = {
 				// 첨부파일 허용 사이즈 재계산
 				if(upload_status == true){
 					cfg.uploadLeftFileSize = response_tags.left_size;
-					$('#'+cfg.uploaderStatusID+' .attach_size').html(filesize(cfg.uploadMaxFileSize - cfg.uploadLeftFileSize));
+					jQuery('#'+cfg.uploaderStatusID+' .attach_size').html(filesize(cfg.uploadMaxFileSize - cfg.uploadLeftFileSize));
 				}
 
 				// 파일박스안에 내용을 초기화
 				myUpload.uploadedList = [];
-				$('#'+myUpload.config.queueBoxID).find('.AXUploadItem').remove();
+				jQuery('#'+myUpload.config.queueBoxID).find('.AXUploadItem').remove();
 
 				if(response_tags.files == undefined) {
 					return false;
@@ -639,7 +638,7 @@ var fnObj = {
 
 				// NuriCms: AXUpload5 element ID insert
 				var res = [];
-				$.each(response_tags.files.item, function(i, file){
+				jQuery.each(response_tags.files.item, function(i, file){
 					file.id = 'AX'+AXUtil.timekey()+'_AX_'+(response_tags.files.item.length - i-1);
 					res[i] = file;
 				});
@@ -687,7 +686,7 @@ var fnObj = {
 // AXUpload5 실행
 window.editorUploadInit = fnObj.pageStart;
 
-$(function(){
+jQuery(function(){
 	try { document.execCommand('BackgroundImageCache',false,true); } catch(e) { }
 });
 
