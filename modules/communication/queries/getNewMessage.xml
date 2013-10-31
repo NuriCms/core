@@ -10,6 +10,7 @@
 		<condition operation="equal" column="member_message.receiver_srl" var="receiver_srl" notnull="notnull" />
 		<condition operation="equal" column="member_message.readed" var="readed" default="N" notnull="notnull" pipe="and" />
 		<condition operation="equal" column="member_message.sender_srl" var="member.member_srl" pipe="and" />
+		<condition operation="equal" column="member_message.message_type" var="message_type" default="R" pipe="and" />
 	</conditions>
 	<navigation>
 		<index var="sort_index" default="member_message.list_order" order="desc" />
