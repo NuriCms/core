@@ -20,6 +20,11 @@
 		<value xml:lang="en"><![CDATA[The File APIs are not fully supported in this browser.]]></value>
 		<value xml:lang="jp"><![CDATA[このブラウザーはHTML5ファイル送信をサポートしていません。]]></value>
 	</item>
+	<item name="AXerror_fileCount">
+		<value xml:lang="ko"><![CDATA[업로드 개수가 초과된 아이템은 업로드 되지 않습니다.]]></value>
+		<value xml:lang="en"><![CDATA[Upload the count has been exceeded.]]></value>
+		<value xml:lang="jp"><![CDATA[アップロード数を超えたアイテムはアップロードされません。]]></value>
+	</item>
 	<item name="AXerror_deleteQueue">
 		<value xml:lang="ko"><![CDATA[등록된 파일이 없습니다.]]></value>
 		<value xml:lang="en"><![CDATA[There is no file.]]></value>
@@ -44,6 +49,11 @@
 		<value xml:lang="ko"><![CDATA[허용된 확장자가 아닙니다.]]></value>
 		<value xml:lang="en"><![CDATA[Invalid File Type.]]></value>
 		<value xml:lang="jp"><![CDATA[許可されてない拡張名です。]]></value>
+	</item>
+	<item name="AXuploadFileSize">
+		<value xml:lang="ko"><![CDATA[허용하는 파일 사이즈를 초과하였습니다.]]></value>
+		<value xml:lang="en"><![CDATA[Upload limit exceeded.]]></value>
+		<value xml:lang="jp"><![CDATA[許可されたファイルサイズを超えました。]]></value>
 	</item>
 	<item name="AXres_error">
 		<value xml:lang="ko"><![CDATA[파일전송에 실패 하였습니다. 서버에서 에러가 리턴되었습니다. 콘솔창을 확인 하세요.]]></value>
