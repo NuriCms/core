@@ -23,8 +23,8 @@ jQuery.each(("touchstart touchmove touchend").split(" "), function (i, name) {
 /* *** extend implement block ***************************** */
 var Class = (function () {
 	function subclass() { };
-	function create() { var parent = null, properties = $A(arguments); if (Object.isFunction(properties[0])) parent = properties.shift(); function klass() { this.initialize.apply(this, arguments); } Object.extend(klass, Class.Methods); klass.superclass = parent; klass.subclasses = []; if (parent) { subclass.prototype = parent.prototype; klass.prototype = new subclass; parent.subclasses.push(klass); } for (var i = 0; i < properties.length; i++) klass.addMethods(properties[i]); if (!klass.prototype.initialize) klass.prototype.initialize = Prototype.emptyFunction; klass.prototype.constructor = klass; return klass; }
-	function addMethods(source) { var ancestor = this.superclass && this.superclass.prototype; var properties = Object.keys(source); if (!Object.keys({ toString: true }).length) { if (source.toString != Object.prototype.toString) properties.push("toString"); if (source.valueOf != Object.prototype.valueOf) properties.push("valueOf"); } for (var i = 0, length = properties.length; i < length; i++) { var property = properties[i], value = source[property]; if (ancestor && Object.isFunction(value) && value.argumentNames().first() == "$super") { var method = value; value = (function (m) { return function () { return ancestor[m].apply(this, arguments); }; })(property).wrap(method); value.valueOf = method.valueOf.bind(method); value.toString = method.toString.bind(method); } this.prototype[property] = value; } return this; }
+	function create() { var parent = null, properties = AX_A(arguments); if (Object.isFunction(properties[0])) parent = properties.shift(); function klass() { this.initialize.apply(this, arguments); } Object.extend(klass, Class.Methods); klass.superclass = parent; klass.subclasses = []; if (parent) { subclass.prototype = parent.prototype; klass.prototype = new subclass; parent.subclasses.push(klass); } for (var i = 0; i < properties.length; i++) klass.addMethods(properties[i]); if (!klass.prototype.initialize) klass.prototype.initialize = Prototype.emptyFunction; klass.prototype.constructor = klass; return klass; }
+	function addMethods(source) { var ancestor = this.superclass && this.superclass.prototype; var properties = Object.keys(source); if (!Object.keys({ toString: true }).length) { if (source.toString != Object.prototype.toString) properties.push("toString"); if (source.valueOf != Object.prototype.valueOf) properties.push("valueOf"); } for (var i = 0, length = properties.length; i < length; i++) { var property = properties[i], value = source[property]; if (ancestor && Object.isFunction(value) && value.argumentNames().first() == "AXJ_super") { var method = value; value = (function (m) { return function () { return ancestor[m].apply(this, arguments); }; })(property).wrap(method); value.valueOf = method.valueOf.bind(method); value.toString = method.toString.bind(method); } this.prototype[property] = value; } return this; }
 	return { create: create, Methods: { addMethods: addMethods } };
 })();
 
@@ -63,11 +63,11 @@ var Class = (function () {
 		switch (type) {
 			case 'undefined':
 			case 'function':
-					try {
-						return toJSONfn(object(), isqoute);
-					} catch (e) {
-						return;
-					}
+						try {
+							return toJSONfn(object(), isqoute);
+						} catch (e) {
+							return;
+						}
 			case 'unknown': return;
 			case 'boolean': return object.toString();
 			case 'number': return object.toString();
@@ -175,10 +175,12 @@ Object.extend(String.prototype, (function () {
 				if (!is24) hh += 12;
 				return new Date(aDate[0], (parseFloat(aDate[1]) - 1), parseFloat(aDate[2]), parseFloat(hh), parseFloat(mm));
 			} catch (e) {
-				return (defaultDate || new Date());
+				var now = new Date();
+				return (defaultDate || new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12));
 			}
 		} else { // > 10
-			return (defaultDate || new Date());
+			var now = new Date();
+			return (defaultDate || new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12));
 		}
 	}
 	function toNum() {
@@ -203,17 +205,17 @@ Object.extend(String.prototype, (function () {
 		var cStr;
 		var RegExpJS = new RegExp("<[ ]*script[^>]*>[^<]*</[ ]*script[^>]*>", "gi");
 		cStr = this.replace(RegExpJS, "");
-		
-		cStr = cStr.replace(/[\s]*onclick[^=]*=/gi," xonclick=");
-		cStr = cStr.replace(/[\s]*onmouserover[^=]*=/gi," xonmouseover=");
-		cStr = cStr.replace(/[\s]*onmouseout[^=]*=/gi," xonmouseout=");
-		cStr = cStr.replace(/[\s]*onchange[^=]*=/gi," xonchange=");
-		cStr = cStr.replace(/[\s]*onblur[^=]*=/gi," xonblur=");
-	    cStr = cStr.replace(/[\s]*onerror[^=]*=/gi," xonerror=");
-	    cStr = cStr.replace(/[\s]*onload[^=]*=/gi," xonload=");
-	    cStr = cStr.replace(/[\s]*href[^=]*=[\s]*["']?javascript/gi, " href=\"xjavascript");
-	    
-	    return cStr;
+
+		cStr = cStr.replace(/[\s]*onclick[^=]*=/gi, " xonclick=");
+		cStr = cStr.replace(/[\s]*onmouserover[^=]*=/gi, " xonmouseover=");
+		cStr = cStr.replace(/[\s]*onmouseout[^=]*=/gi, " xonmouseout=");
+		cStr = cStr.replace(/[\s]*onchange[^=]*=/gi, " xonchange=");
+		cStr = cStr.replace(/[\s]*onblur[^=]*=/gi, " xonblur=");
+		cStr = cStr.replace(/[\s]*onerror[^=]*=/gi, " xonerror=");
+		cStr = cStr.replace(/[\s]*onload[^=]*=/gi, " xonload=");
+		cStr = cStr.replace(/[\s]*href[^=]*=[\s]*["']?javascript/gi, " href=\"xjavascript");
+
+		return cStr;
 	}
 	function times(count) { return count < 1 ? '' : new Array(count + 1).join(this); }
 	function inspect(useDoubleQuotes) {
@@ -262,7 +264,7 @@ Object.extend(String.prototype, (function () {
 		} else {
 			var localNums = localNum.split(/\//g);
 			var tempNum = _this.left(3);
-			$.each(localNums, function () {
+			jQuery.each(localNums, function () {
 				if (this == tempNum) {
 					myLocalNums = this;
 					return false;
@@ -301,12 +303,12 @@ Object.extend(String.prototype, (function () {
 		return returnString;
 
 	}
-	function getAnchorDate(){
-	    var idx = this.indexOf("#", 0);
-    	var cnt = this.length;
-    	var str = this.substring(idx+1, cnt);
-    	return str;
-    }
+	function getAnchorData() {
+		var idx = this.indexOf("#", 0);
+		var cnt = this.length;
+		var str = this.substring(idx + 1, cnt);
+		return str;
+	}
 	function print() {
 		return this;
 	}
@@ -344,7 +346,7 @@ Object.extend(String.prototype, (function () {
 		ucase: ucase,
 		getByte: getByte,
 		phone: toPhoneString,
-		anchorDate: getAnchorDate,
+		anchorData: getAnchorData,
 		print: print
 	}
 })());
@@ -434,7 +436,7 @@ Object.extend(Date.prototype, (function () {
 		var d2 = day2.getDate();
 		var hh2 = day2.getHours();
 		var mm2 = day2.getMinutes();
-		var dd2 = new Date(y2, m2, d2, hh2, mm2);
+		var dd2 = new Date(y2, m2, d2, hh1, mm1);
 
 		if (tp != undefined) {
 			if (tp == "D") {
@@ -457,19 +459,22 @@ Object.extend(Date.prototype, (function () {
 			return this.getUTCFullYear() + sSeper + (this.getMonth() + 1).setDigit(2) + sSeper + this.getDate().setDigit(2);
 		} else {
 			var fStr = format;
-			var nY, nM, nD, nH, nMM, nS;
+			var nY, nM, nD, nH, nMM, nS, nDW;
 			nY = this.getUTCFullYear();
 			nM = (this.getMonth() + 1).setDigit(2);
 			nD = this.getDate().setDigit(2);
 			nH = this.getHours().setDigit(2);
 			nMM = this.getMinutes().setDigit(2);
 			nS = this.getSeconds().setDigit(2);
+			nDW = this.getDay();
+
 			var yre = /[^y]*(y{0,4})[^y]*/gi; yre.test(fStr); var regY = RegExp.$1;
 			var mre = /[^m]*(m{2})[^m]*/gi; mre.test(fStr); var regM = RegExp.$1;
 			var dre = /[^d]*(d{1,2})[^d]*/gi; dre.test(fStr); var regD = RegExp.$1;
 			var hre = /[^h]*(h{2})[^d]*/gi; hre.test(fStr); var regH = RegExp.$1;
 			var mire = /[^mi]*(mi)[^mi]*/gi; mire.test(fStr); var regMI = RegExp.$1;
 			var sre = /[^s]*(s{2})[^s]*/gi; sre.test(fStr); var regS = RegExp.$1;
+			var dwre = /[^d]*(dw)[^w]*/gi; dwre.test(fStr); var regDW = RegExp.$1;
 
 			if (regY) {
 				fStr = fStr.replace(regY, nY.right(regY.length));
@@ -490,6 +495,10 @@ Object.extend(Date.prototype, (function () {
 			}
 			if (regS) {
 				fStr = fStr.replace(regS, nS);
+			}
+			if (regS) {
+				fStr = fStr.replace(regDW, AXConfig.weekDays[nDW].label);
+
 			}
 			return fStr;
 		}
@@ -571,7 +580,7 @@ Object.extend(Array.prototype, (function () {
 	function remove(callBack) {
 		var _self = this;
 		var collect = [];
-		$.each(this, function (index, O) {
+		jQuery.each(this, function (index, O) {
 			if (!callBack.call({ index: index, item: O })) collect.push(O);
 		});
 		return collect;
@@ -579,7 +588,7 @@ Object.extend(Array.prototype, (function () {
 	function search(callBack) {
 		var _self = this;
 		var collect = [];
-		$.each(this, function (index, O) {
+		jQuery.each(this, function (index, O) {
 			if (callBack.call({ index: index, item: O })) collect.push(O);
 		});
 		return collect.length;
@@ -587,7 +596,7 @@ Object.extend(Array.prototype, (function () {
 	function getObject(callBack) {
 		var _self = this;
 		var collect = [];
-		$.each(this, function (index, O) {
+		jQuery.each(this, function (index, O) {
 			if (callBack.call({ index: index, item: O })) collect.push(O);
 		});
 		return collect;
@@ -595,7 +604,7 @@ Object.extend(Array.prototype, (function () {
 	function hasObject(callBack) {
 		var _self = this;
 		var collect = null;
-		$.each(this, function (index, O) {
+		jQuery.each(this, function (index, O) {
 			if (callBack.call({ index: index, item: O })) {
 				collect = O;
 				return false;
@@ -689,7 +698,7 @@ Object.extend(Array.prototype, (function () {
 		}
 		return myselect;
 	}
-	function convertTree(parentKey, childKey, hashDigit){
+	function convertTree(parentKey, childKey, hashDigit) {
 		var tree = [];
 		var pointer = {};
 		var seq = 0;
@@ -720,8 +729,8 @@ Object.extend(Array.prototype, (function () {
 				var pHashs = pHash.split(/_/g);
 				var pTree = tree;
 				var pTreeItem;
-				$.each(pHashs, function (idx, T) {
-					if (idx > 0){
+				jQuery.each(pHashs, function (idx, T) {
+					if (idx > 0) {
 						pTreeItem = pTree[T.number()];
 						pTree = pTree[T.number()].subTree;
 					}
@@ -738,7 +747,27 @@ Object.extend(Array.prototype, (function () {
 		}
 		return tree;
 	}
-
+	function getIndex(context) {
+		if (!Object.isFunction(context)) {
+			findObj = context;
+			context = function (x) { return (x == findObj); }
+		}
+		var findObject, findIndex;
+		var i = 0;
+		while (i < this.length) {
+			var sobj = {
+				index: i,
+				item: this[i]
+			};
+			if (context.call(sobj, sobj)) {
+				findObject = this[i];
+				findIndex = i;
+				break;
+			}
+			i++;
+		}
+		return { item: findObject, index: findIndex };
+	}
 
 	return {
 		clear: clear,
@@ -759,18 +788,27 @@ Object.extend(Array.prototype, (function () {
 		get: m_find,
 		gets: m_findAll,
 		getObj: m_find2,
-		
+		getIndex: getIndex,
 		convertTree: convertTree
 	}
 })());
 
 /* **************************** extend implement block ** */
 
-function $M(id) { return document.getElementById(id); }
-function $A(iterable) { if (!iterable) return []; if ('toArray' in Object(iterable)) return iterable.toArray(); var length = iterable.length || 0, results = new Array(length); while (length--) results[length] = iterable[length]; return results; }
+function AXgetId(id) { return document.getElementById(id); }
+function AX_A(iterable) { if (!iterable) return []; if ('toArray' in Object(iterable)) return iterable.toArray(); var length = iterable.length || 0, results = new Array(length); while (length--) results[length] = iterable[length]; return results; }
 
 /* jQuery 1.9 bug fix */
 var AXConfig = {
+	weekDays: [
+		{ label: "일" },
+		{ label: "월" },
+		{ label: "화" },
+		{ label: "수" },
+		{ label: "목" },
+		{ label: "금" },
+		{ label: "토" }
+	],
 	AXReq: {
 		async: true, // AJAX 비동기 처리 여부
 		okCode: "ok", // 통신 성공 코드
@@ -778,7 +816,7 @@ var AXConfig = {
 		dataType: "", // AJAX return Data type
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8", // AJAX contentType
 		dataSendMethod: "parameter", // AJAX parameter send type
-		crossDomain : false,
+		crossDomain: false,
 		resultFormatter: function () { // onsucc formatter
 			return this;
 		}
@@ -792,7 +830,7 @@ var AXConfig = {
 		pageHeight: 400,
 		keyResult: "result",
 		keyList: "list",
-		emptyListMSG : "목록이 없습니다."
+		emptyListMSG: "목록이 없습니다."
 	},
 	AXTree: {
 		fitToWidthRightMargin: 10,
@@ -802,29 +840,32 @@ var AXConfig = {
 		keyResult: "result",
 		keyTree: "tree",
 		keyList: "list",
-		emptyListMSG : "목록이 없습니다."
+		emptyListMSG: "목록이 없습니다."
 	},
 	AXProgress: {
-		cancelMsg:"프로세스를 취소 하시겠습니까?"
+		cancelMsg: "프로세스를 취소 하시겠습니까?"
 	},
 	AXUpload5: {
-		buttonTxt:"Upload files",
-		deleteConfirm:"정말 삭제하시겠습니까?",
-		uploadSelectTxt:"업로드 하실 파일을 선택해주세요.",
-		dropZoneTxt:"업로드할 파일을 여기에 놓습니다."
+		buttonTxt: "Upload files",
+		deleteConfirm: "정말 삭제하시겠습니까?",
+		uploadSelectTxt: "업로드 하실 파일을 선택해주세요.",
+		dropZoneTxt: "업로드할 파일을 여기에 놓습니다."
+	},
+	AXModal: {
+		contentDivClass: "bodyHeightDiv"
 	}
 };
 
 var AXUtil = {
-	
-	async:true,
-	ajaxOkCode:"ok",
-	ajaxResponseType:"",
-	ajaxDataType:"",
-	gridPassiveMode:false,
-	gridPassiveRemoveHide:false,
-	gridFitToWidthRightMargin:10,
-	
+
+	async: true,
+	ajaxOkCode: "ok",
+	ajaxResponseType: "",
+	ajaxDataType: "",
+	gridPassiveMode: false,
+	gridPassiveRemoveHide: false,
+	gridFitToWidthRightMargin: 10,
+
 	browser: (function () {
 		var ua = navigator.userAgent.toLowerCase();
 		var mobile = (ua.search(/mobile/g) != -1) ? true : false;
@@ -902,16 +943,16 @@ var AXUtil = {
 	dayLen: function (y, m) {
 		if ([3, 5, 8, 10].has(function () { return this.item == m; })) { return 30; } else if (m == 1) { return (((y % 4 == 0) && (y % 100 != 0)) || (y % 400 == 0)) ? 29 : 28; } else { return 31; }
 	},
-	clientHeight: function(){
+	clientHeight: function () {
 		return (AXUtil.docTD == "Q") ? document.body.clientHeight : document.documentElement.clientHeight;
 	},
-	scrollHeight: function(){
+	scrollHeight: function () {
 		return (AXUtil.docTD == "Q") ? document.body.scrollHeight : document.documentElement.scrollHeight;
 	},
-	clientWidth: function(){
+	clientWidth: function () {
 		return (AXUtil.docTD == "Q") ? document.body.clientWidth : document.documentElement.clientWidth;
 	},
-	scrollWidth: function(){
+	scrollWidth: function () {
 		return (AXUtil.docTD == "Q") ? document.body.scrollWidth : document.documentElement.scrollWidth;
 	},
 	Event: {
@@ -987,8 +1028,8 @@ var AXUtil = {
 	isEmpty: function (val) {
 		return (val == "" || val == null || val == undefined) ? true : false;
 	},
-	getUrlInfo: function (){
-		
+	getUrlInfo: function () {
+
 		var url, url_param, param, referUrl, pathName, AXparam, pageProtocol, pageHostName;
 		url_param = window.location.href;
 		param = window.location.search;
@@ -996,24 +1037,39 @@ var AXUtil = {
 		pathName = window.location.pathname;
 		url = url_param.replace(param, '');
 		param = param.replace(/^\?/, '');
-		pageProtocol = window.location.protocol; 
+		pageProtocol = window.location.protocol;
 		pageHostName = window.location.hostname;
-		
-		AXparam = url_param.replace(pageProtocol+"//", "");
-		AXparam = AXparam.replace(pageHostName + pathName + "?" + param + "#", "");
-		
 
-	    pageInfo = {};
-	    pageInfo.url = url;
-	    pageInfo.param = param;
-	    pageInfo.anchorData = AXparam;
-	    pageInfo.urlParam = url_param;
-	    pageInfo.referUrl = referUrl;
-	    pageInfo.pathName = pathName;
-	    pageInfo.protocol = pageProtocol;
-	    pageInfo.hostName = pageHostName;
+		AXparam = url_param.replace(pageProtocol + "//", "");
+		if (param){		
+			AXparam = AXparam.replace(pageHostName + pathName + "?" + param , "");
+		}else{
+			AXparam = AXparam.replace(pageHostName + pathName, "");
+		}
+
+
+		pageInfo = {};
+		pageInfo.url = url;
+		pageInfo.param = param;
+		pageInfo.anchorData = AXparam;
+		pageInfo.urlParam = url_param;
+		pageInfo.referUrl = referUrl;
+		pageInfo.pathName = pathName;
+		pageInfo.protocol = pageProtocol;
+		pageInfo.hostName = pageHostName;
 
 		return pageInfo;
+	},
+	encParam: function (str) {
+		var re = new RegExp("[^&?]*?=[^&?]*", "ig");
+		var pars = [];
+		var arr;
+		while ((arr = re.exec(str)) != null) {
+			var strContent = arr.toString();
+			var dotIndex = strContent.indexOf("=");
+			pars.push(strContent.substring(0, dotIndex) + "=" + strContent.substring(dotIndex + 1).enc());
+		}
+		return pars.join("&");
 	}
 };
 var trace = AXUtil.console;
@@ -1057,7 +1113,7 @@ var AXJ = Class.create({
 		if (configs) jQuery.each(configs, function (k, v) { _self.config[k] = v; });
 		this.init();
 	},
-	changeConfig: function(configs){
+	changeConfig: function (configs) {
 		var _self = this;
 		if (configs) jQuery.each(configs, function (k, v) { _self.config[k] = v; });
 	},
@@ -1104,6 +1160,23 @@ var AXJ = Class.create({
 		} else {
 			return ids[idx];
 		}
+	},
+	stopEvent: function(event){
+		if (event.preventDefault) event.preventDefault();
+		if (event.stopPropagation) event.stopPropagation();
+		event.cancelBubble = true;
+		return false;
+	},
+	clearRange: function(){
+		if (window.getSelection) {
+			if (window.getSelection().empty) {  // Chrome
+				window.getSelection().empty();
+			} else if (window.getSelection().removeAllRanges) {  // Firefox
+				window.getSelection().removeAllRanges();
+			}
+		} else if (document.selection) {  // IE?
+			document.selection.empty();
+		}	
 	}
 });
 /* ********************************************** AXJ ** */
@@ -1157,11 +1230,15 @@ var AXReqQue = Class.create({
 		var ontimeout = this.ontimeout.bind(this);
 		var onsucc = this.onsucc.bind(this);
 
-		if (typeof myQue.configs.pars == "object") {
-			myQue.configs.pars.dummy = AXUtil.timekey();
-		} else if (typeof myQue.configs.pars == "string") {
-			if (myQue.configs.pars == "") myQue.configs.pars += "dummy=" + AXUtil.timekey();
-			else myQue.configs.pars += "&dummy=" + AXUtil.timekey();
+		if (AXConfig.AXReq.dataSendMethod != "json") {
+
+		} else {
+			if (typeof myQue.configs.pars == "object") {
+				myQue.configs.pars.dummy = AXUtil.timekey();
+			} else if (typeof myQue.configs.pars == "string") {
+				if (myQue.configs.pars == "") myQue.configs.pars += "dummy=" + AXUtil.timekey();
+				else myQue.configs.pars += "&dummy=" + AXUtil.timekey();
+			}
 		}
 
 		if (config.debug) trace({ url: myQue.url, pars: myQue.configs.pars });
@@ -1235,11 +1312,11 @@ var AXReq = Class.create({
 		"2012-09-28 오후 2:58:32 - 시작"
 	],
 	initialize: function (url, configs) {
-		
-		if(window.location.toString().left(4) != "http"){
+
+		if (window.location.toString().left(4) != "http") {
 			dialog.push("현재 파일시스템으로 샘플 코드를 보고 계십니다. ajax 통신 관련한 기능은 정상 작동하지 않게 됩니다. ");
 		}
-		
+
 		myAXreqQue.add({ url: url, configs: configs });
 	}
 });
@@ -1252,8 +1329,8 @@ var AXMask = Class.create(AXJ, {
 	logs: [
 		"2012-10-06 오후 4:17:59"
 	],
-	initialize: function ($super) {
-		$super();
+	initialize: function (AXJ_super) {
+		AXJ_super();
 		this.selects = [];
 		this.config.maskClassName = "AXMask";
 		this.config.content = "disable content";
@@ -1264,7 +1341,7 @@ var AXMask = Class.create(AXJ, {
 		this.mask = jQuery("<div class=\"" + this.config.maskClassName + "\" style=\"z_index:" + this.config.maskZindex + "\"></div>");
 	},
 	open: function (val) {
-		$(document.body).append(this.mask);
+		jQuery(document.body).append(this.mask);
 		var bodyHeight = 0;
 		(AXUtil.docTD == "Q") ? bodyHeight = document.body.clientHeight : bodyHeight = document.documentElement.clientHeight;
 	},
@@ -1320,8 +1397,8 @@ var AXNotification = Class.create(AXJ, {
 		"2012-10-30 오후 12:01:10",
 		"2013-01-09 오후 1:46:55 push type bug fix - tom"
 	],
-	initialize: function ($super) {
-		$super();
+	initialize: function (AXJ_super) {
+		AXJ_super();
 		this.Observer = null;
 		this.lasBreadSeq = 0;
 		this.bread = [];
@@ -1396,7 +1473,7 @@ var AXNotification = Class.create(AXJ, {
 			po.push("	</table>");
 			if (obj.buttons) {
 				po.push("	<div class=\"AXNotificationButtons\">");
-				$.each(obj.buttons, function (index, B) {
+				jQuery.each(obj.buttons, function (index, B) {
 					po.push("	<input type=\"button\" value=\"" + this.buttonValue + "\" class=\"AXButton " + (this.buttonClass || "") + "\"  id=\"bread_AX_" + breadID + "_AX_buttons_AX_" + index + "\" />");
 				});
 				po.push("	</div>");
@@ -1411,34 +1488,34 @@ var AXNotification = Class.create(AXJ, {
 		}
 
 		if (config.type == "toast") {
-			if (!$M(config.targetID)) jQuery(document.body).append(this.toastTray);
+			if (!AXgetId(config.targetID)) jQuery(document.body).append(this.toastTray);
 			this.bread.push({ breadID: breadID, type: obj.type, html: po.join('').enc() });
 			this.insertBread();
 		} else if (config.type == "dialog") {
-			if (!$M(config.targetID)) jQuery(document.body).append(this.dialogTray);
+			if (!AXgetId(config.targetID)) jQuery(document.body).append(this.dialogTray);
 			this.dialogTray.prepend(po.join(''));
 
 			mask.open();
 			var bodyWidth = (AXUtil.docTD == "Q") ? document.body.clientWidth : document.documentElement.clientWidth;
 			var l = bodyWidth / 2 - this.dialogTray.width() / 2;
 			this.dialogTray.css({ left: l + "px" });
-			$("#bread_AX_" + breadID).fadeIn();
+			jQuery("#bread_AX_" + breadID).fadeIn();
 
 			var endCheck = this.endCheck.bind(this);
 
 			//Confirm button
-			$("#bread_AX_" + breadID + "_AX_confirm").bind("click", function () {
+			jQuery("#bread_AX_" + breadID + "_AX_confirm").bind("click", function () {
 				if (obj.onConfirm) obj.onConfirm(obj.data);
-				$("#bread_AX_" + breadID).fadeOut({
+				jQuery("#bread_AX_" + breadID).fadeOut({
 					duration: config.easing.close.duration, easing: config.easing.close.easing, complete: function () {
-						$("#bread_AX_" + breadID).remove();
+						jQuery("#bread_AX_" + breadID).remove();
 						endCheck();
 					}
 				});
 			});
 
 			//AXBUTTON
-			$(".AXNotificationButtons").find(".AXButton").bind("click", function (event) {
+			jQuery(".AXNotificationButtons").find(".AXButton").bind("click", function (event) {
 				var eid = event.target.id.split(/_AX_/g);
 				var myBreadID = eid[1];
 				var buttonSeq = eid.last();
@@ -1447,15 +1524,15 @@ var AXNotification = Class.create(AXJ, {
 						if (obj.buttons[buttonSeq].onClick) obj.buttons[buttonSeq].onClick(obj.buttons[buttonSeq].data);
 					}
 				}
-				$("#bread_AX_" + myBreadID).fadeOut({
+				jQuery("#bread_AX_" + myBreadID).fadeOut({
 					duration: config.easing.close.duration, easing: config.easing.close.easing, complete: function () {
-						$("#bread_AX_" + myBreadID).remove();
+						jQuery("#bread_AX_" + myBreadID).remove();
 						endCheck();
 					}
 				});
 			});
 
-			$(".AXNotificationButtons").find(".AXButton").get(0).focus();
+			jQuery(".AXNotificationButtons").find(".AXButton").get(0).focus();
 
 		}
 	},
@@ -1472,25 +1549,25 @@ var AXNotification = Class.create(AXJ, {
 
 		var myQue = this.bread.first();
 		var breadID = myQue.breadID;
-		$("#" + config.targetID).prepend(myQue.html.decode());
-		$("#bread_AX_" + breadID + "_AX_confirm").bind("click", function () {
-			$("#bread_AX_" + breadID).fadeOut({
+		jQuery("#" + config.targetID).prepend(myQue.html.decode());
+		jQuery("#bread_AX_" + breadID + "_AX_confirm").bind("click", function () {
+			jQuery("#bread_AX_" + breadID).fadeOut({
 				duration: config.easing.close.duration, easing: config.easing.close.easing, complete: function () {
-					$("#bread_AX_" + breadID).remove();
+					jQuery("#bread_AX_" + breadID).remove();
 					endCheck();
 				}
 			});
 		});
 
-		$("#bread_AX_" + breadID).slideDown({
+		jQuery("#bread_AX_" + breadID).slideDown({
 			duration: config.easing.open.duration, easing: config.easing.open.easing, complete: function () {
 				nextBread();
-				//$("#msg").html($("#msg").html()+"<br/>"+$M("bread_AX_"+breadID)+"/"+breadID);
+				//jQuery("#msg").html(jQuery("#msg").html()+"<br/>"+AXgetId("bread_AX_"+breadID)+"/"+breadID);
 				if (myQue.type != "Caution") {
 					setTimeout(function () {
-						$("#bread_AX_" + breadID).fadeOut({
+						jQuery("#bread_AX_" + breadID).fadeOut({
 							duration: config.easing.close.duration, easing: config.easing.close.easing, complete: function () {
-								$("#bread_AX_" + breadID).remove();
+								jQuery("#bread_AX_" + breadID).remove();
 								endCheck();
 							}
 						});
@@ -1506,7 +1583,7 @@ var AXNotification = Class.create(AXJ, {
 	},
 	endCheck: function () {
 
-		if ($("#" + this.config.targetID).html() == "") {
+		if (jQuery("#" + this.config.targetID).html() == "") {
 			this.lasBreadSeq = 0;
 			if (this.config.type == "dialog") {
 				mask.close();
@@ -1524,7 +1601,7 @@ dialog.setConfig({ targetID: "basicDialog", type: "dialog" });
 
 /* ** AXScroll ********************************************** */
 var AXScroll = Class.create(AXJ, {
-	version: "AXScroll v1.1",
+	version: "AXScroll v1.2",
 	author: "tom@axisj.com",
 	logs: [
 		"2012-10-10 오전 11:17:34",
@@ -1535,10 +1612,11 @@ var AXScroll = Class.create(AXJ, {
 		"2013-01-31 오후 3:10:02 스크롤바가 최소일때 휠 및 드래그 계산수정-root ",
 		"2013-02-08 오후 5:48:26 컨테이너가 스크롤타켓보다 길때 휠 함수 중단 처리 - tom",
 		"2013-02-16 오후 4:13:16 unbind 후 다시 bind할때 생기는 이벤트 중첩현상 처리 - tom",
-		"2013-08-01 오후 4:54:17 mobile touch 버그픽스 - tom "
+		"2013-08-01 오후 4:54:17 mobile touch 버그픽스 - tom ",
+		"2013-10-16 오후 6:45:48 mobile 스크롤 속도문제 패치 - tom"
 	],
-	initialize: function ($super) {
-		$super();
+	initialize: function (AXJ_super) {
+		AXJ_super();
 		this.config.CT_className = "AXScroll";
 		this.config.ST_className = "scrollTarget";
 		this.scrollBarMove = false;
@@ -1557,9 +1635,10 @@ var AXScroll = Class.create(AXJ, {
 			trace("need scrollID - setConfig({scrollID:''})");
 			return;
 		}
-
-		$("#" + config.targetID).addClass(this.config.CT_className);
-		$("#" + config.scrollID).addClass(this.config.ST_className);
+		this.scrollTargetID = jQuery("#" + config.targetID);
+		this.scrollScrollID = jQuery("#" + config.scrollID);
+		this.scrollTargetID.addClass(this.config.CT_className);
+		this.scrollScrollID.addClass(this.config.ST_className);
 		this.initScroll();
 		this.bindEvent();
 	},
@@ -1569,31 +1648,32 @@ var AXScroll = Class.create(AXJ, {
 			var po = [];
 			po.push("<div class=\"scrollTrack\" id=\"" + config.targetID + "_AX_scrollTrack\"></div>");
 			po.push("<div class=\"scrollBar\" id=\"" + config.targetID + "_AX_scrollBar\"></div>");
-			$("#" + config.targetID).append(po.join(''));
+			this.scrollTargetID.append(po.join(''));
 			this.scroll = true;
+			
+			this.scrollTrack = jQuery("#" + config.targetID + "_AX_scrollTrack");
+			this.scrollBar = jQuery("#" + config.targetID + "_AX_scrollBar");
 		}
 
-		var CTheight = $("#" + config.targetID).innerHeight();
-		var CTwidth = $("#" + config.targetID).innerWidth();
-		$("#" + config.targetID + "_AX_scrollTrack").css({ height: CTheight - 4 });
-		$("#" + config.scrollID).css({ width: CTwidth });
-		var Cheight = $("#" + config.scrollID).outerHeight();
-
-
+		var CTheight = this.scrollTargetID.innerHeight();
+		var CTwidth = this.scrollTargetID.innerWidth();
+		this.scrollTrack.css({ height: CTheight - 4 });
+		this.scrollScrollID.css({ width: CTwidth });
+		var Cheight = this.scrollScrollID.outerHeight();
 
 		var SBheight = CTheight * (CTheight - 4) / Cheight;
-		$("#" + config.targetID + "_AX_scrollBar").css({ height: Math.ceil(SBheight) });
+		this.scrollBar.css({ height: Math.ceil(SBheight) });
 		if (SBheight < 10) {
 			this.minHeightSB.TF = true;
 			this.minHeightSB.h = SBheight;
 		}
 
 		if (CTheight == Cheight || CTheight > Cheight) {
-			$("#" + config.targetID + "_AX_scrollTrack").hide();
-			$("#" + config.targetID + "_AX_scrollBar").hide();
+			this.scrollTrack.hide();
+			this.scrollBar.hide();
 		} else {
-			$("#" + config.targetID + "_AX_scrollTrack").show();
-			$("#" + config.targetID + "_AX_scrollBar").show();
+			this.scrollTrack.show();
+			this.scrollBar.show();
 		}
 	},
 	resizeScroll: function () {
@@ -1602,8 +1682,8 @@ var AXScroll = Class.create(AXJ, {
 	bindEvent: function () {
 		var config = this.config;
 
-		var CTheight = $("#" + config.targetID).innerHeight();
-		var Cheight = $("#" + config.scrollID).outerHeight();
+		var CTheight = this.scrollTargetID.innerHeight();
+		var Cheight = this.scrollScrollID.outerHeight();
 
 		/* event 선언자 */
 		var tractActive = this.tractActive.bind(this);
@@ -1638,28 +1718,28 @@ var AXScroll = Class.create(AXJ, {
 		}
 		/* event 선언자 */
 
-		$("#" + config.targetID).bind("mouseover", this.tractActiveBind);
-		$("#" + config.targetID).bind("mouseout", this.tractInActiveBind);
+		this.scrollTargetID.bind("mouseover", this.tractActiveBind);
+		this.scrollTargetID.bind("mouseout", this.tractInActiveBind);
 
-		$("#" + config.targetID + "_AX_scrollBar").bind("dragstart", this.cancelEventBind);
-		$("#" + config.targetID + "_AX_scrollBar").bind("mousedown", this.SBonMouseDownBind);
+		this.scrollBar.bind("dragstart", this.cancelEventBind);
+		this.scrollBar.bind("mousedown", this.SBonMouseDownBind);
 
 		//if(CTheight < Cheight ) {
 		var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel";
 		if (document.attachEvent) { //if IE (and Opera depending on user setting)
-			if ($M(config.targetID)) $M(config.targetID).attachEvent("on" + mousewheelevt, this.SBonWheelBind);
+			if (AXgetId(config.targetID)) AXgetId(config.targetID).attachEvent("on" + mousewheelevt, this.SBonWheelBind);
 		} else if (document.addEventListener) { //WC3 browsers
-			if ($M(config.targetID)) $M(config.targetID).addEventListener(mousewheelevt, this.SBonWheelBind, false);
+			if (AXgetId(config.targetID)) AXgetId(config.targetID).addEventListener(mousewheelevt, this.SBonWheelBind, false);
 		}
 		if (document.addEventListener) {
-			if ($M(config.targetID)) $M(config.targetID).addEventListener("touchstart", this.SBtouchstartBind, false)
+			if (AXgetId(config.targetID)) AXgetId(config.targetID).addEventListener("touchstart", this.SBtouchstartBind, false)
 		}
 		//}
 	},
 	tractActive: function (event) {
 		var config = this.config;
-		$("#" + config.targetID + "_AX_scrollBar").addClass("scrollBar_hover");
-		$("#" + config.targetID + "_AX_scrollTrack").addClass("scrollTrack_hover");
+		this.scrollBar.addClass("scrollBar_hover");
+		this.scrollTrack.addClass("scrollTrack_hover");
 		if (this.Observer) clearTimeout(this.Observer); //닫기 명령 제거
 		this.initScroll();
 	},
@@ -1669,10 +1749,9 @@ var AXScroll = Class.create(AXJ, {
 			SBonWheelEnd();
 		}, 500);
 	},
-
 	getMousePosition: function (event) {
 		var config = this.config;
-		var pos = $("#" + config.targetID + "_AX_scrollTrack").offset();
+		var pos = this.scrollTrack.offset();
 		//trace(pos);
 		var x = (event.pageX - pos.left);
 		var y = (event.pageY - pos.top);
@@ -1682,7 +1761,7 @@ var AXScroll = Class.create(AXJ, {
 	getTouchPosition: function (event) {
 		var config = this.config;
 		var touch = event.touches[0];
-		var pos = $("#" + config.targetID + "_AX_scrollTrack").offset();
+		var pos = this.scrollTrack.offset();
 		if (this.config.touchDirection) {
 			var x = (touch.pageX - pos.left);
 			var y = (touch.pageY - pos.top);
@@ -1692,29 +1771,29 @@ var AXScroll = Class.create(AXJ, {
 		}
 		return { x: x, y: y };
 	},
-
 	/* scrollBar event */
 	SBtouchstart: function (e) {
 		var event = window.event || e;
 		var config = this.config;
 
-		var CTheight = $("#" + config.targetID).innerHeight();
-		var Cheight = $("#" + config.scrollID).outerHeight();
-		var Ch = $("#" + config.scrollID).outerHeight();
-		var STh = $("#" + config.targetID + "_AX_scrollTrack").height();
+		var CTheight = this.scrollTargetID.innerHeight();
+		var Cheight = this.scrollScrollID.outerHeight();
+		var Ch = this.scrollScrollID.outerHeight();
+		var STh = this.scrollTrack.height();
 
 		this.CTheight = CTheight;
 		this.Cheight = Cheight;
 		this.Ch = Ch;
 		this.STh = STh;
+		
 		if (CTheight < Cheight) {
 
 			this.scrollBarMove = true;
 
 			var pos = this.getTouchPosition(event);
-			var SBpos = $("#" + config.targetID + "_AX_scrollBar").position();
-			var SBh = $("#" + config.targetID + "_AX_scrollBar").height();
-			this.scrollBarAttr = { y: (SBpos.top - pos.y).number(), h: SBh.number(), sth: STh };
+			var SBpos = this.scrollBar.position();
+			var SBh = this.scrollBar.height();
+			this.scrollBarAttr = { y: (SBpos.top - pos.y).number(), h: SBh.number(), sth: STh, trackPos:this.scrollTrack.offset() };
 
 			var SBtouchend = this.SBtouchend.bind(this);
 			this.SBtouchendBind = function () {
@@ -1724,15 +1803,13 @@ var AXScroll = Class.create(AXJ, {
 			this.SBtouchmoveBind = function () {
 				SBtouchmove(event);
 			}
-
 			if (document.addEventListener) {
 				document.addEventListener("touchend", this.SBtouchendBind, false);
 				document.addEventListener("touchmove", this.SBtouchmoveBind, false);
 			}
 
-
-			if (event.preventDefault) event.preventDefault();
-			else return false;
+			//if (event.preventDefault) event.preventDefault();
+			//else return false;
 
 		} else {
 
@@ -1746,10 +1823,10 @@ var AXScroll = Class.create(AXJ, {
 			this.scrollBarMove = false;
 			this.scrollMoving = false;
 
-			$(document.body).removeAttr("onselectstart");
-			$(document.body).removeClass("AXUserSelectNone");
-			$("#" + config.targetID + "_AX_scrollBar").removeClass("scrollBar_hover");
-			$("#" + config.targetID + "_AX_scrollTrack").removeClass("scrollTrack_hover");
+			jQuery(document.body).removeAttr("onselectstart");
+			jQuery(document.body).removeClass("AXUserSelectNone");
+			this.scrollBar.removeClass("scrollBar_hover");
+			this.scrollTrack.removeClass("scrollTrack_hover");
 
 			if (document.removeEventListener) {
 				document.removeEventListener("touchend", this.SBtouchendBind, false);
@@ -1761,9 +1838,17 @@ var AXScroll = Class.create(AXJ, {
 		var event = window.event || e;
 		var config = this.config;
 		if (this.scrollBarMove) {
-			$(document.body).attr("onselectstart", "return false");
-			$(document.body).addClass("AXUserSelectNone");
-			var pos = this.getTouchPosition(event);
+			
+			var touch = event.touches[0];
+			var tpos = this.scrollBarAttr.trackPos;
+			if (this.config.touchDirection) {
+				var x = (touch.pageX - tpos.left);
+				var y = (touch.pageY - tpos.top);
+			} else {
+				var x = (-touch.pageX - tpos.left);
+				var y = (-touch.pageY - tpos.top);
+			}
+			var pos = { x: x, y: y };
 
 			var SBy = pos.y + this.scrollBarAttr.y;
 			if (SBy < 2) SBy = 2;
@@ -1771,13 +1856,16 @@ var AXScroll = Class.create(AXJ, {
 				SBy = this.scrollBarAttr.sth - this.scrollBarAttr.h + 2;
 			}
 
-			$("#" + config.targetID + "_AX_scrollBar").css({ top: SBy.round() });
-			//$M(config.targetID+"_AX_scrollBar").style.top = SBy;
+			this.scrollBar.css({ top: SBy.round() });
+			//this.scrollBar[0].style.top = SBy.round();
+
 			this.setContentPosition();
 
 			if (this.scrollMoving == false) {
-				$("#" + config.targetID + "_AX_scrollBar").addClass("scrollBar_hover");
-				$("#" + config.targetID + "_AX_scrollTrack").addClass("scrollTrack_hover");
+				jQuery(document.body).attr("onselectstart", "return false");
+				jQuery(document.body).addClass("AXUserSelectNone");
+				this.scrollBar.addClass("scrollBar_hover");
+				this.scrollTrack.addClass("scrollTrack_hover");
 				this.scrollMoving = true;
 			}
 
@@ -1789,10 +1877,10 @@ var AXScroll = Class.create(AXJ, {
 		var config = this.config;
 		this.scrollBarMove = true;
 		var pos = this.getMousePosition(event);
-		var SBpos = $("#" + config.targetID + "_AX_scrollBar").position();
-		var SBh = $("#" + config.targetID + "_AX_scrollBar").height();
-		var STh = $("#" + config.targetID + "_AX_scrollTrack").height();
-		var Ch = $("#" + config.scrollID).outerHeight();
+		var SBpos = this.scrollBar.position();
+		var SBh = this.scrollBar.height();
+		var STh = this.scrollTrack.height();
+		var Ch = this.scrollScrollID.outerHeight();
 
 		this.Ch = Ch;
 		this.STh = STh;
@@ -1800,15 +1888,15 @@ var AXScroll = Class.create(AXJ, {
 		this.scrollBarAttr = { y: (SBpos.top - pos.y).number(), h: SBh.number(), sth: STh };
 		//trace("y:"+SBpos.top +" - "+ pos.y +", h:"+ SBh +", sth:"+STh+", calc y : "+(SBpos.top - pos.y).number());
 
-		$(document.body).bind("mousemove.AXScroll", this.SBonMouseMoveBind);
-		$(document.body).bind("mouseup.AXScroll", this.SBonMouseUpBind);
-		$(document.body).bind("mouseleave.AXScroll", this.SBonMouseUpBind);
+		jQuery(document.body).bind("mousemove.AXScroll", this.SBonMouseMoveBind);
+		jQuery(document.body).bind("mouseup.AXScroll", this.SBonMouseUpBind);
+		jQuery(document.body).bind("mouseleave.AXScroll", this.SBonMouseUpBind);
 	},
 	SBonMouseMove: function (event) {
 		var config = this.config;
 		if (this.scrollBarMove) {
-			$(document.body).attr("onselectstart", "return false");
-			$(document.body).addClass("AXUserSelectNone");
+			jQuery(document.body).attr("onselectstart", "return false");
+			jQuery(document.body).addClass("AXUserSelectNone");
 			var pos = this.getMousePosition(event);
 
 			var SBy = pos.y + this.scrollBarAttr.y;
@@ -1819,7 +1907,7 @@ var AXScroll = Class.create(AXJ, {
 				SBy = this.scrollBarAttr.sth - this.scrollBarAttr.h + 2;
 				//trace(SBy)
 			}
-			$("#" + config.targetID + "_AX_scrollBar").css({ top: SBy });
+			this.scrollBar.css({ top: SBy });
 			this.setContentPosition();
 			//this.setScrollbarPositionForWheel();
 		}
@@ -1828,12 +1916,12 @@ var AXScroll = Class.create(AXJ, {
 		if (this.scrollBarMove) {
 			var config = this.config;
 			this.scrollBarMove = false;
-			$(document.body).removeAttr("onselectstart");
-			$(document.body).removeClass("AXUserSelectNone");
+			jQuery(document.body).removeAttr("onselectstart");
+			jQuery(document.body).removeClass("AXUserSelectNone");
 		}
-		$(document.body).unbind("mousemove.AXScroll");
-		$(document.body).unbind("mouseup.AXScroll");
-		$(document.body).unbind("mouseleave.AXScroll");
+		jQuery(document.body).unbind("mousemove.AXScroll");
+		jQuery(document.body).unbind("mouseup.AXScroll");
+		jQuery(document.body).unbind("mouseleave.AXScroll");
 	},
 	SBonWheel: function (e) {
 		//content top handle
@@ -1842,9 +1930,9 @@ var AXScroll = Class.create(AXJ, {
 		var event = (window.event || e);
 		var delta = event.detail ? event.detail * (-10) : event.wheelDelta //check for detail first so Opera uses that instead of wheelDelta
 
-		var Sy = $("#" + config.scrollID).position().top;
-		var Sh = $("#" + config.scrollID).outerHeight();
-		var TGh = $("#" + config.targetID).height();
+		var Sy = this.scrollScrollID.position().top;
+		var Sh = this.scrollScrollID.outerHeight();
+		var TGh = this.scrollTargetID.height();
 
 		//trace(Sh+" + "+Sy+" < "+TGh );
 		if (Sh < TGh) return; //스크롤 할 대상이 없음 2013-02-08 오후 5:48:07 tom@axmods.com
@@ -1859,9 +1947,7 @@ var AXScroll = Class.create(AXJ, {
 			Sy = -(Sh - TGh);
 			eventCancle = true;
 		}
-
-
-		$("#" + config.scrollID).css({ top: Sy });
+		this.scrollScrollID.css({ top: Sy });
 
 		//this.setContentPosition();
 		this.setScrollbarPositionForWheel();
@@ -1877,8 +1963,8 @@ var AXScroll = Class.create(AXJ, {
 	SBonWheelEnd: function () {
 		if (this.scrollBarMove) return;
 		var config = this.config;
-		$("#" + config.targetID + "_AX_scrollBar").removeClass("scrollBar_hover");
-		$("#" + config.targetID + "_AX_scrollTrack").removeClass("scrollTrack_hover");
+		this.scrollBar.removeClass("scrollBar_hover");
+		this.scrollTrack.removeClass("scrollTrack_hover");
 	},
 	cancelEvent: function (event) {
 		event.stopPropagation(); // disable  event
@@ -1886,7 +1972,7 @@ var AXScroll = Class.create(AXJ, {
 	},
 	setContentPosition: function () {
 		var config = this.config;
-		var SBy = $("#" + config.targetID + "_AX_scrollBar").position().top;
+		var SBy = this.scrollBar.position().top;
 		var STh = this.STh;
 		var Ch = this.Ch;
 
@@ -1921,8 +2007,8 @@ var AXScroll = Class.create(AXJ, {
 			//trace({SBy:SBy, Ch:Ch, STh:STh});			
 			var Ctop = SBy * Ch / STh;
 		}
-		$("#" + config.scrollID).css({ top: -(Ctop.round()) });
-		//$M(config.scrollID).style.top = -Ctop;
+		this.scrollScrollID.css({ top: -(Ctop.round()) });
+		//this.scrollScrollID[0].style.top = -Ctop.round();
 	},
 
 	setScrollbarPositionForWheel: function () {
@@ -1930,9 +2016,9 @@ var AXScroll = Class.create(AXJ, {
 
 		var config = this.config;
 		//wheel control event is not jquery event !
-		var Sy = $("#" + config.scrollID).position().top;
-		var STh = $("#" + config.targetID + "_AX_scrollTrack").height() + 4;
-		var Sh = $("#" + config.scrollID).outerHeight();
+		var Sy = this.scrollScrollID.position().top;
+		var STh = this.scrollTrack.height() + 4;
+		var Sh = this.scrollScrollID.outerHeight();
 
 		var SBy = (-Sy * STh) / Sh;
 		/*
@@ -1955,66 +2041,65 @@ var AXScroll = Class.create(AXJ, {
 				SBy = STh - 10 - 2;
 			}
 		}
-
-		$("#" + config.targetID + "_AX_scrollBar").css({ top: SBy });
+		this.scrollBar.css({ top: SBy });
 	},
 
 
 	setSBPosition: function () {
 		var config = this.config;
-		var Ctop = $("#" + config.scrollID).position().top;
-		var CTheight = $("#" + config.targetID).innerHeight();
-		var STh = $("#" + config.targetID + "_AX_scrollTrack").height() + 8;
-		var Ch = $("#" + config.scrollID).outerHeight();
+		var Ctop = this.scrollScrollID.position().top;
+		var CTheight = this.scrollTargetID.innerHeight();
+		var STh = this.scrollTrack.height() + 8;
+		var Ch = this.scrollScrollID.outerHeight();
 
-		var SBh = $("#" + config.targetID + "_AX_scrollBar").height();
+		var SBh = this.scrollBar.height();
 
 		//trace({Ctop:Ctop, CTheight:CTheight, Ch:Ch, STh:STh, SBh:SBh, x:(STh*Ctop)/Ch});
 
 		var SBtop = -(STh * Ctop) / Ch;
 		if (SBtop < 0) SBtop;
 		if ((SBtop + SBh) > STh) SBtop = STh - SBh;
-		$("#" + config.targetID + "_AX_scrollBar").css({ top: SBtop });
+		this.scrollBar.css({ top: SBtop });
 
 	},
 	focusElement: function (id) {
 		var config = this.config;
-		if ($M(id)) {
-			//trace($("#"+id).position());
-			var pos = $("#" + id).position();
+		if (AXgetId(id)) {
+			//trace(jQuery("#"+id).position());
+			var pos = jQuery("#" + id).position();
 
 			var myNewTop = pos.top;
-			var CTheight = $("#" + config.targetID).innerHeight();
-			var Cheight = $("#" + config.scrollID).outerHeight();
+			var CTheight = this.scrollTargetID.innerHeight();
+			var Cheight = this.scrollScrollID.outerHeight();
 			if ((Cheight - myNewTop) < CTheight) {
 				myNewTop = Cheight - CTheight;
 			}
-			$("#" + config.scrollID).css({ top: -myNewTop });
+			this.scrollScrollID.css({ top: -myNewTop });
 			this.setSBPosition();
 		}
 	},
 	unbind: function () {
 		var config = this.config;
-		$("#" + config.targetID + "_AX_scrollTrack").remove();
-		$("#" + config.targetID + "_AX_scrollBar").remove();
+		this.scrollTrack.remove();
+		this.scrollBar.remove();
 
-		$("#" + config.targetID).unbind("mouseover", this.tractActiveBind);
-		$("#" + config.targetID).unbind("mouseout", this.tractInActiveBind);
+		this.scrollTargetID.unbind("mouseover", this.tractActiveBind);
+		this.scrollTargetID.unbind("mouseout", this.tractInActiveBind);
 
-		//$("#"+config.targetID+"_AX_scrollBar").unbind("dragstart", this.cancelEventBind);
-		//$("#"+config.targetID+"_AX_scrollBar").unbind("mousedown", this.SBonMouseDownBind);
-		$(document.body).unbind("mousemove.AXScroll", this.SBonMouseMoveBind);
-		$(document.body).unbind("mouseup.AXScroll", this.SBonMouseUpBind);
+		//jQuery("#"+config.targetID+"_AX_scrollBar").unbind("dragstart", this.cancelEventBind);
+		//jQuery("#"+config.targetID+"_AX_scrollBar").unbind("mousedown", this.SBonMouseDownBind);
+		jQuery(document.body).unbind("mousemove.AXScroll", this.SBonMouseMoveBind);
+		jQuery(document.body).unbind("mouseup.AXScroll", this.SBonMouseUpBind);
 
 		var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel";
 		if (document.attachEvent) { //if IE (and Opera depending on user setting)
-			if ($M(config.targetID)) $M(config.targetID).detachEvent("on" + mousewheelevt, this.SBonWheelBind);
+			if (AXgetId(config.targetID)) AXgetId(config.targetID).detachEvent("on" + mousewheelevt, this.SBonWheelBind);
 		} else if (document.addEventListener) { //WC3 browsers
-			if ($M(config.targetID)) $M(config.targetID).removeEventListener(mousewheelevt, this.SBonWheelBind, false);
+			if (AXgetId(config.targetID)) AXgetId(config.targetID).removeEventListener(mousewheelevt, this.SBonWheelBind, false);
 		}
 
 		if (document.addEventListener) {
-			if ($M(config.targetID)) $M(config.targetID).removeEventListener("touchstart", this.SBtouchstartBind, false)
+			if (AXgetId(config.targetID)) AXgetId(config.targetID).removeEventListener("touchstart", this.SBtouchstartBind, false)
 		}
 
 	}
@@ -2028,18 +2113,18 @@ var AXCalendar = Class.create(AXJ, {
 	logs: [
 		"2012-12-05 오후 11:54:27"
 	],
-	initialize: function ($super) {
-		$super();
+	initialize: function (AXJ_super) {
+		AXJ_super();
 		this.config.CT_className = "AXCalendar";
 		this.Observer = null;
 		this.config.weeks = [
-			{ name: "SUN", style: "color:#c78b82;" },
-			{ name: "MON", style: "color:#7b7b7b;" },
-			{ name: "TUE", style: "color:#7b7b7b;" },
-			{ name: "WED", style: "color:#7b7b7b;" },
-			{ name: "THU", style: "color:#7b7b7b;" },
-			{ name: "FRI", style: "color:#7b7b7b;" },
-			{ name: "SAT", style: "color:#627d9b;" }
+			{ name: "SUN" },
+			{ name: "MON" },
+			{ name: "TUE" },
+			{ name: "WED" },
+			{ name: "THU" },
+			{ name: "FRI" },
+			{ name: "SAT" }
 		];
 		this.config.printFormat = "d";
 		this.config.titleFormat = "yyyy/mm/dd";
@@ -2084,8 +2169,8 @@ var AXCalendar = Class.create(AXJ, {
 		po.push("<table cellspacing=\"0\" cellpadding=\"0\" class=\"calendarPage\">");
 		po.push("<thead>");
 		po.push("<tr>");
-		$.each(cfg.weeks, function (wi, ww) {
-			po.push("<td class=\"head_" + wi + "\" style=\"" + ww.style + "\">" + ww.name + "</td>");
+		jQuery.each(cfg.weeks, function (wi, ww) {
+			po.push("<td class=\"head_" + wi + " dayofweek_" + wi + "\">" + ww.name + "</td>");
 		});
 		po.push("</tr>");
 		po.push("</thead>");
@@ -2109,12 +2194,12 @@ var AXCalendar = Class.create(AXJ, {
 		po.push("</tbody>");
 		po.push("</table>");
 		po.push("</div>");
-		$("#" + cfg.targetID).html(po.join(''));
+		jQuery("#" + cfg.targetID).html(po.join(''));
 	},
 	dayPageSetDay: function (date) {
 		var cfg = this.config;
-		$("#" + cfg.targetID).find(".calendarDate").removeClass("selected");
-		$("#" + cfg.targetID + "_AX_" + date.print(this.config.valueFormat) + "_AX_date").addClass("selected");
+		jQuery("#" + cfg.targetID).find(".calendarDate").removeClass("selected");
+		jQuery("#" + cfg.targetID + "_AX_" + date.print(this.config.valueFormat) + "_AX_date").addClass("selected");
 	},
 	printMonthPage: function (date) {
 		var cfg = this.config;
@@ -2145,12 +2230,12 @@ var AXCalendar = Class.create(AXJ, {
 		po.push("</tbody>");
 		po.push("</table>");
 		po.push("</div>");
-		$("#" + cfg.targetID).html(po.join(''));
+		jQuery("#" + cfg.targetID).html(po.join(''));
 	},
 	monthPageSetMonth: function (date) {
 		var cfg = this.config;
-		$("#" + cfg.targetID).find(".calendarMonth").removeClass("selected");
-		$("#" + cfg.targetID + "_AX_" + (date.getMonth() + 1) + "_AX_month").addClass("selected");
+		jQuery("#" + cfg.targetID).find(".calendarMonth").removeClass("selected");
+		jQuery("#" + cfg.targetID + "_AX_" + (date.getMonth() + 1) + "_AX_month").addClass("selected");
 	},
 	printYearPage: function (year) {
 		var cfg = this.config;
@@ -2179,12 +2264,12 @@ var AXCalendar = Class.create(AXJ, {
 		po.push("</tbody>");
 		po.push("</table>");
 		po.push("</div>");
-		$("#" + cfg.targetID).html(po.join(''));
+		jQuery("#" + cfg.targetID).html(po.join(''));
 	},
 	yearPageSetYear: function (date) {
 		var cfg = this.config;
-		$("#" + cfg.targetID).find(".calendarMonth").removeClass("selected");
-		$("#" + cfg.targetID + "_AX_" + date.print("yyyy") + "_AX_year").addClass("selected");
+		jQuery("#" + cfg.targetID).find(".calendarMonth").removeClass("selected");
+		jQuery("#" + cfg.targetID + "_AX_" + date.print("yyyy") + "_AX_year").addClass("selected");
 	},
 	printTimePage: function (displayTime) {
 		var cfg = this.config;
@@ -2230,23 +2315,23 @@ var AXCalendar = Class.create(AXJ, {
 		po.push("<div class='AMPM'><input type='text' id='" + cfg.targetID + "_AX_AMPM' value='" + apm + "' style='width:50px;' /></div>");
 		po.push("</div>");
 		po.push("</div>");
-		$("#" + cfg.targetID).html(po.join(''));
+		jQuery("#" + cfg.targetID).html(po.join(''));
 
 		var timePageChange = this.timePageChange.bind(this);
-		$("#" + cfg.targetID + "_AX_hour").unbindInput();
-		$("#" + cfg.targetID + "_AX_minute").unbindInput();
-		$("#" + cfg.targetID + "_AX_AMPM").unbindInput();
-		$("#" + cfg.targetID + "_AX_hour").bindSlider({
+		jQuery("#" + cfg.targetID + "_AX_hour").unbindInput();
+		jQuery("#" + cfg.targetID + "_AX_minute").unbindInput();
+		jQuery("#" + cfg.targetID + "_AX_AMPM").unbindInput();
+		jQuery("#" + cfg.targetID + "_AX_hour").bindSlider({
 			min: 1, max: 12, onChange: function (objID, objVal) {
 				timePageChange(objID, objVal);
 			}
 		});
-		$("#" + cfg.targetID + "_AX_minute").bindSlider({
+		jQuery("#" + cfg.targetID + "_AX_minute").bindSlider({
 			min: 0, max: 59, onChange: function (objID, objVal) {
 				timePageChange(objID, objVal);
 			}
 		});
-		$("#" + cfg.targetID + "_AX_AMPM").bindSwitch({
+		jQuery("#" + cfg.targetID + "_AX_AMPM").bindSwitch({
 			off: "AM", on: "PM", onChange: function (objID, objVal) {
 				timePageChange(objID, objVal);
 			}
@@ -2254,21 +2339,21 @@ var AXCalendar = Class.create(AXJ, {
 	},
 	timePageChange: function (objID, objVal) {
 		var cfg = this.config;
-		var mytime = $("#" + cfg.targetID + "_AX_hour").val().number().setDigit(2) + ":" + $("#" + cfg.targetID + "_AX_minute").val().number().setDigit(2) + " " + $("#" + cfg.targetID + "_AX_AMPM").val();
-		$("#" + cfg.targetID + "_AX_box").find(".timeDisplay").html(mytime);
+		var mytime = jQuery("#" + cfg.targetID + "_AX_hour").val().number().setDigit(2) + ":" + jQuery("#" + cfg.targetID + "_AX_minute").val().number().setDigit(2) + " " + jQuery("#" + cfg.targetID + "_AX_AMPM").val();
+		jQuery("#" + cfg.targetID + "_AX_box").find(".timeDisplay").html(mytime);
 		if (cfg.onChange) {
-			var hh = $("#" + cfg.targetID + "_AX_hour").val().number();
-			var mi = $("#" + cfg.targetID + "_AX_minute").val().number();
-			var apm = $("#" + cfg.targetID + "_AX_AMPM").val();
+			var hh = jQuery("#" + cfg.targetID + "_AX_hour").val().number();
+			var mi = jQuery("#" + cfg.targetID + "_AX_minute").val().number();
+			var apm = jQuery("#" + cfg.targetID + "_AX_AMPM").val();
 			if (apm == "PM") hh += 12;
 			cfg.onChange(hh.setDigit(2) + ":" + mi.setDigit(2));
 		}
 	},
 	getTime: function () {
 		var cfg = this.config;
-		var hh = $("#" + cfg.targetID + "_AX_hour").val().number();
-		var mi = $("#" + cfg.targetID + "_AX_minute").val().number();
-		var apm = $("#" + cfg.targetID + "_AX_AMPM").val();
+		var hh = jQuery("#" + cfg.targetID + "_AX_hour").val().number();
+		var mi = jQuery("#" + cfg.targetID + "_AX_minute").val().number();
+		var apm = jQuery("#" + cfg.targetID + "_AX_AMPM").val();
 		if (apm == "PM") hh += 12;
 		return hh.setDigit(2) + ":" + mi.setDigit(2);
 	}
@@ -2281,8 +2366,8 @@ var AXMultiSelect = Class.create(AXJ, {
 	author: "SQUALL",
 	createDate: "2013-01-31 오후 5:01:12",
 	lastModifyDate: "2013-01-31 오후 5:01:15",
-	initialize: function ($super) {
-		$super();
+	initialize: function (AXJ_super) {
+		AXJ_super();
 		this.selects = [];
 		this.config.selectClassName = "readySelect";
 		this.config.beselectClassName = "beSelected";
@@ -2300,7 +2385,7 @@ var AXMultiSelect = Class.create(AXJ, {
 	onmouseClick: function (element, event) {
 		var myTarget = event.target;
 		if (myTarget) {
-			while (!$(myTarget).hasClass(this.config.selectClassName) && myTarget.parentNode) {
+			while (!jQuery(myTarget).hasClass(this.config.selectClassName) && myTarget.parentNode) {
 				myTarget = myTarget.parentNode;
 			}
 		}
@@ -2322,7 +2407,7 @@ var AXMultiSelect = Class.create(AXJ, {
 	/* ------------------------------------------------------------------------------------------------------------------ */
 	/* class method ~~~~~~ */
 	collect: function () {
-		this.selectTargets = $("#" + this.config.selectStage + " ." + this.config.selectClassName).get();
+		this.selectTargets = jQuery("#" + this.config.selectStage + " ." + this.config.selectClassName).get();
 	},
 	clearSelects: function () {
 		var beselectClassName = this.config.beselectClassName;
@@ -2376,24 +2461,24 @@ var AXMultiSelect = Class.create(AXJ, {
 		} else {
 			//마지막 selects 개체를 찾는다.
 			var lastElement = this.selects.last();
-			var li = this.selectTargets.getObj($(lastElement)[0]).index;
-			var si = this.selectTargets.getObj($(Obj)[0]).index;
+			var li = this.selectTargets.getObj(jQuery(lastElement)[0]).index;
+			var si = this.selectTargets.getObj(jQuery(Obj)[0]).index;
 			if (si == li) return;
 
 			this.clearSelects();
-			var objParent = $(Obj).parent()[0];
+			var objParent = jQuery(Obj).parent()[0];
 
 			if (si > li) {
 				jQuery.each(si.rangeFrom(li), function (i, n) {
-					if (objParent == $(selectTargets[n]).parent()[0]) {
-						$(selectTargets[n]).addClass(beselectClassName);
+					if (objParent == jQuery(selectTargets[n]).parent()[0]) {
+						jQuery(selectTargets[n]).addClass(beselectClassName);
 						addSelectBind(selectTargets[n]);
 					}
 				});
 			} else {
 				jQuery.each(li.rangeFrom(si), function (i, n) {
-					if (objParent == $(selectTargets[n]).parent()[0]) {
-						$(selectTargets[n]).addClass(beselectClassName);
+					if (objParent == jQuery(selectTargets[n]).parent()[0]) {
+						jQuery(selectTargets[n]).addClass(beselectClassName);
 						addSelectBind(selectTargets[n]);
 					}
 				});
@@ -2417,8 +2502,8 @@ var AXContextMenuClass = Class.create(AXJ, {
 		"2013-03-22 오후 6:08:57",
 		"2013-09-03 오후 7:10:14 메뉴확장 위치 제어 버그 픽스"
 	],
-	initialize: function ($super) {
-		$super();
+	initialize: function (AXJ_super) {
+		AXJ_super();
 		this.showedItem = {};
 		this.objects = [];
 		this.config.theme = "AXContextMenu";
@@ -2429,7 +2514,7 @@ var AXContextMenuClass = Class.create(AXJ, {
 	},
 	bindSetConfig: function (objID, configs) {
 		var findIndex = null;
-		$.each(this.objects, function (index, O) {
+		jQuery.each(this.objects, function (index, O) {
 			if (O.id == objID) {
 				findIndex = index;
 				return false;
@@ -2490,7 +2575,7 @@ var AXContextMenuClass = Class.create(AXJ, {
 		//trace(subMenu.length);		
 		var po = [];
 		po.push("<div id=\"" + subMenuID + "\" class=\"" + theme + "\" style=\"width:" + width + "px;left:" + (width.number() - 15) + "px;display:none;\">");
-		$.each(subMenu, function (idx, menu) {
+		jQuery.each(subMenu, function (idx, menu) {
 			if (filter(objSeq, objID, myobj, menu)) {
 				var className = (menu.className) ? menu.className : "";
 				var hasSubMenu = (menu.subMenu) ? " hasSubMenu" : "";
@@ -2515,7 +2600,7 @@ var AXContextMenuClass = Class.create(AXJ, {
 	open: function (myobj, position) {
 		var cfg = this.config;
 		var objSeq = null;
-		$.each(this.objects, function (index, O) {
+		jQuery.each(this.objects, function (index, O) {
 			if (O.id == myobj.id) {
 				objSeq = index;
 				return false;
@@ -2532,18 +2617,18 @@ var AXContextMenuClass = Class.create(AXJ, {
 			obj.sendObj = myobj.sendObj;
 		}
 
-		if ($M(objID)) return;
+		if (AXgetId(objID)) return;
 
 		var theme = obj.theme || cfg.theme;
 		var width = obj.width || cfg.width;
 
-		$("#" + objID).remove();
+		jQuery("#" + objID).remove();
 
 		var filter = this.filter.bind(this);
 		var getSubMenu = this.getSubMenu.bind(this);
 		var po = [];
 		po.push("<div id=\"" + objID + "\" class=\"" + theme + "\" style=\"width:" + width + "px;\">");
-		$.each(obj.menu, function (idx, menu) {
+		jQuery.each(obj.menu, function (idx, menu) {
 			if (filter(objSeq, objID, myobj, menu)) {
 				if (menu.upperLine) {
 					po.push("<div class=\"hline\"></div>");
@@ -2569,16 +2654,16 @@ var AXContextMenuClass = Class.create(AXJ, {
 			}
 		});
 		po.push("</div>");
-		$(document.body).append(po.join(''));
+		jQuery(document.body).append(po.join(''));
 
-		$("#" + objID + " .contextMenuItem:first-child").addClass("first");
-		$("#" + objID + " .contextMenuItem:last-child").addClass("last");
+		jQuery("#" + objID + " .contextMenuItem:first-child").addClass("first");
+		jQuery("#" + objID + " .contextMenuItem:last-child").addClass("last");
 
 		var contextMenuItemMouseOver = this.contextMenuItemMouseOver.bind(this);
 		this.contextMenuItemMouseOverBind = function (event) {
 			contextMenuItemMouseOver(event, objSeq, objID);
 		};
-		$("#" + objID + " .contextMenuItem").bind("mouseover", this.contextMenuItemMouseOverBind);
+		jQuery("#" + objID + " .contextMenuItem").bind("mouseover", this.contextMenuItemMouseOverBind);
 
 		//컨텍스트 메뉴의 위치 지정
 		var css = {};
@@ -2593,13 +2678,13 @@ var AXContextMenuClass = Class.create(AXJ, {
 		}
 
 		// -- 부모박스 정보와 박스 정보
-		var pElement = $("#" + objID).offsetParent();
+		var pElement = jQuery("#" + objID).offsetParent();
 		var pBox = { width: pElement.width(), height: pElement.height() };
 		var clientHeight = (AXUtil.docTD == "Q") ? document.body.scrollHeight : document.documentElement.scrollHeight;
 		var clienWidth = (AXUtil.docTD == "Q") ? document.body.scrollWidth : document.documentElement.scrollWidth;
 		if (clienWidth > pBox.width) pBox.width = clienWidth;
 		if (clientHeight > pBox.height) pBox.height = clientHeight;
-		var _box = { width: $("#" + objID).outerWidth(), height: $("#" + objID).outerHeight() };
+		var _box = { width: jQuery("#" + objID).outerWidth(), height: jQuery("#" + objID).outerHeight() };
 		// -- 부모박스 정보와 박스 정보		
 
 		if ((_box.height.number() + css.top.number()) > pBox.height) {
@@ -2629,7 +2714,7 @@ var AXContextMenuClass = Class.create(AXJ, {
 			css.left = "auto";
 			this.openLR = "right";
 		}
-		$("#" + objID).css(css);
+		jQuery("#" + objID).css(css);
 
 		//var eventBind = this.eventBind.bind(this);
 		this.eventBind(objSeq, objID);
@@ -2639,26 +2724,40 @@ var AXContextMenuClass = Class.create(AXJ, {
 		var cfg = this.config;
 		/* closeEvent bind */
 		var contextMenuItemDown = this.contextMenuItemDown.bind(this);
-		this.contextMenuItemDownBind = function (event) {
+		var contextMenuItemDownBind = function (event) {
 			contextMenuItemDown(event, objSeq, objID);
 		};
-		$(document).bind("mousedown", this.contextMenuItemDownBind);
-		$(document).bind("keydown", this.contextMenuItemDownBind);
+		
+		jQuery(document).bind("mousedown.AXContenxtMenu", contextMenuItemDownBind);
+		jQuery(document).bind("keydown.AXContenxtMenu", contextMenuItemDownBind);
+		
+		jQuery(document).find("iframe").each(function () {
+			jQuery(window[this.name].document).bind("mousedown.AXContenxtMenu", contextMenuItemDownBind);
+			jQuery(window[this.name].document).bind("keydown.AXContenxtMenu", contextMenuItemDownBind);
+		});
+
+
 		/* closeEvent bind ~~~~~~~~~~~~~~~~~~~ */
 		//click
 		var contextMenuItemClick = this.contextMenuItemClick.bind(this);
 		this.contextMenuItemClickBind = function (event) {
 			contextMenuItemClick(event, objSeq, objID);
 		};
-		$("#" + objID).find(".contextMenuItem").bind("click", this.contextMenuItemClickBind);
+		jQuery("#" + objID).find(".contextMenuItem").bind("click", this.contextMenuItemClickBind);
 	},
 	_close: function (objSeq, objID) {
 		var cfg = this.config;
-		$("#" + objID).fadeOut("fast", function () {
-			$("#" + objID).remove();
+		jQuery("#" + objID).fadeOut("fast", function () {
+			jQuery("#" + objID).remove();
 		});
-		$(document).unbind("keydown", this.contextMenuItemDownBind);
-		$(document).unbind("mousedown", this.contextMenuItemDownBind);
+		jQuery(document).unbind("keydown.AXContenxtMenu");
+		jQuery(document).unbind("mousedown.AXContenxtMenu");
+
+		jQuery(document).find("iframe").each(function () {
+			jQuery(window[this.name].document).unbind("mousedown.AXContenxtMenu");
+			jQuery(window[this.name].document).unbind("keydown.AXContenxtMenu");
+		});
+
 		this.showedItem = {}; // 초기화
 		this.openTB = "";
 		this.openLR = "";
@@ -2666,7 +2765,7 @@ var AXContextMenuClass = Class.create(AXJ, {
 	close: function (myobj) {
 		var cfg = this.config;
 		var objSeq = null;
-		$.each(this.objects, function (index, O) {
+		jQuery.each(this.objects, function (index, O) {
 			if (O.id == myobj.id) {
 				objSeq = index;
 				return false;
@@ -2679,12 +2778,12 @@ var AXContextMenuClass = Class.create(AXJ, {
 		var obj = this.objects[objSeq];
 		var objID = obj.id;
 
-		$("#" + objID).fadeOut("fast", function () {
-			$("#" + objID).remove();
+		jQuery("#" + objID).fadeOut("fast", function () {
+			jQuery("#" + objID).remove();
 		});
 
-		$(document).unbind("keydown", this.contextMenuItemDownBind);
-		$(document).unbind("mousedown", this.contextMenuItemDownBind);
+		jQuery(document).unbind("keydown", this.contextMenuItemDownBind);
+		jQuery(document).unbind("mousedown", this.contextMenuItemDownBind);
 
 		this.showedItem = {}; // 초기화
 		this.openTB = "";
@@ -2700,33 +2799,33 @@ var AXContextMenuClass = Class.create(AXJ, {
 		var eventTarget = event.target;
 		var myTarget = this.getEventTarget({
 			evt: eventTarget, evtIDs: eid,
-			find: function (evt, evtIDs) { return ($(evt).hasClass("contextMenuItem")) ? true : false; }
+			find: function (evt, evtIDs) { return (jQuery(evt).hasClass("contextMenuItem")) ? true : false; }
 		});
 		// event target search ------------------------    	
 		if (myTarget) {
 			var poi = myTarget.id.split(/_AX_/g);
 			var depth = poi[poi.length - 2];
 			if (this.showedItem[depth]) {
-				$("#" + this.showedItem[depth]).hide();
+				jQuery("#" + this.showedItem[depth]).hide();
 			}
-			if ($(myTarget).hasClass("hasSubMenu")) {
+			if (jQuery(myTarget).hasClass("hasSubMenu")) {
 
 				// -- 부모박스 정보와 박스 정보
-				var pElement = $("#" + myTarget.id + "_AX_subMenu").offsetParent();
+				var pElement = jQuery("#" + myTarget.id + "_AX_subMenu").offsetParent();
 				var pBox = { width: pElement.width(), height: pElement.height() };
 				var clientHeight = (AXUtil.docTD == "Q") ? document.body.scrollHeight : document.documentElement.scrollHeight;
 				var clienWidth = (AXUtil.docTD == "Q") ? document.body.scrollWidth : document.documentElement.scrollWidth;
 				if (clienWidth > pBox.width) pBox.width = clienWidth;
 				if (clientHeight > pBox.height) pBox.height = clientHeight;
-				var _box = { width: $("#" + myTarget.id + "_AX_subMenu").outerWidth(), height: $("#" + myTarget.id + "_AX_subMenu").outerHeight() };
+				var _box = { width: jQuery("#" + myTarget.id + "_AX_subMenu").outerWidth(), height: jQuery("#" + myTarget.id + "_AX_subMenu").outerHeight() };
 				// -- 부모박스 정보와 박스 정보		
 
-				var subMenuTop = $("#" + myTarget.id).position().top;
+				var subMenuTop = jQuery("#" + myTarget.id).position().top;
 
 				var css;
 				if (this.openTB == "up") {
-					var ph = $("#" + myTarget.id).offsetParent().height();
-					var h = $("#" + myTarget.id).height();
+					var ph = jQuery("#" + myTarget.id).offsetParent().height();
+					var h = jQuery("#" + myTarget.id).height();
 					var bottom = ph - subMenuTop - h;
 					css = { top: "auto", bottom: bottom };
 				} else {
@@ -2737,8 +2836,8 @@ var AXContextMenuClass = Class.create(AXJ, {
 					css.left = -(20);
 				}
 
-				$("#" + myTarget.id + "_AX_subMenu").css(css);
-				$("#" + myTarget.id + "_AX_subMenu").show();
+				jQuery("#" + myTarget.id + "_AX_subMenu").css(css);
+				jQuery("#" + myTarget.id + "_AX_subMenu").show();
 
 				this.showedItem[depth] = myTarget.id + "_AX_subMenu";
 			}
@@ -2758,7 +2857,7 @@ var AXContextMenuClass = Class.create(AXJ, {
 		var eventTarget = event.target;
 		var myTarget = this.getEventTarget({
 			evt: eventTarget, evtIDs: eid,
-			find: function (evt, evtIDs) { return ($(evt).hasClass("contextMenuItem")) ? true : false; }
+			find: function (evt, evtIDs) { return (jQuery(evt).hasClass("contextMenuItem")) ? true : false; }
 		});
 		// event target search ------------------------
 
@@ -2777,7 +2876,7 @@ var AXContextMenuClass = Class.create(AXJ, {
 		var eventTarget = event.target;
 		var myTarget = this.getEventTarget({
 			evt: eventTarget, evtIDs: eid,
-			find: function (evt, evtIDs) { return ($(evt).hasClass("contextMenuItem")) ? true : false; }
+			find: function (evt, evtIDs) { return (jQuery(evt).hasClass("contextMenuItem")) ? true : false; }
 		});
 		// event target search ------------------------
 
@@ -2794,7 +2893,7 @@ var AXContextMenuClass = Class.create(AXJ, {
 			hashs = hashs.reverse();
 
 			var menu = obj.menu;
-			$.each(hashs, function (idx, hash) {
+			jQuery.each(hashs, function (idx, hash) {
 				if (idx == 0) menu = menu[hash];
 				else menu = menu.subMenu[hash];
 			});
@@ -2818,12 +2917,12 @@ var AXPopOverClass = Class.create(AXContextMenuClass, {
 	open: function (myobj, position) {
 		var cfg = this.config;
 		var objSeq = null;
-		$.each(this.objects, function (index, O) {
+		jQuery.each(this.objects, function (index, O) {
 			if (O.id == myobj.id) {
 				objSeq = index;
 				//return false;
 			} else {
-				$("#" + O.id).remove();
+				jQuery("#" + O.id).remove();
 			}
 		});
 		if (objSeq == null) {
@@ -2839,10 +2938,9 @@ var AXPopOverClass = Class.create(AXContextMenuClass, {
 		}
 
 		if (this.observer) clearTimeout(this.observer); //닫기 명령 제거
-
 		var direction = obj.direction || "top";
 
-		if ($M(objID)) {
+		if (AXgetId(objID)) {
 			if (position.clientX) {
 				this.contentMenuSetCss(event, position, objSeq, objID);
 			}
@@ -2862,7 +2960,7 @@ var AXPopOverClass = Class.create(AXContextMenuClass, {
 			if (position.arrowLeft) arrowStyle = "background-position:" + position.arrowLeft + "px 0px;"
 		}
 
-		$("#" + objID).remove();
+		jQuery("#" + objID).remove();
 
 		var filter = this.filter.bind(this);
 		var getSubMenu = this.getSubMenu.bind(this);
@@ -2872,7 +2970,7 @@ var AXPopOverClass = Class.create(AXContextMenuClass, {
 		po.push("<div class=\"arrowBottom\" style=\"" + arrowStyle + "\"></div>");
 		po.push("<div class=\"blockContainer\">");
 		if (obj.menu) {
-			$.each(obj.menu, function (idx, menu) {
+			jQuery.each(obj.menu, function (idx, menu) {
 				if (!menu) return false;
 				if (filter(objSeq, objID, myobj, menu)) {
 					if (menu.upperLine) {
@@ -2905,21 +3003,21 @@ var AXPopOverClass = Class.create(AXContextMenuClass, {
 		}
 		po.push("</div>");
 		po.push("</div>");
-		$(document.body).append(po.join(''));
+		jQuery(document.body).append(po.join(''));
 
 		if (direction == "top") {
-			$("#" + objID).find(".arrowTop").show();
-			$("#" + objID).find(".arrowBottom").hide();
+			jQuery("#" + objID).find(".arrowTop").show();
+			jQuery("#" + objID).find(".arrowBottom").hide();
 		} else if (direction == "bottom") {
-			$("#" + objID).find(".arrowTop").hide();
-			$("#" + objID).find(".arrowBottom").show();
+			jQuery("#" + objID).find(".arrowTop").hide();
+			jQuery("#" + objID).find(".arrowBottom").show();
 		} else {
-			$("#" + objID).find(".arrowTop").show();
-			$("#" + objID).find(".arrowBottom").hide();
+			jQuery("#" + objID).find(".arrowTop").show();
+			jQuery("#" + objID).find(".arrowBottom").hide();
 		}
 
-		$("#" + objID + " .contextMenuItem:first-child").addClass("first");
-		$("#" + objID + " .contextMenuItem:last-child").addClass("last");
+		jQuery("#" + objID + " .contextMenuItem:first-child").addClass("first");
+		jQuery("#" + objID + " .contextMenuItem:last-child").addClass("last");
 
 		var contextMenuItemMouseOver = this.contextMenuItemMouseOver.bind(this);
 		this.contextMenuItemMouseOverBind = function (event) {
@@ -2933,9 +3031,9 @@ var AXPopOverClass = Class.create(AXContextMenuClass, {
 		var eventClear = function () {
 			if (this.observer) clearTimeout(this.observer); //닫기 명령 제거
 		}
-		$("#" + objID + " .contextMenuItem").bind("mouseover", this.contextMenuItemMouseOverBind);
-		$("#" + objID).bind("mouseover", eventClear.bind(this));
-		$("#" + objID).bind("mouseout", this.contextMenuMouseOutBind);
+		jQuery("#" + objID + " .contextMenuItem").bind("mouseover", this.contextMenuItemMouseOverBind);
+		jQuery("#" + objID).bind("mouseover", eventClear.bind(this));
+		jQuery("#" + objID).bind("mouseout", this.contextMenuMouseOutBind);
 
 		this.contentMenuSetCss(null, position, objSeq, objID);
 
@@ -2965,30 +3063,30 @@ var AXPopOverClass = Class.create(AXContextMenuClass, {
 			css.top = mouse.pageY;
 		}
 		// -- 부모박스 정보와 박스 정보
-		var pElement = $("#" + objID).offsetParent();
+		var pElement = jQuery("#" + objID).offsetParent();
 		var pBox = { width: pElement.width(), height: pElement.height() };
 		var clientHeight = (AXUtil.docTD == "Q") ? document.body.scrollHeight : document.documentElement.scrollHeight;
 		var clienWidth = (AXUtil.docTD == "Q") ? document.body.scrollWidth : document.documentElement.scrollWidth;
 		if (clienWidth > pBox.width) pBox.width = clienWidth;
 		if (clientHeight > pBox.height) pBox.height = clientHeight;
-		var _box = { width: $("#" + objID).outerWidth(), height: $("#" + objID).outerHeight() };
+		var _box = { width: jQuery("#" + objID).outerWidth(), height: jQuery("#" + objID).outerHeight() };
 		// -- 부모박스 정보와 박스 정보		
 		var openTB = "";
 		if (direction == "top") {
 			openTB = "top";
 		} else if (direction == "bottom") {
-			css.top -= $("#" + objID).outerHeight();
+			css.top -= jQuery("#" + objID).outerHeight();
 			openTB = "bottom";
 		} else {
 			if ((_box.height.number() + css.top.number()) > pBox.height) {
 				css.top = css.top - _box.height.number() - position.handleHeight - 3;
-				$("#" + objID).find(".arrowTop").hide();
-				$("#" + objID).find(".arrowBottom").show();
+				jQuery("#" + objID).find(".arrowTop").hide();
+				jQuery("#" + objID).find(".arrowBottom").show();
 				//css.top -= ((_box.height.number() + css.top.number()) - pBox.height) + 5;
 				openTB = "bottom";
 			} else {
-				$("#" + objID).find(".arrowTop").show();
-				$("#" + objID).find(".arrowBottom").hide();
+				jQuery("#" + objID).find(".arrowTop").show();
+				jQuery("#" + objID).find(".arrowBottom").hide();
 				openTB = "top";
 			}
 		}
@@ -2998,9 +3096,9 @@ var AXPopOverClass = Class.create(AXContextMenuClass, {
 				var moveLeft = ((_box.width.number() + css.left.number()) - pBox.width) + 5;
 				css.left -= moveLeft;
 				if (openTB == "top") {
-					$("#" + objID).find(".arrowTop").css({ "background-position": (moveLeft + 5) + "px 0px;" });
+					jQuery("#" + objID).find(".arrowTop").css({ "background-position": (moveLeft + 5) + "px 0px;" });
 				} else {
-					$("#" + objID).find(".arrowBottom").css({ "background-position": (moveLeft + 5) + "px 0px;" });
+					jQuery("#" + objID).find(".arrowBottom").css({ "background-position": (moveLeft + 5) + "px 0px;" });
 				}
 			} else {
 
@@ -3008,7 +3106,7 @@ var AXPopOverClass = Class.create(AXContextMenuClass, {
 		} else {
 
 		}
-		$("#" + objID).css(css);
+		jQuery("#" + objID).css(css);
 	},
 	contextMenuItemMouseOver: function (event, objSeq, objID) {
 		var cfg = this.config;
@@ -3022,21 +3120,21 @@ var AXPopOverClass = Class.create(AXContextMenuClass, {
 		var eventTarget = event.target;
 		var myTarget = this.getEventTarget({
 			evt: eventTarget, evtIDs: eid,
-			find: function (evt, evtIDs) { return ($(evt).hasClass("contextMenuItem")) ? true : false; }
+			find: function (evt, evtIDs) { return (jQuery(evt).hasClass("contextMenuItem")) ? true : false; }
 		});
 		// event target search ------------------------    	
 		if (myTarget) {
 			var poi = myTarget.id.split(/_AX_/g);
 			var depth = poi[poi.length - 2];
 			if (this.showedItem[depth]) {
-				$("#" + this.showedItem[depth]).hide();
+				jQuery("#" + this.showedItem[depth]).hide();
 			}
-			if ($(myTarget).hasClass("hasSubMenu")) {
-				var subMenuTop = $("#" + myTarget.id).position().top;
+			if (jQuery(myTarget).hasClass("hasSubMenu")) {
+				var subMenuTop = jQuery("#" + myTarget.id).position().top;
 				var css;
 				if (this.openTB == "up") {
-					var ph = $("#" + myTarget.id).offsetParent().height();
-					var h = $("#" + myTarget.id).height();
+					var ph = jQuery("#" + myTarget.id).offsetParent().height();
+					var h = jQuery("#" + myTarget.id).height();
 					var bottom = ph - subMenuTop - h;
 					css = { top: "auto", bottom: bottom };
 				} else {
@@ -3046,8 +3144,8 @@ var AXPopOverClass = Class.create(AXContextMenuClass, {
 					//css.left = -(menuWidth - 15);
 					css.left = -(20);
 				}
-				$("#" + myTarget.id + "_AX_subMenu").css(css);
-				$("#" + myTarget.id + "_AX_subMenu").show();
+				jQuery("#" + myTarget.id + "_AX_subMenu").css(css);
+				jQuery("#" + myTarget.id + "_AX_subMenu").show();
 
 				this.showedItem[depth] = myTarget.id + "_AX_subMenu";
 			}
@@ -3065,8 +3163,8 @@ AXPopOver.setConfig({ theme: "AXPopOver" });
 
 jQuery.fn.bindTooltip = function (config) {
 	if (config == undefined) config = {};
-	$.each(this, function () {
-		var tooltipContent = $("#" + this.id + "_AX_tooltip").html();
+	jQuery.each(this, function () {
+		var tooltipContent = jQuery("#" + this.id + "_AX_tooltip").html();
 		AXPopOver.bind({
 			id: this.id + "_AX_tooltipobj",
 			theme: (config.theme || "AXPopOverTooltip"), // 선택항목
@@ -3075,16 +3173,16 @@ jQuery.fn.bindTooltip = function (config) {
 			body: tooltipContent
 		});
 
-		$(this).bind((config.event || "mouseover"), function () {
-			var pos = $(this).offset();
+		jQuery(this).bind((config.event || "mouseover"), function () {
+			var pos = jQuery(this).offset();
 			var direction = (config.direction || "top");
 			var posTop = pos.top;
 			if (direction == "bottom") {
 				posTop -= 3;
 			} else {
-				posTop += $(this).outerHeight() + 3;
+				posTop += jQuery(this).outerHeight() + 3;
 			}
-			AXPopOver.open({ id: this.id + "_AX_tooltipobj", sendObj: {} }, { left: pos.left, top: posTop, handleHeight: ($(this).outerHeight().number() + 3) }); // event 직접 연결 방식
+			AXPopOver.open({ id: this.id + "_AX_tooltipobj", sendObj: {} }, { left: pos.left, top: posTop, handleHeight: (jQuery(this).outerHeight().number() + 3) }); // event 직접 연결 방식
 		});
 		return this;
 	});
@@ -3182,7 +3280,7 @@ jQuery.fn.extend({
 		.map(function (i, elem) {
 			var val = jQuery(this).val();
 			//(elem.title || elem.placeholder || "")  //ie에서는 placeholder를 인식하지못함
-			var label = ($(elem).attr("title") || $(elem).attr("placeholder") || "");
+			var label = (jQuery(elem).attr("title") || jQuery(elem).attr("placeholder") || "");
 			return val == null ?
 				null :
 				jQuery.isArray(val) ?
@@ -3195,7 +3293,7 @@ jQuery.fn.extend({
 	}
 });
 
-jQuery(document.body).ready(function(){
-	$("input[type=text]").bind("mousedown", function(){this.focus();});
-	$("textarea").bind("mousedown", function(){this.focus();});
+jQuery(document.body).ready(function () {
+	jQuery("input[type=text]").bind("mousedown", function () { this.focus(); });
+	jQuery("textarea").bind("mousedown", function () { this.focus(); });
 });

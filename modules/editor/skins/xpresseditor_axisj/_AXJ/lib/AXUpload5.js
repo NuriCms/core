@@ -1143,13 +1143,16 @@ swfobject.addDomLoadEvent(function () {
  */
 
 var AXUpload5 = Class.create(AXJ, {
-	version : "AXUpload5 V1.0",
+	version : "AXUpload5 V1.2",
 	author : "tom@axisj.com",
 	logs: [
-		"2013-10-02 오후 2:19:36 - 시작 tom"
+		"2013-10-02 오후 2:19:36 - 시작 tom",
+		"2013-10-12 오전 11:13:06 - 업로드 서버오류 예외 처리 tom",
+		"2013-10-29 오후 3:26:33 - 기타 버그 패치 최지연",
+		"2013-10-30 오후 3:38:05 - config.uploadPars, config.deletePars 초기 설정값 패치 by tom"
 	],
-	initialize: function($super){
-		$super();
+	initialize: function(AXJ_super){
+		AXJ_super();
 		this.uploadedList = [];
 		this.uploadingObj = null;
 		this.queue = [];
@@ -1172,6 +1175,8 @@ var AXUpload5 = Class.create(AXJ, {
 		}
 		this.config.flash_url = "/_AXJ/lib/swfupload.swf";
 		this.config.flash9_url = "/_AXJ/lib/swfupload_fp9.swf";
+		this.config.uploadPars = {};
+		this.config.deletePars = {};
 	},
 	init: function(reset){
 		var cfg = this.config;
@@ -1187,7 +1192,7 @@ var AXUpload5 = Class.create(AXJ, {
 			}
 		}
 		
-		this.target = $("#"+cfg.targetID);
+		this.target = jQuery("#"+cfg.targetID);
 		if(reset == undefined){
 			this.target.empty();
 		}
@@ -1205,9 +1210,9 @@ var AXUpload5 = Class.create(AXJ, {
 		po.push('<div style="position:relative;">');
 		po.push('	<table style="table-layout:fixed;width:100%;"><tbody><tr><td id="'+cfg.targetID+'_AX_selectorTD">');
 		po.push('	<input type="file" id="'+cfg.targetID+'_AX_files" '+inputFileMultiple+' accept="'+inputFileAccept+'" style="position:absolute;left:0px;top:0px;margin:0px;padding:0px;-moz-opacity: 0.0;opacity:.00;filter: alpha(opacity=0);" />');
-		po.push('	<button class="AXButton '+cfg.targetButtonClass+'" id="'+cfg.targetID+'_AX_selector"><span class="AXFileSelector">'+(AXConfig.AXUpload5.buttonTxt||"Upload files")+'</span></button>');
+		po.push('	<button type="button" class="AXButton '+cfg.targetButtonClass+'" id="'+cfg.targetID+'_AX_selector"><span class="AXFileSelector">'+(AXConfig.AXUpload5.buttonTxt||"Upload files")+'</span></button>');
 		po.push('	</td>');
-	
+		
 		if(cfg.isSingleUpload){
 			po.push('<td>');
 			po.push('<div class="AXFileDisplay" id="'+cfg.targetID+'_AX_display">'+AXConfig.AXUpload5.uploadSelectTxt+'</div>');
@@ -1219,13 +1224,13 @@ var AXUpload5 = Class.create(AXJ, {
 		this.target.empty();
 		this.target.append(po.join(''));
 		
-		$('#'+cfg.targetID+'_AX_selectorTD').css({width:$('#'+cfg.targetID+'_AX_selector').outerWidth()+5});
-		$('#'+cfg.targetID+'_AX_files').css({width:$('#'+cfg.targetID+'_AX_selector').outerWidth(),height:$('#'+cfg.targetID+'_AX_selector').outerHeight()});
+		jQuery('#'+cfg.targetID+'_AX_selectorTD').css({width:jQuery('#'+cfg.targetID+'_AX_selector').outerWidth()+5});
+		jQuery('#'+cfg.targetID+'_AX_files').css({width:jQuery('#'+cfg.targetID+'_AX_selector').outerWidth(),height:jQuery('#'+cfg.targetID+'_AX_selector').outerHeight()});
 		
 		var pauseQueue = this.pauseQueue.bind(this);
-		$('#'+cfg.targetID+'_AX_selector').click(function(){
+		jQuery('#'+cfg.targetID+'_AX_selector').click(function(){
 			pauseQueue();
-			$('#'+cfg.targetID+'_AX_files').click();
+			jQuery('#'+cfg.targetID+'_AX_files').click();
 		});
 		
 		var onFileSelect = this.onFileSelect.bind(this);
@@ -1245,23 +1250,23 @@ var AXUpload5 = Class.create(AXJ, {
 				dropZoneMsg.push("<span class=\"msgText\" id=\""+cfg.dropBoxID+"_msgText\">");
 				dropZoneMsg.push(AXConfig.AXUpload5.dropZoneTxt);
 				dropZoneMsg.push("</span>");
-				$("#"+cfg.dropBoxID).append(dropZoneMsg.join(''));
+				jQuery("#"+cfg.dropBoxID).append(dropZoneMsg.join(''));
 				*/
-				$("#"+cfg.dropBoxID).addClass("allowDrop");
-				//$("#"+cfg.dropBoxID).find(".msgText").css({"top":$("#"+cfg.dropBoxID).height()/2-50});
+				jQuery("#"+cfg.dropBoxID).addClass("allowDrop");
+				//jQuery("#"+cfg.dropBoxID).find(".msgText").css({"top":jQuery("#"+cfg.dropBoxID).height()/2-50});
 				// 드랍존 표현구문 ----------------- e
 				
 				var dropZoneBox = [];
 				dropZoneBox.push("<div class=\"dropZoneBox\" id=\""+cfg.dropBoxID+"_dropZoneBox\" style=\"border:3px dashed #d7d7d7;display:none;\">");
 				dropZoneBox.push("</div>");
-				$("#"+cfg.dropBoxID).append(dropZoneBox.join(''));
+				jQuery("#"+cfg.dropBoxID).append(dropZoneBox.join(''));
 				
 				// ---------------- 옵션사항 s
 				/*
-				$("#"+cfg.dropBoxID+"_dropZoneBox").show();
-				$("#"+cfg.dropBoxID+"_dropZoneBox").css({height:$("#"+cfg.dropBoxID).innerHeight()-6, width:$("#"+cfg.dropBoxID).innerWidth()-6});
+				jQuery("#"+cfg.dropBoxID+"_dropZoneBox").show();
+				jQuery("#"+cfg.dropBoxID+"_dropZoneBox").css({height:jQuery("#"+cfg.dropBoxID).innerHeight()-6, width:jQuery("#"+cfg.dropBoxID).innerWidth()-6});
 				setTimeout(function(){
-					$("#"+cfg.dropBoxID+"_dropZoneBox").fadeOut();
+					jQuery("#"+cfg.dropBoxID+"_dropZoneBox").fadeOut();
 				}, 2000);
 				*/
 				// ---------------- 옵션사항 e
@@ -1287,12 +1292,12 @@ var AXUpload5 = Class.create(AXJ, {
 	},
 	swfinit: function(reset){
 		var cfg = this.config;
-		this.target = $("#"+cfg.targetID);
+		this.target = jQuery("#"+cfg.targetID);
 		
 		var po = [];
 		po.push('<div style="position:relative;">');
 		po.push('	<table style="table-layout:fixed;width:100%;"><tbody><tr><td id="'+cfg.targetID+'_AX_selectorTD">');
-		po.push('	<button class="AXButton '+cfg.targetButtonClass+'" id="'+cfg.targetID+'_AX_selector"><span class="AXFileSelector">'+(AXConfig.AXUpload5.buttonTxt||"Upload files")+'</span></button>');
+		po.push('	<button type="button" class="AXButton '+cfg.targetButtonClass+'" id="'+cfg.targetID+'_AX_selector"><span class="AXFileSelector">'+(AXConfig.AXUpload5.buttonTxt||"Upload files")+'</span></button>');
 		po.push('	<span id="spanButtonPlaceholder" class="AXUpload5flashUploadButton"></span>');
 		po.push('	</td>');
 		
@@ -1307,10 +1312,10 @@ var AXUpload5 = Class.create(AXJ, {
 		this.target.empty();
 		this.target.append(po.join(''));		
 		
-		$('#'+cfg.targetID+'_AX_selectorTD').css({width:$('#'+cfg.targetID+'_AX_selector').outerWidth()+5});
+		jQuery('#'+cfg.targetID+'_AX_selectorTD').css({width:jQuery('#'+cfg.targetID+'_AX_selector').outerWidth()+5});
 		
-		var btnW = $('#'+cfg.targetID+'_AX_selector').outerWidth();
-		var btnH = $('#'+cfg.targetID+'_AX_selector').outerHeight();
+		var btnW = jQuery('#'+cfg.targetID+'_AX_selector').outerWidth();
+		var btnH = jQuery('#'+cfg.targetID+'_AX_selector').outerHeight();
 		
 		// functions --------------------------------------------------------------- s
 		var uploadSuccess = this.uploadSuccess.bind(this);
@@ -1338,33 +1343,35 @@ var AXUpload5 = Class.create(AXJ, {
 					var uploadFn = function(){
 						var itemID = 'AX_'+ file.id;
 						this.queue.push({id:itemID, file:file});
-						$("#" + cfg.targetID+'_AX_display').empty();
-						$("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, file));
+						jQuery("#" + cfg.targetID+'_AX_display').empty();
+						jQuery("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, file));
 					};
 					this.deleteFile(myFile, uploadFn.bind(this));
 					return;
 				}else{
 					var itemID = 'AX_'+ file.id;
 					this.queue.push({id:itemID, file:file});
-					$("#" + cfg.targetID+'_AX_display').empty();
-					$("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, file));
+					jQuery("#" + cfg.targetID+'_AX_display').empty();
+					jQuery("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, file));
 				}
 			}else{
 				//cfg.uploadMaxFileCount
 				var uploadedCount = this.uploadedList.length;
-				if(uploadedCount >= cfg.uploadMaxFileCount){
-					cfg.onError("fileCount");
-					this.cancelUpload();
-					return;
-				}
+				if(cfg.uploadMaxFileCount != 0){
+					if(uploadedCount <= cfg.uploadMaxFileCount){
+						cfg.onError("fileCount");
+						this.cancelUpload();
+						return;
+					}
+				}				
 				
 				//trace(file);
 				//{"filestatus":-1, "name":"20130708175735_1.jpg", "type":".jpg", "id":"SWFUpload_0_0", "index":0, "modificationdate":"2013-10-04T08:51:27Z", "uploadtype":0, "post":{}, "size":891324, "creationdate":"2013-10-04T08:52:02Z"} 
 				var itemID = 'AX_'+ file.id;
 				this.queue.push({id:itemID, file:file});
 				//큐박스에 아이템 추가
-				$("#" + cfg.queueBoxID).prepend(this.getItemTag(itemID, file));
-				$("#" + cfg.queueBoxID).find("#"+itemID).fadeIn();
+				jQuery("#" + cfg.queueBoxID).prepend(this.getItemTag(itemID, file));
+				jQuery("#" + cfg.queueBoxID).find("#"+itemID).fadeIn();
 			}
 		};
 		var file_queued_handler_bind = file_queued_handler.bind(this);
@@ -1420,9 +1427,9 @@ var AXUpload5 = Class.create(AXJ, {
 		var upload_progress_handler = function(file, bytesLoaded, bytesTotal){
 			var itemID = 'AX_'+ file.id;
 			if(cfg.isSingleUpload){
-				$("#"+itemID).find(".AXUploadProcessBar").width( ((bytesLoaded / bytesTotal) * 100).round(2)+"%" );
+				jQuery("#"+itemID).find(".AXUploadProcessBar").width( ((bytesLoaded / bytesTotal) * 100).round(2)+"%" );
 			}else{
-				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcessBar").width( ((bytesLoaded / bytesTotal) * 100).round(2)+"%" );
+				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcessBar").width( ((bytesLoaded / bytesTotal) * 100).round(2)+"%" );
 			}
 		};
 		var upload_progress_handler_bind = upload_progress_handler.bind(this);
@@ -1433,47 +1440,47 @@ var AXUpload5 = Class.create(AXJ, {
 			try{if(typeof res == "string") res = res.object();}catch(e){trace(e);}
 			if(cfg.isSingleUpload){
 				
-				$("#"+itemID+" .AXUploadBtns").show();
-				$("#"+itemID+" .AXUploadLabel").show();
-				$("#"+itemID+" .AXUploadTit").show();
+				jQuery("#"+itemID+" .AXUploadBtns").show();
+				jQuery("#"+itemID+" .AXUploadLabel").show();
+				jQuery("#"+itemID+" .AXUploadTit").show();
 				
-				$("#"+itemID+" .AXUploadProcess").hide();
+				jQuery("#"+itemID+" .AXUploadProcess").hide();
 								
 				uploadSuccess(file, itemID, res);
 				// --------------------- s
-				$("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
+				jQuery("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
 					onClickDeleteButton(itemID);
 				});
 				if(cfg.onClickUploadedItem){
-					$("#"+itemID+" .AXUploadDownload").bind("click", function(){
+					jQuery("#"+itemID+" .AXUploadDownload").bind("click", function(){
 						onClickFileTitle(itemID);
 					});
 				}
 				
 			}else{
 				
-				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show();
-				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
-				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
+				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show();
+				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
+				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
 				
 				if(res[cfg.fileKeys.thumbPath]){
-					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
 						"background-image":"url('"+(res[cfg.fileKeys.thumbPath]||"").dec()+"')",
 						"background-size":"100% auto",
 						"background-position":"center center"
 					});
 				}else{
-					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({"background-image":"url()"});
-					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").html((res[cfg.fileKeys.type]||"").dec().replace(".", ""));
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({"background-image":"url()"});
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").html((res[cfg.fileKeys.type]||"").dec().replace(".", ""));
 				}
 				
 				uploadSuccess(file, itemID, res);
 				// --------------------- s
-				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
+				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
 					onClickDeleteButton(itemID);
 				});
 				if(cfg.onClickUploadedItem){
-					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadDownload").bind("click", function(){
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadDownload").bind("click", function(){
 						onClickFileTitle(itemID);
 					});
 				}
@@ -1481,7 +1488,7 @@ var AXUpload5 = Class.create(AXJ, {
 			
 			//큐에서 제거
 			var updateQueue = [];
-			$.each(this.queue, function(){
+			jQuery.each(this.queue, function(){
 				if(this.id != itemID) updateQueue.push(this);
 			});
 			this.queue = updateQueue;			
@@ -1610,8 +1617,8 @@ var AXUpload5 = Class.create(AXJ, {
 						var f = files[i];
 						var itemID = 'AX'+AXUtil.timekey()+'_AX_'+i;
 						this.queue.push({id:itemID, file:f});
-						$("#" + cfg.targetID+'_AX_display').empty();
-						$("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, f));
+						jQuery("#" + cfg.targetID+'_AX_display').empty();
+						jQuery("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, f));
 						
 						this.queueLive = true;
 						if(cfg.onStart) cfg.onStart.call(this.queue, this.queue);
@@ -1624,8 +1631,8 @@ var AXUpload5 = Class.create(AXJ, {
 					var f = files[i];
 					var itemID = 'AX'+AXUtil.timekey()+'_AX_'+i;
 					this.queue.push({id:itemID, file:f});
-					$("#" + cfg.targetID+'_AX_display').empty();
-					$("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, f));					
+					jQuery("#" + cfg.targetID+'_AX_display').empty();
+					jQuery("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, f));					
 				}
 
 			}else{
@@ -1648,8 +1655,8 @@ var AXUpload5 = Class.create(AXJ, {
 							var itemID = 'AX'+AXUtil.timekey()+'_AX_'+i;
 							this.queue.push({id:itemID, file:f});
 							//큐박스에 아이템 추가
-							$("#" + cfg.queueBoxID).prepend(this.getItemTag(itemID, f));
-							$("#" + cfg.queueBoxID).find("#"+itemID).fadeIn();
+							jQuery("#" + cfg.queueBoxID).prepend(this.getItemTag(itemID, f));
+							jQuery("#" + cfg.queueBoxID).find("#"+itemID).fadeIn();
 						}else{
 							cfg.onError("fileCount");
 							break;
@@ -1666,14 +1673,15 @@ var AXUpload5 = Class.create(AXJ, {
 	},
 	onFileDragOver: function(evt){
 		var cfg = this.config;
-		$("#"+cfg.dropBoxID).addClass("onDrop");
-		$("#"+cfg.dropBoxID+"_dropZoneBox").show();
-		$("#"+cfg.dropBoxID+"_dropZoneBox").css({height:$("#"+cfg.dropBoxID).innerHeight()-6, width:$("#"+cfg.dropBoxID).innerWidth()-6});
+		jQuery("#"+cfg.dropBoxID).addClass("onDrop");
+		jQuery("#"+cfg.dropBoxID+"_dropZoneBox").show();
+		/*jQuery("#"+cfg.dropBoxID+"_dropZoneBox").css({height:jQuery("#"+cfg.dropBoxID).innerHeight()-6, width:jQuery("#"+cfg.dropBoxID).innerWidth()-6}); 라르게덴 2013-10-29 오후 3:21:45 */
+		jQuery("#"+cfg.dropBoxID+"_dropZoneBox").css({height:jQuery("#"+cfg.dropBoxID).prop("scrollHeight")-6, width:jQuery("#"+cfg.dropBoxID).innerWidth()-6});
 		
 		var dropZone = document.getElementById(cfg.dropBoxID+"_dropZoneBox");
 		dropZone.addEventListener('dragleave', function(evt){
-			$("#"+cfg.dropBoxID).removeClass("onDrop");
-			$("#"+cfg.dropBoxID+"_dropZoneBox").hide();
+			jQuery("#"+cfg.dropBoxID).removeClass("onDrop");
+			jQuery("#"+cfg.dropBoxID+"_dropZoneBox").hide();
 		}, false);
 
 		evt.stopPropagation();
@@ -1684,8 +1692,8 @@ var AXUpload5 = Class.create(AXJ, {
 		var cfg = this.config;
 		evt.stopPropagation();
 		evt.preventDefault();
-		$("#"+cfg.dropBoxID).removeClass("onDrop");
-		$("#"+cfg.dropBoxID+"_dropZoneBox").hide()
+		jQuery("#"+cfg.dropBoxID).removeClass("onDrop");
+		jQuery("#"+cfg.dropBoxID+"_dropZoneBox").hide()
 		
 		var files = evt.dataTransfer.files; // FileList object.
 		
@@ -1708,8 +1716,8 @@ var AXUpload5 = Class.create(AXJ, {
 					var itemID = 'AX'+AXUtil.timekey()+'_AX_'+i;
 					this.queue.push({id:itemID, file:f});
 					//큐박스에 아이템 추가
-					$("#" + cfg.queueBoxID).prepend(this.getItemTag(itemID, f));
-					$("#" + cfg.queueBoxID).find("#"+itemID).fadeIn();
+					jQuery("#" + cfg.queueBoxID).prepend(this.getItemTag(itemID, f));
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID).fadeIn();
 				}else{
 					cfg.onError("fileCount");
 					break;
@@ -1728,12 +1736,13 @@ var AXUpload5 = Class.create(AXJ, {
 		var cfg = this.config;
 		if(!this.queueLive) return;
 		if(this.queue.length == 0){
-			trace("uploadEnd");
+			//trace("uploadEnd");
 			this.uploadComplete();
 			return;
 		}
 		
 		var uploadQueue = this.uploadQueue.bind(this);
+		var cancelUpload = this.cancelUpload.bind(this);
 		var uploadSuccess = this.uploadSuccess.bind(this);
 		var onClickDeleteButton = this.onClickDeleteButton.bind(this);
 		var onClickFileTitle = this.onClickFileTitle.bind(this);
@@ -1742,7 +1751,7 @@ var AXUpload5 = Class.create(AXJ, {
 		this.uploadingObj = obj;
 		var formData = new FormData();
 		//서버로 전송해야 할 추가 파라미터 정보 설정
-		$.each(cfg.uploadPars, function(k, v){
+		jQuery.each(cfg.uploadPars, function(k, v){
 			formData.append(k, v); 
 		});
 		//formData.append(obj.file.name, obj.file);
@@ -1755,51 +1764,63 @@ var AXUpload5 = Class.create(AXJ, {
 		this.xhr.open('POST', cfg.uploadUrl, true);
 		this.xhr.onload = function(e) {
 			var res = e.target.response;
-			try{if(typeof res == "string") res = res.object();}catch(e){trace(e);}
+			try { if (typeof res == "string") res = res.object(); } catch (e) {
+				trace(e);
+				cancelUpload();
+				return;
+			}
+
+			if (res.result == "err" || res.error) {
+				alert("파일전송에 실패 하였습니다. 서버에서 에러가 리턴되었습니다. 콘솔창을 확인 하세요.");
+				trace(res);
+				jQuery("#" + itemID).fadeOut("slow");
+				cancelUpload();
+				return;
+			}
 			
 			if(cfg.isSingleUpload){
 				
-				$("#"+itemID+" .AXUploadBtns").show();
-				$("#"+itemID+" .AXUploadLabel").show();
-				$("#"+itemID+" .AXUploadTit").show();
+				jQuery("#"+itemID+" .AXUploadBtns").show();
+				jQuery("#"+itemID+" .AXUploadLabel").show();
+				jQuery("#"+itemID+" .AXUploadTit").show();
 				
-				$("#"+itemID+" .AXUploadProcess").hide();
+				jQuery("#"+itemID+" .AXUploadProcess").hide();
 								
 				uploadSuccess(obj.file, itemID, res);
 				// --------------------- s
-				$("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
+				jQuery("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
 					onClickDeleteButton(itemID);
 				});
 				if(cfg.onClickUploadedItem){
-					$("#"+itemID+" .AXUploadDownload").bind("click", function(){
+					jQuery("#"+itemID+" .AXUploadDownload").bind("click", function(){
 						onClickFileTitle(itemID);
 					});
 				}
 				
 			}else{
 				
-				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show();
-				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
-				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
+				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show();
+				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
+				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
 				
 				if(res[cfg.fileKeys.thumbPath]){
-					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
 						"background-image":"url('"+(res[cfg.fileKeys.thumbPath]||"").dec()+"')",
 						"background-size":"100% auto",
 						"background-position":"center center"
 					});
 				}else{
-					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({"background-image":"url()"});
-					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").html((res[cfg.fileKeys.type]||"").dec().replace(".", ""));
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({"background-image":"url()"});
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").html((res[cfg.fileKeys.type]||"").dec().replace(".", ""));
 				}
 				
 				uploadSuccess(obj.file, itemID, res);
 				// --------------------- s
-				$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
+				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
 					onClickDeleteButton(itemID);
 				});
 				if(cfg.onClickUploadedItem){
-					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadDownload").bind("click", function(){
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadDownload").bind("click", function(){
 						onClickFileTitle(itemID);
 					});
 				}
@@ -1814,9 +1835,9 @@ var AXUpload5 = Class.create(AXJ, {
 		var setUploadingObjBind = setUploadingObj.bind(this);
 		this.xhr.upload.onprogress = function(e) {
 			if(cfg.isSingleUpload){
-				if (e.lengthComputable) { $("#"+itemID).find(".AXUploadProcessBar").width( ((e.loaded / e.total) * 100).round(2)+"%" ); }	
+				if (e.lengthComputable) { jQuery("#"+itemID).find(".AXUploadProcessBar").width( ((e.loaded / e.total) * 100).round(2)+"%" ); }	
 			}else{
-				if (e.lengthComputable) { $("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcessBar").width( ((e.loaded / e.total) * 100).round(2)+"%" ); }	
+				if (e.lengthComputable) { jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcessBar").width( ((e.loaded / e.total) * 100).round(2)+"%" ); }	
 			}
 			if (e.lengthComputable) {
 				if(	e.loaded > e.total*0.9 ){
@@ -1829,18 +1850,18 @@ var AXUpload5 = Class.create(AXJ, {
 	uploadSuccess: function(file, itemID, res){ // 업로드 아이템별 이벤트
 		var cfg = this.config;
 		var uploadedItem = {id:itemID};
-		$.each(res, function(k, v){
+		jQuery.each(res, function(k, v){
 			uploadedItem[k] = v;
 		});
 		this.uploadedList.push(uploadedItem);
-		$("#"+itemID).addClass("readyselect");
+		jQuery("#"+itemID).addClass("readyselect");
 		if(cfg.onUpload) cfg.onUpload.call(uploadedItem, uploadedItem);
 	},
 	clearQueue: function(){
 		//큐제거
-		$.each(this.queue, function(){
-			$("#"+this.id).hide(function(){
-				$(this).remove();
+		jQuery.each(this.queue, function(){
+			jQuery("#"+this.id).hide(function(){
+				jQuery(this).remove();
 			});
 		});
 		this.queue = [];
@@ -1868,7 +1889,7 @@ var AXUpload5 = Class.create(AXJ, {
 		}else{
 			if(this.uploadingObj){
 				this.xhr.abort();
-				$("#"+this.uploadingObj.id).remove();
+				jQuery("#"+this.uploadingObj.id).remove();
 				this.uploadingObj = null;
 			}
 			this.pauseQueue();
@@ -1880,7 +1901,7 @@ var AXUpload5 = Class.create(AXJ, {
 		var cfg = this.config;
 		if(cfg.isSingleUpload){
 			var myFile;
-			$.each(this.uploadedList, function(){
+			jQuery.each(this.uploadedList, function(){
 				if(this.id == itemID){
 					myFile = this;
 					return false;
@@ -1894,7 +1915,7 @@ var AXUpload5 = Class.create(AXJ, {
 			this.init("reset");
 		}else{
 			var myFile;
-			$.each(this.uploadedList, function(){
+			jQuery.each(this.uploadedList, function(){
 				if(this.id == itemID){
 					myFile = this;
 					return false;
@@ -1916,7 +1937,7 @@ var AXUpload5 = Class.create(AXJ, {
 		if(cfg.onClickUploadedItem){
 			
 			var myFile;
-			$.each(this.uploadedList, function(){
+			jQuery.each(this.uploadedList, function(){
 				if(this.id == itemID){
 					myFile = this;
 					return false;
@@ -1935,12 +1956,12 @@ var AXUpload5 = Class.create(AXJ, {
 		if (file != undefined){
 			var pars = [];
 			var sendPars = "";
-			$.each(file, function(k, v){
+			jQuery.each(file, function(k, v){
 				pars.push(k + '=' + v);
 			});
 			
 			if (typeof(cfg.deletePars) === "object") {
-				$.each(cfg.deletePars, function(k, v){
+				jQuery.each(cfg.deletePars, function(k, v){
 					pars.push(k + '=' + v);
 				});
 				sendPars = pars.join("&");
@@ -1949,18 +1970,18 @@ var AXUpload5 = Class.create(AXJ, {
 			}
 
 			if(cfg.isSingleUpload){
-				$("#"+file.id+" .AXUploadBtns").hide();
+				jQuery("#"+file.id+" .AXUploadBtns").hide();
 			}else{
-				$("#" + cfg.queueBoxID).find("#"+file.id+" .AXUploadBtns").hide();
+				jQuery("#" + cfg.queueBoxID).find("#"+file.id+" .AXUploadBtns").hide();
 			}
 			
 			new AXReq(cfg.deleteUrl, {debug:false, pars:sendPars, onsucc:function(res){
 				if(res.result == AXConfig.AXReq.okCode){
 					if(cfg.isSingleUpload){
-						$('#'+cfg.targetID+'_AX_display').html(AXConfig.AXUpload5.uploadSelectTxt);
+						jQuery('#'+cfg.targetID+'_AX_display').html(AXConfig.AXUpload5.uploadSelectTxt);
 					}else{
-						$("#"+file.id).hide(function(){
-							$(this).remove();
+						jQuery("#"+file.id).hide(function(){
+							jQuery(this).remove();
 						});
 					}
 					
@@ -1968,7 +1989,7 @@ var AXUpload5 = Class.create(AXJ, {
 					if(cfg.onDelete) cfg.onDelete.call(file, file);
 					if(onEnd) onEnd();
 				}else{
-					$("#" + cfg.queueBoxID).find("#"+file.id+" .AXUploadBtns").show();
+					jQuery("#" + cfg.queueBoxID).find("#"+file.id+" .AXUploadBtns").show();
 				}
 			}});
 
@@ -1979,7 +2000,7 @@ var AXUpload5 = Class.create(AXJ, {
 	deleteSelect: function(arg){
 		if(arg == "all"){
 			var deleteQueue = [];
-			$.each(this.uploadedList, function(){
+			jQuery.each(this.uploadedList, function(){
 				deleteQueue.push(this.id);
 			});
 			this.ccDelete(deleteQueue, 0);
@@ -1989,7 +2010,7 @@ var AXUpload5 = Class.create(AXJ, {
 			var selectObj = this.multiSelector.getSelects();	
 			if (selectObj.length > 0){
 				var deleteQueue = [];
-				$.each(selectObj, function(){
+				jQuery.each(selectObj, function(){
 					deleteQueue.push(this.id);
 				});
 				this.ccDelete(deleteQueue, 0);
@@ -2002,7 +2023,7 @@ var AXUpload5 = Class.create(AXJ, {
 	ccDelete: function(deleteQueue, index){
 		if(deleteQueue.length > index){
 			var myFile;
-			$.each(this.uploadedList, function(){
+			jQuery.each(this.uploadedList, function(){
 				if(this.id == deleteQueue[index]){
 					myFile = this;
 					return false;
@@ -2016,7 +2037,7 @@ var AXUpload5 = Class.create(AXJ, {
 	},
 	removeUploadedList: function(fid){
 		var newUploadedList = [];
-		$.each(this.uploadedList, function(){
+		jQuery.each(this.uploadedList, function(){
 			if(this.id != fid) newUploadedList.push(this);
 		});
 		this.uploadedList = newUploadedList;
@@ -2035,7 +2056,7 @@ var AXUpload5 = Class.create(AXJ, {
 		if(cfg.isSingleUpload){
 
 			var f;
-			if($.isArray(files)){
+			if(jQuery.isArray(files)){
 				this.uploadedList.push(files.first());
 				f = files.first();
 			}else{
@@ -2051,19 +2072,19 @@ var AXUpload5 = Class.create(AXJ, {
 				size:f[cfg.fileKeys.fileSize]
 			};
 			
-			$("#" + cfg.targetID+'_AX_display').empty();
-			$("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, uf));
+			jQuery("#" + cfg.targetID+'_AX_display').empty();
+			jQuery("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, uf));
 			
-			$("#"+itemID+" .AXUploadBtns").show();
-			$("#"+itemID+" .AXUploadLabel").show();
-			$("#"+itemID+" .AXUploadTit").show();
-			$("#"+itemID+" .AXUploadProcess").hide();
+			jQuery("#"+itemID+" .AXUploadBtns").show();
+			jQuery("#"+itemID+" .AXUploadLabel").show();
+			jQuery("#"+itemID+" .AXUploadTit").show();
+			jQuery("#"+itemID+" .AXUploadProcess").hide();
 			
-			$("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
+			jQuery("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
 				onClickDeleteButton(itemID);
 			});
 			if(cfg.onClickUploadedItem){
-				$("#"+itemID+" .AXUploadDownload").bind("click", function(){
+				jQuery("#"+itemID+" .AXUploadDownload").bind("click", function(){
 					onClickFileTitle(itemID);
 				});
 			}
@@ -2071,7 +2092,7 @@ var AXUpload5 = Class.create(AXJ, {
 		}else{
 			this.uploadedList = files;
 			if(cfg.queueBoxID){
-				$.each(this.uploadedList, function(fidx, f){
+				jQuery.each(this.uploadedList, function(fidx, f){
 					if(f.id == undefined){
 						trace("id key는 필수 항목 입니다.");
 						return false;	
@@ -2082,36 +2103,36 @@ var AXUpload5 = Class.create(AXJ, {
 						name:f[cfg.fileKeys.name],
 						size:f[cfg.fileKeys.fileSize]
 					};
-					$("#" + cfg.queueBoxID).prepend(getItemTag(itemID, uf));
-					$("#" + cfg.queueBoxID).find("#"+itemID).fadeIn();
+					jQuery("#" + cfg.queueBoxID).prepend(getItemTag(itemID, uf));
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID).fadeIn();
 					
 					// --------------------- s
-					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show();
-					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
-					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show();
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
 		
 					if(f[cfg.fileKeys.thumbPath]){
-						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
+						jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
 							"background-image":"url('"+(f[cfg.fileKeys.thumbPath]||"").dec()+"')",
 							"background-size":"100% auto",
 							"background-position":"center center"
 						});
 					}else{				
-						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({"background-image":"url()"});
-						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").html((f[cfg.fileKeys.type]||"").dec().replace(".", ""));
+						jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({"background-image":"url()"});
+						jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").html((f[cfg.fileKeys.type]||"").dec().replace(".", ""));
 					}
 		
-					$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
+					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
 						onClickDeleteButton(itemID);
 					});
 					if(cfg.onClickUploadedItem){
-						$("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadDownload").bind("click", function(){
+						jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadDownload").bind("click", function(){
 							onClickFileTitle(itemID);
 						});
 					}
 					// --------------------- e
 								
-					$("#"+itemID).addClass("readyselect");
+					jQuery("#"+itemID).addClass("readyselect");
 					
 				});
 				this.multiSelector.collect();
@@ -2121,7 +2142,7 @@ var AXUpload5 = Class.create(AXJ, {
 	getUploadedList: function(arg){
 		if(arg == "param"){
 			var pars = [];
-			$.each(this.uploadedList, function(){
+			jQuery.each(this.uploadedList, function(){
 				pars.push(jQuery.param(this));
 			});
 			return pars.join("&");
@@ -2135,7 +2156,7 @@ var AXUpload5 = Class.create(AXJ, {
 		var selectObj = this.multiSelector.getSelects();
 		if(arg == "param"){
 			var pars = [];
-			$.each(this.uploadedList, function(){
+			jQuery.each(this.uploadedList, function(){
 				for(var a=0;a<selectObj.length;a++){
 					if(this.id == selectObj[a].id) pars.push(jQuery.param(this));
 				}
@@ -2144,7 +2165,7 @@ var AXUpload5 = Class.create(AXJ, {
 			pars = null;
 		}else{
 			var pars = [];
-			$.each(this.uploadedList, function(){
+			jQuery.each(this.uploadedList, function(){
 				for(var a=0;a<selectObj.length;a++){
 					if(this.id == selectObj[a].id) pars.push(this);
 				}
@@ -2171,12 +2192,12 @@ var AXUpload5 = Class.create(AXJ, {
 		po.push("<a href='#AXexec' class='AXFileTitle'>"+AXfile.ti.dec()+"</a>");
 		po.push("<a href='#AXexec' class='AXFileDelete'>X</a>");
 		po.push("</div>"); 
-		$("#"+UploadDisplay_id).html(po.join(''));			
-		$("#"+UploadDisplay_id).find(".AXFileDelete").bind("click", onClickButton);
+		jQuery("#"+UploadDisplay_id).html(po.join(''));			
+		jQuery("#"+UploadDisplay_id).find(".AXFileDelete").bind("click", onClickButton);
 
 		if(this.settings.onclick){
 			var onclick = this.settings.onclick.bind(this);
-			$("#"+UploadDisplay_id).find(".AXFileTitle").bind("click", function(){
+			jQuery("#"+UploadDisplay_id).find(".AXFileTitle").bind("click", function(){
 				onclick(AXfile);
 			});
 		}
@@ -2191,13 +2212,13 @@ var AXUpload5 = Class.create(AXJ, {
 	addKeyInUploadedListItem: function(objID, obj){
 		var uploadedList = this.uploadedList;
 		
-		$.each(uploadedList, function(idx, o){
+		jQuery.each(uploadedList, function(idx, o){
 			if (o.id == objID){
-				$.each(obj, function(k, v){
+				jQuery.each(obj, function(k, v){
 					o[k] = v;
 				});
 			}else{
-				$.each(obj, function(k, v){
+				jQuery.each(obj, function(k, v){
 					o[k] = '';
 				});
 			}
