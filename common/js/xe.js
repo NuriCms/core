@@ -292,127 +292,127 @@ $(window).load(function(){ xe.broadcast('ONLOAD'); });
 if(jQuery) jQuery.noConflict();
 
 (function($) {
-    /* OS check */
-    var UA = navigator.userAgent.toLowerCase();
-    $.os = {
-        Linux: /linux/.test(UA),
-        Unix: /x11/.test(UA),
-        Mac: /mac/.test(UA),
-        Windows: /win/.test(UA)
-    };
-    $.os.name = ($.os.Windows) ? 'Windows' :
-        ($.os.Linux) ? 'Linux' :
-        ($.os.Unix) ? 'Unix' :
-        ($.os.Mac) ? 'Mac' : '';
+	/* OS check */
+	var UA = navigator.userAgent.toLowerCase();
+	$.os = {
+		Linux: /linux/.test(UA),
+		Unix: /x11/.test(UA),
+		Mac: /mac/.test(UA),
+		Windows: /win/.test(UA)
+	};
+	$.os.name = ($.os.Windows) ? 'Windows' :
+		($.os.Linux) ? 'Linux' :
+		($.os.Unix) ? 'Unix' :
+		($.os.Mac) ? 'Mac' : '';
 
-    /**
-     * @brief XE 공용 유틸리티 함수
-     * @namespace XE
-     */
-    window.XE = {
-        loaded_popup_menus : new Array(),
-        addedDocument : new Array(),
-        /**
-         * @brief 특정 name을 가진 체크박스들의 checked 속성 변경
-         * @param [itemName='cart',][options={}]
-         */
-        checkboxToggleAll : function(itemName) {
-            if(!is_def(itemName)) itemName='cart';
-            var options = {
-                wrap : null,
-                checked : 'toggle',
-                doClick : false
-            };
+	/**
+	 * @brief XE 공용 유틸리티 함수
+	 * @namespace XE
+	 */
+	window.XE = {
+		loaded_popup_menus : new Array(),
+		addedDocument : new Array(),
+		/**
+		 * @brief 특정 name을 가진 체크박스들의 checked 속성 변경
+		 * @param [itemName='cart',][options={}]
+		 */
+		checkboxToggleAll : function(itemName) {
+			if(!is_def(itemName)) itemName='cart';
+			var options = {
+				wrap : null,
+				checked : 'toggle',
+				doClick : false
+			};
 
-            switch(arguments.length) {
-                case 1:
-                    if(typeof(arguments[0]) == "string") {
-                        itemName = arguments[0];
-                    } else {
-                        $.extend(options, arguments[0] || {});
+			switch(arguments.length) {
+				case 1:
+					if(typeof(arguments[0]) == "string") {
+						itemName = arguments[0];
+					} else {
+						$.extend(options, arguments[0] || {});
 						itemName = 'cart';
-                    }
-                    break;
-                case 2:
-                    itemName = arguments[0];
-                    $.extend(options, arguments[1] || {});
-            }
+					}
+					break;
+				case 2:
+					itemName = arguments[0];
+					$.extend(options, arguments[1] || {});
+			}
 
-            if(options.doClick == true) options.checked = null;
-            if(typeof(options.wrap) == "string") options.wrap ='#'+options.wrap;
+			if(options.doClick == true) options.checked = null;
+			if(typeof(options.wrap) == "string") options.wrap ='#'+options.wrap;
 
-            if(options.wrap) {
-                var obj = $(options.wrap).find('input[name='+itemName+']:checkbox');
-            } else {
-                var obj = $('input[name='+itemName+']:checkbox');
-            }
+			if(options.wrap) {
+				var obj = $(options.wrap).find('input[name='+itemName+']:checkbox');
+			} else {
+				var obj = $('input[name='+itemName+']:checkbox');
+			}
 
 			if(options.checked == 'toggle') {
-                obj.each(function() {
-                    $(this).attr('checked', ($(this).attr('checked')) ? false : true);
-                });
-            } else {
-                (options.doClick == true) ? obj.click() : obj.attr('checked', options.checked);
-            }
-        },
+				obj.each(function() {
+					$(this).attr('checked', ($(this).attr('checked')) ? false : true);
+				});
+			} else {
+				(options.doClick == true) ? obj.click() : obj.attr('checked', options.checked);
+			}
+		},
 
-        /**
-         * @brief 문서/회원 등 팝업 메뉴 출력
-         */
-        displayPopupMenu : function(ret_obj, response_tags, params) {
-            var target_srl = params["target_srl"];
-            var menu_id = params["menu_id"];
-            var menus = ret_obj['menus'];
-            var html = "";
+		/**
+		 * @brief 문서/회원 등 팝업 메뉴 출력
+		 */
+		displayPopupMenu : function(ret_obj, response_tags, params) {
+			var target_srl = params["target_srl"];
+			var menu_id = params["menu_id"];
+			var menus = ret_obj['menus'];
+			var html = "";
 
-            if(this.loaded_popup_menus[menu_id]) {
-                html = this.loaded_popup_menus[menu_id];
+			if(this.loaded_popup_menus[menu_id]) {
+				html = this.loaded_popup_menus[menu_id];
 
-            } else {
-                if(menus) {
-                    var item = menus['item'];
-                    if(typeof(item.length)=='undefined' || item.length<1) item = new Array(item);
-                    if(item.length) {
-                        for(var i=0;i<item.length;i++) {
-                            var url = item[i].url;
-                            var str = item[i].str;
-                            var icon = item[i].icon;
-                            var target = item[i].target;
+			} else {
+				if(menus) {
+					var item = menus['item'];
+					if(typeof(item.length)=='undefined' || item.length<1) item = new Array(item);
+					if(item.length) {
+						for(var i=0;i<item.length;i++) {
+							var url = item[i].url;
+							var str = item[i].str;
+							var icon = item[i].icon;
+							var target = item[i].target;
 
-                            var styleText = "";
-                            var click_str = "";
-                            /* if(icon) styleText = " style=\"background-image:url('"+icon+"')\" "; */
-                            switch(target) {
-                                case "popup" :
-                                        click_str = " onclick=\"popopen(this.href,'"+target+"'); return false;\"";
-                                    break;
-                                case "javascript" :
-                                        click_str = " onclick=\""+url+"; return false; \"";
-                                        url="#";
-                                    break;
-                            }
+							var styleText = "";
+							var click_str = "";
+							/* if(icon) styleText = " style=\"background-image:url('"+icon+"')\" "; */
+							switch(target) {
+								case "popup" :
+										click_str = " onclick=\"popopen(this.href,'"+target+"'); return false;\"";
+									break;
+								case "javascript" :
+										click_str = " onclick=\""+url+"; return false; \"";
+										url="#";
+									break;
+							}
 
-                            html += '<li '+styleText+'><a href="'+url+'"'+click_str+'>'+str+'</a></li> ';
-                        }
-                    }
-                }
-                this.loaded_popup_menus[menu_id] =  html;
-            }
+							html += '<li '+styleText+'><a href="'+url+'"'+click_str+'>'+str+'</a></li> ';
+						}
+					}
+				}
+				this.loaded_popup_menus[menu_id] =  html;
+			}
 
-            /* 레이어 출력 */
-            if(html) {
-                var area = $('#popup_menu_area').html('<ul>'+html+'</ul>');
-                var areaOffset = {top:params['page_y'], left:params['page_x']};
+			/* 레이어 출력 */
+			if(html) {
+				var area = $('#popup_menu_area').html('<ul>'+html+'</ul>');
+				var areaOffset = {top:params['page_y'], left:params['page_x']};
 
-                if(area.outerHeight()+areaOffset.top > $(window).height()+$(window).scrollTop())
-                    areaOffset.top = $(window).height() - area.outerHeight() + $(window).scrollTop();
-                if(area.outerWidth()+areaOffset.left > $(window).width()+$(window).scrollLeft())
-                    areaOffset.left = $(window).width() - area.outerWidth() + $(window).scrollLeft();
+				if(area.outerHeight()+areaOffset.top > $(window).height()+$(window).scrollTop())
+					areaOffset.top = $(window).height() - area.outerHeight() + $(window).scrollTop();
+				if(area.outerWidth()+areaOffset.left > $(window).width()+$(window).scrollLeft())
+					areaOffset.left = $(window).width() - area.outerWidth() + $(window).scrollLeft();
 
-                area.css({ top:areaOffset.top, left:areaOffset.left }).show().focus();
-            }
-        }
-    }
+				area.css({ top:areaOffset.top, left:areaOffset.left }).show().focus();
+			}
+		}
+	}
 }) (jQuery);
 
 
@@ -420,55 +420,55 @@ if(jQuery) jQuery.noConflict();
 /* jQuery(document).ready() */
 jQuery(function($) {
 
-    /* select - option의 disabled=disabled 속성을 IE에서도 체크하기 위한 함수 */
-    if($.browser.msie) {
-        $('select').each(function(i, sels) {
-            var disabled_exists = false;
-            var first_enable = new Array();
+	/* select - option의 disabled=disabled 속성을 IE에서도 체크하기 위한 함수 */
+	if(navigator.appName == 'Microsoft Internet Explorer') {
+		$('select').each(function(i, sels) {
+			var disabled_exists = false;
+			var first_enable = new Array();
 
-            for(var j=0; j < sels.options.length; j++) {
-                if(sels.options[j].disabled) {
-                    sels.options[j].style.color = '#CCCCCC';
-                    disabled_exists = true;
-                }else{
-                    first_enable[i] = (first_enable[i] > -1) ? first_enable[i] : j;
-                }
-            }
+			for(var j=0; j < sels.options.length; j++) {
+				if(sels.options[j].disabled) {
+					sels.options[j].style.color = '#CCCCCC';
+					disabled_exists = true;
+				}else{
+					first_enable[i] = (first_enable[i] > -1) ? first_enable[i] : j;
+				}
+			}
 
-            if(!disabled_exists) return;
+			if(!disabled_exists) return;
 
-            sels.oldonchange = sels.onchange;
-            sels.onchange = function() {
-                if(this.options[this.selectedIndex].disabled) {
+			sels.oldonchange = sels.onchange;
+			sels.onchange = function() {
+				if(this.options[this.selectedIndex].disabled) {
 
-                    this.selectedIndex = first_enable[i];
-                    /*
-                    if(this.options.length<=1) this.selectedIndex = -1;
-                    else if(this.selectedIndex < this.options.length - 1) this.selectedIndex++;
-                    else this.selectedIndex--;
-                    */
+					this.selectedIndex = first_enable[i];
+					/*
+					if(this.options.length<=1) this.selectedIndex = -1;
+					else if(this.selectedIndex < this.options.length - 1) this.selectedIndex++;
+					else this.selectedIndex--;
+					*/
 
-                } else {
-                    if(this.oldonchange) this.oldonchange();
-                }
-            };
+				} else {
+					if(this.oldonchange) this.oldonchange();
+				}
+			};
 
-            if(sels.selectedIndex >= 0 && sels.options[ sels.selectedIndex ].disabled) sels.onchange();
+			if(sels.selectedIndex >= 0 && sels.options[ sels.selectedIndex ].disabled) sels.onchange();
 
-        });
-    }
+		});
+	}
 
-    /* 단락에디터 fold 컴포넌트 펼치기/접기 */
-    var drEditorFold = $('.xe_content .fold_button');
-    if(drEditorFold.size()) {
-        var fold_container = $('div.fold_container', drEditorFold);
-        $('button.more', drEditorFold).click(function() {
-            $(this).hide().next('button').show().parent().next(fold_container).show();
-        });
-        $('button.less', drEditorFold).click(function() {
-            $(this).hide().prev('button').show().parent().next(fold_container).hide();
-        });
-    }
+	/* 단락에디터 fold 컴포넌트 펼치기/접기 */
+	var drEditorFold = $('.xe_content .fold_button');
+	if(drEditorFold.size()) {
+		var fold_container = $('div.fold_container', drEditorFold);
+		$('button.more', drEditorFold).click(function() {
+			$(this).hide().next('button').show().parent().next(fold_container).show();
+		});
+		$('button.less', drEditorFold).click(function() {
+			$(this).hide().prev('button').show().parent().next(fold_container).hide();
+		});
+	}
 
 	jQuery('input[type="submit"],button[type="submit"]').click(function(ev){
 		var $el = jQuery(ev.currentTarget);
@@ -500,15 +500,15 @@ var isArray = Array.isArray || function(obj){ return Object.prototype.toString.c
  **/
 String.prototype.getQuery = function(key) {
 	var loc = isSameUrl(this, window.location.href) ? current_url : this;
-    var idx = loc.indexOf('?');
-    if(idx == -1) return null;
-    var query_string = loc.substr(idx+1, this.length), args = {};
-    query_string.replace(/([^=]+)=([^&]*)(&|$)/g, function() { args[arguments[1]] = arguments[2]; });
+	var idx = loc.indexOf('?');
+	if(idx == -1) return null;
+	var query_string = loc.substr(idx+1, this.length), args = {};
+	query_string.replace(/([^=]+)=([^&]*)(&|$)/g, function() { args[arguments[1]] = arguments[2]; });
 
-    var q = args[key];
-    if(typeof(q)=='undefined') q = '';
+	var q = args[key];
+	if(typeof(q)=='undefined') q = '';
 
-    return q;
+	return q;
 }
 
 /**
@@ -516,18 +516,18 @@ String.prototype.getQuery = function(key) {
  **/
 String.prototype.setQuery = function(key, val) {
 	var loc = isSameUrl(this, window.location.href) ? current_url : this;
-    var idx = loc.indexOf('?');
-    var uri = loc.replace(/#$/, '');
+	var idx = loc.indexOf('?');
+	var uri = loc.replace(/#$/, '');
 	var act, re, v;
 
 	if (typeof(val)=='undefined') val = '';
 
-    if (idx != -1) {
-        var query_string = uri.substr(idx+1, loc.length), args = {}, q_list = [];
+	if (idx != -1) {
+		var query_string = uri.substr(idx+1, loc.length), args = {}, q_list = [];
 		uri = loc.substr(0, idx);
-        query_string.replace(/([^=]+)=([^&]*)(&|$)/g, function(all,key,val) { args[key] = val; });
+		query_string.replace(/([^=]+)=([^&]*)(&|$)/g, function(all,key,val) { args[key] = val; });
 
-        args[key] = val;
+		args[key] = val;
 
 		for (var prop in args) {
 			if (!args.hasOwnProperty(prop)) continue;
@@ -537,26 +537,26 @@ String.prototype.setQuery = function(key, val) {
 
 		query_string = q_list.join('&');
 		uri = uri+(query_string?'?'+query_string:'');
-    } else {
-        if (String(val).trim()) uri = uri+'?'+key+'='+val;
-    }
+	} else {
+		if (String(val).trim()) uri = uri+'?'+key+'='+val;
+	}
 
 	re = /^https:\/\/([^:\/]+)(:\d+|)/i;
-    if (re.test(uri)) {
-        var toReplace = 'http://'+RegExp.$1;
-        if (window.http_port && http_port != 80) toReplace += ':' + http_port;
-        uri = uri.replace(re, toReplace);
-    }
+	if (re.test(uri)) {
+		var toReplace = 'http://'+RegExp.$1;
+		if (window.http_port && http_port != 80) toReplace += ':' + http_port;
+		uri = uri.replace(re, toReplace);
+	}
 
-    var bUseSSL = !!window.enforce_ssl;
+	var bUseSSL = !!window.enforce_ssl;
 	if (!bUseSSL && isArray(window.ssl_actions) && (act=uri.getQuery('act'))) {
-        for (var i=0,c=ssl_actions.length; i < c; i++) {
-            if (ssl_actions[i] === act) {
-                bUseSSL = true;
-                break;
-            }
-        }
-    }
+		for (var i=0,c=ssl_actions.length; i < c; i++) {
+			if (ssl_actions[i] === act) {
+				bUseSSL = true;
+				break;
+			}
+		}
+	}
 
 	re = /http:\/\/([^:\/]+)(:\d+|)/i;
 	if (bUseSSL && re.test(uri)) {
@@ -568,14 +568,14 @@ String.prototype.setQuery = function(key, val) {
 	// insert index.php if it isn't included
 	uri = uri.replace(/\/(index\.php)?\?/, '/index.php?');
 
-    return encodeURI(uri);
+	return encodeURI(uri);
 }
 
 /**
  * @brief string prototype으로 trim 함수 추가
  **/
 String.prototype.trim = function() {
-    return this.replace(/(^\s*)|(\s*$)/g, "");
+	return this.replace(/(^\s*)|(\s*$)/g, "");
 }
 
 })();
@@ -584,22 +584,22 @@ String.prototype.trim = function() {
  * @brief xSleep(micro time)
  **/
 function xSleep(sec) {
-    sec = sec / 1000;
-    var now = new Date();
-    var sleep = new Date();
-    while( sleep.getTime() - now.getTime() < sec) {
-        sleep = new Date();
-    }
+	sec = sec / 1000;
+	var now = new Date();
+	var sleep = new Date();
+	while( sleep.getTime() - now.getTime() < sec) {
+		sleep = new Date();
+	}
 }
 
 /**
  * @brief 주어진 인자가 하나라도 defined되어 있지 않으면 false return
  **/
 function isDef() {
-    for(var i=0; i < arguments.length; ++i) {
-        if(typeof(arguments[i]) == "undefined") return false;
-    }
-    return true;
+	for(var i=0; i < arguments.length; ++i) {
+		if(typeof(arguments[i]) == "undefined") return false;
+	}
+	return true;
 }
 
 /**
@@ -608,20 +608,20 @@ function isDef() {
  **/
 var winopen_list = new Array();
 function winopen(url, target, attribute) {
-    if(typeof(xeVid)!='undefined' && url.indexOf(request_uri)>-1 && !url.getQuery('vid')) url = url.setQuery('vid',xeVid);
-    try {
-        if(target != "_blank" && winopen_list[target]) {
-            winopen_list[target].close();
-            winopen_list[target] = null;
-        }
-    } catch(e) {
-    }
+	if(typeof(xeVid)!='undefined' && url.indexOf(request_uri)>-1 && !url.getQuery('vid')) url = url.setQuery('vid',xeVid);
+	try {
+		if(target != "_blank" && winopen_list[target]) {
+			winopen_list[target].close();
+			winopen_list[target] = null;
+		}
+	} catch(e) {
+	}
 
-    if(typeof(target) == 'undefined') target = '_blank';
-    if(typeof(attribute) == 'undefined') attribute = '';
-    var win = window.open(url, target, attribute);
-    win.focus();
-    if(target != "_blank") winopen_list[target] = win;
+	if(typeof(target) == 'undefined') target = '_blank';
+	if(typeof(attribute) == 'undefined') attribute = '';
+	var win = window.open(url, target, attribute);
+	win.focus();
+	if(target != "_blank") winopen_list[target] = win;
 }
 
 /**
@@ -629,113 +629,113 @@ function winopen(url, target, attribute) {
  * common/tpl/popup_layout.html이 요청되는 XE내의 팝업일 경우에 사용
  **/
 function popopen(url, target) {
-    if(typeof(target) == "undefined") target = "_blank";
-    if(typeof(xeVid)!='undefined' && url.indexOf(request_uri)>-1 && !url.getQuery('vid')) url = url.setQuery('vid',xeVid);
-    winopen(url, target, "width=800,height=600,scrollbars=yes,resizable=yes,toolbars=no");
+	if(typeof(target) == "undefined") target = "_blank";
+	if(typeof(xeVid)!='undefined' && url.indexOf(request_uri)>-1 && !url.getQuery('vid')) url = url.setQuery('vid',xeVid);
+	winopen(url, target, "width=800,height=600,scrollbars=yes,resizable=yes,toolbars=no");
 }
 
 /**
  * @brief 메일 보내기용
  **/
 function sendMailTo(to) {
-    location.href="mailto:"+to;
+	location.href="mailto:"+to;
 }
 
 /**
  * @brief url이동 (open_window 값이 N 가 아니면 새창으로 띄움)
  **/
 function move_url(url, open_window) {
-    if(!url) return false;
-    if(typeof(open_window) == 'undefined') open_window = 'N';
-    if(open_window=='N') {
-        open_window = false;
-    } else {
-        open_window = true;
-    }
+	if(!url) return false;
+	if(typeof(open_window) == 'undefined') open_window = 'N';
+	if(open_window=='N') {
+		open_window = false;
+	} else {
+		open_window = true;
+	}
 
-    if(/^\./.test(url)) url = request_uri+url;
+	if(/^\./.test(url)) url = request_uri+url;
 
-    if(open_window) {
-        winopen(url);
-    } else {
-        location.href=url;
-    }
+	if(open_window) {
+		winopen(url);
+	} else {
+		location.href=url;
+	}
 
-    return false;
+	return false;
 }
 
 /**
  * @brief 멀티미디어 출력용 (IE에서 플래쉬/동영상 주변에 점선 생김 방지용)
  **/
 function displayMultimedia(src, width, height, options) {
-    var html = _displayMultimedia(src, width, height, options);
-    if(html) document.writeln(html);
+	var html = _displayMultimedia(src, width, height, options);
+	if(html) document.writeln(html);
 }
 function _displayMultimedia(src, width, height, options) {
-    if(src.indexOf('files') == 0) src = request_uri + src;
+	if(src.indexOf('files') == 0) src = request_uri + src;
 
-    var defaults = {
-        wmode : 'transparent',
-        allowScriptAccess : 'sameDomain',
-        quality : 'high',
-        flashvars : '',
-        autostart : false
-    };
+	var defaults = {
+		wmode : 'transparent',
+		allowScriptAccess : 'sameDomain',
+		quality : 'high',
+		flashvars : '',
+		autostart : false
+	};
 
-    var params = jQuery.extend(defaults, options || {});
+	var params = jQuery.extend(defaults, options || {});
 	var autostart = (params.autostart && params.autostart != 'false') ? 'true' : 'false';
 	delete(params.autostart);
 
-    var clsid = "";
-    var codebase = "";
-    var html = "";
+	var clsid = "";
+	var codebase = "";
+	var html = "";
 
-    if(/\.(gif|jpg|jpeg|bmp|png)$/i.test(src)){
-        html = '<img src="'+src+'" width="'+width+'" height="'+height+'" />';
-    } else if(/\.flv$/i.test(src) || /\.mov$/i.test(src) || /\.moov$/i.test(src) || /\.m4v$/i.test(src)) {
-        html = '<embed src="'+request_uri+'common/img/flvplayer.swf" allowfullscreen="true" autostart="'+autostart+'" width="'+width+'" height="'+height+'" flashvars="&file='+src+'&width='+width+'&height='+height+'&autostart='+autostart+'" wmode="'+params.wmode+'" />';
-    } else if(/\.swf/i.test(src)) {
-        clsid = 'clsid:D27CDB6E-AE6D-11cf-96B8-444553540000';
+	if(/\.(gif|jpg|jpeg|bmp|png)$/i.test(src)){
+		html = '<img src="'+src+'" width="'+width+'" height="'+height+'" />';
+	} else if(/\.flv$/i.test(src) || /\.mov$/i.test(src) || /\.moov$/i.test(src) || /\.m4v$/i.test(src)) {
+		html = '<embed src="'+request_uri+'common/img/flvplayer.swf" allowfullscreen="true" autostart="'+autostart+'" width="'+width+'" height="'+height+'" flashvars="&file='+src+'&width='+width+'&height='+height+'&autostart='+autostart+'" wmode="'+params.wmode+'" />';
+	} else if(/\.swf/i.test(src)) {
+		clsid = 'clsid:D27CDB6E-AE6D-11cf-96B8-444553540000';
 
-        if(typeof(enforce_ssl)!='undefined' && enforce_ssl){ codebase = "https://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0"; }
-        else { codebase = "http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0"; }
-        html = '<object classid="'+clsid+'" codebase="'+codebase+'" width="'+width+'" height="'+height+'" flashvars="'+params.flashvars+'">';
-        html += '<param name="movie" value="'+src+'" />';
-        for(var name in params) {
-            if(params[name] != 'undefined' && params[name] != '') {
-                html += '<param name="'+name+'" value="'+params[name]+'" />';
-            }
-        }
-        html += ''
-            + '<embed src="'+src+'" autostart="'+autostart+'"  width="'+width+'" height="'+height+'" flashvars="'+params.flashvars+'" wmode="'+params.wmode+'"></embed>'
-            + '</object>';
-    }  else {
-		if (jQuery.browser.mozilla || jQuery.browser.opera) {
+		if(typeof(enforce_ssl)!='undefined' && enforce_ssl){ codebase = "https://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0"; }
+		else { codebase = "http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0"; }
+		html = '<object classid="'+clsid+'" codebase="'+codebase+'" width="'+width+'" height="'+height+'" flashvars="'+params.flashvars+'">';
+		html += '<param name="movie" value="'+src+'" />';
+		for(var name in params) {
+			if(params[name] != 'undefined' && params[name] != '') {
+				html += '<param name="'+name+'" value="'+params[name]+'" />';
+			}
+		}
+		html += ''
+			+ '<embed src="'+src+'" autostart="'+autostart+'"  width="'+width+'" height="'+height+'" flashvars="'+params.flashvars+'" wmode="'+params.wmode+'"></embed>'
+			+ '</object>';
+	}  else {
+		if (navigator.userAgent.indexOf('Firefox') > -1 || navigator.userAgent.indexOf("Opera") > -1) {
 			// firefox and opera uses 0 or 1 for autostart parameter.
 			autostart = (params.autostart && params.autostart != 'false') ? '1' : '0';
 		}
 
-        html = '<embed src="'+src+'" autostart="'+autostart+'" width="'+width+'" height="'+height+'"';
-        if(params.wmode == 'transparent') {
-            html += ' windowlessvideo="1"';
-        }
-        html += '></embed>';
-    }
-    return html;
+		html = '<embed src="'+src+'" autostart="'+autostart+'" width="'+width+'" height="'+height+'"';
+		if(params.wmode == 'transparent') {
+			html += ' windowlessvideo="1"';
+		}
+		html += '></embed>';
+	}
+	return html;
 }
 
 /**
  * @brief 에디터에서 사용되는 내용 여닫는 코드 (고정, zbxe용)
  **/
 function zbxe_folder_open(id) {
-    jQuery("#folder_open_"+id).hide();
-    jQuery("#folder_close_"+id).show();
-    jQuery("#folder_"+id).show();
+	jQuery("#folder_open_"+id).hide();
+	jQuery("#folder_close_"+id).show();
+	jQuery("#folder_"+id).show();
 }
 function zbxe_folder_close(id) {
-    jQuery("#folder_open_"+id).show();
-    jQuery("#folder_close_"+id).hide();
-    jQuery("#folder_"+id).hide();
+	jQuery("#folder_open_"+id).show();
+	jQuery("#folder_close_"+id).hide();
+	jQuery("#folder_"+id).hide();
 }
 
 /**
@@ -766,85 +766,85 @@ function setFixedPopupSize() {
  * @brief 추천/비추천,스크랩,신고기능등 특정 srl에 대한 특정 module/action을 호출하는 함수
  **/
 function doCallModuleAction(module, action, target_srl) {
-    var params = {
+	var params = {
 		target_srl : target_srl,
-		cur_mid    : current_mid,
-		mid        : current_mid
+		cur_mid	: current_mid,
+		mid		: current_mid
 	};
-    exec_xml(module, action, params, completeCallModuleAction);
+	exec_xml(module, action, params, completeCallModuleAction);
 }
 
 function completeCallModuleAction(ret_obj, response_tags) {
-    if(ret_obj['message']!='success') alert(ret_obj['message']);
-    location.reload();
+	if(ret_obj['message']!='success') alert(ret_obj['message']);
+	location.reload();
 }
 
 function completeMessage(ret_obj) {
-    alert(ret_obj['message']);
-    location.reload();
+	alert(ret_obj['message']);
+	location.reload();
 }
 
 
 
 /* 언어코드 (lang_type) 쿠키값 변경 */
 function doChangeLangType(obj) {
-    if(typeof(obj) == "string") {
-        setLangType(obj);
-    } else {
-        var val = obj.options[obj.selectedIndex].value;
-        setLangType(val);
-    }
+	if(typeof(obj) == "string") {
+		setLangType(obj);
+	} else {
+		var val = obj.options[obj.selectedIndex].value;
+		setLangType(val);
+	}
 	location.href = location.href.setQuery('l', '');
 }
 function setLangType(lang_type) {
-    var expire = new Date();
-    expire.setTime(expire.getTime()+ (7000 * 24 * 3600000));
-    setCookie('lang_type', lang_type, expire, '/');
+	var expire = new Date();
+	expire.setTime(expire.getTime()+ (7000 * 24 * 3600000));
+	setCookie('lang_type', lang_type, expire, '/');
 }
 
 /* 미리보기 */
 function doDocumentPreview(obj) {
-    var fo_obj = obj;
-    while(fo_obj.nodeName != "FORM") {
-        fo_obj = fo_obj.parentNode;
-    }
-    if(fo_obj.nodeName != "FORM") return;
-    var editor_sequence = fo_obj.getAttribute('editor_sequence');
+	var fo_obj = obj;
+	while(fo_obj.nodeName != "FORM") {
+		fo_obj = fo_obj.parentNode;
+	}
+	if(fo_obj.nodeName != "FORM") return;
+	var editor_sequence = fo_obj.getAttribute('editor_sequence');
 
-    var content = editorGetContent(editor_sequence);
+	var content = editorGetContent(editor_sequence);
 
-    var win = window.open("", "previewDocument","toolbars=no,width=700px;height=800px,scrollbars=yes,resizable=yes");
+	var win = window.open("", "previewDocument","toolbars=no,width=700px;height=800px,scrollbars=yes,resizable=yes");
 
-    var dummy_obj = jQuery("#previewDocument");
+	var dummy_obj = jQuery("#previewDocument");
 
-    if(!dummy_obj.length) {
-        jQuery(
-            '<form id="previewDocument" target="previewDocument" method="post" action="'+request_uri+'">'+
-            '<input type="hidden" name="module" value="document" />'+
-            '<input type="hidden" name="act" value="dispDocumentPreview" />'+
-            '<input type="hidden" name="content" />'+
-            '</form>'
-        ).appendTo(document.body);
+	if(!dummy_obj.length) {
+		jQuery(
+			'<form id="previewDocument" target="previewDocument" method="post" action="'+request_uri+'">'+
+			'<input type="hidden" name="module" value="document" />'+
+			'<input type="hidden" name="act" value="dispDocumentPreview" />'+
+			'<input type="hidden" name="content" />'+
+			'</form>'
+		).appendTo(document.body);
 
-        dummy_obj = jQuery("#previewDocument")[0];
-    } else {
+		dummy_obj = jQuery("#previewDocument")[0];
+	} else {
 		dummy_obj = dummy_obj[0];
 	}
 
-    if(dummy_obj) {
-        dummy_obj.content.value = content;
-        dummy_obj.submit();
-    }
+	if(dummy_obj) {
+		dummy_obj.content.value = content;
+		dummy_obj.submit();
+	}
 }
 
 /* 게시글 저장 */
 function doDocumentSave(obj) {
-    var editor_sequence = obj.form.getAttribute('editor_sequence');
-    var prev_content = editorRelKeys[editor_sequence]['content'].value;
-    if(typeof(editor_sequence)!='undefined' && editor_sequence && typeof(editorRelKeys)!='undefined' && typeof(editorGetContent)=='function') {
-        var content = editorGetContent(editor_sequence);
-        editorRelKeys[editor_sequence]['content'].value = content;
-    }
+	var editor_sequence = obj.form.getAttribute('editor_sequence');
+	var prev_content = editorRelKeys[editor_sequence]['content'].value;
+	if(typeof(editor_sequence)!='undefined' && editor_sequence && typeof(editorRelKeys)!='undefined' && typeof(editorGetContent)=='function') {
+		var content = editorGetContent(editor_sequence);
+		editorRelKeys[editor_sequence]['content'].value = content;
+	}
 
 	var params={}, responses=['error','message','document_srl'], elms=obj.form.elements, data=jQuery(obj.form).serializeArray();;
 	jQuery.each(data, function(i, field){
@@ -857,85 +857,85 @@ function doDocumentSave(obj) {
 
 	exec_xml('document','procDocumentTempSave', params, completeDocumentSave, responses, params, obj.form);
 
-    editorRelKeys[editor_sequence]['content'].value = prev_content;
-    return false;
+	editorRelKeys[editor_sequence]['content'].value = prev_content;
+	return false;
 }
 
 function completeDocumentSave(ret_obj) {
-    jQuery('input[name=document_srl]').eq(0).val(ret_obj['document_srl']);
-    alert(ret_obj['message']);
+	jQuery('input[name=document_srl]').eq(0).val(ret_obj['document_srl']);
+	alert(ret_obj['message']);
 }
 
 /* 저장된 게시글 불러오기 */
 var objForSavedDoc = null;
 function doDocumentLoad(obj) {
-    // 저장된 게시글 목록 불러오기
-    objForSavedDoc = obj.form;
-    popopen(request_uri.setQuery('module','document').setQuery('act','dispTempSavedList'));
+	// 저장된 게시글 목록 불러오기
+	objForSavedDoc = obj.form;
+	popopen(request_uri.setQuery('module','document').setQuery('act','dispTempSavedList'));
 }
 
 /* 저장된 게시글의 선택 */
 function doDocumentSelect(document_srl) {
-    if(!opener || !opener.objForSavedDoc) {
-        window.close();
-        return;
-    }
+	if(!opener || !opener.objForSavedDoc) {
+		window.close();
+		return;
+	}
 
-    // 게시글을 가져와서 등록하기
-    opener.location.href = opener.current_url.setQuery('document_srl', document_srl).setQuery('act', 'dispBoardWrite');
-    window.close();
+	// 게시글을 가져와서 등록하기
+	opener.location.href = opener.current_url.setQuery('document_srl', document_srl).setQuery('act', 'dispBoardWrite');
+	window.close();
 }
 
 
 /* 스킨 정보 */
 function viewSkinInfo(module, skin) {
-    popopen("./?module=module&act=dispModuleSkinInfo&selected_module="+module+"&skin="+skin, 'SkinInfo');
+	popopen("./?module=module&act=dispModuleSkinInfo&selected_module="+module+"&skin="+skin, 'SkinInfo');
 }
 
 
 /* 관리자가 문서를 관리하기 위해서 선택시 세션에 넣음 */
 var addedDocument = new Array();
 function doAddDocumentCart(obj) {
-    var srl = obj.value;
-    addedDocument[addedDocument.length] = srl;
-    setTimeout(function() { callAddDocumentCart(addedDocument.length); }, 100);
+	var srl = obj.value;
+	addedDocument[addedDocument.length] = srl;
+	setTimeout(function() { callAddDocumentCart(addedDocument.length); }, 100);
 }
 
 function callAddDocumentCart(document_length) {
-    if(addedDocument.length<1 || document_length != addedDocument.length) return;
-    var params = new Array();
-    params["srls"] = addedDocument.join(",");
-    exec_xml("document","procDocumentAddCart", params, null);
-    addedDocument = new Array();
+	if(addedDocument.length<1 || document_length != addedDocument.length) return;
+	var params = new Array();
+	params["srls"] = addedDocument.join(",");
+	exec_xml("document","procDocumentAddCart", params, null);
+	addedDocument = new Array();
 }
 
 /* ff의 rgb(a,b,c)를 #... 로 변경 */
 function transRGB2Hex(value) {
-    if(!value) return value;
-    if(value.indexOf('#') > -1) return value.replace(/^#/, '');
+	if(!value) return value;
+	if(value.indexOf('#') > -1) return value.replace(/^#/, '');
 
-    if(value.toLowerCase().indexOf('rgb') < 0) return value;
-    value = value.replace(/^rgb\(/i, '').replace(/\)$/, '');
-    value_list = value.split(',');
+	if(value.toLowerCase().indexOf('rgb') < 0) return value;
+	value = value.replace(/^rgb\(/i, '').replace(/\)$/, '');
+	value_list = value.split(',');
 
-    var hex = '';
-    for(var i = 0; i < value_list.length; i++) {
-        var color = parseInt(value_list[i], 10).toString(16);
-        if(color.length == 1) color = '0'+color;
-        hex += color;
-    }
-    return hex;
+	var hex = '';
+	for(var i = 0; i < value_list.length; i++) {
+		var color = parseInt(value_list[i], 10).toString(16);
+		if(color.length == 1) color = '0'+color;
+		hex += color;
+	}
+	return hex;
 }
 
 /* 보안 로그인 모드로 전환 */
 function toggleSecuritySignIn() {
-    var href = location.href;
-    if(/https:\/\//i.test(href)) location.href = href.replace(/^https/i,'http');
-    else location.href = href.replace(/^http/i,'https');
+	var href = location.href;
+	if(/https:\/\//i.test(href)) location.href = href.replace(/^https/i,'http');
+	else location.href = href.replace(/^http/i,'https');
 }
 
 function reloadDocument() {
-    location.reload();
+	location.reload();
 }
 
 
@@ -948,137 +948,137 @@ function reloadDocument() {
 
 var Base64 = {
 
-    // private property
-    _keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+	// private property
+	_keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
 
-    // public method for encoding
-    encode : function (input) {
-        var output = "";
-        var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
-        var i = 0;
+	// public method for encoding
+	encode : function (input) {
+		var output = "";
+		var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+		var i = 0;
 
-        input = Base64._utf8_encode(input);
+		input = Base64._utf8_encode(input);
 
-        while (i < input.length) {
+		while (i < input.length) {
 
-            chr1 = input.charCodeAt(i++);
-            chr2 = input.charCodeAt(i++);
-            chr3 = input.charCodeAt(i++);
+			chr1 = input.charCodeAt(i++);
+			chr2 = input.charCodeAt(i++);
+			chr3 = input.charCodeAt(i++);
 
-            enc1 = chr1 >> 2;
-            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
-            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
-            enc4 = chr3 & 63;
+			enc1 = chr1 >> 2;
+			enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+			enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+			enc4 = chr3 & 63;
 
-            if (isNaN(chr2)) {
-                enc3 = enc4 = 64;
-            } else if (isNaN(chr3)) {
-                enc4 = 64;
-            }
+			if (isNaN(chr2)) {
+				enc3 = enc4 = 64;
+			} else if (isNaN(chr3)) {
+				enc4 = 64;
+			}
 
-            output = output +
-            this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
-            this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
+			output = output +
+			this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
+			this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
 
-        }
+		}
 
-        return output;
-    },
+		return output;
+	},
 
-    // public method for decoding
-    decode : function (input) {
-        var output = "";
-        var chr1, chr2, chr3;
-        var enc1, enc2, enc3, enc4;
-        var i = 0;
+	// public method for decoding
+	decode : function (input) {
+		var output = "";
+		var chr1, chr2, chr3;
+		var enc1, enc2, enc3, enc4;
+		var i = 0;
 
-        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+		input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
 
-        while (i < input.length) {
+		while (i < input.length) {
 
-            enc1 = this._keyStr.indexOf(input.charAt(i++));
-            enc2 = this._keyStr.indexOf(input.charAt(i++));
-            enc3 = this._keyStr.indexOf(input.charAt(i++));
-            enc4 = this._keyStr.indexOf(input.charAt(i++));
+			enc1 = this._keyStr.indexOf(input.charAt(i++));
+			enc2 = this._keyStr.indexOf(input.charAt(i++));
+			enc3 = this._keyStr.indexOf(input.charAt(i++));
+			enc4 = this._keyStr.indexOf(input.charAt(i++));
 
-            chr1 = (enc1 << 2) | (enc2 >> 4);
-            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
-            chr3 = ((enc3 & 3) << 6) | enc4;
+			chr1 = (enc1 << 2) | (enc2 >> 4);
+			chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+			chr3 = ((enc3 & 3) << 6) | enc4;
 
-            output = output + String.fromCharCode(chr1);
+			output = output + String.fromCharCode(chr1);
 
-            if (enc3 != 64) {
-                output = output + String.fromCharCode(chr2);
-            }
-            if (enc4 != 64) {
-                output = output + String.fromCharCode(chr3);
-            }
+			if (enc3 != 64) {
+				output = output + String.fromCharCode(chr2);
+			}
+			if (enc4 != 64) {
+				output = output + String.fromCharCode(chr3);
+			}
 
-        }
+		}
 
-        output = Base64._utf8_decode(output);
+		output = Base64._utf8_decode(output);
 
-        return output;
+		return output;
 
-    },
+	},
 
-    // private method for UTF-8 encoding
-    _utf8_encode : function (string) {
-        string = string.replace(/\r\n/g,"\n");
-        var utftext = "";
+	// private method for UTF-8 encoding
+	_utf8_encode : function (string) {
+		string = string.replace(/\r\n/g,"\n");
+		var utftext = "";
 
-        for (var n = 0; n < string.length; n++) {
+		for (var n = 0; n < string.length; n++) {
 
-            var c = string.charCodeAt(n);
+			var c = string.charCodeAt(n);
 
-            if (c < 128) {
-                utftext += String.fromCharCode(c);
-            }
-            else if((c > 127) && (c < 2048)) {
-                utftext += String.fromCharCode((c >> 6) | 192);
-                utftext += String.fromCharCode((c & 63) | 128);
-            }
-            else {
-                utftext += String.fromCharCode((c >> 12) | 224);
-                utftext += String.fromCharCode(((c >> 6) & 63) | 128);
-                utftext += String.fromCharCode((c & 63) | 128);
-            }
+			if (c < 128) {
+				utftext += String.fromCharCode(c);
+			}
+			else if((c > 127) && (c < 2048)) {
+				utftext += String.fromCharCode((c >> 6) | 192);
+				utftext += String.fromCharCode((c & 63) | 128);
+			}
+			else {
+				utftext += String.fromCharCode((c >> 12) | 224);
+				utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+				utftext += String.fromCharCode((c & 63) | 128);
+			}
 
-        }
+		}
 
-        return utftext;
-    },
+		return utftext;
+	},
 
-    // private method for UTF-8 decoding
-    _utf8_decode : function (utftext) {
-        var string = "";
-        var i = 0;
-        var c = c1 = c2 = 0;
+	// private method for UTF-8 decoding
+	_utf8_decode : function (utftext) {
+		var string = "";
+		var i = 0;
+		var c = c1 = c2 = 0;
 
-        while ( i < utftext.length ) {
+		while ( i < utftext.length ) {
 
-            c = utftext.charCodeAt(i);
+			c = utftext.charCodeAt(i);
 
-            if (c < 128) {
-                string += String.fromCharCode(c);
-                i++;
-            }
-            else if((c > 191) && (c < 224)) {
-                c2 = utftext.charCodeAt(i+1);
-                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
-                i += 2;
-            }
-            else {
-                c2 = utftext.charCodeAt(i+1);
-                c3 = utftext.charCodeAt(i+2);
-                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
-                i += 3;
-            }
+			if (c < 128) {
+				string += String.fromCharCode(c);
+				i++;
+			}
+			else if((c > 191) && (c < 224)) {
+				c2 = utftext.charCodeAt(i+1);
+				string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+				i += 2;
+			}
+			else {
+				c2 = utftext.charCodeAt(i+1);
+				c3 = utftext.charCodeAt(i+2);
+				string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+				i += 3;
+			}
 
-        }
+		}
 
-        return string;
-    }
+		return string;
+	}
 
 }
 
@@ -1093,11 +1093,11 @@ var Base64 = {
  * ------------------------------------------- */
 
 if(typeof(resizeImageContents) == 'undefined') {
-    function resizeImageContents() {}
+	function resizeImageContents() {}
 }
 
 if(typeof(activateOptionDisabled) == 'undefined') {
-    function activateOptionDisabled() {}
+	function activateOptionDisabled() {}
 }
 
 objectExtend = jQuery.extend;
@@ -1106,57 +1106,57 @@ objectExtend = jQuery.extend;
  * @brief 특정 Element의 display 옵션 토글
  **/
 function toggleDisplay(objId) {
-    jQuery('#'+objId).toggle();
+	jQuery('#'+objId).toggle();
 }
 
 /**
  * @brief 에디터에서 사용하되 내용 여닫는 코드 (zb5beta beta 호환용으로 남겨 놓음)
  **/
 function svc_folder_open(id) {
-    jQuery("#_folder_open_"+id).hide();
-    jQuery("#_folder_close_"+id).show();
-    jQuery("#_folder_"+id).show();
+	jQuery("#_folder_open_"+id).hide();
+	jQuery("#_folder_close_"+id).show();
+	jQuery("#_folder_"+id).show();
 }
 function svc_folder_close(id) {
-    jQuery("#_folder_open_"+id).show();
-    jQuery("#_folder_close_"+id).hide();
-    jQuery("#_folder_"+id).hide();
+	jQuery("#_folder_open_"+id).show();
+	jQuery("#_folder_close_"+id).hide();
+	jQuery("#_folder_"+id).hide();
 }
 
 /**
  * @brief 날짜 선택 (달력 열기)
  **/
 function open_calendar(fo_id, day_str, callback_func) {
-    if(typeof(day_str)=="undefined") day_str = "";
+	if(typeof(day_str)=="undefined") day_str = "";
 
-    var url = "./common/tpl/calendar.php?";
-    if(fo_id) url+="fo_id="+fo_id;
-    if(day_str) url+="&day_str="+day_str;
-    if(callback_func) url+="&callback_func="+callback_func;
+	var url = "./common/tpl/calendar.php?";
+	if(fo_id) url+="fo_id="+fo_id;
+	if(day_str) url+="&day_str="+day_str;
+	if(callback_func) url+="&callback_func="+callback_func;
 
-    popopen(url, 'Calendar');
+	popopen(url, 'Calendar');
 }
 
 var loaded_popup_menus = XE.loaded_popup_menus;
 function createPopupMenu() {}
 function chkPopupMenu() {}
 function displayPopupMenu(ret_obj, response_tags, params) {
-    XE.displayPopupMenu(ret_obj, response_tags, params);
+	XE.displayPopupMenu(ret_obj, response_tags, params);
 }
 
 function GetObjLeft(obj) {
-    return jQuery(obj).offset().left;
+	return jQuery(obj).offset().left;
 }
 function GetObjTop(obj) {
-    return jQuery(obj).offset().top;
+	return jQuery(obj).offset().top;
 }
 
 function replaceOuterHTML(obj, html) {
-    jQuery(obj).replaceWith(html);
+	jQuery(obj).replaceWith(html);
 }
 
 function getOuterHTML(obj) {
-    return jQuery(obj).html().trim();
+	return jQuery(obj).html().trim();
 }
 
 function setCookie(name, value, expire, path) {
@@ -1197,20 +1197,20 @@ jQuery(function($){
 		if(!$target.length) $target = $(evt.target).closest('a,div,span');
 		if(!$target.length) return;
 
-        // 객체의 className값을 구함
+		// 객체의 className값을 구함
 		var cls = $target.attr('class'), match;
 		if(cls) match = cls.match(new RegExp('(?:^| )((document|comment|member)_([1-9]\\d*))(?: |$)',''));
 		if(!match) return;
 
 		var action = 'get'+ucfirst(match[2])+'Menu';
 		var params = {
-			mid        : current_mid,
-			cur_mid    : current_mid,
-			menu_id    : match[1],
+			mid		: current_mid,
+			cur_mid	: current_mid,
+			menu_id	: match[1],
 			target_srl : match[3],
-			cur_act    : current_url.getQuery('act'),
-			page_x     : evt.pageX,
-			page_y     : evt.pageY
+			cur_act	: current_url.getQuery('act'),
+			page_x	 : evt.pageX,
+			page_y	 : evt.pageY
 		};
 		var response_tags = 'error message menus'.split(' ');
 
@@ -1223,8 +1223,8 @@ jQuery(function($){
 
 		show_waiting_message = false;
 		exec_xml('member', action, params, XE.displayPopupMenu, response_tags, params);
-        show_waiting_message = true;
-    });
+		show_waiting_message = true;
+	});
 
 	/**
 	 * Create popup windows automatically.
@@ -1259,159 +1259,159 @@ var show_waiting_message = true;
 
 /*  This work is licensed under Creative Commons GNU LGPL License.
 
-    License: http://creativecommons.org/licenses/LGPL/2.1/
+	License: http://creativecommons.org/licenses/LGPL/2.1/
    Version: 0.9
-    Author:  Stefan Goessner/2006
-    Web:     http://goessner.net/
+	Author:  Stefan Goessner/2006
+	Web:	 http://goessner.net/
 */
 function xml2json(xml, tab, ignoreAttrib) {
    var X = {
-      toObj: function(xml) {
-         var o = {};
-         if (xml.nodeType==1) {   // element node ..
-            if (ignoreAttrib && xml.attributes.length)   // element with attributes  ..
-               for (var i=0; i<xml.attributes.length; i++)
-                  o["@"+xml.attributes[i].nodeName] = (xml.attributes[i].nodeValue||"").toString();
-            if (xml.firstChild) { // element has child nodes ..
-               var textChild=0, cdataChild=0, hasElementChild=false;
-               for (var n=xml.firstChild; n; n=n.nextSibling) {
-                  if (n.nodeType==1) hasElementChild = true;
-                  else if (n.nodeType==3 && n.nodeValue.match(/[^ \f\n\r\t\v]/)) textChild++; // non-whitespace text
-                  else if (n.nodeType==4) cdataChild++; // cdata section node
-               }
-               if (hasElementChild) {
-                  if (textChild < 2 && cdataChild < 2) { // structured element with evtl. a single text or/and cdata node ..
-                     X.removeWhite(xml);
-                     for (var n=xml.firstChild; n; n=n.nextSibling) {
-                        if (n.nodeType == 3)  // text node
-                           o = X.escape(n.nodeValue);
-                        else if (n.nodeType == 4)  // cdata node
-//                           o["#cdata"] = X.escape(n.nodeValue);
-                            o = X.escape(n.nodeValue);
-                        else if (o[n.nodeName]) {  // multiple occurence of element ..
-                           if (o[n.nodeName] instanceof Array)
-                              o[n.nodeName][o[n.nodeName].length] = X.toObj(n);
-                           else
-                              o[n.nodeName] = [o[n.nodeName], X.toObj(n)];
-                        }
-                        else  // first occurence of element..
-                           o[n.nodeName] = X.toObj(n);
-                     }
-                  }
-                  else { // mixed content
-                     if (!xml.attributes.length)
-                        o = X.escape(X.innerXml(xml));
-                     else
-                        o["#text"] = X.escape(X.innerXml(xml));
-                  }
-               }
-               else if (textChild) { // pure text
-                  if (!xml.attributes.length)
-                     o = X.escape(X.innerXml(xml));
-                  else
-                     o["#text"] = X.escape(X.innerXml(xml));
-               }
-               else if (cdataChild) { // cdata
-                  if (cdataChild > 1)
-                     o = X.escape(X.innerXml(xml));
-                  else
-                     for (var n=xml.firstChild; n; n=n.nextSibling){
-                        //o["#cdata"] = X.escape(n.nodeValue);
-                        o = X.escape(n.nodeValue);
-                  }
-               }
-            }
-            if (!xml.attributes.length && !xml.firstChild) o = null;
-         }
-         else if (xml.nodeType==9) { // document.node
-            o = X.toObj(xml.documentElement);
-         }
-         else
-            alert("unhandled node type: " + xml.nodeType);
-         return o;
-      },
-      toJson: function(o, name, ind) {
-         var json = name ? ("\""+name+"\"") : "";
-         if (o instanceof Array) {
-            for (var i=0,n=o.length; i<n; i++)
-               o[i] = X.toJson(o[i], "", ind+"\t");
-            json += (name?":[":"[") + (o.length > 1 ? ("\n"+ind+"\t"+o.join(",\n"+ind+"\t")+"\n"+ind) : o.join("")) + "]";
-         }
-         else if (o == null)
-            json += (name&&":") + "null";
-         else if (typeof(o) == "object") {
-            var arr = [];
-            for (var m in o)
-               arr[arr.length] = X.toJson(o[m], m, ind+"\t");
-            json += (name?":{":"{") + (arr.length > 1 ? ("\n"+ind+"\t"+arr.join(",\n"+ind+"\t")+"\n"+ind) : arr.join("")) + "}";
-         }
-         else if (typeof(o) == "string")
-            json += (name&&":") + "\"" + o.toString() + "\"";
-         else
-            json += (name&&":") + o.toString();
-         return json;
-      },
-      innerXml: function(node) {
-         var s = ""
-         if ("innerHTML" in node)
-            s = node.innerHTML;
-         else {
-            var asXml = function(n) {
-               var s = "";
-               if (n.nodeType == 1) {
-                  s += "<" + n.nodeName;
-                  for (var i=0; i<n.attributes.length;i++)
-                     s += " " + n.attributes[i].nodeName + "=\"" + (n.attributes[i].nodeValue||"").toString() + "\"";
-                  if (n.firstChild) {
-                     s += ">";
-                     for (var c=n.firstChild; c; c=c.nextSibling)
-                        s += asXml(c);
-                     s += "</"+n.nodeName+">";
-                  }
-                  else
-                     s += "/>";
-               }
-               else if (n.nodeType == 3)
-                  s += n.nodeValue;
-               else if (n.nodeType == 4)
-                  s += "<![CDATA[" + n.nodeValue + "]]>";
-               return s;
-            };
-            for (var c=node.firstChild; c; c=c.nextSibling)
-               s += asXml(c);
-         }
-         return s;
-      },
-      escape: function(txt) {
-         return txt.replace(/[\\]/g, "\\\\")
-                   .replace(/[\"]/g, '\\"')
-                   .replace(/[\n]/g, '\\n')
-                   .replace(/[\r]/g, '\\r');
-      },
-      removeWhite: function(e) {
-         e.normalize();
-         for (var n = e.firstChild; n; ) {
-            if (n.nodeType == 3) {  // text node
-               if (!n.nodeValue.match(/[^ \f\n\r\t\v]/)) { // pure whitespace text node
-                  var nxt = n.nextSibling;
-                  e.removeChild(n);
-                  n = nxt;
-               }
-               else
-                  n = n.nextSibling;
-            }
-            else if (n.nodeType == 1) {  // element node
-               X.removeWhite(n);
-               n = n.nextSibling;
-            }
-            else                      // any other node
-               n = n.nextSibling;
-         }
-         return e;
-      }
+	  toObj: function(xml) {
+		 var o = {};
+		 if (xml.nodeType==1) {   // element node ..
+			if (ignoreAttrib && xml.attributes.length)   // element with attributes  ..
+			   for (var i=0; i<xml.attributes.length; i++)
+				  o["@"+xml.attributes[i].nodeName] = (xml.attributes[i].nodeValue||"").toString();
+			if (xml.firstChild) { // element has child nodes ..
+			   var textChild=0, cdataChild=0, hasElementChild=false;
+			   for (var n=xml.firstChild; n; n=n.nextSibling) {
+				  if (n.nodeType==1) hasElementChild = true;
+				  else if (n.nodeType==3 && n.nodeValue.match(/[^ \f\n\r\t\v]/)) textChild++; // non-whitespace text
+				  else if (n.nodeType==4) cdataChild++; // cdata section node
+			   }
+			   if (hasElementChild) {
+				  if (textChild < 2 && cdataChild < 2) { // structured element with evtl. a single text or/and cdata node ..
+					 X.removeWhite(xml);
+					 for (var n=xml.firstChild; n; n=n.nextSibling) {
+						if (n.nodeType == 3)  // text node
+						   o = X.escape(n.nodeValue);
+						else if (n.nodeType == 4)  // cdata node
+//						   o["#cdata"] = X.escape(n.nodeValue);
+							o = X.escape(n.nodeValue);
+						else if (o[n.nodeName]) {  // multiple occurence of element ..
+						   if (o[n.nodeName] instanceof Array)
+							  o[n.nodeName][o[n.nodeName].length] = X.toObj(n);
+						   else
+							  o[n.nodeName] = [o[n.nodeName], X.toObj(n)];
+						}
+						else  // first occurence of element..
+						   o[n.nodeName] = X.toObj(n);
+					 }
+				  }
+				  else { // mixed content
+					 if (!xml.attributes.length)
+						o = X.escape(X.innerXml(xml));
+					 else
+						o["#text"] = X.escape(X.innerXml(xml));
+				  }
+			   }
+			   else if (textChild) { // pure text
+				  if (!xml.attributes.length)
+					 o = X.escape(X.innerXml(xml));
+				  else
+					 o["#text"] = X.escape(X.innerXml(xml));
+			   }
+			   else if (cdataChild) { // cdata
+				  if (cdataChild > 1)
+					 o = X.escape(X.innerXml(xml));
+				  else
+					 for (var n=xml.firstChild; n; n=n.nextSibling){
+						//o["#cdata"] = X.escape(n.nodeValue);
+						o = X.escape(n.nodeValue);
+				  }
+			   }
+			}
+			if (!xml.attributes.length && !xml.firstChild) o = null;
+		 }
+		 else if (xml.nodeType==9) { // document.node
+			o = X.toObj(xml.documentElement);
+		 }
+		 else
+			alert("unhandled node type: " + xml.nodeType);
+		 return o;
+	  },
+	  toJson: function(o, name, ind) {
+		 var json = name ? ("\""+name+"\"") : "";
+		 if (o instanceof Array) {
+			for (var i=0,n=o.length; i<n; i++)
+			   o[i] = X.toJson(o[i], "", ind+"\t");
+			json += (name?":[":"[") + (o.length > 1 ? ("\n"+ind+"\t"+o.join(",\n"+ind+"\t")+"\n"+ind) : o.join("")) + "]";
+		 }
+		 else if (o == null)
+			json += (name&&":") + "null";
+		 else if (typeof(o) == "object") {
+			var arr = [];
+			for (var m in o)
+			   arr[arr.length] = X.toJson(o[m], m, ind+"\t");
+			json += (name?":{":"{") + (arr.length > 1 ? ("\n"+ind+"\t"+arr.join(",\n"+ind+"\t")+"\n"+ind) : arr.join("")) + "}";
+		 }
+		 else if (typeof(o) == "string")
+			json += (name&&":") + "\"" + o.toString() + "\"";
+		 else
+			json += (name&&":") + o.toString();
+		 return json;
+	  },
+	  innerXml: function(node) {
+		 var s = ""
+		 if ("innerHTML" in node)
+			s = node.innerHTML;
+		 else {
+			var asXml = function(n) {
+			   var s = "";
+			   if (n.nodeType == 1) {
+				  s += "<" + n.nodeName;
+				  for (var i=0; i<n.attributes.length;i++)
+					 s += " " + n.attributes[i].nodeName + "=\"" + (n.attributes[i].nodeValue||"").toString() + "\"";
+				  if (n.firstChild) {
+					 s += ">";
+					 for (var c=n.firstChild; c; c=c.nextSibling)
+						s += asXml(c);
+					 s += "</"+n.nodeName+">";
+				  }
+				  else
+					 s += "/>";
+			   }
+			   else if (n.nodeType == 3)
+				  s += n.nodeValue;
+			   else if (n.nodeType == 4)
+				  s += "<![CDATA[" + n.nodeValue + "]]>";
+			   return s;
+			};
+			for (var c=node.firstChild; c; c=c.nextSibling)
+			   s += asXml(c);
+		 }
+		 return s;
+	  },
+	  escape: function(txt) {
+		 return txt.replace(/[\\]/g, "\\\\")
+				   .replace(/[\"]/g, '\\"')
+				   .replace(/[\n]/g, '\\n')
+				   .replace(/[\r]/g, '\\r');
+	  },
+	  removeWhite: function(e) {
+		 e.normalize();
+		 for (var n = e.firstChild; n; ) {
+			if (n.nodeType == 3) {  // text node
+			   if (!n.nodeValue.match(/[^ \f\n\r\t\v]/)) { // pure whitespace text node
+				  var nxt = n.nextSibling;
+				  e.removeChild(n);
+				  n = nxt;
+			   }
+			   else
+				  n = n.nextSibling;
+			}
+			else if (n.nodeType == 1) {  // element node
+			   X.removeWhite(n);
+			   n = n.nextSibling;
+			}
+			else					  // any other node
+			   n = n.nextSibling;
+		 }
+		 return e;
+	  }
    };
    if (xml.nodeType == 9) // document node
-      xml = xml.documentElement;
+	  xml = xml.documentElement;
 
    var json_obj = X.toObj(X.removeWhite(xml)), json_str;
 
@@ -1432,15 +1432,15 @@ function xml2json(xml, tab, ignoreAttrib) {
  **/
 $.exec_xml = window.exec_xml = function(module, act, params, callback_func, response_tags, callback_func_arg, fo_obj) {
 	var xml_path = request_uri+"index.php"
-    if(!params) params = {};
+	if(!params) params = {};
 
 	// {{{ set parameters
 	if($.isArray(params)) params = arr2obj(params);
 	params['module'] = module;
-	params['act']    = act;
+	params['act']	= act;
 
-    if(typeof(xeVid)!='undefined') params['vid'] = xeVid;
-    if(typeof(response_tags)=="undefined" || response_tags.length<1) response_tags = ['error','message'];
+	if(typeof(xeVid)!='undefined') params['vid'] = xeVid;
+	if(typeof(response_tags)=="undefined" || response_tags.length<1) response_tags = ['error','message'];
 	else {
 		response_tags.push('error', 'message');
 	}
@@ -1449,9 +1449,9 @@ $.exec_xml = window.exec_xml = function(module, act, params, callback_func, resp
 	// use ssl?
 	if ($.isArray(ssl_actions) && params['act'] && $.inArray(params['act'], ssl_actions) >= 0)
 	{
-		var url    = default_url || request_uri;
+		var url	= default_url || request_uri;
 		var port   = window.https_port || 443;
-		var _ul    = $('<a>').attr('href', url)[0];
+		var _ul	= $('<a>').attr('href', url)[0];
 		var target = 'https://' + _ul.hostname.replace(/:\d+$/, '');
 
 		if(port != 443) target += ':'+port;
@@ -1507,8 +1507,8 @@ $.exec_xml = window.exec_xml = function(module, act, params, callback_func, resp
 		}
 
 		$.each(response_tags, function(key, val){ tags[val] = true; });
-        tags["redirect_url"] = true;
-        tags["act"] = true;
+		tags["redirect_url"] = true;
+		tags["act"] = true;
 		$.each(resp_obj, function(key, val){ if(tags[key]) ret[key] = val; });
 
 		if(ret['error'] != 0) {
@@ -1532,14 +1532,14 @@ $.exec_xml = window.exec_xml = function(module, act, params, callback_func, resp
 	// 모든 xml데이터는 POST방식으로 전송. try-catch문으로 오류 발생시 대처
 	try {
 		$.ajax({
-			url         : xml_path,
-			type        : 'POST',
-			dataType    : 'xml',
-			data        : xml.join('\n'),
+			url		 : xml_path,
+			type		: 'POST',
+			dataType	: 'xml',
+			data		: xml.join('\n'),
 			contentType : 'text/plain',
 			beforeSend  : function(xhr){ _xhr = xhr; },
-			success     : onsuccess,
-			error       : function(xhr, textStatus) {
+			success	 : onsuccess,
+			error	   : function(xhr, textStatus) {
 				waiting_obj.css('display', 'none');
 
 				var msg = '';
@@ -1585,15 +1585,15 @@ function send_by_form(url, params) {
 
 	$('#'+form_id).remove();
 	var form = $('<form id="%id%"></form>'.replace(/%id%/g, form_id)).attr({
-		'id'     : form_id,
+		'id'	 : form_id,
 		'method' : 'post',
 		'action' : url,
 		'target' : frame_id
 	});
 
 	params['xeVirtualRequestMethod'] = 'xml';
-	params['xeRequestURI']           = location.href.replace(/#(.*)$/i,'');
-	params['xeVirtualRequestUrl']    = request_uri;
+	params['xeRequestURI']		   = location.href.replace(/#(.*)$/i,'');
+	params['xeVirtualRequestUrl']	= request_uri;
 
 	$.each(params, function(key, value){
 		$('<input type="hidden">').attr('name', key).attr('value', value).appendTo(form);
@@ -1614,9 +1614,9 @@ function arr2obj(arr) {
  * @brief exec_json (exec_xml와 같은 용도)
  **/
 $.exec_json = function(action,data,func,f_error){
-    if(typeof(data) == 'undefined') data = {};
-    action = action.split(".");
-    if(action.length == 2){
+	if(typeof(data) == 'undefined') data = {};
+	action = action.split(".");
+	if(action.length == 2){
 		// The cover can be disturbing if it consistently blinks (because ajax call usually takes very short time). So make it invisible for the 1st 0.5 sec and then make it visible.
 		var timeoutId = $(".wfsr").data('timeout_id');
 		if(timeoutId) clearTimeout(timeoutId);
@@ -1624,19 +1624,19 @@ $.exec_json = function(action,data,func,f_error){
 		$(".wfsr").data('timeout_id', setTimeout(function(){
 			$(".wfsr").css('opacity', '');
 		}, 1000));
-        if(show_waiting_message) $(".wfsr").html(waiting_message).show();
+		if(show_waiting_message) $(".wfsr").html(waiting_message).show();
 
-        $.extend(data,{module:action[0],act:action[1]});
-        if(typeof(xeVid)!='undefined') $.extend(data,{vid:xeVid});
-        $.ajax({
-            type:"POST"
-            ,dataType:"json"
-            ,url:request_uri
-            ,contentType:"application/json"
-            ,data:$.param(data)
-            ,success : function(data){
-                $(".wfsr").hide().trigger('cancel_confirm');
-                if(data.error != 0 && data.error > -1000){
+		$.extend(data,{module:action[0],act:action[1]});
+		if(typeof(xeVid)!='undefined') $.extend(data,{vid:xeVid});
+		$.ajax({
+			type:"POST"
+			,dataType:"json"
+			,url:request_uri
+			,contentType:"application/json"
+			,data:$.param(data)
+			,success : function(data){
+				$(".wfsr").hide().trigger('cancel_confirm');
+				if(data.error != 0 && data.error > -1000){
 					if(data.error == -1 && data.message == 'msg_is_not_administrator'){
 						alert('You are not logged in as an administrator');
 	//					window.location.reload();
@@ -1648,40 +1648,40 @@ $.exec_json = function(action,data,func,f_error){
 						return;
 					}
 				}
-                if($.isFunction(func)) func(data);
-            }
-        });
-    }
+				if($.isFunction(func)) func(data);
+			}
+		});
+	}
 };
 
 $.fn.exec_html = function(action,data,type,func,args){
-    if(typeof(data) == 'undefined') data = {};
-    if(!$.inArray(type, ['html','append','prepend'])) type = 'html';
+	if(typeof(data) == 'undefined') data = {};
+	if(!$.inArray(type, ['html','append','prepend'])) type = 'html';
 
-    var self = $(this);
-    action = action.split(".");
-    if(action.length == 2){
+	var self = $(this);
+	action = action.split(".");
+	if(action.length == 2){
 		var timeoutId = $(".wfsr").data('timeout_id');
 		if(timeoutId) clearTimeout(timeoutId);
 		$(".wfsr").css('opacity', 0.0);
 		$(".wfsr").data('timeout_id', setTimeout(function(){
 			$(".wfsr").css('opacity', '');
 		}, 1000));
-        if(show_waiting_message) $(".wfsr").html(waiting_message).show();
+		if(show_waiting_message) $(".wfsr").html(waiting_message).show();
 
-        $.extend(data,{module:action[0],act:action[1]});
-        $.ajax({
-            type:"POST"
-            ,dataType:"html"
-            ,url:request_uri
-            ,data:$.param(data)
-            ,success : function(html){
-                $(".wfsr").hide().trigger('cancel_confirm');
-                self[type](html);
-                if($.isFunction(func)) func(args);
-            }
-        });
-    }
+		$.extend(data,{module:action[0],act:action[1]});
+		$.ajax({
+			type:"POST"
+			,dataType:"html"
+			,url:request_uri
+			,data:$.param(data)
+			,success : function(html){
+				$(".wfsr").hide().trigger('cancel_confirm');
+				self[type](html);
+				if($.isFunction(func)) func(args);
+			}
+		});
+	}
 };
 
 function beforeUnloadHandler(){
@@ -1710,10 +1710,10 @@ $(function($){
 (function($){
 
 var messages  = [];
-var rules     = [];
+var rules	 = [];
 var filters   = {};
 var callbacks = [];
-var extras    = {};
+var extras	= {};
 
 var Validator = xe.createApp('Validator', {
 	init : function() {
@@ -2120,3 +2120,14 @@ function legacy_filter(filter_name, form, module, act, callback, responses, conf
 
 	return false;
 }
+
+/* jQuery compatibility */
+jQuery.browser = 
+{
+	version: 1.7976931348623157E+10308, /* infinity */
+	msie: (navigator.appName == 'Microsoft Internet Explorer'),
+	opera:(navigator.userAgent.indexOf("Opera") > -1),
+	mozilla:(navigator.userAgent.indexOf("Firefox") > -1),
+	firefox:(navigator.userAgent.indexOf("Firefox") > -1),
+	safari:(navigator.userAgent.indexOf("Safari") > -1)
+};

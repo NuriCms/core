@@ -82,13 +82,13 @@ class FileHandler
 			{
 				if($type == 'force')
 				{
-					@unlink($target_dir . $file);
+					unlink($target_dir . $file);
 				}
 				else
 				{
 					if(!file_exists($target_dir . $file))
 					{
-						@copy($source_dir . $file, $target_dir . $file);
+						copy($source_dir . $file, $target_dir . $file);
 					}
 				}
 			}
@@ -117,10 +117,10 @@ class FileHandler
 
 		if($force == 'Y')
 		{
-			@unlink($target_dir . '/' . $target);
+			unlink($target_dir . '/' . $target);
 		}
 
-		@copy($source, $target_dir . '/' . $target);
+		copy($source, $target_dir . '/' . $target);
 	}
 
 	/**
@@ -133,7 +133,7 @@ class FileHandler
 	{
 		$file_name = FileHandler::getRealPath($file_name);
 
-		if(!file_exists($file_name))
+		if(!is_readable($file_name))
 		{
 			return;
 		}
@@ -144,7 +144,7 @@ class FileHandler
 			return;
 		}
 
-		return @file_get_contents($file_name);
+		return file_get_contents($file_name);
 	}
 
 	/**
@@ -176,8 +176,8 @@ class FileHandler
 			$flags = 0;
 		}
 
-		@file_put_contents($file_name, $buff, $flags);
-		@chmod($file_name, 0644);
+		file_put_contents($file_name, $buff, $flags);
+		chmod($file_name, 0644);
 	}
 
 	/**
@@ -189,7 +189,11 @@ class FileHandler
 	function removeFile($file_name)
 	{
 		$file_name = FileHandler::getRealPath($file_name);
-		return (file_exists($file_name) && @unlink($file_name));
+		if(file_exists($file_name))
+		{
+			return unlink($file_name);
+		}
+		else return FALSE;
 	}
 
 	/**
@@ -205,7 +209,7 @@ class FileHandler
 	{
 		$source = FileHandler::getRealPath($source);
 		$target = FileHandler::getRealPath($target);
-		return @rename($source, $target);
+		return rename($source, $target);
 	}
 
 	/**
@@ -380,8 +384,8 @@ class FileHandler
 				}
 				else
 				{
-					@mkdir($path, 0755);
-					@chmod($path, 0755);
+					mkdir($path, 0755);
+					chmod($path, 0755);
 				}
 			}
 		}
@@ -848,7 +852,7 @@ class FileHandler
 				{
 					return FALSE;
 				}
-				$source = @imagecreatefromgif($source_file);
+				$source = imagecreatefromgif($source_file);
 				break;
 			// jpg
 			case 'jpeg' :
@@ -857,7 +861,7 @@ class FileHandler
 				{
 					return FALSE;
 				}
-				$source = @imagecreatefromjpeg($source_file);
+				$source = imagecreatefromjpeg($source_file);
 				break;
 			// png
 			case 'png' :
@@ -865,7 +869,7 @@ class FileHandler
 				{
 					return FALSE;
 				}
-				$source = @imagecreatefrompng($source_file);
+				$source = imagecreatefrompng($source_file);
 				break;
 			// bmp
 			case 'wbmp' :
@@ -874,7 +878,7 @@ class FileHandler
 				{
 					return FALSE;
 				}
-				$source = @imagecreatefromwbmp($source_file);
+				$source = imagecreatefromwbmp($source_file);
 				break;
 			default :
 				return;
@@ -960,7 +964,7 @@ class FileHandler
 		{
 			return FALSE;
 		}
-		@chmod($target_file, 0644);
+		chmod($target_file, 0644);
 
 		return TRUE;
 	}
@@ -1074,6 +1078,7 @@ class FileHandler
 	 */
 	function hasContent($filename)
 	{
+		$filename = FileHandler::getRealPath($filename);
 		return (is_readable($filename) && !!filesize($filename));
 	}
 

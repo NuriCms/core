@@ -187,7 +187,6 @@ class trashAdminController extends trash
 	 */
 	function procTrashAdminGetList()
 	{
-		if(!Context::get('is_logged')) return new Object(-1,'msg_not_permitted');
 		$trashSrls = Context::get('trash_srls');
 		if($trashSrls) $trashSrlList = explode(',', $trashSrls);
 

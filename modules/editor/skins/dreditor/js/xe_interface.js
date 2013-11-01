@@ -95,7 +95,7 @@ window.onbeforeunload = function(e) {
 	});
 
 	if (msg) {
-		if ($.browser.msie) window.event.returnValue = msg;
+		if (navigator.appName == 'Microsoft Internet Explorer') window.event.returnValue = msg;
 		else return msg;
 	}
 };

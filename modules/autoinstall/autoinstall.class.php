@@ -90,6 +90,7 @@ class autoinstall extends ModuleObject
 	{
 		$oModuleController = getController('module');
 
+		$config = new stdClass();
 		$config->downloadServer = _XE_DOWNLOAD_SERVER_;
 		$oModuleController->insertModuleConfig('autoinstall', $config);
 	}

@@ -137,12 +137,12 @@ class menuAdminController extends menu
 			return new Object(-1, 'msg_adminmenu_cannot_delete');
 
 		// get menu properies with child menu
-		$phpFile = sprintf("./files/cache/menu/%s.php", $menu_srl);
+		$phpFile = FileHandler::getRealPath(sprintf("./files/cache/menu/%s.php", $menu_srl));
 		$originMenu = NULL;
 
-		if(is_readable(FileHandler::getRealPath($phpFile)))
+		if(is_readable($phpFile))
 		{
-			@include(FileHandler::getRealPath($phpFile));
+			include($phpFile);
 		}
 
 		// check home menu in originMenu
@@ -737,12 +737,12 @@ class menuAdminController extends menu
 		if($itemInfo->parent_srl) $parent_srl = $itemInfo->parent_srl;
 
 		// get menu properies with child menu
-		$phpFile = sprintf("./files/cache/menu/%s.php", $args->menu_srl);
+		$phpFile = FileHandler::getRealPath(sprintf("./files/cache/menu/%s.php", $args->menu_srl));
 		$originMenu = NULL;
 
-		if(is_readable(FileHandler::getRealPath($phpFile)))
+		if(is_readable($phpFile))
 		{
-			@include(FileHandler::getRealPath($phpFile));
+			include($phpFile);
 
 			if(is_array($menu->list))
 			{
@@ -889,12 +889,12 @@ class menuAdminController extends menu
 		}
 
 		// get menu properies with child menu
-		$phpFile = sprintf("./files/cache/menu/%s.php", $originalItemInfo->menu_srl);
+		$phpFile = FileHandler::getRealPath(sprintf("./files/cache/menu/%s.php", $originalItemInfo->menu_srl));
 		$originMenu = NULL;
 
-		if(is_readable(FileHandler::getRealPath($phpFile)))
+		if(is_readable($phpFile))
 		{
-			@include(FileHandler::getRealPath($phpFile));
+			include($phpFile);
 
 			if(is_array($menu->list))
 			{
@@ -988,12 +988,12 @@ class menuAdminController extends menu
 		$menuSrl = $itemInfo->menu_srl;
 
 		// get menu properies with child menu
-		$phpFile = sprintf("./files/cache/menu/%s.php", $menuSrl);
+		$phpFile = FileHandler::getRealPath(sprintf("./files/cache/menu/%s.php", $menuSrl));
 		$originMenu = NULL;
 
-		if(is_readable(FileHandler::getRealPath($phpFile)))
+		if(is_readable($phpFile))
 		{
-			@include(FileHandler::getRealPath($phpFile));
+			include($phpFile);
 
 			if(is_array($menu->list))
 			{
@@ -1304,9 +1304,9 @@ class menuAdminController extends menu
 				// change home menu cache file
 				if($url == $this->homeModuleMid)
 				{
-					if(file_exists($this->homeMenuCacheFile))
+					if(is_readable($this->homeMenuCacheFile))
 					{
-						@include($this->homeMenuCacheFile);
+						include($this->homeMenuCacheFile);
 					}
 					if(!$homeMenuSrl || $homeMenuSrl != $menu_srl)
 					{

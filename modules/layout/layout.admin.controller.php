@@ -356,7 +356,7 @@ class layoutAdminController extends layout
 		$layout_srl = Context::get('layout_srl');
 		$code = Context::get('code');
 		$code_css   = Context::get('code_css');
-		$is_post    = ($_SERVER['REQUEST_METHOD'] == 'POST');
+		$is_post	= ($_SERVER['REQUEST_METHOD'] == 'POST');
 
 		if(!$layout_srl || !$code || !$is_post)
 		{
@@ -668,7 +668,7 @@ class layoutAdminController extends layout
 		header("Pragma: ");
 		header("Content-Type: application/x-compressed");
 		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-		//            header("Content-Length: " .strlen($stream)); ?? why??
+		//			header("Content-Length: " .strlen($stream)); ?? why??
 		header('Content-Disposition: attachment; filename="'. $filename .'"');
 		header("Content-Transfer-Encoding: binary\n");
 		echo $stream;

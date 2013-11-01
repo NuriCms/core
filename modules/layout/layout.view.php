@@ -162,9 +162,9 @@ class layoutView extends layout
 								$oMenuAdminController = getAdminController('menu');
 								$homeMenuCacheFile = $oMenuAdminController->getHomeMenuCacheFile();
 
-								if(file_exists($homeMenuCacheFile))
+								if(is_readable($homeMenuCacheFile))
 								{
-									@include($homeMenuCacheFile);
+									include($homeMenuCacheFile);
 								}
 
 								if(!$menu->menu_srl)
@@ -179,9 +179,9 @@ class layoutView extends layout
 									$menu->php_file = str_replace($menu->menu_srl, $homeMenuSrl, $menu->php_file);
 								}
 							}
-							if(file_exists($menu->php_file))
+							if(is_readable($menu->php_file))
 							{
-								@include($menu->php_file);
+								include($menu->php_file);
 							}
 							Context::set($menu_id, $menu);
 						}
@@ -346,7 +346,7 @@ class layoutView extends layout
 		{
 			foreach($layout_info->menu as $menu_id => $menu)
 			{
-				if(file_exists($menu->php_file)) @include($menu->php_file);
+				if(is_readable($menu->php_file)) include($menu->php_file);
 				Context::set($menu_id, $menu);
 			}
 		}

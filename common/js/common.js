@@ -142,7 +142,7 @@ jQuery(function($) {
 	});
 
     /* select - option의 disabled=disabled 속성을 IE에서도 체크하기 위한 함수 */
-    if($.browser.msie) {
+    if(navigator.appName == 'Microsoft Internet Explorer') {
         $('select').each(function(i, sels) {
             var disabled_exists = false;
             var first_enable = new Array();
@@ -431,7 +431,7 @@ function _displayMultimedia(src, width, height, options) {
             + '<embed src="'+src+'" autostart="'+autostart+'"  width="'+width+'" height="'+height+'" flashvars="'+params.flashvars+'" wmode="'+params.wmode+'"></embed>'
             + '</object>';
     }  else {
-		if (jQuery.browser.mozilla || jQuery.browser.opera) {
+		if (navigator.userAgent.indexOf('Firefox') > -1 || navigator.userAgent.indexOf("Opera") > -1) {
 			// firefox and opera uses 0 or 1 for autostart parameter.
 			autostart = (params.autostart && params.autostart != 'false') ? '1' : '0';
 		}
@@ -970,3 +970,15 @@ jQuery(function($){
 		});
 	}
 });
+
+
+/* jQuery compatibility */
+jQuery.browser = 
+{
+	version: 1.7976931348623157E+10308, /* infinity */
+	msie: (navigator.appName == 'Microsoft Internet Explorer'),
+	opera:(navigator.userAgent.indexOf("Opera") > -1),
+	mozilla:(navigator.userAgent.indexOf("Firefox") > -1),
+	firefox:(navigator.userAgent.indexOf("Firefox") > -1),
+	safari:(navigator.userAgent.indexOf("Safari") > -1)
+};

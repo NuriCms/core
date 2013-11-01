@@ -161,7 +161,7 @@ body>.x,
 }
 /* Custom Styles */
 .x .section{margin:20px 0 40px 0}
-.x .section>h1{position:relative;border-bottom:1px solid #ddd}
+.x .section>h1{position:relative;border-bottom:1px solid #ddd;cursor:pointer}
 .x .section>h1>.snToggle{position:absolute;bottom:0;right:0;width:32px;height:32px;opacity:.5;filter:alpha(opacity=50)}
 .x .section>h1>.snToggle.x_icon-chevron-up{background-position:-279px -112px}
 .x .section>h1>.snToggle.x_icon-chevron-down{background-position:-303px -111px}

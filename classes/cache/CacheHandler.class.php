@@ -215,7 +215,7 @@ class CacheHandler extends Handler
 	 * Function used for generating keys for similar objects.
 	 *
 	 * Ex: 1:document:123
-	 *     1:document:777
+	 *	 1:document:777
 	 *
 	 * This allows easily removing all object of type "document"
 	 * from cache by simply invalidating the group key.

@@ -822,7 +822,7 @@ function onSiteMapReceived(htData){
 				}
 			}
 
-        })
+		})
 		.bind("rename.jstree", function(event, data){
 			$("#siteMapTree").removeClass("_node_renaming");
 		})
@@ -2035,9 +2035,9 @@ jQuery(function($){
 		}
 
 		/*
-        [normal_btn] =>
-        [hover_btn] =>
-        [active_btn] =>
+		[normal_btn] =>
+		[hover_btn] =>
+		[active_btn] =>
 		*/
 	}
 	/*
@@ -3945,9 +3945,9 @@ function getParameterByName(name){
   var regex = new RegExp(regexS);
   var results = regex.exec(window.location.search);
   if(results == null)
-    return "";
+	return "";
   else
-    return decodeURIComponent(results[1].replace(/\+/g, " "));
+	return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
 function formatUpdatedDateWithTime(sDate){
@@ -3993,40 +3993,40 @@ top.fullSetupWinLoaded = function(){
 
 
 jQuery.extend({
-    stringify  : function stringify(obj) {
-        if ("JSON" in window) {
-            return JSON.stringify(obj);
-        }
+	stringify  : function stringify(obj) {
+		if ("JSON" in window) {
+			return JSON.stringify(obj);
+		}
 
-        var t = typeof (obj);
-        if (t != "object" || obj === null) {
-            // simple data type
-            if (t == "string") obj = '"' + obj + '"';
+		var t = typeof (obj);
+		if (t != "object" || obj === null) {
+			// simple data type
+			if (t == "string") obj = '"' + obj + '"';
 
-            return String(obj);
-        } else {
-            // recurse array or object
-            var n, v, json = [], arr = (obj && obj.constructor == Array);
+			return String(obj);
+		} else {
+			// recurse array or object
+			var n, v, json = [], arr = (obj && obj.constructor == Array);
 
-            for (n in obj) {
-                v = obj[n];
-                t = typeof(v);
-                if (obj.hasOwnProperty(n)) {
-                    if (t == "string") {
-                        v = '"' + v + '"';
-                    } else if (t == "object" && v !== null){
-                        v = jQuery.stringify(v);
-                    }
+			for (n in obj) {
+				v = obj[n];
+				t = typeof(v);
+				if (obj.hasOwnProperty(n)) {
+					if (t == "string") {
+						v = '"' + v + '"';
+					} else if (t == "object" && v !== null){
+						v = jQuery.stringify(v);
+					}
 
-                    json.push((arr ? "" : '"' + n + '":') + String(v));
-                }
-            }
+					json.push((arr ? "" : '"' + n + '":') + String(v));
+				}
+			}
 
-            return (arr ? "[" : "{" )
+			return (arr ? "[" : "{" )
 				+ String(json)
 				+ (arr ? "]" : "}" );
-        }
-    }
+		}
+	}
 });
 //]]>
 </script>

@@ -727,7 +727,7 @@ class documentModel extends document
 		$list_order = array();
 		foreach($list as $key => $val)
 		{
-			$obj = null;
+			$obj = new stdClass();
 			$obj->mid = $val['mid'];
 			$obj->module_srl = $val['module_srl'];
 			$obj->category_srl = $val['category_srl'];
@@ -904,6 +904,7 @@ class documentModel extends document
 		{
 			$oModuleModel = &getModel('module');
 			$config = $oModuleModel->getModuleConfig('document');
+			if(!is_object($config)) $config = new stdClass();
 			if(!$config->thumbnail_type) $config->thumbnail_type = 'crop';
 			$GLOBALS['__document_config__'] = $config;
 		}
