@@ -1,7 +1,7 @@
 ﻿/*!
  * axisJ Javascript Library Version 1.0
  * http://axisJ.com
- * 
+ *
  * 아래 소스의 라이선스는 axisJ.com 에서 확인 하실 수 있습니다.
  * http://axisJ.com/license
  * axisJ를 사용하시려면 라이선스 페이지를 확인 및 숙지 후 사용 하시기 바람니다. 무단 사용시 예상치 못한 피해가 발생 하실 수 있습니다.
@@ -1041,7 +1041,7 @@ var AXUtil = {
 		pageHostName = window.location.hostname;
 
 		AXparam = url_param.replace(pageProtocol + "//", "");
-		if (param){		
+		if (param){
 			AXparam = AXparam.replace(pageHostName + pathName + "?" + param , "");
 		}else{
 			AXparam = AXparam.replace(pageHostName + pathName, "");
@@ -1176,7 +1176,7 @@ var AXJ = Class.create({
 			}
 		} else if (document.selection) {  // IE?
 			document.selection.empty();
-		}	
+		}
 	}
 });
 /* ********************************************** AXJ ** */
@@ -1198,7 +1198,7 @@ var AXReqQue = Class.create({
 		try {
 			this.start();
 		} catch (e) {
-			//AXUtil.alert(e);	
+			//AXUtil.alert(e);
 		}
 	},
 	start: function () {
@@ -1650,7 +1650,7 @@ var AXScroll = Class.create(AXJ, {
 			po.push("<div class=\"scrollBar\" id=\"" + config.targetID + "_AX_scrollBar\"></div>");
 			this.scrollTargetID.append(po.join(''));
 			this.scroll = true;
-			
+
 			this.scrollTrack = jQuery("#" + config.targetID + "_AX_scrollTrack");
 			this.scrollBar = jQuery("#" + config.targetID + "_AX_scrollBar");
 		}
@@ -1785,7 +1785,7 @@ var AXScroll = Class.create(AXJ, {
 		this.Cheight = Cheight;
 		this.Ch = Ch;
 		this.STh = STh;
-		
+
 		if (CTheight < Cheight) {
 
 			this.scrollBarMove = true;
@@ -1838,7 +1838,7 @@ var AXScroll = Class.create(AXJ, {
 		var event = window.event || e;
 		var config = this.config;
 		if (this.scrollBarMove) {
-			
+
 			var touch = event.touches[0];
 			var tpos = this.scrollBarAttr.trackPos;
 			if (this.config.touchDirection) {
@@ -2004,7 +2004,7 @@ var AXScroll = Class.create(AXJ, {
 			}
 		} else {
 			SBy = SBy == 2 ? SBy = 0 : SBy = SBy - 2;
-			//trace({SBy:SBy, Ch:Ch, STh:STh});			
+			//trace({SBy:SBy, Ch:Ch, STh:STh});
 			var Ctop = SBy * Ch / STh;
 		}
 		this.scrollScrollID.css({ top: -(Ctop.round()) });
@@ -2572,7 +2572,7 @@ var AXContextMenuClass = Class.create(AXJ, {
 		var getSubMenu = this.getSubMenu.bind(this);
 		var subMenuID = parentID + "_AX_subMenu";
 
-		//trace(subMenu.length);		
+		//trace(subMenu.length);
 		var po = [];
 		po.push("<div id=\"" + subMenuID + "\" class=\"" + theme + "\" style=\"width:" + width + "px;left:" + (width.number() - 15) + "px;display:none;\">");
 		jQuery.each(subMenu, function (idx, menu) {
@@ -2685,7 +2685,7 @@ var AXContextMenuClass = Class.create(AXJ, {
 		if (clienWidth > pBox.width) pBox.width = clienWidth;
 		if (clientHeight > pBox.height) pBox.height = clientHeight;
 		var _box = { width: jQuery("#" + objID).outerWidth(), height: jQuery("#" + objID).outerHeight() };
-		// -- 부모박스 정보와 박스 정보		
+		// -- 부모박스 정보와 박스 정보
 
 		if ((_box.height.number() + css.top.number()) > pBox.height) {
 			css.top -= ((_box.height.number() + css.top.number()) - pBox.height) + 5;
@@ -2727,10 +2727,10 @@ var AXContextMenuClass = Class.create(AXJ, {
 		var contextMenuItemDownBind = function (event) {
 			contextMenuItemDown(event, objSeq, objID);
 		};
-		
+
 		jQuery(document).bind("mousedown.AXContenxtMenu", contextMenuItemDownBind);
 		jQuery(document).bind("keydown.AXContenxtMenu", contextMenuItemDownBind);
-		
+
 		jQuery(document).find("iframe").each(function () {
 			jQuery(window[this.name].document).bind("mousedown.AXContenxtMenu", contextMenuItemDownBind);
 			jQuery(window[this.name].document).bind("keydown.AXContenxtMenu", contextMenuItemDownBind);
@@ -2801,7 +2801,7 @@ var AXContextMenuClass = Class.create(AXJ, {
 			evt: eventTarget, evtIDs: eid,
 			find: function (evt, evtIDs) { return (jQuery(evt).hasClass("contextMenuItem")) ? true : false; }
 		});
-		// event target search ------------------------    	
+		// event target search ------------------------
 		if (myTarget) {
 			var poi = myTarget.id.split(/_AX_/g);
 			var depth = poi[poi.length - 2];
@@ -2818,7 +2818,7 @@ var AXContextMenuClass = Class.create(AXJ, {
 				if (clienWidth > pBox.width) pBox.width = clienWidth;
 				if (clientHeight > pBox.height) pBox.height = clientHeight;
 				var _box = { width: jQuery("#" + myTarget.id + "_AX_subMenu").outerWidth(), height: jQuery("#" + myTarget.id + "_AX_subMenu").outerHeight() };
-				// -- 부모박스 정보와 박스 정보		
+				// -- 부모박스 정보와 박스 정보
 
 				var subMenuTop = jQuery("#" + myTarget.id).position().top;
 
@@ -3070,7 +3070,7 @@ var AXPopOverClass = Class.create(AXContextMenuClass, {
 		if (clienWidth > pBox.width) pBox.width = clienWidth;
 		if (clientHeight > pBox.height) pBox.height = clientHeight;
 		var _box = { width: jQuery("#" + objID).outerWidth(), height: jQuery("#" + objID).outerHeight() };
-		// -- 부모박스 정보와 박스 정보		
+		// -- 부모박스 정보와 박스 정보
 		var openTB = "";
 		if (direction == "top") {
 			openTB = "top";
@@ -3122,7 +3122,7 @@ var AXPopOverClass = Class.create(AXContextMenuClass, {
 			evt: eventTarget, evtIDs: eid,
 			find: function (evt, evtIDs) { return (jQuery(evt).hasClass("contextMenuItem")) ? true : false; }
 		});
-		// event target search ------------------------    	
+		// event target search ------------------------
 		if (myTarget) {
 			var poi = myTarget.id.split(/_AX_/g);
 			var depth = poi[poi.length - 2];

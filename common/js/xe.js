@@ -2122,7 +2122,7 @@ function legacy_filter(filter_name, form, module, act, callback, responses, conf
 }
 
 /* jQuery compatibility */
-jQuery.browser = 
+jQuery.browser =
 {
 	version: 1.7976931348623157E+10308, /* infinity */
 	msie: (navigator.appName == 'Microsoft Internet Explorer'),

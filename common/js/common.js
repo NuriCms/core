@@ -973,7 +973,7 @@ jQuery(function($){
 
 
 /* jQuery compatibility */
-jQuery.browser = 
+jQuery.browser =
 {
 	version: 1.7976931348623157E+10308, /* infinity */
 	msie: (navigator.appName == 'Microsoft Internet Explorer'),
