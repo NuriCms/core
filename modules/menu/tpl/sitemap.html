@@ -2340,7 +2340,7 @@ jQuery(function($){
 
 			for(var ii=0, nLen2=$groups.length; ii<nLen2; ii++){
 				$chkbox = $($groups[ii]);
-				if($chkbox.attr('checked')){
+				if($chkbox.prop('checked')){
 					vValue.push($chkbox.val());
 				}
 			}
