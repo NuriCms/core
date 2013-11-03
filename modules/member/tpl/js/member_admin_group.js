@@ -10,7 +10,7 @@ jQuery(function ($){
 
 	$('input:radio[name=defaultGroup]').click(function(){
 		$('._deleteTD').show();
-		if ($(this).attr('checked')){
+		if ($(this).prop('checked')){
 			$(this).closest('tr').find('._deleteTD').hide();
 		}
 	});

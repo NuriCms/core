@@ -79,7 +79,7 @@ var FaceOff = {
         else $('#useFooter').attr('checked',false);
 
         $('#useHeader').click(function(event) {
-            if($('#useHeader').attr('checked')) {
+            if($('#useHeader').prop('checked')) {
                 $('#header').css('display','block');
                 $('#useHeader').attr('checked', true);
             } else {
@@ -89,7 +89,7 @@ var FaceOff = {
         });
 
         $('#useFooter').click(function(event) {
-            if($('#useFooter').attr('checked')) $('#footer').css('display','block');
+            if($('#useFooter').prop('checked')) $('#footer').css('display','block');
             else $('#footer').css('display','none');
         });
 

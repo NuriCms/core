@@ -1671,7 +1671,7 @@ jQuery(function($){
 		$("#siteMapTree").jstree("deselect_all");
 	});
 	$('#properties ._chkUseAsHome').click(function(){
-		if($(this).attr('checked')){
+		if($(this).prop('checked')){
 			var params = {
 				menu_item_srl : $._xeAdminVar.sSelectedMenuSrl,
 				index_module_srl : htNodeInfo[$._xeAdminVar.sSelectedMenuSrl].module_srl

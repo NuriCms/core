@@ -65,7 +65,7 @@ if(jQuery) jQuery.noConflict();
 
 			if(options.checked == 'toggle') {
                 obj.each(function() {
-                    $(this).attr('checked', ($(this).attr('checked')) ? false : true);
+                    $(this).attr('checked', ($(this).prop('checked')) ? false : true);
                 });
             } else {
                 (options.doClick == true) ? obj.click() : obj.attr('checked', options.checked);
