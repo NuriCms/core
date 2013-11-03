@@ -32,9 +32,6 @@ class MysqlInsertTest extends MysqlTest
 		$this->_test($xml_file, $argsString, $expected);
 	}
 
-
-}
-
 /* End of file MysqlInsertTest.php */
 /* Location: ./tests/classes/db/db/xml_query/mysql/MysqlInsertTest.php */
 	/**
