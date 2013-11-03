@@ -9,8 +9,8 @@
  * SWFUpload 2 is (c) 2007-2008 Jake Roberts and is released under the MIT License:
  * http://www.opensource.org/licenses/mit-license.php
  *
- * SWFObject v2.2 <http://code.google.com/p/swfobject/> 
- *	is released under the MIT License <http://www.opensource.org/licenses/mit-license.php> 
+ * SWFObject v2.2 <http://code.google.com/p/swfobject/>
+ *	is released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
  */
 
 /* ******************* */
@@ -118,14 +118,14 @@ SWFUpload.completeURL = function (url) {
 		if (typeof(url) !== "string" || url.match(/^https?:\/\//i) || url.match(/^\//) || url === "") {
 			return url;
 		}
-		
+
 		indexSlash = window.location.pathname.lastIndexOf("/");
 		if (indexSlash <= 0) {
 			path = "/";
 		} else {
 			path = window.location.pathname.substr(0, indexSlash) + "/";
 		}
-		
+
 		return path + url;
 	} catch (ex) {
 		return url;
@@ -151,7 +151,7 @@ SWFUpload.prototype.initSettings = function (userSettings) {
 			this.settings[settingName] = defaultValue;
 		}
 	};
-	
+
 	// Upload backend settings
 	this.ensureDefault("upload_url", "");
 	this.ensureDefault("preserve_relative_urls", false);
@@ -161,7 +161,7 @@ SWFUpload.prototype.initSettings = function (userSettings) {
 	this.ensureDefault("requeue_on_error", false);
 	this.ensureDefault("http_success", []);
 	this.ensureDefault("assume_success_timeout", 0);
-	
+
 	// File Settings
 	this.ensureDefault("file_types", "*.*");
 	this.ensureDefault("file_types_description", "All Files");
@@ -173,7 +173,7 @@ SWFUpload.prototype.initSettings = function (userSettings) {
 	this.ensureDefault("flash_url", "swfupload.swf");
 	this.ensureDefault("flash9_url", "swfupload_fp9.swf");
 	this.ensureDefault("prevent_swf_caching", true);
-	
+
 	// Button Settings
 	this.ensureDefault("button_image_url", "");
 	this.ensureDefault("button_width", 1);
@@ -188,11 +188,11 @@ SWFUpload.prototype.initSettings = function (userSettings) {
 	this.ensureDefault("button_placeholder", null);
 	this.ensureDefault("button_cursor", SWFUpload.CURSOR.ARROW);
 	this.ensureDefault("button_window_mode", SWFUpload.WINDOW_MODE.WINDOW);
-	
+
 	// Debug Settings
 	this.ensureDefault("debug", false);
 	this.settings.debug_enabled = this.settings.debug;	// Here to maintain v2 API
-	
+
 	// Event Handlers
 	this.settings.return_upload_start_handler = this.returnUploadStart;
 	this.ensureDefault("swfupload_preload_handler", null);
@@ -202,36 +202,36 @@ SWFUpload.prototype.initSettings = function (userSettings) {
 	this.ensureDefault("file_queued_handler", null);
 	this.ensureDefault("file_queue_error_handler", null);
 	this.ensureDefault("file_dialog_complete_handler", null);
-	
+
 	this.ensureDefault("upload_resize_start_handler", null);
 	this.ensureDefault("upload_start_handler", null);
 	this.ensureDefault("upload_progress_handler", null);
 	this.ensureDefault("upload_error_handler", null);
 	this.ensureDefault("upload_success_handler", null);
 	this.ensureDefault("upload_complete_handler", null);
-	
+
 	this.ensureDefault("mouse_click_handler", null);
 	this.ensureDefault("mouse_out_handler", null);
 	this.ensureDefault("mouse_over_handler", null);
-	
+
 	this.ensureDefault("debug_handler", this.debugMessage);
 
 	this.ensureDefault("custom_settings", {});
 
 	// Other settings
 	this.customSettings = this.settings.custom_settings;
-	
+
 	// Update the flash url if needed
 	if (!!this.settings.prevent_swf_caching) {
 		this.settings.flash_url = this.settings.flash_url + (this.settings.flash_url.indexOf("?") < 0 ? "?" : "&") + "preventswfcaching=" + new Date().getTime();
 		this.settings.flash9_url = this.settings.flash9_url + (this.settings.flash9_url.indexOf("?") < 0 ? "?" : "&") + "preventswfcaching=" + new Date().getTime();
 	}
-	
+
 	if (!this.settings.preserve_relative_urls) {
 		this.settings.upload_url = SWFUpload.completeURL(this.settings.upload_url);
 		this.settings.button_image_url = SWFUpload.completeURL(this.settings.button_image_url);
 	}
-	
+
 	delete this.ensureDefault;
 };
 
@@ -241,7 +241,7 @@ SWFUpload.prototype.loadSupport = function () {
 		loading : swfobject.hasFlashPlayerVersion("9.0.28"),
 		imageResize : swfobject.hasFlashPlayerVersion("10.0.0")
 	};
-	
+
 };
 
 // Private: loadFlash replaces the button_placeholder element with the flash movie.
@@ -252,7 +252,7 @@ SWFUpload.prototype.loadFlash = function () {
 		this.queueEvent("swfupload_load_failed_handler", ["Flash Player doesn't support SWFUpload"]);
 		return;
 	}
-	
+
 	// Make sure an element with the ID we are going to use doesn't already exist
 	if (document.getElementById(this.movieName) !== null) {
 		this.support.loading = false;
@@ -270,7 +270,7 @@ SWFUpload.prototype.loadFlash = function () {
 	}
 
 	wrapperType = (targetElement.currentStyle && targetElement.currentStyle["display"] || window.getComputedStyle && document.defaultView.getComputedStyle(targetElement, null).getPropertyValue("display")) !== "block" ? "span" : "div";
-	
+
 	// Append the container and load the flash
 	tempParent = document.createElement(wrapperType);
 
@@ -293,7 +293,7 @@ SWFUpload.prototype.loadFlash = function () {
 	} else if (els.length === 1) {
 		this.movieElement = els[0];
 	}
-	
+
 	targetElement.parentNode.replaceChild(tempParent.firstChild, targetElement);
 
 	// Fix IE Flash/Form bug
@@ -319,10 +319,10 @@ SWFUpload.prototype.getFlashHTML = function (flashVersion) {
 SWFUpload.prototype.getFlashVars = function () {
 	// Build a string from the post param object
 	var httpSuccessString, paramString;
-	
+
 	paramString = this.buildParamString();
 	httpSuccessString = this.settings.http_success.join(",");
-	
+
 	// Build the parameter string
 	return ["movieName=", encodeURIComponent(this.movieName),
 			"&amp;uploadURL=", encodeURIComponent(this.settings.upload_url),
@@ -361,7 +361,7 @@ SWFUpload.prototype.getMovieElement = function () {
 	if (this.movieElement === null) {
 		throw "Could not find Flash element";
 	}
-	
+
 	return this.movieElement;
 };
 
@@ -369,8 +369,8 @@ SWFUpload.prototype.getMovieElement = function () {
 // and joins them up in to a string formatted "name=value&amp;name=value"
 SWFUpload.prototype.buildParamString = function () {
 	var name, postParams, paramStringPairs = [];
-	
-	postParams = this.settings.post_params; 
+
+	postParams = this.settings.post_params;
 
 	if (typeof(postParams) === "object") {
 		for (name in postParams) {
@@ -389,11 +389,11 @@ SWFUpload.prototype.buildParamString = function () {
 // Credits: Major improvements provided by steffen
 SWFUpload.prototype.destroy = function () {
 	var movieElement;
-	
+
 	try {
 		// Make sure Flash is done before we try to remove it
 		this.cancelUpload(null, false);
-		
+
 		movieElement = this.cleanUp();
 
 		// Remove the SWFUpload DOM nodes
@@ -416,8 +416,8 @@ SWFUpload.prototype.destroy = function () {
 		this.customSettings = null;
 		this.eventQueue = null;
 		this.movieName = null;
-		
-		
+
+
 		return true;
 	} catch (ex2) {
 		return false;
@@ -522,7 +522,7 @@ SWFUpload.prototype.getSetting = function (name) {
 // bugs in the ExternalInterface library.
 SWFUpload.prototype.callFlash = function (functionName, argumentArray) {
 	var movieElement, returnValue, returnString;
-	
+
 	argumentArray = argumentArray || [];
 	movieElement = this.getMovieElement();
 
@@ -537,7 +537,7 @@ SWFUpload.prototype.callFlash = function (functionName, argumentArray) {
 	} catch (ex) {
 		this.debug("Exception calling flash function '" + functionName + "': " + ex.message);
 	}
-	
+
 	// Unescape file post param values
 	if (returnValue != undefined && typeof returnValue.post === "object") {
 		returnValue = this.unescapeFilePostParams(returnValue);
@@ -571,13 +571,13 @@ SWFUpload.prototype.selectFiles = function () {
 
 
 // Public: startUpload starts uploading the first file in the queue unless
-// the optional parameter 'fileID' specifies the ID 
+// the optional parameter 'fileID' specifies the ID
 SWFUpload.prototype.startUpload = function (fileID) {
 	this.callFlash("StartUpload", [fileID]);
 };
 
 // Public: startUpload starts uploading the first file in the queue unless
-// the optional parameter 'fileID' specifies the ID 
+// the optional parameter 'fileID' specifies the ID
 SWFUpload.prototype.startResizedUpload = function (fileID, width, height, encoding, quality, allowEnlarging) {
 	this.callFlash("StartUpload", [fileID, { "width": width, "height" : height, "encoding" : encoding, "quality" : quality, "allowEnlarging" : allowEnlarging }]);
 };
@@ -620,7 +620,7 @@ SWFUpload.prototype.getStats = function () {
 	return this.callFlash("GetStats");
 };
 
-// Public: setStats changes the SWFUpload statistics.  You shouldn't need to 
+// Public: setStats changes the SWFUpload statistics.  You shouldn't need to
 // change the statistics but you can.  Changing the statistics does not
 // affect SWFUpload accept for the successful_uploads count which is used
 // by the upload_limit setting to determine how many files the user may upload.
@@ -734,7 +734,7 @@ SWFUpload.prototype.setHTTPSuccess = function (http_status_codes) {
 	if (typeof http_status_codes === "string") {
 		http_status_codes = http_status_codes.replace(" ", "").split(",");
 	}
-	
+
 	this.settings.http_success = http_status_codes;
 	this.callFlash("SetHTTPSuccess", [http_status_codes]);
 };
@@ -756,7 +756,7 @@ SWFUpload.prototype.setButtonImageURL = function (buttonImageURL) {
 	if (buttonImageURL == undefined) {
 		buttonImageURL = "";
 	}
-	
+
 	this.settings.button_image_url = buttonImageURL;
 	this.callFlash("SetButtonImageURL", [buttonImageURL]);
 };
@@ -765,13 +765,13 @@ SWFUpload.prototype.setButtonImageURL = function (buttonImageURL) {
 SWFUpload.prototype.setButtonDimensions = function (width, height) {
 	this.settings.button_width = width;
 	this.settings.button_height = height;
-	
+
 	var movie = this.getMovieElement();
 	if (movie != undefined) {
 		movie.style.width = width + "px";
 		movie.style.height = height + "px";
 	}
-	
+
 	this.callFlash("SetButtonDimensions", [width, height]);
 };
 // Public: setButtonText Changes the text overlaid on the button
@@ -812,9 +812,9 @@ SWFUpload.prototype.setButtonCursor = function (cursor) {
 	Flash Event Interfaces
 	These functions are used by Flash to trigger the various
 	events.
-	
+
 	All these functions a Private.
-	
+
 	Because the ExternalInterface library is buggy the event calls
 	are added to a queue and the queue then executed by a setTimeout.
 	This ensures that events are executed in a determinate order and that
@@ -824,24 +824,24 @@ SWFUpload.prototype.setButtonCursor = function (cursor) {
 SWFUpload.prototype.queueEvent = function (handlerName, argumentArray) {
 	// Warning: Don't call this.debug inside here or you'll create an infinite loop
 	var self = this;
-	
+
 	if (argumentArray == undefined) {
 		argumentArray = [];
 	} else if (!(argumentArray instanceof Array)) {
 		argumentArray = [argumentArray];
 	}
-	
+
 	if (typeof this.settings[handlerName] === "function") {
 		// Queue the event
 		this.eventQueue.push(function () {
 			this.settings[handlerName].apply(this, argumentArray);
 		});
-		
+
 		// Execute the next queued event
 		setTimeout(function () {
 			self.executeNextEvent();
 		}, 0);
-		
+
 	} else if (this.settings[handlerName] !== null) {
 		throw "Event handler " + handlerName + " is unknown or is not a function";
 	}
@@ -898,7 +898,7 @@ SWFUpload.prototype.swfuploadPreload = function () {
 	if (returnValue === undefined) {
 		returnValue = true;
 	}
-	
+
 	return !!returnValue;
 }
 
@@ -920,7 +920,7 @@ SWFUpload.prototype.flashReady = function () {
 // This function is called by Flash each time the ExternalInterface functions are created.
 SWFUpload.prototype.cleanUp = function () {
 	var key, movieElement = this.getMovieElement();
-	
+
 	// Pro-actively unhook all the Flash functions
 	try {
 		if (movieElement && typeof(movieElement.CallFunction) === "unknown") { // We only want to do this in IE
@@ -935,7 +935,7 @@ SWFUpload.prototype.cleanUp = function () {
 			}
 		}
 	} catch (ex1) {
-	
+
 	}
 
 	// Fix Flashes own cleanup code so if the SWF Movie was removed from the page
@@ -946,10 +946,10 @@ SWFUpload.prototype.cleanUp = function () {
 				instance[name] = null;
 			}
 		} catch (flashEx) {
-		
+
 		}
 	};
-	
+
 	return movieElement;
 };
 
@@ -1013,9 +1013,9 @@ SWFUpload.prototype.returnUploadStart = function (file) {
 	if (returnValue === undefined) {
 		returnValue = true;
 	}
-	
+
 	returnValue = !!returnValue;
-	
+
 	this.callFlash("ReturnUploadStart", [returnValue]);
 };
 
@@ -1055,12 +1055,12 @@ SWFUpload.prototype.debug = function (message) {
 	itself to the body if necessary.
 
 	The console is automatically scrolled as messages appear.
-	
+
 	If you are using your own debug handler or when you deploy to production and
 	have debug disabled you can remove these functions to reduce the file size
 	and complexity.
 ********************************** */
-   
+
 // Private: debugMessage is the default debug_handler.  If you want to print debug messages
 // call the debug() function.  When overriding the function your own function should
 // check to see if the debug setting is true before outputting debug information.
@@ -1119,8 +1119,8 @@ SWFUpload.Console.writeLine = function (message) {
 };
 
 
-/*	SWFObject v2.2 <http://code.google.com/p/swfobject/> 
-	is released under the MIT License <http://www.opensource.org/licenses/mit-license.php> 
+/*	SWFObject v2.2 <http://code.google.com/p/swfobject/>
+	is released under the MIT License <http://www.opensource.org/licenses/mit-license.php>
 */
 swfobject = function(){var D="undefined",r="object",S="Shockwave Flash",W="ShockwaveFlash.ShockwaveFlash",q="application/x-shockwave-flash",R="SWFObjectExprInst",x="onreadystatechange",O=window,j=document,t=navigator,T=false,U=[h],o=[],N=[],I=[],l,Q,E,B,J=false,a=false,n,G,m=true,M=function(){var aa=typeof j.getElementById!=D&&typeof j.getElementsByTagName!=D&&typeof j.createElement!=D,ah=t.userAgent.toLowerCase(),Y=t.platform.toLowerCase(),ae=Y?/win/.test(Y):/win/.test(ah),ac=Y?/mac/.test(Y):/mac/.test(ah),af=/webkit/.test(ah)?parseFloat(ah.replace(/^.*webkit\/(\d+(\.\d+)?).*$/,"$1")):false,X=!+"\v1",ag=[0,0,0],ab=null;if(typeof t.plugins!=D&&typeof t.plugins[S]==r){ab=t.plugins[S].description;if(ab&&!(typeof t.mimeTypes!=D&&t.mimeTypes[q]&&!t.mimeTypes[q].enabledPlugin)){T=true;X=false;ab=ab.replace(/^.*\s+(\S+\s+\S+$)/,"$1");ag[0]=parseInt(ab.replace(/^(.*)\..*$/,"$1"),10);ag[1]=parseInt(ab.replace(/^.*\.(.*)\s.*$/,"$1"),10);ag[2]=/[a-zA-Z]/.test(ab)?parseInt(ab.replace(/^.*[a-zA-Z]+(.*)$/,"$1"),10):0}}else{if(typeof O.ActiveXObject!=D){try{var ad=new ActiveXObject(W);if(ad){ab=ad.GetVariable("$version");if(ab){X=true;ab=ab.split(" ")[1].split(",");ag=[parseInt(ab[0],10),parseInt(ab[1],10),parseInt(ab[2],10)]}}}catch(Z){}}}return{w3:aa,pv:ag,wk:af,ie:X,win:ae,mac:ac}}(),k=function(){if(!M.w3){return}if((typeof j.readyState!=D&&j.readyState=="complete")||(typeof j.readyState==D&&(j.getElementsByTagName("body")[0]||j.body))){f()}if(!J){if(typeof j.addEventListener!=D){j.addEventListener("DOMContentLoaded",f,false)}if(M.ie&&M.win){j.attachEvent(x,function(){if(j.readyState=="complete"){j.detachEvent(x,arguments.callee);f()}});if(O==top){(function(){if(J){return}try{j.documentElement.doScroll("left")}catch(X){setTimeout(arguments.callee,0);return}f()})()}}if(M.wk){(function(){if(J){return}if(!/loaded|complete/.test(j.readyState)){setTimeout(arguments.callee,0);return}f()})()}s(f)}}();function f(){if(J){return}try{var Z=j.getElementsByTagName("body")[0].appendChild(C("span"));Z.parentNode.removeChild(Z)}catch(aa){return}J=true;var X=U.length;for(var Y=0;Y<X;Y++){U[Y]()}}function K(X){if(J){X()}else{U[U.length]=X}}function s(Y){if(typeof O.addEventListener!=D){O.addEventListener("load",Y,false)}else{if(typeof j.addEventListener!=D){j.addEventListener("load",Y,false)}else{if(typeof O.attachEvent!=D){i(O,"onload",Y)}else{if(typeof O.onload=="function"){var X=O.onload;O.onload=function(){X();Y()}}else{O.onload=Y}}}}}function h(){if(T){V()}else{H()}}function V(){var X=j.getElementsByTagName("body")[0];var aa=C(r);aa.setAttribute("type",q);var Z=X.appendChild(aa);if(Z){var Y=0;(function(){if(typeof Z.GetVariable!=D){var ab=Z.GetVariable("$version");if(ab){ab=ab.split(" ")[1].split(",");M.pv=[parseInt(ab[0],10),parseInt(ab[1],10),parseInt(ab[2],10)]}}else{if(Y<10){Y++;setTimeout(arguments.callee,10);return}}X.removeChild(aa);Z=null;H()})()}else{H()}}function H(){var ag=o.length;if(ag>0){for(var af=0;af<ag;af++){var Y=o[af].id;var ab=o[af].callbackFn;var aa={success:false,id:Y};if(M.pv[0]>0){var ae=c(Y);if(ae){if(F(o[af].swfVersion)&&!(M.wk&&M.wk<312)){w(Y,true);if(ab){aa.success=true;aa.ref=z(Y);ab(aa)}}else{if(o[af].expressInstall&&A()){var ai={};ai.data=o[af].expressInstall;ai.width=ae.getAttribute("width")||"0";ai.height=ae.getAttribute("height")||"0";if(ae.getAttribute("class")){ai.styleclass=ae.getAttribute("class")}if(ae.getAttribute("align")){ai.align=ae.getAttribute("align")}var ah={};var X=ae.getElementsByTagName("param");var ac=X.length;for(var ad=0;ad<ac;ad++){if(X[ad].getAttribute("name").toLowerCase()!="movie"){ah[X[ad].getAttribute("name")]=X[ad].getAttribute("value")}}P(ai,ah,Y,ab)}else{p(ae);if(ab){ab(aa)}}}}}else{w(Y,true);if(ab){var Z=z(Y);if(Z&&typeof Z.SetVariable!=D){aa.success=true;aa.ref=Z}ab(aa)}}}}}function z(aa){var X=null;var Y=c(aa);if(Y&&Y.nodeName=="OBJECT"){if(typeof Y.SetVariable!=D){X=Y}else{var Z=Y.getElementsByTagName(r)[0];if(Z){X=Z}}}return X}function A(){return !a&&F("6.0.65")&&(M.win||M.mac)&&!(M.wk&&M.wk<312)}function P(aa,ab,X,Z){a=true;E=Z||null;B={success:false,id:X};var ae=c(X);if(ae){if(ae.nodeName=="OBJECT"){l=g(ae);Q=null}else{l=ae;Q=X}aa.id=R;if(typeof aa.width==D||(!/%$/.test(aa.width)&&parseInt(aa.width,10)<310)){aa.width="310"}if(typeof aa.height==D||(!/%$/.test(aa.height)&&parseInt(aa.height,10)<137)){aa.height="137"}j.title=j.title.slice(0,47)+" - Flash Player Installation";var ad=M.ie&&M.win?"ActiveX":"PlugIn",ac="MMredirectURL="+O.location.toString().replace(/&/g,"%26")+"&MMplayerType="+ad+"&MMdoctitle="+j.title;if(typeof ab.flashvars!=D){ab.flashvars+="&"+ac}else{ab.flashvars=ac}if(M.ie&&M.win&&ae.readyState!=4){var Y=C("div");X+="SWFObjectNew";Y.setAttribute("id",X);ae.parentNode.insertBefore(Y,ae);ae.style.display="none";(function(){if(ae.readyState==4){ae.parentNode.removeChild(ae)}else{setTimeout(arguments.callee,10)}})()}u(aa,ab,X)}}function p(Y){if(M.ie&&M.win&&Y.readyState!=4){var X=C("div");Y.parentNode.insertBefore(X,Y);X.parentNode.replaceChild(g(Y),X);Y.style.display="none";(function(){if(Y.readyState==4){Y.parentNode.removeChild(Y)}else{setTimeout(arguments.callee,10)}})()}else{Y.parentNode.replaceChild(g(Y),Y)}}function g(ab){var aa=C("div");if(M.win&&M.ie){aa.innerHTML=ab.innerHTML}else{var Y=ab.getElementsByTagName(r)[0];if(Y){var ad=Y.childNodes;if(ad){var X=ad.length;for(var Z=0;Z<X;Z++){if(!(ad[Z].nodeType==1&&ad[Z].nodeName=="PARAM")&&!(ad[Z].nodeType==8)){aa.appendChild(ad[Z].cloneNode(true))}}}}}return aa}function u(ai,ag,Y){var X,aa=c(Y);if(M.wk&&M.wk<312){return X}if(aa){if(typeof ai.id==D){ai.id=Y}if(M.ie&&M.win){var ah="";for(var ae in ai){if(ai[ae]!=Object.prototype[ae]){if(ae.toLowerCase()=="data"){ag.movie=ai[ae]}else{if(ae.toLowerCase()=="styleclass"){ah+=' class="'+ai[ae]+'"'}else{if(ae.toLowerCase()!="classid"){ah+=" "+ae+'="'+ai[ae]+'"'}}}}}var af="";for(var ad in ag){if(ag[ad]!=Object.prototype[ad]){af+='<param name="'+ad+'" value="'+ag[ad]+'" />'}}aa.outerHTML='<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"'+ah+">"+af+"</object>";N[N.length]=ai.id;X=c(ai.id)}else{var Z=C(r);Z.setAttribute("type",q);for(var ac in ai){if(ai[ac]!=Object.prototype[ac]){if(ac.toLowerCase()=="styleclass"){Z.setAttribute("class",ai[ac])}else{if(ac.toLowerCase()!="classid"){Z.setAttribute(ac,ai[ac])}}}}for(var ab in ag){if(ag[ab]!=Object.prototype[ab]&&ab.toLowerCase()!="movie"){e(Z,ab,ag[ab])}}aa.parentNode.replaceChild(Z,aa);X=Z}}return X}function e(Z,X,Y){var aa=C("param");aa.setAttribute("name",X);aa.setAttribute("value",Y);Z.appendChild(aa)}function y(Y){var X=c(Y);if(X&&X.nodeName=="OBJECT"){if(M.ie&&M.win){X.style.display="none";(function(){if(X.readyState==4){b(Y)}else{setTimeout(arguments.callee,10)}})()}else{X.parentNode.removeChild(X)}}}function b(Z){var Y=c(Z);if(Y){for(var X in Y){if(typeof Y[X]=="function"){Y[X]=null}}Y.parentNode.removeChild(Y)}}function c(Z){var X=null;try{X=j.getElementById(Z)}catch(Y){}return X}function C(X){return j.createElement(X)}function i(Z,X,Y){Z.attachEvent(X,Y);I[I.length]=[Z,X,Y]}function F(Z){var Y=M.pv,X=Z.split(".");X[0]=parseInt(X[0],10);X[1]=parseInt(X[1],10)||0;X[2]=parseInt(X[2],10)||0;return(Y[0]>X[0]||(Y[0]==X[0]&&Y[1]>X[1])||(Y[0]==X[0]&&Y[1]==X[1]&&Y[2]>=X[2]))?true:false}function v(ac,Y,ad,ab){if(M.ie&&M.mac){return}var aa=j.getElementsByTagName("head")[0];if(!aa){return}var X=(ad&&typeof ad=="string")?ad:"screen";if(ab){n=null;G=null}if(!n||G!=X){var Z=C("style");Z.setAttribute("type","text/css");Z.setAttribute("media",X);n=aa.appendChild(Z);if(M.ie&&M.win&&typeof j.styleSheets!=D&&j.styleSheets.length>0){n=j.styleSheets[j.styleSheets.length-1]}G=X}if(M.ie&&M.win){if(n&&typeof n.addRule==r){n.addRule(ac,Y)}}else{if(n&&typeof j.createTextNode!=D){n.appendChild(j.createTextNode(ac+" {"+Y+"}"))}}}function w(Z,X){if(!m){return}var Y=X?"visible":"hidden";if(J&&c(Z)){c(Z).style.visibility=Y}else{v("#"+Z,"visibility:"+Y)}}function L(Y){var Z=/[\\\"<>\.;]/;var X=Z.exec(Y)!=null;return X&&typeof encodeURIComponent!=D?encodeURIComponent(Y):Y}var d=function(){if(M.ie&&M.win){window.attachEvent("onunload",function(){var ac=I.length;for(var ab=0;ab<ac;ab++){I[ab][0].detachEvent(I[ab][1],I[ab][2])}var Z=N.length;for(var aa=0;aa<Z;aa++){y(N[aa])}for(var Y in M){M[Y]=null}M=null;for(var X in swfobject){swfobject[X]=null}swfobject=null})}}();return{registerObject:function(ab,X,aa,Z){if(M.w3&&ab&&X){var Y={};Y.id=ab;Y.swfVersion=X;Y.expressInstall=aa;Y.callbackFn=Z;o[o.length]=Y;w(ab,false)}else{if(Z){Z({success:false,id:ab})}}},getObjectById:function(X){if(M.w3){return z(X)}},embedSWF:function(ab,ah,ae,ag,Y,aa,Z,ad,af,ac){var X={success:false,id:ah};if(M.w3&&!(M.wk&&M.wk<312)&&ab&&ah&&ae&&ag&&Y){w(ah,false);K(function(){ae+="";ag+="";var aj={};if(af&&typeof af===r){for(var al in af){aj[al]=af[al]}}aj.data=ab;aj.width=ae;aj.height=ag;var am={};if(ad&&typeof ad===r){for(var ak in ad){am[ak]=ad[ak]}}if(Z&&typeof Z===r){for(var ai in Z){if(typeof am.flashvars!=D){am.flashvars+="&"+ai+"="+Z[ai]}else{am.flashvars=ai+"="+Z[ai]}}}if(F(Y)){var an=u(aj,am,ah);if(aj.id==ah){w(ah,true)}X.success=true;X.ref=an}else{if(aa&&A()){aj.data=aa;P(aj,am,ah,ac);return}else{w(ah,true)}}if(ac){ac(X)}})}else{if(ac){ac(X)}}},switchOffAutoHideShow:function(){m=false},ua:M,getFlashPlayerVersion:function(){return{major:M.pv[0],minor:M.pv[1],release:M.pv[2]}},hasFlashPlayerVersion:F,createSWF:function(Z,Y,X){if(M.w3){return u(Z,Y,X)}else{return undefined}},showExpressInstall:function(Z,aa,X,Y){if(M.w3&&A()){P(Z,aa,X,Y)}},removeSWF:function(X){if(M.w3){y(X)}},createCSS:function(aa,Z,Y,X){if(M.w3){v(aa,Z,Y,X)}},addDomLoadEvent:K,addLoadEvent:s,getQueryParamValue:function(aa){var Z=j.location.search||j.location.hash;if(Z){if(/\?/.test(Z)){Z=Z.split("?")[1]}if(aa==null){return L(Z)}var Y=Z.split("&");for(var X=0;X<Y.length;X++){if(Y[X].substring(0,Y[X].indexOf("="))==aa){return L(Y[X].substring((Y[X].indexOf("=")+1)))}}}return""},expressInstallCallback:function(){if(a){var X=c(R);if(X&&l){X.parentNode.replaceChild(l,X);if(Q){w(Q,true);if(M.ie&&M.win){l.style.display="block"}}if(E){E(B)}}a=false}}}}();
 swfobject.addDomLoadEvent(function () {
@@ -1136,7 +1136,7 @@ swfobject.addDomLoadEvent(function () {
 /*!
  * axisJ Javascript Library Version 1.0
  * http://axisJ.com
- * 
+ *
  * 아래 소스의 라이선스는 axisJ.com 에서 확인 하실 수 있습니다.
  * http://axisJ.com/license
  * axisJ를 사용하시려면 라이선스 페이지를 확인 및 숙지 후 사용 하시기 바람니다. 무단 사용시 예상치 못한 피해가 발생 하실 수 있습니다.
@@ -1191,12 +1191,12 @@ var AXUpload5 = Class.create(AXJ, {
 				return;
 			}
 		}
-		
+
 		this.target = jQuery("#"+cfg.targetID);
 		if(reset == undefined){
 			this.target.empty();
 		}
-		
+
 		var inputFileMultiple = 'multiple="multiple"';
 		var inputFileAccept = cfg.file_types;
 		if(cfg.isSingleUpload){
@@ -1205,45 +1205,45 @@ var AXUpload5 = Class.create(AXJ, {
 		if(!this.supportHtml5){
 			inputFileMultiple = '';
 		}
-		
+
 		var po = [];
 		po.push('<div style="position:relative;">');
 		po.push('	<table style="table-layout:fixed;width:100%;"><tbody><tr><td id="'+cfg.targetID+'_AX_selectorTD">');
 		po.push('	<input type="file" id="'+cfg.targetID+'_AX_files" '+inputFileMultiple+' accept="'+inputFileAccept+'" style="position:absolute;left:0px;top:0px;margin:0px;padding:0px;-moz-opacity: 0.0;opacity:.00;filter: alpha(opacity=0);" />');
 		po.push('	<button type="button" class="AXButton '+cfg.targetButtonClass+'" id="'+cfg.targetID+'_AX_selector"><span class="AXFileSelector">'+(AXConfig.AXUpload5.buttonTxt||"Upload files")+'</span></button>');
 		po.push('	</td>');
-		
+
 		if(cfg.isSingleUpload){
 			po.push('<td>');
 			po.push('<div class="AXFileDisplay" id="'+cfg.targetID+'_AX_display">'+AXConfig.AXUpload5.uploadSelectTxt+'</div>');
 			po.push('</td>');
 		}
-		
+
 		po.push('	<tr></tbody></table>');
 		po.push('</div>');
 		this.target.empty();
 		this.target.append(po.join(''));
-		
+
 		jQuery('#'+cfg.targetID+'_AX_selectorTD').css({width:jQuery('#'+cfg.targetID+'_AX_selector').outerWidth()+5});
 		jQuery('#'+cfg.targetID+'_AX_files').css({width:jQuery('#'+cfg.targetID+'_AX_selector').outerWidth(),height:jQuery('#'+cfg.targetID+'_AX_selector').outerHeight()});
-		
+
 		var pauseQueue = this.pauseQueue.bind(this);
 		jQuery('#'+cfg.targetID+'_AX_selector').click(function(){
 			pauseQueue();
 			jQuery('#'+cfg.targetID+'_AX_files').click();
 		});
-		
+
 		var onFileSelect = this.onFileSelect.bind(this);
 		var fileSelector = document.getElementById(cfg.targetID+'_AX_files');
 		if(AXUtil.browser.name == "ie" && AXUtil.browser.version < 9){
-			
+
 		}else{
 			fileSelector.addEventListener('change', onFileSelect, false);
 		}
 
 		if(reset == undefined){
 			if(cfg.dropBoxID && this.supportHtml5){
-				
+
 				// 드랍존 표현구문 ----------------- s
 				/*
 				var dropZoneMsg = [];
@@ -1255,12 +1255,12 @@ var AXUpload5 = Class.create(AXJ, {
 				jQuery("#"+cfg.dropBoxID).addClass("allowDrop");
 				//jQuery("#"+cfg.dropBoxID).find(".msgText").css({"top":jQuery("#"+cfg.dropBoxID).height()/2-50});
 				// 드랍존 표현구문 ----------------- e
-				
+
 				var dropZoneBox = [];
 				dropZoneBox.push("<div class=\"dropZoneBox\" id=\""+cfg.dropBoxID+"_dropZoneBox\" style=\"border:3px dashed #d7d7d7;display:none;\">");
 				dropZoneBox.push("</div>");
 				jQuery("#"+cfg.dropBoxID).append(dropZoneBox.join(''));
-				
+
 				// ---------------- 옵션사항 s
 				/*
 				jQuery("#"+cfg.dropBoxID+"_dropZoneBox").show();
@@ -1270,16 +1270,16 @@ var AXUpload5 = Class.create(AXJ, {
 				}, 2000);
 				*/
 				// ---------------- 옵션사항 e
-				
+
 				var onFileDragOver = this.onFileDragOver.bind(this);
 				var onFileDrop = this.onFileDrop.bind(this);
 				var dragZone = document.getElementById(cfg.dropBoxID);
 				dragZone.addEventListener('dragover', function(evt){onFileDragOver(evt)}, false);
-				
+
 				var dropZone = document.getElementById(cfg.dropBoxID+"_dropZoneBox");
 				dropZone.addEventListener('drop', function(evt){onFileDrop(evt)}, false);
 			}
-			
+
 			if(cfg.queueBoxID){
 				this.multiSelector = new AXMultiSelect();
 				this.multiSelector.setConfig({
@@ -1293,35 +1293,35 @@ var AXUpload5 = Class.create(AXJ, {
 	swfinit: function(reset){
 		var cfg = this.config;
 		this.target = jQuery("#"+cfg.targetID);
-		
+
 		var po = [];
 		po.push('<div style="position:relative;">');
 		po.push('	<table style="table-layout:fixed;width:100%;"><tbody><tr><td id="'+cfg.targetID+'_AX_selectorTD">');
 		po.push('	<button type="button" class="AXButton '+cfg.targetButtonClass+'" id="'+cfg.targetID+'_AX_selector"><span class="AXFileSelector">'+(AXConfig.AXUpload5.buttonTxt||"Upload files")+'</span></button>');
 		po.push('	<span id="spanButtonPlaceholder" class="AXUpload5flashUploadButton"></span>');
 		po.push('	</td>');
-		
+
 		if(cfg.isSingleUpload){
 			po.push('<td>');
 			po.push('<div class="AXFileDisplay" id="'+cfg.targetID+'_AX_display">'+AXConfig.AXUpload5.uploadSelectTxt+'</div>');
 			po.push('</td>');
 		}
-		
+
 		po.push('	<tr></tbody></table>');
 		po.push('</div>');
 		this.target.empty();
-		this.target.append(po.join(''));		
-		
+		this.target.append(po.join(''));
+
 		jQuery('#'+cfg.targetID+'_AX_selectorTD').css({width:jQuery('#'+cfg.targetID+'_AX_selector').outerWidth()+5});
-		
+
 		var btnW = jQuery('#'+cfg.targetID+'_AX_selector').outerWidth();
 		var btnH = jQuery('#'+cfg.targetID+'_AX_selector').outerHeight();
-		
+
 		// functions --------------------------------------------------------------- s
 		var uploadSuccess = this.uploadSuccess.bind(this);
 		var onClickDeleteButton = this.onClickDeleteButton.bind(this);
 		var onClickFileTitle = this.onClickFileTitle.bind(this);
-		
+
 		var file_dialog_complete_handler = function(numFilesSelected, numFilesQueued){
 			if (numFilesSelected > 0) {
 				if (this.swfu.getStats().files_queued > 0) {
@@ -1363,10 +1363,10 @@ var AXUpload5 = Class.create(AXJ, {
 						this.cancelUpload();
 						return;
 					}
-				}				
-				
+				}
+
 				//trace(file);
-				//{"filestatus":-1, "name":"20130708175735_1.jpg", "type":".jpg", "id":"SWFUpload_0_0", "index":0, "modificationdate":"2013-10-04T08:51:27Z", "uploadtype":0, "post":{}, "size":891324, "creationdate":"2013-10-04T08:52:02Z"} 
+				//{"filestatus":-1, "name":"20130708175735_1.jpg", "type":".jpg", "id":"SWFUpload_0_0", "index":0, "modificationdate":"2013-10-04T08:51:27Z", "uploadtype":0, "post":{}, "size":891324, "creationdate":"2013-10-04T08:52:02Z"}
 				var itemID = 'AX_'+ file.id;
 				this.queue.push({id:itemID, file:file});
 				//큐박스에 아이템 추가
@@ -1436,16 +1436,16 @@ var AXUpload5 = Class.create(AXJ, {
 		//--
 		var upload_success_handler = function(file, res){
 			var itemID = 'AX_'+ file.id;
-			
+
 			try{if(typeof res == "string") res = res.object();}catch(e){trace(e);}
 			if(cfg.isSingleUpload){
-				
+
 				jQuery("#"+itemID+" .AXUploadBtns").show();
 				jQuery("#"+itemID+" .AXUploadLabel").show();
 				jQuery("#"+itemID+" .AXUploadTit").show();
-				
+
 				jQuery("#"+itemID+" .AXUploadProcess").hide();
-								
+
 				uploadSuccess(file, itemID, res);
 				// --------------------- s
 				jQuery("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
@@ -1456,13 +1456,13 @@ var AXUpload5 = Class.create(AXJ, {
 						onClickFileTitle(itemID);
 					});
 				}
-				
+
 			}else{
-				
+
 				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show();
 				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
 				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
-				
+
 				if(res[cfg.fileKeys.thumbPath]){
 					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
 						"background-image":"url('"+(res[cfg.fileKeys.thumbPath]||"").dec()+"')",
@@ -1473,7 +1473,7 @@ var AXUpload5 = Class.create(AXJ, {
 					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({"background-image":"url()"});
 					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").html((res[cfg.fileKeys.type]||"").dec().replace(".", ""));
 				}
-				
+
 				uploadSuccess(file, itemID, res);
 				// --------------------- s
 				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
@@ -1485,13 +1485,13 @@ var AXUpload5 = Class.create(AXJ, {
 					});
 				}
 			}
-			
+
 			//큐에서 제거
 			var updateQueue = [];
 			jQuery.each(this.queue, function(){
 				if(this.id != itemID) updateQueue.push(this);
 			});
-			this.queue = updateQueue;			
+			this.queue = updateQueue;
 		};
 		var upload_success_handler_bind = upload_success_handler.bind(this);
 		//--
@@ -1502,7 +1502,7 @@ var AXUpload5 = Class.create(AXJ, {
 				if (this.swfu.getStats().files_queued === 0) {
 					this.uploadComplete();
 				}else{
-					this.swfu.startUpload();		
+					this.swfu.startUpload();
 				}
 			}
 		};
@@ -1513,7 +1513,7 @@ var AXUpload5 = Class.create(AXJ, {
 		};
 		var queue_complete_handler_bind = queue_complete_handler.bind(this);
 		// functions --------------------------------------------------------------- e
-		
+
 		var settings = {
 			flash_url : cfg.flash_url,
 			flash9_url : cfg.flash9_url,
@@ -1526,13 +1526,13 @@ var AXUpload5 = Class.create(AXJ, {
 			file_upload_limit : 0, //cfg.uploadMaxFileCount,
 			file_queue_limit : 0,
 			debug: false,
-	
+
 			// Button Settings
 			button_image_url : "null",
 			button_placeholder_id : "spanButtonPlaceholder",
 			button_width: btnW,
 			button_height: btnH,
-	
+
 			// The event handler functions are defined in handlers.js
 			swfupload_preload_handler : function(){},
 			swfupload_load_failed_handler : function(){},
@@ -1548,7 +1548,7 @@ var AXUpload5 = Class.create(AXJ, {
 			queue_complete_handler : queue_complete_handler_bind	// Queue plugin event
 		};
 		this.swfu = new SWFUpload(settings);
-		
+
 		if(cfg.queueBoxID){
 			this.multiSelector = new AXMultiSelect();
 			this.multiSelector.setConfig({
@@ -1586,15 +1586,15 @@ var AXUpload5 = Class.create(AXJ, {
 			po.push('		<a href="#AXExecption" class="AXUploadBtnsA" id="'+itemID+'_AXUploadBtns_deleteFile">del</a>');
 			po.push('	</div>');
 			po.push('	<div class="AXUploadLabel" style="display:none;">');
-			
+
 			if(cfg.formatter){
 				var uf = {};
 				//uf.id =  (f.id) ? f.id : itemID;
 				uf.id =  itemID;
 				uf.name = f.name;
-				uf.type = f.type; 
-				uf.size = f.size; 
-				
+				uf.type = f.type;
+				uf.size = f.size;
+
 				var returnStr = cfg.formatter.call(uf, uf);
 				if (returnStr) po.push(returnStr);
 			}
@@ -1608,7 +1608,7 @@ var AXUpload5 = Class.create(AXJ, {
 		if(this.supportHtml5){
 			var files = evt.target.files; // FileList object
 			if(cfg.isSingleUpload){
-				
+
 				var myFile = this.uploadedList.first();
 				if(myFile){
 					if(!confirm(AXConfig.AXUpload5.deleteConfirm)) return;
@@ -1619,7 +1619,7 @@ var AXUpload5 = Class.create(AXJ, {
 						this.queue.push({id:itemID, file:f});
 						jQuery("#" + cfg.targetID+'_AX_display').empty();
 						jQuery("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, f));
-						
+
 						this.queueLive = true;
 						if(cfg.onStart) cfg.onStart.call(this.queue, this.queue);
 						this.uploadQueue();
@@ -1632,7 +1632,7 @@ var AXUpload5 = Class.create(AXJ, {
 					var itemID = 'AX'+AXUtil.timekey()+'_AX_'+i;
 					this.queue.push({id:itemID, file:f});
 					jQuery("#" + cfg.targetID+'_AX_display').empty();
-					jQuery("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, f));					
+					jQuery("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, f));
 				}
 
 			}else{
@@ -1646,7 +1646,7 @@ var AXUpload5 = Class.create(AXJ, {
 					}
 				}
 				if(hasSizeOverFile) cfg.onError("fileSize", {name:sizeOverFile.name, size:sizeOverFile.size});
-				
+
 				var uploadedCount = this.uploadedList.length;
 				for (var i = 0, f; f = files[i]; i++) {
 					if(f.size <= cfg.uploadMaxFileSize){
@@ -1677,7 +1677,7 @@ var AXUpload5 = Class.create(AXJ, {
 		jQuery("#"+cfg.dropBoxID+"_dropZoneBox").show();
 		/*jQuery("#"+cfg.dropBoxID+"_dropZoneBox").css({height:jQuery("#"+cfg.dropBoxID).innerHeight()-6, width:jQuery("#"+cfg.dropBoxID).innerWidth()-6}); 라르게덴 2013-10-29 오후 3:21:45 */
 		jQuery("#"+cfg.dropBoxID+"_dropZoneBox").css({height:jQuery("#"+cfg.dropBoxID).prop("scrollHeight")-6, width:jQuery("#"+cfg.dropBoxID).innerWidth()-6});
-		
+
 		var dropZone = document.getElementById(cfg.dropBoxID+"_dropZoneBox");
 		dropZone.addEventListener('dragleave', function(evt){
 			jQuery("#"+cfg.dropBoxID).removeClass("onDrop");
@@ -1694,9 +1694,9 @@ var AXUpload5 = Class.create(AXJ, {
 		evt.preventDefault();
 		jQuery("#"+cfg.dropBoxID).removeClass("onDrop");
 		jQuery("#"+cfg.dropBoxID+"_dropZoneBox").hide()
-		
+
 		var files = evt.dataTransfer.files; // FileList object.
-		
+
 		var hasSizeOverFile = false;
 		var sizeOverFile;
 		for (var i = 0, f; f = files[i]; i++) {
@@ -1707,7 +1707,7 @@ var AXUpload5 = Class.create(AXJ, {
 			}
 		}
 		if(hasSizeOverFile) cfg.onError("fileSize", {name:sizeOverFile.name, size:sizeOverFile.size});
-		
+
 		var uploadedCount = this.uploadedList.length;
 		for (var i = 0, f; f = files[i]; i++) {
 			if(f.size <= cfg.uploadMaxFileSize){
@@ -1740,26 +1740,26 @@ var AXUpload5 = Class.create(AXJ, {
 			this.uploadComplete();
 			return;
 		}
-		
+
 		var uploadQueue = this.uploadQueue.bind(this);
 		var cancelUpload = this.cancelUpload.bind(this);
 		var uploadSuccess = this.uploadSuccess.bind(this);
 		var onClickDeleteButton = this.onClickDeleteButton.bind(this);
 		var onClickFileTitle = this.onClickFileTitle.bind(this);
-		
+
 		var obj = this.queue.shift();
 		this.uploadingObj = obj;
 		var formData = new FormData();
 		//서버로 전송해야 할 추가 파라미터 정보 설정
 		jQuery.each(cfg.uploadPars, function(k, v){
-			formData.append(k, v); 
+			formData.append(k, v);
 		});
 		//formData.append(obj.file.name, obj.file);
 		formData.append(cfg.uploadFileName, obj.file);
-		
+
 		//obj.id
 		var itemID = obj.id;
-		
+
 		this.xhr = new XMLHttpRequest();
 		this.xhr.open('POST', cfg.uploadUrl, true);
 		this.xhr.onload = function(e) {
@@ -1777,15 +1777,15 @@ var AXUpload5 = Class.create(AXJ, {
 				cancelUpload();
 				return;
 			}
-			
+
 			if(cfg.isSingleUpload){
-				
+
 				jQuery("#"+itemID+" .AXUploadBtns").show();
 				jQuery("#"+itemID+" .AXUploadLabel").show();
 				jQuery("#"+itemID+" .AXUploadTit").show();
-				
+
 				jQuery("#"+itemID+" .AXUploadProcess").hide();
-								
+
 				uploadSuccess(obj.file, itemID, res);
 				// --------------------- s
 				jQuery("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
@@ -1796,13 +1796,13 @@ var AXUpload5 = Class.create(AXJ, {
 						onClickFileTitle(itemID);
 					});
 				}
-				
+
 			}else{
-				
+
 				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show();
 				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
 				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
-				
+
 				if(res[cfg.fileKeys.thumbPath]){
 					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
 						"background-image":"url('"+(res[cfg.fileKeys.thumbPath]||"").dec()+"')",
@@ -1813,7 +1813,7 @@ var AXUpload5 = Class.create(AXJ, {
 					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({"background-image":"url()"});
 					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").html((res[cfg.fileKeys.type]||"").dec().replace(".", ""));
 				}
-				
+
 				uploadSuccess(obj.file, itemID, res);
 				// --------------------- s
 				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
@@ -1835,9 +1835,9 @@ var AXUpload5 = Class.create(AXJ, {
 		var setUploadingObjBind = setUploadingObj.bind(this);
 		this.xhr.upload.onprogress = function(e) {
 			if(cfg.isSingleUpload){
-				if (e.lengthComputable) { jQuery("#"+itemID).find(".AXUploadProcessBar").width( ((e.loaded / e.total) * 100).round(2)+"%" ); }	
+				if (e.lengthComputable) { jQuery("#"+itemID).find(".AXUploadProcessBar").width( ((e.loaded / e.total) * 100).round(2)+"%" ); }
 			}else{
-				if (e.lengthComputable) { jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcessBar").width( ((e.loaded / e.total) * 100).round(2)+"%" ); }	
+				if (e.lengthComputable) { jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcessBar").width( ((e.loaded / e.total) * 100).round(2)+"%" ); }
 			}
 			if (e.lengthComputable) {
 				if(	e.loaded > e.total*0.9 ){
@@ -1885,7 +1885,7 @@ var AXUpload5 = Class.create(AXJ, {
 			}
 			stats = null;
 			this.pauseQueue();
-			this.clearQueue();			
+			this.clearQueue();
 		}else{
 			if(this.uploadingObj){
 				this.xhr.abort();
@@ -1929,13 +1929,13 @@ var AXUpload5 = Class.create(AXJ, {
 			}
 			myFile = null;
 		}
-		
+
 	},
 	onClickFileTitle: function(itemID){
 		var cfg = this.config;
 		//trace(itemID);
 		if(cfg.onClickUploadedItem){
-			
+
 			var myFile;
 			jQuery.each(this.uploadedList, function(){
 				if(this.id == itemID){
@@ -1950,7 +1950,7 @@ var AXUpload5 = Class.create(AXJ, {
 		var cfg = this.config;
 		if(!onEnd) if(!confirm(AXConfig.AXUpload5.deleteConfirm)) return;
 		var removeUploadedList = this.removeUploadedList.bind(this);
-		
+
 		//trace(file);
 		//{"id":"AXA220125984_AX_0", "name":"38540011%2EJPG", "type":"%2EJPG", "saveName":"0DA0316011A0001%2EJPG", "fileSize":"3172720", "uploadedPath":"%2F%5Ffile%2F1%2F", "thumbPath":"%2F%5Ffile%2F1%2FT%5F0DA0316011A0001%2EJPG"}
 		if (file != undefined){
@@ -1959,7 +1959,7 @@ var AXUpload5 = Class.create(AXJ, {
 			jQuery.each(file, function(k, v){
 				pars.push(k + '=' + v);
 			});
-			
+
 			if (typeof(cfg.deletePars) === "object") {
 				jQuery.each(cfg.deletePars, function(k, v){
 					pars.push(k + '=' + v);
@@ -1974,7 +1974,7 @@ var AXUpload5 = Class.create(AXJ, {
 			}else{
 				jQuery("#" + cfg.queueBoxID).find("#"+file.id+" .AXUploadBtns").hide();
 			}
-			
+
 			new AXReq(cfg.deleteUrl, {debug:false, pars:sendPars, onsucc:function(res){
 				if(res.result == AXConfig.AXReq.okCode){
 					if(cfg.isSingleUpload){
@@ -1984,7 +1984,7 @@ var AXUpload5 = Class.create(AXJ, {
 							jQuery(this).remove();
 						});
 					}
-					
+
 					removeUploadedList(file.id);
 					if(cfg.onDelete) cfg.onDelete.call(file, file);
 					if(onEnd) onEnd();
@@ -2007,7 +2007,7 @@ var AXUpload5 = Class.create(AXJ, {
 			deleteQueue = null;
 		}else{
 			if(!this.multiSelector) return;
-			var selectObj = this.multiSelector.getSelects();	
+			var selectObj = this.multiSelector.getSelects();
 			if (selectObj.length > 0){
 				var deleteQueue = [];
 				jQuery.each(selectObj, function(){
@@ -2048,11 +2048,11 @@ var AXUpload5 = Class.create(AXJ, {
 	},
 	setUploadedList: function(files){
 		var cfg = this.config;
-		
+
 		var getItemTag = this.getItemTag.bind(this);
 		var onClickDeleteButton = this.onClickDeleteButton.bind(this);
 		var onClickFileTitle = this.onClickFileTitle.bind(this);
-		
+
 		if(cfg.isSingleUpload){
 
 			var f;
@@ -2065,21 +2065,21 @@ var AXUpload5 = Class.create(AXJ, {
 			}
 			if(!f) return;
 			var itemID = f.id;
-			
+
 			var uf = {
 				id:itemID,
 				name:f[cfg.fileKeys.name],
 				size:f[cfg.fileKeys.fileSize]
 			};
-			
+
 			jQuery("#" + cfg.targetID+'_AX_display').empty();
 			jQuery("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, uf));
-			
+
 			jQuery("#"+itemID+" .AXUploadBtns").show();
 			jQuery("#"+itemID+" .AXUploadLabel").show();
 			jQuery("#"+itemID+" .AXUploadTit").show();
 			jQuery("#"+itemID+" .AXUploadProcess").hide();
-			
+
 			jQuery("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
 				onClickDeleteButton(itemID);
 			});
@@ -2088,14 +2088,14 @@ var AXUpload5 = Class.create(AXJ, {
 					onClickFileTitle(itemID);
 				});
 			}
-			
+
 		}else{
 			this.uploadedList = files;
 			if(cfg.queueBoxID){
 				jQuery.each(this.uploadedList, function(fidx, f){
 					if(f.id == undefined){
 						trace("id key는 필수 항목 입니다.");
-						return false;	
+						return false;
 					}
 					var itemID = f.id;
 					var uf = {
@@ -2105,23 +2105,23 @@ var AXUpload5 = Class.create(AXJ, {
 					};
 					jQuery("#" + cfg.queueBoxID).prepend(getItemTag(itemID, uf));
 					jQuery("#" + cfg.queueBoxID).find("#"+itemID).fadeIn();
-					
+
 					// --------------------- s
 					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show();
 					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
 					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
-		
+
 					if(f[cfg.fileKeys.thumbPath]){
 						jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({
 							"background-image":"url('"+(f[cfg.fileKeys.thumbPath]||"").dec()+"')",
 							"background-size":"100% auto",
 							"background-position":"center center"
 						});
-					}else{				
+					}else{
 						jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").css({"background-image":"url()"});
 						jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadIcon").html((f[cfg.fileKeys.type]||"").dec().replace(".", ""));
 					}
-		
+
 					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
 						onClickDeleteButton(itemID);
 					});
@@ -2131,9 +2131,9 @@ var AXUpload5 = Class.create(AXJ, {
 						});
 					}
 					// --------------------- e
-								
+
 					jQuery("#"+itemID).addClass("readyselect");
-					
+
 				});
 				this.multiSelector.collect();
 			}
@@ -2175,24 +2175,24 @@ var AXUpload5 = Class.create(AXJ, {
 		}
 	},
 	setUploadedFile: function(file){
-		
+
 		this.uploadedList = [];
 		this.uploadedList.push(file);
 		fileNameMaxLen = this.settings.fileNameMaxLen;
 		var po = [];
-		
+
 		var dfileicon = this.settings.dfileicon;
 
 		var UploadDisplay_id = this.settings.UploadDisplay_id;
-		var onClickButton = this.onClickButton.bind(this);		
+		var onClickButton = this.onClickButton.bind(this);
 		var AXfile = this.uploadedList.first();
-		
+
 		var po = [];
 		po.push("<div class='AXFileTitleBlock'>");
 		po.push("<a href='#AXexec' class='AXFileTitle'>"+AXfile.ti.dec()+"</a>");
 		po.push("<a href='#AXexec' class='AXFileDelete'>X</a>");
-		po.push("</div>"); 
-		jQuery("#"+UploadDisplay_id).html(po.join(''));			
+		po.push("</div>");
+		jQuery("#"+UploadDisplay_id).html(po.join(''));
 		jQuery("#"+UploadDisplay_id).find(".AXFileDelete").bind("click", onClickButton);
 
 		if(this.settings.onclick){
@@ -2208,10 +2208,10 @@ var AXUpload5 = Class.create(AXJ, {
 	getUploadedFile: function(){
 		return this.uploadedList.first();
 	},
-	
+
 	addKeyInUploadedListItem: function(objID, obj){
 		var uploadedList = this.uploadedList;
-		
+
 		jQuery.each(uploadedList, function(idx, o){
 			if (o.id == objID){
 				jQuery.each(obj, function(k, v){
@@ -2224,7 +2224,7 @@ var AXUpload5 = Class.create(AXJ, {
 			}
 		});
 	},
-	
+
 	nothing: function(){
 
 	}

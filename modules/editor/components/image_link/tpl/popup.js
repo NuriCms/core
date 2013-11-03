@@ -73,7 +73,7 @@
 		var open_window = 'N';
 
 		if(link_url) link_url = link_url.replace(/&/ig,'&amp;').replace(/</ig,'&lt;').replace(/>/ig,'&gt;');
-		if($form.find('#open_window').attr('checked')) open_window = 'Y';
+		if($form.find('#open_window').prop('checked')) open_window = 'Y';
 
 		var url = $form.find('#image_url').val();
 		var alt = $form.find('#image_alt').val();

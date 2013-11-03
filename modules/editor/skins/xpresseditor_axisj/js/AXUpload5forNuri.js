@@ -55,7 +55,7 @@ var AXUpload5 = Class.create(AXUpload5, {
 
 				editorRelKeys[seq].primary.value = target_srl;
 			}
-	
+
 			// 문서 강제 자동저장 1번만 사용 ( 첨부파일 target_srl로 자동 저장문서를 저장하기 위한 용도일 뿐 )
 			if(!uploadAutosaveChecker) myUpload.custom.autosave();
 		},
@@ -66,18 +66,18 @@ var AXUpload5 = Class.create(AXUpload5, {
 				targetfileID = [],
 				uploadFile = [],
 				text = new Array();
-	
+
 			if(editorMode[editorSequence]=='preview') return;
 
 			// 본문 삽입의 대상을 첨부파일 리스트로부터 구함
-			if(files == undefined) { 
+			if(files == undefined) {
 				targetFiles = myUpload.multiSelector.getSelects();
 				if(targetFiles.length < 1) return false;
-	
+
 				jQuery.each(targetFiles, function(i, file){
 					targetfileID[file.id] = file.id;
 				});
-	
+
 				jQuery.each(myUpload.uploadedList, function(i, file){
 					if(!targetfileID[file.id]) return true;
 					uploadFile.push(file);
@@ -85,7 +85,7 @@ var AXUpload5 = Class.create(AXUpload5, {
 			} else {
 				uploadFile.push(files);
 			}
-	
+
 			editorFocus(editorSequence);
 
 			jQuery.each(uploadFile, function(){
@@ -111,20 +111,20 @@ var AXUpload5 = Class.create(AXUpload5, {
 					} else {
 						text.push("<img src=\"common/img/blank.gif\" editor_component=\"multimedia_link\" multimedia_src=\""+this.download_url+"\" width=\"400\" height=\"320\" style=\"display:block;width:400px;height:320px;border:2px dotted #4371B9;background:url(./modules/editor/components/multimedia_link/tpl/multimedia_link_component.gif) no-repeat center;\" auto_start=\"false\" alt=\"\" />");
 					}
-		
+
 				// binary파일의 경우 url_link 컴포넌트 연결
 				} else {
 					text.push("<a href=\""+this.download_url+"\">"+this.source_filename+"</a>\n");
 				}
 			});
-	
+
 			// html 모드
 			if(editorMode[editorSequence]=='html'){
 				if(text.length>0 && get_by_id('editor_textarea_'+editorSequence))
 				{
 					get_by_id('editor_textarea_'+editorSequence).value += text.join('');
 				}
-	
+
 			// 위지윅 모드
 			}else{
 				var iframe_obj = editorGetIFrame(editorSequence);
@@ -141,26 +141,26 @@ var AXUpload5 = Class.create(AXUpload5, {
 			this.uploadComplete();
 			return;
 		}
-		
+
 		var uploadQueue = this.uploadQueue.bind(this);
 		var cancelUpload = this.cancelUpload.bind(this);
 		var uploadSuccess = this.uploadSuccess.bind(this);
 		var onClickDeleteButton = this.onClickDeleteButton.bind(this);
 		var onClickFileTitle = this.onClickFileTitle.bind(this);
-		
+
 		var obj = this.queue.shift();
 		this.uploadingObj = obj;
 		var formData = new FormData();
 		//서버로 전송해야 할 추가 파라미터 정보 설정
 		jQuery.each(cfg.uploadPars, function(k, v){
-			formData.append(k, v); 
+			formData.append(k, v);
 		});
 		//formData.append(obj.file.name, obj.file);
 		formData.append(cfg.uploadFileName, obj.file);
-		
+
 		//obj.id
 		var itemID = obj.id;
-		
+
 		this.xhr = new XMLHttpRequest();
 		this.xhr.open('POST', cfg.uploadUrl, true);
 		this.xhr.onload = function(e) {
@@ -178,15 +178,15 @@ var AXUpload5 = Class.create(AXUpload5, {
 				cancelUpload();
 				return;
 			}
-			
+
 			if(cfg.isSingleUpload){
-				
+
 				jQuery("#"+itemID+" .AXUploadBtns").show();
 				jQuery("#"+itemID+" .AXUploadLabel").show();
 				jQuery("#"+itemID+" .AXUploadTit").show();
-				
+
 				jQuery("#"+itemID+" .AXUploadProcess").hide();
-								
+
 				uploadSuccess(obj.file, itemID, res);
 				// --------------------- s
 				jQuery("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
@@ -197,9 +197,9 @@ var AXUpload5 = Class.create(AXUpload5, {
 						onClickFileTitle(itemID);
 					});
 				}
-				
+
 			}else{
-				
+
 //				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show();
 				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
 				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
@@ -217,7 +217,7 @@ var AXUpload5 = Class.create(AXUpload5, {
 							||"none"
 						).dec().replace(".", "")); // NuriCms: 일반 파일 확장자명 추가
 				}
-				
+
 				uploadSuccess(obj.file, itemID, res);
 				// --------------------- s
 				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
@@ -239,9 +239,9 @@ var AXUpload5 = Class.create(AXUpload5, {
 		var setUploadingObjBind = setUploadingObj.bind(this);
 		this.xhr.upload.onprogress = function(e) {
 			if(cfg.isSingleUpload){
-				if (e.lengthComputable) { jQuery("#"+itemID).find(".AXUploadProcessBar").width( ((e.loaded / e.total) * 100).round(2)+"%" ); }	
+				if (e.lengthComputable) { jQuery("#"+itemID).find(".AXUploadProcessBar").width( ((e.loaded / e.total) * 100).round(2)+"%" ); }
 			}else{
-				if (e.lengthComputable) { jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcessBar").width( ((e.loaded / e.total) * 100).round(2)+"%" ); }	
+				if (e.lengthComputable) { jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcessBar").width( ((e.loaded / e.total) * 100).round(2)+"%" ); }
 			}
 			if (e.lengthComputable) {
 				if(	e.loaded > e.total*0.9 ){
@@ -253,11 +253,11 @@ var AXUpload5 = Class.create(AXUpload5, {
 	},
 	setUploadedList: function(files){ // 파일박스 리스트 추가
 		var cfg = this.config;
-		
+
 		var getItemTag = this.getItemTag.bind(this);
 		var onClickDeleteButton = this.onClickDeleteButton.bind(this);
 		var onClickFileTitle = this.onClickFileTitle.bind(this);
-		
+
 		if(cfg.isSingleUpload){
 
 			var f;
@@ -270,21 +270,21 @@ var AXUpload5 = Class.create(AXUpload5, {
 			}
 			if(!f) return;
 			var itemID = f.id;
-			
+
 			var uf = {
 				id:itemID,
 				name:f[cfg.fileKeys.name],
 				size:f[cfg.fileKeys.fileSize]
 			};
-			
+
 			jQuery("#" + cfg.targetID+'_AX_display').empty();
 			jQuery("#" + cfg.targetID+'_AX_display').append(this.getItemTag(itemID, uf));
-			
+
 			jQuery("#"+itemID+" .AXUploadBtns").show();
 			jQuery("#"+itemID+" .AXUploadLabel").show();
 			jQuery("#"+itemID+" .AXUploadTit").show();
 			jQuery("#"+itemID+" .AXUploadProcess").hide();
-			
+
 			jQuery("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
 				onClickDeleteButton(itemID);
 			});
@@ -293,14 +293,14 @@ var AXUpload5 = Class.create(AXUpload5, {
 					onClickFileTitle(itemID);
 				});
 			}
-			
+
 		}else{
 			this.uploadedList = files;
 			if(cfg.queueBoxID){
 				jQuery.each(this.uploadedList, function(fidx, f){
 					if(f.id == undefined){
 						trace("id key is required.");
-						return false;	
+						return false;
 					}
 					var itemID = f.id;
 					var uf = {
@@ -329,7 +329,7 @@ var AXUpload5 = Class.create(AXUpload5, {
 							||"none"
 						).dec().replace(".", "")); // NuriCms: 일반 파일 확장자명 추가
 					}
-		
+
 					jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtnsA").bind("click", function(){
 						onClickDeleteButton(itemID);
 					});
@@ -376,7 +376,7 @@ var AXUpload5 = Class.create(AXUpload5, {
 			jQuery.each(file, function(k, v){
 				pars.push(k + '=' + v);
 			});
-			
+
 			if (typeof(cfg.deletePars) === "object") {
 				jQuery.each(cfg.deletePars, function(k, v){
 					pars.push(k + '=' + v);
@@ -432,7 +432,7 @@ var AXUpload5 = Class.create(AXUpload5, {
 			}
 
 			var deleteQueue = [];
-			
+
 			 // NuriCms: 삭제 대상이 없으면 메시지를 출력
 			if(this.uploadedList.length == 0){
 				toast.push({body:uploadSettingObj[editorSequence].lang.error_deleteQueue, type:'Warning'});
@@ -474,14 +474,14 @@ var fnObj = {
 	upload: {
 		init: function(cfg){
 			var seq = cfg.editorSequence;
-		
+
 			if(!is_def(seq)) return;
 
 			cfg = jQuery.extend({
 				url : request_uri+'index.php',
 				sessionName : "PHPSESSID"
 			}, cfg);
-		
+
 			uploadSettingObj[seq] = cfg; // editor 설정정보 저장
 
 			// 파일 박스안의 우클릭, 드래그 방지
@@ -561,7 +561,7 @@ var fnObj = {
 					jQuery("#uploadCancelBtn").get(0).disabled = true; // 전송중지 버튼 제어
 
 					if(cfg.insertedFiles != myUpload.uploadedList.length){ // NuriCms: 파일박스에 등록된 파일수와 서버에 등록된 수가 불일치 할 경우 리로딩
-						fnObj.upload.getFileList(cfg, true); 
+						fnObj.upload.getFileList(cfg, true);
 					}
 
 					// NuriCms: 업로드, 삭제 등 프로세스가 정상종료될 경우 서버로부터 정보를 받아옴(임시저장 처리용)
@@ -664,7 +664,7 @@ var fnObj = {
 			);
 		},
 		changeOption: function(thumbvar){
-			// 업로드 갯수 등 업로드 관련 옵션을 동적으로 변경 할 수 있습니다. 
+			// 업로드 갯수 등 업로드 관련 옵션을 동적으로 변경 할 수 있습니다.
 			myUpload.changeConfig({
 				fileKeys:{
 					name:"source_filename",
@@ -678,8 +678,8 @@ var fnObj = {
 					upload_status:"upload_status",
 					left_size:"left_size"
 				}
-			});	
-			
+			});
+
 		}
 	}
 };
@@ -729,7 +729,7 @@ function _sprintf(format) {
 		return v;
 	}
 	var next = 1, idx = 0, av = arguments;
-	
+
 	return format.replace(_PARSE, _fmt);
 }
 
