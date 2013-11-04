@@ -970,15 +970,3 @@ jQuery(function($){
 		});
 	}
 });
-
-
-/* jQuery compatibility */
-jQuery.browser =
-{
-	version: 1.7976931348623157E+10308, /* infinity */
-	msie: (navigator.appName == 'Microsoft Internet Explorer'),
-	opera:(navigator.userAgent.indexOf("Opera") > -1),
-	mozilla:(navigator.userAgent.indexOf("Firefox") > -1),
-	firefox:(navigator.userAgent.indexOf("Firefox") > -1),
-	safari:(navigator.userAgent.indexOf("Safari") > -1)
-};
