@@ -2,11 +2,11 @@
 var oldExecXml = null;
 var calledArgs = null;
 (function($){
-    $(function() {
+	$(function() {
 
-        var captchaXE = null;
+		var captchaXE = null;
 
-        function xeCaptcha() {
+		function xeCaptcha() {
 			$('form').each(function(i)
 			{
 				var isSubmitHook = false;
@@ -49,17 +49,17 @@ var calledArgs = null;
 							$(self).append('<input type="hidden" name="secret_text" value="'+ $('#secret_text').val() +'" />');
 							$(self).submit();
 						});
-                        var params = new Array();
-                        params['captcha_action'] = 'setCaptchaSession';
-                        params['mid'] = current_mid;
-                        oldExecXml('', '', params, captchaXE.show,new Array('error','message','about_captcha','captcha_reload','captcha_play','cmd_input','cmd_cancel'));
+						var params = new Array();
+						params['captcha_action'] = 'setCaptchaSession';
+						params['mid'] = current_mid;
+						oldExecXml('', '', params, captchaXE.show,new Array('error','message','about_captcha','captcha_reload','captcha_play','cmd_input','cmd_cancel'));
 					});
 				}
 			});
-            var body    = $(document.body);
-            var captchaIma;
+			var body    = $(document.body);
+			var captchaIma;
 
-            if (!captchaXE) {
+			if (!captchaXE) {
 				var fc_isIE  = (navigator.appVersion.indexOf("MSIE") != -1) ? true : false;
 				var fc_isWin = (navigator.appVersion.toLowerCase().indexOf("win") != -1) ? true : false;
 				var fc_isOpera = (navigator.userAgent.indexOf("Opera") != -1) ? true : false;
@@ -98,7 +98,7 @@ var calledArgs = null;
 								'</form>'+_object_ +
 							'</div>').appendTo(captchaXE);
 
-	              $div.find('button.cancel')
+				  $div.find('button.cancel')
 					.click(function(){ $('#captcha_layer').hide(); });
 
 				  $div.find('button.play')
@@ -119,8 +119,8 @@ var calledArgs = null;
 						});
 					});
 
-                captchaXE.exec = function(module, act, params, callback_func, response_tags, callback_func_arg, fo_obj) {
-                    var doCheck = false;
+				captchaXE.exec = function(module, act, params, callback_func, response_tags, callback_func_arg, fo_obj) {
+					var doCheck = false;
 
 					$.each(captchaTargetAct || {}, function(key,val){ if (val == act){ doCheck = true; return false; } });
 
@@ -135,47 +135,47 @@ var calledArgs = null;
 							}
 							captchaXE.compare(); return false;
 						});
-                        calledArgs = {'module':module,'act':act,'params':params,'callback_func':callback_func,'response_tags':response_tags,'callback_func_arg':callback_func_arg,'fo_obj':fo_obj};
-                        var params = new Array();
-                        params['captcha_action'] = 'setCaptchaSession';
-                        params['mid'] = current_mid;
-                        oldExecXml(module, act, params, captchaXE.show,new Array('error','message','about_captcha','captcha_reload','captcha_play','cmd_input','cmd_cancel'));
+						calledArgs = {'module':module,'act':act,'params':params,'callback_func':callback_func,'response_tags':response_tags,'callback_func_arg':callback_func_arg,'fo_obj':fo_obj};
+						var params = new Array();
+						params['captcha_action'] = 'setCaptchaSession';
+						params['mid'] = current_mid;
+						oldExecXml(module, act, params, captchaXE.show,new Array('error','message','about_captcha','captcha_reload','captcha_play','cmd_input','cmd_cancel'));
 					} else {
-                        oldExecXml(module, act, params, callback_func, response_tags, callback_func_arg, fo_obj);
+						oldExecXml(module, act, params, callback_func, response_tags, callback_func_arg, fo_obj);
 					}
 
-                    return true;
-                };
+					return true;
+				};
 
-                captchaXE.show = function(ret_obj) {
+				captchaXE.show = function(ret_obj) {
 					$('#captcha_layer').show();
 					$("#captchaAbout").html(ret_obj['about_captcha']);
 					$("#captcha_layer .reload").attr('title',ret_obj['captcha_reload']);
-                    $("#captcha_layer .play").attr('title',ret_obj['captcha_play']);
+					$("#captcha_layer .play").attr('title',ret_obj['captcha_play']);
 					$("#captcha_layer button[type=submit]").html(ret_obj['cmd_input']);
 					$("#captcha_layer button.cancel").html(ret_obj['cmd_cancel']);
 					$("#captcha_image").attr("src", current_url.setQuery('captcha_action','captchaImage').setQuery('rnd', (new Date).getTime()));
 					$div.find('input[type=text]').val('').focus();
 					$('html, body').css('height','100%');
-                };
+				};
 
-                captchaXE.compare = function(e) {
-                    var params = new Array();
-                    params['captcha_action'] = 'captchaCompare';
-                    params['mid'] = current_mid;
-                    params['secret_text'] = $('#secret_text').val();
-                    oldExecXml(calledArgs.module,calledArgs.act,params, function() {
-                        $("#captcha_layer").hide();
-                        oldExecXml(calledArgs.module, calledArgs.act, calledArgs.params, calledArgs.callback_func, calledArgs.response_tags, calledArgs.callback_func_arg, calledArgs.fo_obj);
-                    } );
-                };
-            }
-            return captchaXE;
-        }
+				captchaXE.compare = function(e) {
+					var params = new Array();
+					params['captcha_action'] = 'captchaCompare';
+					params['mid'] = current_mid;
+					params['secret_text'] = $('#secret_text').val();
+					oldExecXml(calledArgs.module,calledArgs.act,params, function() {
+						$("#captcha_layer").hide();
+						oldExecXml(calledArgs.module, calledArgs.act, calledArgs.params, calledArgs.callback_func, calledArgs.response_tags, calledArgs.callback_func_arg, calledArgs.fo_obj);
+					} );
+				};
+			}
+			return captchaXE;
+		}
 
-        $(window).ready(function(){
-            oldExecXml = exec_xml;
-            exec_xml = xeCaptcha().exec;
-        });
-    });
+		$(window).ready(function(){
+			oldExecXml = exec_xml;
+			exec_xml = xeCaptcha().exec;
+		});
+	});
 })(jQuery);

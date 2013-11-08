@@ -140,9 +140,9 @@ function getScreen() {
 			this.index += val;
 			prevbtn.css("visibility", (this.index>0)?"visible":"hidden");
 			nextbtn.css("visibility", (this.index<this.list.size()-1)?"visible":"hidden");
-            //textyle 이미지 리사이즈 처리
-            var src = this.list.eq(this.index).attr("rawsrc");
-            if(!src) src = this.list.eq(this.index).attr("src");
+			//textyle 이미지 리사이즈 처리
+			var src = this.list.eq(this.index).attr("rawsrc");
+			if(!src) src = this.list.eq(this.index).attr("src");
 			imgframe.attr("src", src).css({
 				left : clientWidth/2 - imgframe.width()/2 + "px",
 				top  : clientHeight/2 - imgframe.height()/2 + "px"

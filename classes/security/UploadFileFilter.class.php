@@ -29,7 +29,6 @@ class UploadFileFilter
 				}
 
 				fclose($fp);
-
 				return TRUE;
 		}
 }

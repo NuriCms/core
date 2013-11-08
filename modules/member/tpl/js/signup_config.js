@@ -1,8 +1,8 @@
 /* 금지아이디 관련 작업들 */
 function doUpdateDeniedID(user_id, mode, message) {
-    if(typeof(message)!='undefined'&&!confirm(message)) return;
+	if(typeof(message)!='undefined'&&!confirm(message)) return;
 
-    exec_xml(
+	exec_xml(
 		'member',
 		'procMemberAdminUpdateDeniedID',
 		{user_id:user_id, mode:mode},
@@ -19,9 +19,9 @@ function doUpdateDeniedID(user_id, mode, message) {
 /* prohibited nick name functions */
 function doUpdateDeniedNickName(nick_name, mode, message)
 {
-    if(typeof(message)!='undefined' && !confirm(message)) return;
+	if(typeof(message)!='undefined' && !confirm(message)) return;
 
-    exec_xml(
+	exec_xml(
 		'member',
 		'procMemberAdminUpdateDeniedNickName',
 		{nick_name:nick_name, mode:mode},

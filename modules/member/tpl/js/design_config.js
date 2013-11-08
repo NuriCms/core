@@ -1,7 +1,7 @@
 /* 멤버 스킨 컬러셋 구해옴 */
 function doGetSkinColorset(skin) {
-    var params = {skin:skin};
-    var response_tags = ['error','message','tpl'];
+	var params = {skin:skin};
+	var response_tags = ['error','message','tpl'];
 
 	function on_complete(ret) {
 		jQuery('#colorset').show();
@@ -14,7 +14,7 @@ function doGetSkinColorset(skin) {
 		try{ fixAdminLayoutFooter(new_h - old_h) }catch(e){ };
 	}
 
-    exec_xml(
+	exec_xml(
 		'member',
 		'getMemberAdminColorset',
 		{skin:skin},
