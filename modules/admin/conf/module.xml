@@ -4,7 +4,6 @@
 	<permissions>
 		<permission action="procAdminRemoveIcons" target="root" />
 		<permission action="procAdminInsertDefaultDesignInfo" target="root" />
-		<permission action="procAdminEnviromentGatheringAgreement" target="root" />
 		<permission action="procAdminUpdateConfig" target="root" />
 		<permission action="procAdminDeleteLogo" target="root" />
 		<permission action="procAdminMenuReset" target="root" />
@@ -19,7 +18,6 @@
 		<action name="procAdminLogout" type="controller" method="GET|POST" />
 		<action name="procAdminInsertDefaultDesignInfo" type="controller" />
 		<action name="procAdminToggleFavorite" type="controller" ruleset="toggleFavorite" />
-		<action name="procAdminEnviromentGatheringAgreement" type="controller" />
 		<action name="procAdminUpdateConfig" type="controller" />
 		<action name="procAdminDeleteLogo" type="controller" />
 		<action name="procAdminMenuReset" type="controller" />
