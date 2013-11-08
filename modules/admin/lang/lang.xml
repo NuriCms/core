@@ -378,6 +378,18 @@
 		<value xml:lang="tr"><![CDATA[Ortam Bilgisi]]></value>
 		<value xml:lang="vi"><![CDATA[Thông tin]]></value>
 	</item>
+	<item name="current_core_version">
+		<value xml:lang="ko"><![CDATA[설치된 코어 버전]]></value>
+		<value xml:lang="en"><![CDATA[Current Core Version]]></value>
+		<value xml:lang="jp"><![CDATA[インストールされているバージョン]]></value>
+		<value xml:lang="zh-CN"><![CDATA[安装版本]]></value>
+		<value xml:lang="zh-TW"><![CDATA[安裝版本]]></value>
+		<value xml:lang="fr"><![CDATA[Version Courante]]></value>
+		<value xml:lang="ru"><![CDATA[Текущая версия]]></value>
+		<value xml:lang="es"><![CDATA[Versión actual]]></value>
+		<value xml:lang="tr"><![CDATA[Güncel Sürüm]]></value>
+		<value xml:lang="vi"><![CDATA[Phiên bản]]></value>
+	</item>
 	<item name="current_version">
 		<value xml:lang="ko"><![CDATA[설치된 버전]]></value>
 		<value xml:lang="en"><![CDATA[Current Version]]></value>

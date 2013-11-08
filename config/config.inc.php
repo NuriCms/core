@@ -69,6 +69,7 @@ else
 	/**
 	 * Location site
 	 */
+	define('_NURI_LOCATION_SITE_', 'https://www.nuricms.org/');
 	define('_XE_LOCATION_SITE_', 'http://www.xpressengine.org/');
 
 	/**
