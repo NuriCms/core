@@ -332,7 +332,7 @@ class installController extends install
 		// Check each item
 		$checklist = array();
 		// 0. check your version of php (5.2.2 is not supported)
-		if(phpversion()=='5.2.2') $checklist['php_version'] = false;
+		if(version_compare(phpversion(), '5.2.4', '<')) $checklist['php_version'] = FALSE;
 		else $checklist['php_version'] = true;
 		// 1. Check permission
 		if(is_writable('./')||is_writable('./files')) $checklist['permission'] = true;
