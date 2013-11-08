@@ -186,6 +186,11 @@ class commentController extends comment
 	 */
 	function insertComment($obj, $manual_inserted = FALSE)
 	{
+		if(!$manual_inserted && !checkCSRF())
+		{
+			return new Object(-1, 'msg_invalid_request');
+		}
+
 		if(!is_object($obj))
 		{
 			$obj = new stdClass();

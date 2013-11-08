@@ -589,35 +589,35 @@
 		</item>
 		<item name="fontlist" type="array">
 			<item name="arial">
-				<value xml:lang="ko"><![CDATA[Arial, Helvetica, sans-serif]]></value>
+				<value xml:lang="ko"><![CDATA[Arial, Helvetica, sans-serif, 나눔고딕, 맑은 고딕, 돋움, Dotum]]></value>
 				<value xml:lang="en"><![CDATA[Arial, Helvetica, sans-serif]]></value>
 			</item>
 			<item name="tahoma">
-				<value xml:lang="ko"><![CDATA[Tahoma, Geneva, sans-serif]]></value>
+				<value xml:lang="ko"><![CDATA[Tahoma, Geneva, sans-serif, Dotum]]></value>
 				<value xml:lang="en"><![CDATA[Tahoma, Geneva, sans-serif]]></value>
 			</item>
 			<item name="verdana">
-				<value xml:lang="ko"><![CDATA[Verdana, Geneva, sans-serif]]></value>
+				<value xml:lang="ko"><![CDATA[Verdana, Geneva, sans-serif, 맑은 고딕]]></value>
 				<value xml:lang="en"><![CDATA[Verdana, Geneva, sans-serif]]></value>
 			</item>
 			<item name="sans-serif">
-				<value xml:lang="ko"><![CDATA[Sans-serif]]></value>
+				<value xml:lang="ko"><![CDATA[Sans-serif, 나눔고딕, 맑은 고딕, 돋움, Dotum]]></value>
 				<value xml:lang="en"><![CDATA[Sans-serif]]></value>
 			</item>
 			<item name="georgia">
-				<value xml:lang="ko"><![CDATA[Georgia, 'Times New Roman', Times, serif]]></value>
+				<value xml:lang="ko"><![CDATA[Georgia, 'Times New Roman', Times, serif, 나눔명조, 명조]]></value>
 				<value xml:lang="en"><![CDATA[Georgia, 'Times New Roman', Times, serif]]></value>
 			</item>
 			<item name="palatinoLinotype">
-				<value xml:lang="ko"><![CDATA['Palatino Linotype', 'Book Antiqua', Palatino, serif]]></value>
+				<value xml:lang="ko"><![CDATA['Palatino Linotype', 'Book Antiqua', Palatino, 나눔명조, 명조, serif]]></value>
 				<value xml:lang="en"><![CDATA['Palatino Linotype', 'Book Antiqua', Palatino, serif]]></value>
 			</item>
 			<item name="timesNewRoman">
-				<value xml:lang="ko"><![CDATA['Times New Roman', Times, serif]]></value>
+				<value xml:lang="ko"><![CDATA['Times New Roman', Times,  나눔명조, 명조, serif]]></value>
 				<value xml:lang="en"><![CDATA['Times New Roman', Times, serif]]></value>
 			</item>
 			<item name="serif">
-				<value xml:lang="ko"><![CDATA[Serif]]></value>
+				<value xml:lang="ko"><![CDATA[나눔명조, 명조, Serif]]></value>
 				<value xml:lang="en"><![CDATA[Serif]]></value>
 			</item>
 			<item name="courierNew">
@@ -626,6 +626,7 @@
 			</item>
 			<item name="lucidaConsole">
 				<value xml:lang="ko"><![CDATA['Lucida Console', Monaco, monospace]]></value>
+				<value xml:lang="en"><![CDATA['Lucida Console', Monaco, monospace]]></value>
 			</item>
 		</item>
 		<item name="header">
