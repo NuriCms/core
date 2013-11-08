@@ -975,9 +975,21 @@ function removeHackTag($content)
 	 */
 	$content = preg_replace_callback('@<(/?)([a-z]+[0-9]?)((?>"[^"]*"|\'[^\']*\'|[^>])*?\b(?:on[a-z]+|data|style|background|href|(?:dyn|low)?src)\s*=[\s\S]*?)(/?)($|>|<)@i', 'removeSrcHack', $content);
 
-	// xmp tag ?뺤씤 �??�붽?
+	// xmp tag check
 	$content = checkXmpTag($content);
 	return $content;
+}
+
+/**
+ * check uploaded file which may be hacking attempts
+ *
+ * @param string $file Taget file path
+ * @return bool
+ */
+function checkUploadedFile($file)
+{
+	require_once(_XE_PATH_ . 'classes/security/UploadFileFilter.class.php');
+	return UploadFileFilter::check($file);
 }
 
 /**
