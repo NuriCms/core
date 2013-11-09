@@ -648,6 +648,73 @@ class ModuleHandler extends Handler
 			}
 		}
 
+		// load common js/css files
+		if(Mobile::isFromMobilePhone())
+		{
+			// add common JS/CSS files
+			if(__DEBUG__)
+			{
+				Context::loadFile(array('./common/css/mobile.css', '', '', -1000000), true);
+				Context::loadFile(array('./common/js/jquery.js', 'head', '', -100000), true);
+				Context::loadFile(array('./common/js/jquery-migrate.js', 'head', '', -100000), true);
+			}
+			else
+			{
+				Context::loadFile(array('./common/css/mobile.min.css', '', '', -1000000), true);
+				Context::loadFile(array('./common/js/jquery.min.js', 'head', '', -100000), true);
+				Context::loadFile(array('./common/js/jquery-migrate.min.js', 'head', '', -100000), true);
+			}
+			Context::addMetaTag('viewport', 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no', FALSE);
+		}
+		else
+		{
+			// add common JS/CSS files
+			if(__DEBUG__)
+			{
+				Context::loadFile(array('./common/js/jquery.js', 'head', '', -100000), true);
+				Context::loadFile(array('./common/js/jquery-migrate.js', 'head', '', -100000), true);
+				Context::loadFile(array('./common/js/x.js', 'head', '', -100000), true);
+				Context::loadFile(array('./common/js/common.js', 'head', '', -100000), true);
+				Context::loadFile(array('./common/js/js_app.js', 'head', '', -100000), true);
+				Context::loadFile(array('./common/js/xml_handler.js', 'head', '', -100000), true);
+				Context::loadFile(array('./common/js/xml_js_filter.js', 'head', '', -100000), true);
+				Context::loadFile(array('./common/js/html5.js', 'head', 'lt IE 9', -100000), true);
+				Context::loadFile(array('./common/css/xe.css', '', '', -1000000), true);
+			}
+			else
+			{
+				Context::loadFile(array('./common/js/jquery.min.js', 'head', '', -100000), true);
+				Context::loadFile(array('./common/js/jquery-migrate.min.js', 'head', '', -100000), true);
+				Context::loadFile(array('./common/js/x.min.js', 'head', '', -100000), true);
+				Context::loadFile(array('./common/js/xe.min.js', 'head', '', -100000), true);
+				Context::loadFile(array('./common/js/html5.js', 'head', 'lt IE 9', -100000), true);
+				Context::loadFile(array('./common/css/xe.min.css', '', '', -1000000), true);
+			}
+
+			// for admin page, add admin css
+			if(Context::get('module') == 'admin' || strpos(Context::get('act'), 'Admin') > 0)
+			{
+				if(__DEBUG__)
+				{
+					Context::loadFile(array('./modules/admin/tpl/css/admin.css', '', '', 10), true);
+					Context::loadFile(array("./modules/admin/tpl/css/admin.iefix.css", '', 'ie', 10), true);
+					Context::loadFile('./modules/admin/tpl/js/admin.js', true);
+					Context::loadFile(array('./modules/admin/tpl/css/admin.bootstrap.css', '', '', 1), true);
+					Context::loadFile(array('./modules/admin/tpl/js/jquery.tmpl.js', '', '', 1), true);
+					Context::loadFile(array('./modules/admin/tpl/js/jquery.jstree.js', '', '', 1), true);
+				}
+				else
+				{
+					Context::loadFile(array('./modules/admin/tpl/css/admin.min.css', '', '', 10), true);
+					Context::loadFile(array("./modules/admin/tpl/css/admin.iefix.min.css", '', 'ie', 10), true);
+					Context::loadFile('./modules/admin/tpl/js/admin.min.js', true);
+					Context::loadFile(array('./modules/admin/tpl/css/admin.bootstrap.min.css', '', '', 1), true);
+					Context::loadFile(array('./modules/admin/tpl/js/jquery.tmpl.js', '', '', 1), true);
+					Context::loadFile(array('./modules/admin/tpl/js/jquery.jstree.js', '', '', 1), true);
+				}
+			}
+		}
+
 		// if failed message exists in session, set context
 		$this->_setInputErrorToContext();
 
