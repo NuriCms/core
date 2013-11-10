@@ -14,8 +14,9 @@
 <html lang="{$lang_type}">
 <head>
 <!--// META -->
-<meta charset="UTF-8">
-<meta name="generator" content="NURI CMS">
+<meta charset="UTF-8" />
+<meta name="generator" content="NURI CMS" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <block loop="Context::getMetaTag() => $no, $val"><meta http-equiv="{$val['name']}"|cond="$val['is_http_equiv']" name="{$val['name']}"|cond="!$val['is_http_equiv']" content="{$val['content']}"></block>
 <!--// TITLE -->
 <title>{Context::getBrowserTitle()}</title>
