@@ -1,8 +1,5 @@
 /files/
 config.user.inc.php
 /node_modules/
-<<<<<<< HEAD
-.settings/*
-=======
->>>>>>> master
+.settings/
 .project
