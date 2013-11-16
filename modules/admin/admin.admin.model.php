@@ -823,11 +823,11 @@ class adminAdminModel extends admin
 		$db_info = Context::getDBInfo();
 		if(!is_readable($file_exist))
 		{
-			$icon_url = $db_info->default_url . 'modules/admin/tpl/img/' . $default_icon_name;
+			$icon_url = 'modules/admin/tpl/img/' . $default_icon_name;
 		}
 		else
 		{
-			$icon_url = $db_info->default_url . 'files/attach/xeicon/' . $iconname;
+			$icon_url = 'files/attach/xeicon/' . $iconname;
 		}
 		return $icon_url;
 	}
