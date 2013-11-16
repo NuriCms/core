@@ -1,0 +1,101 @@
+﻿/*!
+ * AxisJ Javascript Library Version 1.0
+ * http://AxisJ.com
+ * 
+ * Copyright AxisJ
+ * http://AxisJ.com/license
+ * Date 2012-09-28 오후 1:17:52
+ *
+ * Adaptor NURI Project (developer@nuricms.org)
+ */
+
+
+/** .AXButton.Classic **/
+.AXButton.Classic{
+	border:1px solid #4f585f;
+	color:#a0abb4;text-shadow:0px -1px #3a444d;
+	background:url(img/classicRegular.png) repeat-x;
+}
+.AXButton.Classic:hover, .AXButton.Classic:focus{
+	border:1px solid #383f45;
+	background-position:0px -26px;
+	box-shadow:0px 1px 3px #4f5052;
+	color:#939fa7;text-shadow:0px -1px #3a444d;
+}
+.AXButton.Classic:active{
+	border:1px solid #383f45;
+	background-position:0px -52px;
+	box-shadow:none;
+	color:#939fa7;text-shadow:0px 1px #3a444d;
+}
+
+/** .AXButton.Blue **/
+.AXButton.Blue{
+	border:1px solid #3d7fb3;
+	color:#d0ebff;text-shadow:0px -1px #5692c2;
+	background:url(img/blueRegular.png) repeat-x;
+}
+.AXButton.Blue:hover, .AXButton.Blue:focus{
+	border:1px solid #2e6492;
+	background-position:0px -26px;
+	box-shadow:0px 1px 3px #c8cacd;
+	color:#fff;text-shadow:0px -1px #2a4861;
+}
+.AXButton.Blue:active{
+	border:1px solid #296190;
+	background-position:0px -52px;
+	box-shadow:none;
+	color:#b5d5ea;text-shadow:0px 1px #436582;
+}
+
+/** .AXButton.Green **/
+.AXButton.Green{
+	border:1px solid #69994d;
+	color:#deffbb;text-shadow:0px -1px #729a59;
+	background:url(img/greenRegular.png) repeat-x;
+}
+.AXButton.Green:hover, .AXButton.Green:focus{
+	border:1px solid #54813e;
+	background-position:0px -26px;
+	box-shadow:0px 1px 3px #c8cacd;
+	color:#fff;text-shadow:0px -1px #405632;
+}
+.AXButton.Green:active{
+	border:1px solid #5e8846;
+	background-position:0px -52px;
+	box-shadow:none;
+	color:#e1edaf;text-shadow:0px 1px #5e7d58;
+}
+
+/** .AXButton.Red **/
+.AXButton.Red{
+	border:1px solid #882f29;
+	color:#ffccc8;text-shadow:0px -1px #aa4949;
+	background:url(img/redRegular.png) repeat-x;
+}
+.AXButton.Red:hover, .AXButton.Red:focus{
+	border:1px solid #7e201e;
+	background-position:0px -26px;
+	box-shadow:0px 1px 3px #c8cacd;
+	color:#fff;text-shadow:0px -1px #5b2122;
+}
+.AXButton.Red:active{
+	border:1px solid #731c22;
+	background-position:0px -52px;
+	box-shadow:none;
+	color:#ffc1af;text-shadow:0px 1px #7a4247;
+}
+
+/* disabled cotrol */
+.AXButton[disabled]{
+	border:1px solid #979797;
+	background-position:0px -78px;
+	box-shadow:none;
+	color:#cdcdcd;text-shadow:0px -1px #828282;
+}
+.AXButton[disabled]:hover, .AXButton[disabled]:focus, .AXButton[disabled]:active{
+	border:1px solid #979797;
+	background-position:0px -78px;
+	box-shadow:none;
+	color:#cdcdcd;text-shadow:0px -1px #828282;	
+}

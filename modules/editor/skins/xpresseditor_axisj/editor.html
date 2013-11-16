@@ -459,7 +459,7 @@
 				<input type="button" value="{$lang->edit->delete_selected}" class="AXButton" onclick="myUpload.deleteSelect();" />
 				<input type="button" value="{$lang->AXdelete_all}" class="AXButton" onclick="myUpload.deleteSelect('all');" />
 				<input type="button" value="{$lang->edit->link_file}" class="AXButton Classic" onclick="myUpload.custom.insertUploadedFile('{$editor_sequence}');" />
-				<div class="AXlogo"><a href="http://www.axisj.com/" title="Awesome UI library AXISJ" target="_blank"><img src="{$tpl_path}/_AXJ/ui/default/img/axisj_logo.png" width="64" height="25" alt="axisJ"/></a></div>
+				<div class="AXlogo"><a href="http://www.axisj.com/" title="Awesome UI library AXISJ" target="_blank"></a></div>
 				<div class="file_attach_info" id="uploader_status_{$editor_sequence}">
 					{$lang->allowed_attach_size} : <span class="attach_size">{FileHandler::filesize($attached_size)}</span> / {FileHandler::filesize($file_config->allowed_attach_size)} <br />
 					{$lang->allowed_filesize} : (max {FileHandler::filesize($file_config->allowed_filesize)}) ({$lang->allowed_filetypes} : {$file_config->allowed_filetypes})
@@ -477,9 +477,15 @@
 		var editorSequence = {$editor_sequence};
 
 		<!--@if($allow_fileupload)-->
-		<load target="_AXJ/ui/default/AXJ.css" />
-		<load target="_AXJ/ui/default/AXButton.css" />
-		<load target="_AXJ/ui/default/AXUpload5.css" />
+		<!--@if($editor_class == "black")-->
+			<load target="_AXJ/ui/black/AXJ.css" />
+			<load target="_AXJ/ui/black/AXButton.css" />
+			<load target="_AXJ/ui/black/AXUpload5.css" />
+		<!--@else-->
+			<load target="_AXJ/ui/default/AXJ.css" />
+			<load target="_AXJ/ui/default/AXButton.css" />
+			<load target="_AXJ/ui/default/AXUpload5.css" />
+		<!--@end-->
 
 		<load target="_AXJ/lib/AXJ.js" />
 		<load target="_AXJ/lib/AXUpload5.js" />
