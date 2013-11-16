@@ -5,6 +5,8 @@
  * Copyright AxisJ
  * http://AxisJ.com/license
  * Date 2012-09-28 오후 1:17:52
+ *
+ * Adaptor NURI Project (developer@nuricms.org)
  */
 
 .AXHspace1{font-size:1px;line-height:1px;height:1px;}
@@ -1614,6 +1616,12 @@
 	.AXSearchTable tbody td.last, .AXSearchTable tbody th.last{
 		background:url() repeat-y 100% 0px;	
 	}
+
+/* ---------------------------- AXMultiselectorHelper ------------------------------- */
+.AXMultiselectorHelper{
+	position:absolute;
+	z-index:10000;
+}
 
 /*----- default class styleCSS -----*/
 .clear{clear:both;}

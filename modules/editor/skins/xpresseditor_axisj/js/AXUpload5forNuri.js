@@ -200,7 +200,7 @@ var AXUpload5 = Class.create(AXUpload5, {
 
 			}else{
 
-//				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show();
+//				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show(); // 삭제버튼은 비표시
 				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
 				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
 
@@ -614,6 +614,8 @@ var fnObj = {
 				}
 			});
 
+			myUpload.multiSelector.config.moveSens = 2; // NuriCms: 감도조정
+
 			// 서버에 저장된 파일 목록을 불러와 업로드된 목록에 추가 합니다. ----------------------------- s
 			fnObj.upload.getFileList(cfg); // NuriCms: 서버로부터 정보를 받아옴
 			// 서버에 저장된 파일 목록을 불러와 업로드된 목록에 추가 합니다. ----------------------------- e
@@ -690,7 +692,6 @@ window.editorUploadInit = fnObj.pageStart;
 jQuery(function(){
 	try { document.execCommand('BackgroundImageCache',false,true); } catch(e) { }
 });
-
 
 // NuriCms: sprintf(), filesize()를 할 수 있도록 함수 추가함
 
