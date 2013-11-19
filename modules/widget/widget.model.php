@@ -313,7 +313,7 @@ class widgetModel extends widget
 		$xml_obj = $tmp_xml_obj->widgetstyle;
 		if(!$xml_obj) return;
 
-		$buff = '';
+		$buff = '$widgetStyle_info = new stdClass;';
 		// Title of the widget, version
 		$buff .= sprintf('$widgetStyle_info->widgetStyle = "%s";', $widgetStyle);
 		$buff .= sprintf('$widgetStyle_info->path = "%s";', $widgetStyle_path);
@@ -337,6 +337,7 @@ class widgetModel extends widget
 
 		for($i=0; $i < count($author_list); $i++)
 		{
+			$buff .= '$widgetStyle_info->author['.$i.'] = new stdClass;';
 			$buff .= sprintf('$widgetStyle_info->author['.$i.']->name = "%s";', $author_list[$i]->name->body);
 			$buff .= sprintf('$widgetStyle_info->author['.$i.']->email_address = "%s";', $author_list[$i]->attrs->email_address);
 			$buff .= sprintf('$widgetStyle_info->author['.$i.']->homepage = "%s";', $author_list[$i]->attrs->link);
@@ -352,6 +353,7 @@ class widgetModel extends widget
 			{
 				sscanf($history_list[$i]->attrs->date, '%d-%d-%d', $date_obj->y, $date_obj->m, $date_obj->d);
 				$date = sprintf('%04d%02d%02d', $date_obj->y, $date_obj->m, $date_obj->d);
+				$buff .= '$widgetStyle_info->history['.$i.'] = new stdClass;';
 				$buff .= sprintf('$widgetStyle_info->history['.$i.']->description = "%s";', $history_list[$i]->description->body);
 				$buff .= sprintf('$widgetStyle_info->history['.$i.']->version = "%s";', $history_list[$i]->attrs->version);
 				$buff .= sprintf('$widgetStyle_info->history['.$i.']->date = "%s";', $date);
@@ -362,6 +364,7 @@ class widgetModel extends widget
 
 					for($j=0; $j < count($obj->author_list); $j++)
 					{
+						$buff .= '$widgetStyle_info->history['.$i.']->author['.$j.'] = new stdClass;';
 						$buff .= sprintf('$widgetStyle_info->history['.$i.']->author['.$j.']->name = "%s";', $obj->author_list[$j]->name->body);
 						$buff .= sprintf('$widgetStyle_info->history['.$i.']->author['.$j.']->email_address = "%s";', $obj->author_list[$j]->attrs->email_address);
 						$buff .= sprintf('$widgetStyle_info->history['.$i.']->author['.$j.']->homepage = "%s";', $obj->author_list[$j]->attrs->link);
@@ -374,6 +377,7 @@ class widgetModel extends widget
 
 					for($j=0; $j < count($obj->log_list); $j++)
 					{
+						$buff .= '$widgetStyle_info->history['.$i.']->logs['.$j.'] = new stdClass;';
 						$buff .= sprintf('$widgetStyle_info->history['.$i.']->logs['.$j.']->text = "%s";', $obj->log_list[$j]->body);
 						$buff .= sprintf('$widgetStyle_info->history['.$i.']->logs['.$j.']->link = "%s";', $obj->log_list[$j]->attrs->link);
 					}
@@ -393,7 +397,7 @@ class widgetModel extends widget
 			{
 				$extra_var_count = count($extra_vars);
 
-				$buff .= sprintf('$widgetStyle_info->extra_var_count = "%s";', $extra_var_count);
+				$buff .= sprintf('$widgetStyle_info->extra_var_count = "%s";$widgetStyle_info->extra_var = new stdClass;', $extra_var_count);
 				for($i=0;$i<$extra_var_count;$i++)
 				{
 					unset($var);
@@ -404,6 +408,7 @@ class widgetModel extends widget
 					$name = $var->name->body?$var->name->body:$var->title->body;
 					$type = $var->attrs->type?$var->attrs->type:$var->type->body;
 
+					$buff .= sprintf('$widgetStyle_info->extra_var->%s = new stdClass;', $id);
 					$buff .= sprintf('$widgetStyle_info->extra_var->%s->group = "%s";', $id, $group->title->body);
 					$buff .= sprintf('$widgetStyle_info->extra_var->%s->name = "%s";', $id, $name);
 					$buff .= sprintf('$widgetStyle_info->extra_var->%s->type = "%s";', $id, $type);

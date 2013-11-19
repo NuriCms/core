@@ -111,6 +111,7 @@ class member extends ModuleObject {
 		}
 
 		// Configure administrator information
+		$admin_args = new stdClass;
 		$admin_args->is_admin = 'Y';
 		$output = executeQuery('member.getMemberList', $admin_args);
 		if(!$output->data)

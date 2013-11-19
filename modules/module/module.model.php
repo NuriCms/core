@@ -481,6 +481,7 @@ class moduleModel extends module
 
 		$site_module_info = Context::get('site_module_info');
 
+		$args = new stdClass;
 		$args->mid = $mid;
 		if($site_module_info) $args->site_srl = $site_module_info->site_srl;
 		$output = executeQuery('module.getModuleSrlByMid', $args);

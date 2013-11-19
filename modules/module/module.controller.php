@@ -397,6 +397,7 @@ class moduleController extends module
 
 		if($isMenuCreate == TRUE)
 		{
+			$menuArgs = new stdClass;
 			$menuArgs->menu_srl = $args->menu_srl;
 			$menuOutput = executeQuery('menu.getMenu', $menuArgs);
 

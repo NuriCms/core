@@ -85,6 +85,7 @@ class content extends WidgetHandler
 			}
 			else
 			{
+				$obj = new stdClass();
 				$obj->module_srls = $args->module_srls;
 				$output = executeQueryArray('widgets.content.getMids', $obj);
 				if($output->data)

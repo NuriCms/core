@@ -815,6 +815,7 @@ class documentController extends document
 			return false;
 		}
 		// Update read counts
+		$args = new stdClass;
 		$args->document_srl = $document_srl;
 		$output = executeQuery('document.updateReadedCount', $args);
 		// Register session
