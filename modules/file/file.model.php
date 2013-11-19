@@ -42,7 +42,7 @@ class fileModel extends file
 				$file_info = $tmp_files[$i];
 				if(!$file_info->file_srl) continue;
 
-				$obj = null;
+				$obj = new stdClass;
 				$obj->file_srl = $file_info->file_srl;
 				$obj->source_filename = $file_info->source_filename;
 				$obj->file_size = $file_info->file_size;
@@ -75,6 +75,7 @@ class fileModel extends file
 		$this->add("upload_status",$upload_status);
 		$this->add("left_size",$left_size);
 
+		$output = new stdClass;
 		$output->files = $files;
 		$output->editor_sequence = $editor_sequence;
 		$output->upload_target_srl = $upload_target_srl;
@@ -302,6 +303,7 @@ class fileModel extends file
 	{
 		if(!$file_info) return null;
 
+		$file_grant = new stdClass;
 		if($_SESSION['__XE_UPLOADING_FILES_INFO__'][$file_info->file_srl])
 		{
 			$file_grant->is_deletable = true;

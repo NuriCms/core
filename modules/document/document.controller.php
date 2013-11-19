@@ -1295,6 +1295,7 @@ class documentController extends document
 		$oDocumentModel = &getModel('document');
 		if(!$document_count) $document_count = $oDocumentModel->getCategoryDocumentCount($module_srl,$category_srl);
 
+		$args = new stdClass;
 		$args->category_srl = $category_srl;
 		$args->document_count = $document_count;
 		$output = executeQuery('document.updateCategoryCount', $args);

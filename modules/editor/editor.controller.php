@@ -22,6 +22,7 @@ class editorController extends editor
 
 		$this->deleteSavedDoc(false);
 
+		$args = new stdClass;
 		$args->document_srl = Context::get('document_srl');
 		$args->content = Context::get('content');
 		$args->title = Context::get('title');
