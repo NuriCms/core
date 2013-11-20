@@ -1510,6 +1510,7 @@ class memberController extends member
 	function doAutologin()
 	{
 		// Get a key value of auto log-in
+		$args = new stdClass;
 		$args->autologin_key = $_COOKIE['xeak'];
 		// Get information of the key
 		$output = executeQuery('member.getAutologin', $args);

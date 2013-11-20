@@ -29,6 +29,7 @@ class rssView extends rss
 		$oDocumentModel = &getModel('document');
 		$oModuleModel = &getModel('module');
 		$oModuleController = &getController('module');
+		$info = new stdClass;
 		// Get the content and information for the current requested module if the method is not called from another module
 		if(!$document_list)
 		{
