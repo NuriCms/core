@@ -16,6 +16,7 @@ var AXUpload5 = Class.create(AXUpload5, {
 		axDeleteQueue: 0, // 삭제 발생시의 큐
 		reloadFileList: function(cfg) { // 서버로부터 파일리스트 요청(임시저장 처리용)
 			var params = {
+				vid : (function() { if(typeof xeVid !== "undefined") return xeVid; else return ''; })(),
 				mid : current_mid,
 				file_list_area_id : cfg.fileListAreaID,
 				editor_sequence   : cfg.editorSequence,
@@ -522,6 +523,7 @@ var fnObj = {
 				uploadPars:{
 					PHPSESSID : getCookie(cfg.sessionName),
 					editor_sequence : cfg.editorSequence,
+					vid : (function() { if(typeof xeVid !== "undefined") return xeVid; else return ''; })(),
 					mid : current_mid,
 					act : "procFileUpload",
 					upload_target_srl : editorRelKeys[cfg.editorSequence].primary.value,
@@ -650,6 +652,7 @@ var fnObj = {
 			}
 
 			var params = {
+					vid : (function() { if(typeof xeVid !== "undefined") return xeVid; else return ''; })(),
 					mid : current_mid,
 					module : 'file',
 					act : 'getFileList',
