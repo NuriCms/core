@@ -285,6 +285,7 @@ class memberController extends member
 				}
 			}
 		}
+		$args = new stdClass;
 		foreach($getVars as $val)
 		{
 			$args->{$val} = Context::get($val);
@@ -1720,6 +1721,7 @@ class memberController extends member
 		if($keep_signed)
 		{
 			// Key generate for auto login
+			$autologin_args = new stdClass;
 			$autologin_args->autologin_key = md5(strtolower($user_id).$this->memberInfo->password.$_SERVER['HTTP_USER_AGENT']);
 			$autologin_args->member_srl = $this->memberInfo->member_srl;
 			executeQuery('member.deleteAutologin', $autologin_args);
@@ -1814,6 +1816,7 @@ class memberController extends member
 		$member_popup_menu_list = Context::get('member_popup_menu_list');
 		if(!is_array($member_popup_menu_list)) $member_popup_menu_list = array();
 
+		$obj = new stdClass;
 		$obj->url = $url;
 		$obj->str = $str;
 		$obj->icon = $icon;
@@ -1961,6 +1964,7 @@ class memberController extends member
 		if($args->denied == 'Y')
 		{
 			// Insert data into the authentication DB
+			$auth_args = new stdClass;
 			$auth_args->user_id = $args->user_id;
 			$auth_args->member_srl = $args->member_srl;
 			$auth_args->new_password = $args->password;

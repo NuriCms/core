@@ -586,6 +586,7 @@ class pointController extends point
 				// Remove linkage group
 				if($del_group_list && count($del_group_list))
 				{
+					$del_group_args = new stdClass;
 					$del_group_args->member_srl = $member_srl;
 					$del_group_args->group_srl = implode(',', $del_group_list);
 					$del_group_output = executeQuery('point.deleteMemberGroup', $del_group_args);
@@ -593,6 +594,7 @@ class pointController extends point
 				// Grant a new group
 				foreach($new_group_srls as $group_srl)
 				{
+					$new_group_args = new stdClass;
 					$new_group_args->member_srl = $member_srl;
 					$new_group_args->group_srl = $group_srl;
 					executeQuery('member.addMemberToGroup', $new_group_args);
