@@ -1442,7 +1442,7 @@ function checkCSRF()
 
 	if($siteModuleInfo->site_srl == 0)
 	{
-		if(!strstr(strtolower($defaultUrl), strtolower($referer['host'])))
+		if(!stripos($defaultUrl, $referer['host']))
 		{
 			return FALSE;
 		}
@@ -1450,7 +1450,7 @@ function checkCSRF()
 	else
 	{
 		$virtualSiteInfo = $oModuleModel->getSiteInfo($siteModuleInfo->site_srl);
-		if(strtolower($virtualSiteInfo->domain) != strtolower(Context::get('vid')) && !strstr(strtolower($virtualSiteInfo->domain), strtolower($referer['host'])))
+		if(strtolower($virtualSiteInfo->domain) != strtolower(Context::get('vid')) && !stripos($virtualSiteInfo->domain, $referer['host']))
 		{
 			return FALSE;
 		}

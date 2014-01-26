@@ -283,7 +283,7 @@ class fileController extends file
 		$oFileModel = &getModel('file');
 		$file_srl = Context::get('file_srl');
 		$file_key = Context::get('file_key');
-		if(strstr($_SERVER['HTTP_USER_AGENT'], "Android")) $is_android = true;
+		if(strpos($_SERVER['HTTP_USER_AGENT'], "Android")) $is_android = true;
 
 		if($is_android && $_SESSION['__XE_FILE_KEY_AND__'][$file_srl]) $session_key = '__XE_FILE_KEY_AND__';
 		else $session_key = '__XE_FILE_KEY__';
@@ -302,7 +302,7 @@ class fileController extends file
 
 		$file_size = $file_obj->file_size;
 		$filename = $file_obj->source_filename;
-		if(strstr($_SERVER['HTTP_USER_AGENT'], 'MSIE') || (strstr($_SERVER['HTTP_USER_AGENT'], 'Windows') && strstr($_SERVER['HTTP_USER_AGENT'], 'Trident') && strstr($_SERVER['HTTP_USER_AGENT'], 'rv')))
+		if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') || (strpos($_SERVER['HTTP_USER_AGENT'], 'Windows') && strpos($_SERVER['HTTP_USER_AGENT'], 'Trident') && strpos($_SERVER['HTTP_USER_AGENT'], 'rv')))
 		{
 			$filename = rawurlencode($filename);
 			$filename = preg_replace('/\./', '%2e', $filename, substr_count($filename, '.') - 1);
