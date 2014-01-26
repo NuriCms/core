@@ -1147,6 +1147,7 @@ class memberController extends member
 		// Log test by using email_address
 		$oMemberModel = &getModel('member');
 
+		$args = new stdClass;
 		$args->email_address = $email_address;
 		$memberSrl = $oMemberModel->getMemberSrlByEmailAddress($email_address);
 		if(!$memberSrl) return $this->stop('msg_not_exists_member');
@@ -1155,10 +1156,12 @@ class memberController extends member
 		$memberInfo = $oMemberModel->getMemberInfoByMemberSrl($memberSrl, 0, $columnList);
 
 		// Check if a authentication mail has been sent previously
+		$chk_args = new stdClass;
 		$chk_args->member_srl = $memberInfo->member_srl;
 		$output = executeQuery('member.chkAuthMail', $chk_args);
 		if($output->toBool() && $output->data->count == '0') return new Object(-1, 'msg_invalid_request');
 
+		$auth_args = new stdClass;
 		$auth_args->member_srl = $memberInfo->member_srl;
 		$output = executeQueryArray('member.getAuthMailInfo', $auth_args);
 		if(!$output->data || !$output->data[0]->auth_key)  return new Object(-1, 'msg_invalid_request');
