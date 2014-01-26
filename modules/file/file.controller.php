@@ -302,7 +302,7 @@ class fileController extends file
 
 		$file_size = $file_obj->file_size;
 		$filename = $file_obj->source_filename;
-		if(strstr($_SERVER['HTTP_USER_AGENT'], "MSIE"))
+		if(strstr($_SERVER['HTTP_USER_AGENT'], 'MSIE') || (strstr($_SERVER['HTTP_USER_AGENT'], 'Windows') && strstr($_SERVER['HTTP_USER_AGENT'], 'Trident') && strstr($_SERVER['HTTP_USER_AGENT'], 'rv')))
 		{
 			$filename = rawurlencode($filename);
 			$filename = preg_replace('/\./', '%2e', $filename, substr_count($filename, '.') - 1);
@@ -371,7 +371,7 @@ class fileController extends file
 			$srl = (int)$srls[$i];
 			if(!$srl) continue;
 
-			$args = null;
+			$args = new stdClass;
 			$args->file_srl = $srl;
 			$output = executeQuery('file.getFile', $args);
 			if(!$output->toBool()) continue;
@@ -603,6 +603,7 @@ class fileController extends file
 	function insertFile($file_info, $module_srl, $upload_target_srl, $download_count = 0, $manual_insert = false)
 	{
 		// Call a trigger (before)
+		$trigger_obj = new stdClass;
 		$trigger_obj->module_srl = $module_srl;
 		$trigger_obj->upload_target_srl = $upload_target_srl;
 		$output = ModuleHandler::triggerCall('file.insertFile', 'before', $trigger_obj);
@@ -628,6 +629,7 @@ class fileController extends file
 				// An error appears if file size exceeds a limit
 				if($allowed_filesize < filesize($file_info['tmp_name'])) return new Object(-1, 'msg_exceeds_limit_size');
 				// Get total file size of all attachements (from DB)
+				$size_args = new stdClass;
 				$size_args->upload_target_srl = $upload_target_srl;
 				$output = executeQuery('file.getAttachedFileSize', $size_args);
 				$attached_size = (int)$output->data->attached_size + filesize($file_info['tmp_name']);
@@ -693,6 +695,7 @@ class fileController extends file
 		$oMemberModel = &getModel('member');
 		$member_srl = $oMemberModel->getLoggedMemberSrl();
 		// List file information
+		$args = new stdClass;
 		$args->file_srl = getNextSequence();
 		$args->upload_target_srl = $upload_target_srl;
 		$args->module_srl = $module_srl;
@@ -796,7 +799,7 @@ class fileController extends file
 			$srl = (int)$srls[$i];
 			if(!$srl) continue;
 
-			$args = null;
+			$args = new stdClass;
 			$args->file_srl = $srl;
 			$output = executeQuery('file.getFile', $args);
 

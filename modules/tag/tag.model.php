@@ -27,6 +27,7 @@ class tagModel extends tag
 			unset($obj->mid);
 		}
 		// Module_srl passed the array may be a check whether the array
+		$args = new stdClass;
 		if(is_array($obj->module_srl)) $args->module_srl = implode(',', $obj->module_srl);
 		else $args->module_srl = $obj->module_srl;
 		$args->list_count = $obj->list_count;

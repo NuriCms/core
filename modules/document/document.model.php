@@ -260,6 +260,7 @@ class documentModel extends document
 				$keys = array_keys($output->data);
 				$virtual_number = $keys[0];
 
+				$target_args = new stdClass;
 				$target_args->document_srls = implode(',',$target_srls);
 				$target_args->list_order = $args->sort_index;
 				$target_args->order_type = $args->order_type;
@@ -783,6 +784,7 @@ class documentModel extends document
 	 */
 	function getCategoryDocumentCount($module_srl, $category_srl)
 	{
+		$args = new stdClass;
 		$args->module_srl = $module_srl;
 		$args->category_srl = $category_srl;
 		$output = executeQuery('document.getCategoryDocumentCount', $args);

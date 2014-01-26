@@ -16,6 +16,7 @@ var AXUpload5 = Class.create(AXUpload5, {
 		axDeleteQueue: 0, // 삭제 발생시의 큐
 		reloadFileList: function(cfg) { // 서버로부터 파일리스트 요청(임시저장 처리용)
 			var params = {
+				vid : (function() { if(typeof xeVid !== "undefined") return xeVid; else return ''; })(),
 				mid : current_mid,
 				file_list_area_id : cfg.fileListAreaID,
 				editor_sequence   : cfg.editorSequence,
@@ -200,7 +201,7 @@ var AXUpload5 = Class.create(AXUpload5, {
 
 			}else{
 
-//				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show();
+//				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadBtns").show(); // 삭제버튼은 비표시
 				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadLabel").show();
 				jQuery("#" + cfg.queueBoxID).find("#"+itemID+" .AXUploadProcess").hide();
 
@@ -522,6 +523,7 @@ var fnObj = {
 				uploadPars:{
 					PHPSESSID : getCookie(cfg.sessionName),
 					editor_sequence : cfg.editorSequence,
+					vid : (function() { if(typeof xeVid !== "undefined") return xeVid; else return ''; })(),
 					mid : current_mid,
 					act : "procFileUpload",
 					upload_target_srl : editorRelKeys[cfg.editorSequence].primary.value,
@@ -614,6 +616,8 @@ var fnObj = {
 				}
 			});
 
+			myUpload.multiSelector.config.moveSens = 2; // NuriCms: 감도조정
+
 			// 서버에 저장된 파일 목록을 불러와 업로드된 목록에 추가 합니다. ----------------------------- s
 			fnObj.upload.getFileList(cfg); // NuriCms: 서버로부터 정보를 받아옴
 			// 서버에 저장된 파일 목록을 불러와 업로드된 목록에 추가 합니다. ----------------------------- e
@@ -648,6 +652,7 @@ var fnObj = {
 			}
 
 			var params = {
+					vid : (function() { if(typeof xeVid !== "undefined") return xeVid; else return ''; })(),
 					mid : current_mid,
 					module : 'file',
 					act : 'getFileList',
@@ -690,7 +695,6 @@ window.editorUploadInit = fnObj.pageStart;
 jQuery(function(){
 	try { document.execCommand('BackgroundImageCache',false,true); } catch(e) { }
 });
-
 
 // NuriCms: sprintf(), filesize()를 할 수 있도록 함수 추가함
 

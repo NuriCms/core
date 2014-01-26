@@ -189,7 +189,7 @@ class FileHandler
 	function removeFile($file_name)
 	{
 		$file_name = FileHandler::getRealPath($file_name);
-		if(file_exists($file_name))
+		if(is_file($file_name))
 		{
 			return unlink($file_name);
 		}

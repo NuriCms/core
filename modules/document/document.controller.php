@@ -815,6 +815,7 @@ class documentController extends document
 			return false;
 		}
 		// Update read counts
+		$args = new stdClass;
 		$args->document_srl = $document_srl;
 		$output = executeQuery('document.updateReadedCount', $args);
 		// Register session
@@ -1294,6 +1295,7 @@ class documentController extends document
 		$oDocumentModel = &getModel('document');
 		if(!$document_count) $document_count = $oDocumentModel->getCategoryDocumentCount($module_srl,$category_srl);
 
+		$args = new stdClass;
 		$args->category_srl = $category_srl;
 		$args->document_count = $document_count;
 		$output = executeQuery('document.updateCategoryCount', $args);

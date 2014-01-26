@@ -285,6 +285,7 @@ class memberController extends member
 				}
 			}
 		}
+		$args = new stdClass;
 		foreach($getVars as $val)
 		{
 			$args->{$val} = Context::get($val);
@@ -1146,6 +1147,7 @@ class memberController extends member
 		// Log test by using email_address
 		$oMemberModel = &getModel('member');
 
+		$args = new stdClass;
 		$args->email_address = $email_address;
 		$memberSrl = $oMemberModel->getMemberSrlByEmailAddress($email_address);
 		if(!$memberSrl) return $this->stop('msg_not_exists_member');
@@ -1154,10 +1156,12 @@ class memberController extends member
 		$memberInfo = $oMemberModel->getMemberInfoByMemberSrl($memberSrl, 0, $columnList);
 
 		// Check if a authentication mail has been sent previously
+		$chk_args = new stdClass;
 		$chk_args->member_srl = $memberInfo->member_srl;
 		$output = executeQuery('member.chkAuthMail', $chk_args);
 		if($output->toBool() && $output->data->count == '0') return new Object(-1, 'msg_invalid_request');
 
+		$auth_args = new stdClass;
 		$auth_args->member_srl = $memberInfo->member_srl;
 		$output = executeQueryArray('member.getAuthMailInfo', $auth_args);
 		if(!$output->data || !$output->data[0]->auth_key)  return new Object(-1, 'msg_invalid_request');
@@ -1510,6 +1514,7 @@ class memberController extends member
 	function doAutologin()
 	{
 		// Get a key value of auto log-in
+		$args = new stdClass;
 		$args->autologin_key = $_COOKIE['xeak'];
 		// Get information of the key
 		$output = executeQuery('member.getAutologin', $args);
@@ -1719,6 +1724,7 @@ class memberController extends member
 		if($keep_signed)
 		{
 			// Key generate for auto login
+			$autologin_args = new stdClass;
 			$autologin_args->autologin_key = md5(strtolower($user_id).$this->memberInfo->password.$_SERVER['HTTP_USER_AGENT']);
 			$autologin_args->member_srl = $this->memberInfo->member_srl;
 			executeQuery('member.deleteAutologin', $autologin_args);
@@ -1813,6 +1819,7 @@ class memberController extends member
 		$member_popup_menu_list = Context::get('member_popup_menu_list');
 		if(!is_array($member_popup_menu_list)) $member_popup_menu_list = array();
 
+		$obj = new stdClass;
 		$obj->url = $url;
 		$obj->str = $str;
 		$obj->icon = $icon;
@@ -1960,6 +1967,7 @@ class memberController extends member
 		if($args->denied == 'Y')
 		{
 			// Insert data into the authentication DB
+			$auth_args = new stdClass;
 			$auth_args->user_id = $args->user_id;
 			$auth_args->member_srl = $args->member_srl;
 			$auth_args->new_password = $args->password;

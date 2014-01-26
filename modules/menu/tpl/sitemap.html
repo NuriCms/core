@@ -2848,7 +2848,7 @@ jQuery(function($){
 
 		jQuery.exec_json("admin.procAdminInsertDefaultDesignInfo", htParam, function(htData){
 			$.xeMsgBox.alert(xe.lang.success_saved);
-			$('#design').show();
+			setTimeout(function() { jQuery('#design').show(); }, 1000);
 		});
 	});
 

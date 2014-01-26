@@ -1,7 +1,7 @@
 ﻿/*!
  * axisJ Javascript Library Version 1.0
  * http://axisJ.com
- *
+ * 
  * 아래 소스의 라이선스는 axisJ.com 에서 확인 하실 수 있습니다.
  * http://axisJ.com/license
  * axisJ를 사용하시려면 라이선스 페이지를 확인 및 숙지 후 사용 하시기 바람니다. 무단 사용시 예상치 못한 피해가 발생 하실 수 있습니다.
@@ -11,7 +11,6 @@
 var rkeyEvent = /^key/;
 var rmouseEvent = /^(?:mouse|contextmenu)|click/;
 jQuery.each(("touchstart touchmove touchend").split(" "), function (i, name) {
-	// Handle event binding
 	jQuery.fn[name] = function (data, fn) {
 		if (fn == null) { fn = data; data = null; }
 		return arguments.length > 0 ? this.on(name, null, data, fn) : this.trigger(name);
@@ -853,11 +852,14 @@ var AXConfig = {
 	},
 	AXModal: {
 		contentDivClass: "bodyHeightDiv"
+	},
+	AXInput: {
+		errorPrintType: "toast",
+		selectorOptionEmpty: "목록이 없습니다."
 	}
 };
 
 var AXUtil = {
-
 	async: true,
 	ajaxOkCode: "ok",
 	ajaxResponseType: "",
@@ -917,6 +919,7 @@ var AXUtil = {
 		return tg;
 	},
 	copyObject: function (obj) {
+		//return Object.clone(obj);
 		return Object.toJSON(obj).object();
 	},
 	consonantKR: function (cword) {
@@ -986,7 +989,8 @@ var AXUtil = {
 			//toast.push("console's say : " + po);
 		} else {
 			try {
-				console.log(AXUtil.timekey() + " : " + po);
+				//console.log(AXUtil.timekey() + " : " + po);
+				console.log(po);
 			} catch (e) {
 			}
 		}
@@ -1041,7 +1045,7 @@ var AXUtil = {
 		pageHostName = window.location.hostname;
 
 		AXparam = url_param.replace(pageProtocol + "//", "");
-		if (param){
+		if (param){		
 			AXparam = AXparam.replace(pageHostName + pathName + "?" + param , "");
 		}else{
 			AXparam = AXparam.replace(pageHostName + pathName, "");
@@ -1176,7 +1180,7 @@ var AXJ = Class.create({
 			}
 		} else if (document.selection) {  // IE?
 			document.selection.empty();
-		}
+		}	
 	}
 });
 /* ********************************************** AXJ ** */
@@ -1198,7 +1202,7 @@ var AXReqQue = Class.create({
 		try {
 			this.start();
 		} catch (e) {
-			//AXUtil.alert(e);
+			//AXUtil.alert(e);	
 		}
 	},
 	start: function () {
@@ -1650,7 +1654,7 @@ var AXScroll = Class.create(AXJ, {
 			po.push("<div class=\"scrollBar\" id=\"" + config.targetID + "_AX_scrollBar\"></div>");
 			this.scrollTargetID.append(po.join(''));
 			this.scroll = true;
-
+			
 			this.scrollTrack = jQuery("#" + config.targetID + "_AX_scrollTrack");
 			this.scrollBar = jQuery("#" + config.targetID + "_AX_scrollBar");
 		}
@@ -1785,7 +1789,7 @@ var AXScroll = Class.create(AXJ, {
 		this.Cheight = Cheight;
 		this.Ch = Ch;
 		this.STh = STh;
-
+		
 		if (CTheight < Cheight) {
 
 			this.scrollBarMove = true;
@@ -1838,7 +1842,7 @@ var AXScroll = Class.create(AXJ, {
 		var event = window.event || e;
 		var config = this.config;
 		if (this.scrollBarMove) {
-
+			
 			var touch = event.touches[0];
 			var tpos = this.scrollBarAttr.trackPos;
 			if (this.config.touchDirection) {
@@ -2004,7 +2008,7 @@ var AXScroll = Class.create(AXJ, {
 			}
 		} else {
 			SBy = SBy == 2 ? SBy = 0 : SBy = SBy - 2;
-			//trace({SBy:SBy, Ch:Ch, STh:STh});
+			//trace({SBy:SBy, Ch:Ch, STh:STh});			
 			var Ctop = SBy * Ch / STh;
 		}
 		this.scrollScrollID.css({ top: -(Ctop.round()) });
@@ -2362,59 +2366,141 @@ var AXCalendar = Class.create(AXJ, {
 
 /* ** AXMultiSelect ********************************************** */
 var AXMultiSelect = Class.create(AXJ, {
-	version: "AXMultiSelect v1.5",
-	author: "SQUALL",
-	createDate: "2013-01-31 오후 5:01:12",
-	lastModifyDate: "2013-01-31 오후 5:01:15",
+	version: "AXMultiSelect v1.8",
+	author: "tom@axisj.com",
+    logs: [
+    	"2013-01-31 오후 5:01:12",
+		"2013-11-12 오전 9:19:09 - tom : 버그픽스",
+		"2013-11-12 오전 11:59:38 - tom : body relative 버그 픽스, 스크롤바 마우스 선택 문제 해결",
+		"2013-11-13 오후 3:01:15 - tom : 모바일 터치 기능 지원"
+	],
+	
 	initialize: function (AXJ_super) {
 		AXJ_super();
 		this.selects = [];
 		this.config.selectClassName = "readySelect";
 		this.config.beselectClassName = "beSelected";
+		this.config.selectingClassName = "AX_selecting";
+		this.config.unselectingClassName = "AX_unselecting";
+		this.moveSens = 0;
+		this.config.moveSens = 5;
+		this.touchMode;
 	},
 	init: function () {
 
 		var mouseClick = this.onmouseClick.bind(this);
-		jQuery("#" + this.config.selectStage).bind("mousedown", function (event) {
+		this._selectStage = jQuery("#" + this.config.selectStage);
+		this._selectStage.css({"position":"relative"});
+		
+		/*
+		if(AXUtil.browser.mobile){
+			this._selectStage.css({"overflow":"visible", "min-height":this._selectStage.innerHeight(), "height":"auto"});	
+		}
+		*/
+		
+		this._selectStage.bind("mousedown", this.mousedown.bind(this));
+		
+		this._selectStage.bind("click", function (event) {
 			mouseClick(this, event);
 		});
+		
+		this.helper = jQuery("<div class='AXMultiselectorHelper'></div>");
 		this.collect();
+		
+		jQuery(window).bind("resize.AXMultiSelect", this.collect.bind(this));
+		jQuery(window).bind("keydown.AXMultiSelect", this.onKeydown.bind(this));
+		this._selectStage.bind("scroll", this.onScrollStage.bind(this));
+		
+		this._selectStage.bind("touchstart", this.touchstart.bind(this));
+	},
+	onKeydown: function (event) {
+		if (event.keyCode == AXUtil.Event.KEY_ESC) {
+			this.clearSelects();
+		}
+	},
+	onScrollStage: function(event){
+		var cfg = this.config;
+		if(!AXUtil.browser.mobile){
+			if(this.helperAppened || this.helperAppenedReady){
+				this.moveSens = 0;
+				jQuery(document.body).unbind("mousemove.AXMultiSelect");
+				jQuery(document.body).unbind("mouseup.AXMultiSelect");
+				jQuery(document.body).unbind("mouseleave.AXMultiSelect");
+				jQuery(document.body).removeAttr("onselectstart");
+				jQuery(document.body).removeClass("AXUserSelectNone");
+				this.helperAppenedReady = false;
+				this.helperAppened = false;
+				this.helper.remove();
+			}
+		}
+		
 	},
 	/* ------------------------------------------------------------------------------------------------------------------ */
 	/* observe method ~~~~~~ */
 	onmouseClick: function (element, event) {
-		var myTarget = event.target;
-		if (myTarget) {
-			while (!jQuery(myTarget).hasClass(this.config.selectClassName) && myTarget.parentNode) {
-				myTarget = myTarget.parentNode;
+		var cfg = this.config;
+		var eid = event.target.id.split(/_AX_/g);
+		var eventTarget = event.target;
+		var myTarget = this.getEventTarget({
+			evt : eventTarget, evtIDs : eid,
+			until:function(evt, evtIDs){ return (AXgetId(evt.parentNode) == AXgetId(cfg.selectStage)) ? true:false; },
+			find:function(evt, evtIDs){ return (jQuery(evt).hasClass(cfg.selectClassName)) ? true : false; }
+		});
+		//trace("click");
+		if(myTarget){
+			var selectElement = myTarget;
+			if (selectElement) {
+				if (event.shiftKey) {
+					this.shiftSelects(selectElement);
+				} else if (event.metaKey || event.ctrlKey) {
+					this.toggleSelects(selectElement);
+				} else {
+					this.clickSelects(selectElement);
+				}
 			}
-		}
-		if (!jQuery(myTarget).hasClass(this.config.selectClassName)) {
-			this.clearSelects();
+		}else{
+
+			if(event.target.id == cfg.selectStage && AXUtil.browser.name != "ie") this.clearSelects();
 			return;
-		}
-		var selectElement = myTarget;
-		if (selectElement) {
-			if (event.shiftKey) {
-				this.shiftSelects(selectElement);
-			} else if (event.ctrlKey) {
-				this.toggleSelects(selectElement);
-			} else {
-				this.clickSelects(selectElement);
-			}
 		}
 	},
 	/* ------------------------------------------------------------------------------------------------------------------ */
 	/* class method ~~~~~~ */
 	collect: function () {
-		this.selectTargets = jQuery("#" + this.config.selectStage + " ." + this.config.selectClassName).get();
+		var cfg = this.config;
+		this._selectTargets = jQuery("#" + cfg.selectStage + " ." + cfg.selectClassName);
+		this.selectTargets = this._selectTargets.get();
+		var scrollLeft = this._selectStage.scrollLeft().number();
+		var scrollTop = this._selectStage.scrollTop().number();
+		this._selectTargets.each(function(){
+			var jQuerythis = jQuery(this), pos = jQuerythis.position();
+			jQuery.data(this, "selectableItem", {
+				element: this,
+				jQueryelement: jQuerythis,
+				left: pos.left + scrollLeft,
+				top: pos.top + scrollTop,
+				right: pos.left + scrollLeft + jQuerythis.outerWidth(),
+				bottom: pos.top + scrollTop + jQuerythis.outerHeight(),
+				selected: jQuerythis.hasClass(cfg.beselectClassName),
+				selecting: jQuerythis.hasClass(cfg.selectingClassName)
+			});
+		});
 	},
 	clearSelects: function () {
-		var beselectClassName = this.config.beselectClassName;
-		jQuery.each(this.selects, function (i, n) {
-			jQuery(n).removeClass(beselectClassName);
+		var cfg = this.config;		
+		this._selectTargets.each(function(){
+			var selectTarget = jQuery.data(this, "selectableItem");
+			if(selectTarget){
+				if (selectTarget.selecting) {
+					selectTarget.jQueryelement.removeClass(cfg.selectingClassName);
+					selectTarget.selecting = false;
+				}
+				if(selectTarget.selected){
+					selectTarget.jQueryelement.removeClass(cfg.beselectClassName);
+					selectTarget.selected = false;
+				}
+			}
 		});
-		this.selects.clear();
 	},
 	pushSelects: function (Obj) {
 		var hasSelect = this.selects.has(function () {
@@ -2423,76 +2509,625 @@ var AXMultiSelect = Class.create(AXJ, {
 		if (!hasSelect) this.selects.push(Obj);
 	},
 	clickSelects: function (Obj) {
-		var hasSelect = this.selects.has(function () {
-			return this.item == Obj;
-		});
-		if (!hasSelect) this.clearSelects();
-		var beselectClassName = this.config.beselectClassName;
-		jQuery(Obj).addClass(beselectClassName);
-		this.pushSelects(Obj);
+		var cfg = this.config;
+		
+		this.clearSelects();
+		
+		var selectTarget = jQuery.data(Obj, "selectableItem");
+			selectTarget.jQueryelement.addClass(cfg.beselectClassName);
+			selectTarget.selected = true;
 	},
 	toggleSelects: function (Obj) {
-		var beselectClassName = this.config.beselectClassName;
-		var hasSelect = this.selects.has(function () {
-			return this.item == Obj;
-		});
-		if (hasSelect) {
-			jQuery(Obj).removeClass(beselectClassName);
-			var collects = [];
-			collects = jQuery.grep(this.selects, function (n, i) {
-				return (Obj != n);
-			});
-			this.selects = collects;
-		} else {
-			jQuery(Obj).addClass(beselectClassName);
-			this.pushSelects(Obj);
+		var cfg = this.config;
+		
+		var selectTarget = jQuery.data(Obj, "selectableItem");
+		if(selectTarget.selected){
+			selectTarget.jQueryelement.removeClass(cfg.beselectClassName);
+			selectTarget.selected = false;
+		}else{
+			selectTarget.jQueryelement.addClass(cfg.beselectClassName);
+			selectTarget.selected = true;			
 		}
 	},
 	shiftSelects: function (Obj) {
-		var beselectClassName = this.config.beselectClassName;
-		var selectTargets = this.selectTargets;
-		var addSelect = function (Obj) {
-			this.selects.push(Obj);
-		};
-		var addSelectBind = addSelect.bind(this);
+		var cfg = this.config;
 
-		if (this.selects.length == 0) {
+		var selectedLength = 0;
+		var li, si;
+		this._selectTargets.each(function(stIndex, ST){
+			var selectTarget = jQuery.data(this, "selectableItem");
+			if(selectTarget){
+				if(selectTarget.selected){
+					selectedLength++;
+					li = stIndex;
+				}
+			}
+			if(this === Obj) si = stIndex;
+		});
+		
+		if (selectedLength == 0) {
 			this.clickSelects(Obj);
 		} else {
 			//마지막 selects 개체를 찾는다.
-			var lastElement = this.selects.last();
-			var li = this.selectTargets.getObj(jQuery(lastElement)[0]).index;
-			var si = this.selectTargets.getObj(jQuery(Obj)[0]).index;
 			if (si == li) return;
-
 			this.clearSelects();
-			var objParent = jQuery(Obj).parent()[0];
-
-			if (si > li) {
-				jQuery.each(si.rangeFrom(li), function (i, n) {
-					if (objParent == jQuery(selectTargets[n]).parent()[0]) {
-						jQuery(selectTargets[n]).addClass(beselectClassName);
-						addSelectBind(selectTargets[n]);
-					}
-				});
-			} else {
-				jQuery.each(li.rangeFrom(si), function (i, n) {
-					if (objParent == jQuery(selectTargets[n]).parent()[0]) {
-						jQuery(selectTargets[n]).addClass(beselectClassName);
-						addSelectBind(selectTargets[n]);
-					}
-				});
+			var temp;
+			if(si > li){
+				temp = si;
+				si = li;
+				li = temp;
 			}
+			this._selectTargets.each(function(stIndex, ST){
+				var selectTarget = jQuery.data(this, "selectableItem");
+				if(selectTarget){
+					if(si <= stIndex && li >= stIndex){
+						selectTarget.jQueryelement.addClass(cfg.beselectClassName);
+						selectTarget.selected = true;
+					}
+				}
+			});
+		}
+	},
+	
+	/* mouser helper */
+	mousedown: function(event){
+		var cfg = this.config;
+
+		jQuery(document.body).bind("mousemove.AXMultiSelect", this.mousemove.bind(this));
+		jQuery(document.body).bind("mouseup.AXMultiSelect", this.mouseup.bind(this));
+		jQuery(document.body).bind("mouseleave.AXMultiSelect", this.mouseup.bind(this));
+		
+		jQuery(document.body).attr("onselectstart", "return false");
+		jQuery(document.body).addClass("AXUserSelectNone");
+		
+		this.helperAppenedReady = true;
+	},
+	mousemove: function(event){
+		var cfg = this.config;
+		if (!event.pageX) return;
+		
+		/*드래그 감도 적용 */
+		if (this.config.moveSens > this.moveSens) this.moveSens++;
+		if (this.moveSens == this.config.moveSens) this.selectorHelperMove(event);
+	},
+	mouseup: function(event){
+		var cfg = this.config;
+		
+		this.helperAppenedReady = false;
+		this.moveSens = 0;
+
+		jQuery(document.body).unbind("mousemove.AXMultiSelect");
+		jQuery(document.body).unbind("mouseup.AXMultiSelect");
+		jQuery(document.body).unbind("mouseleave.AXMultiSelect");
+
+		jQuery(document.body).removeAttr("onselectstart");
+		jQuery(document.body).removeClass("AXUserSelectNone");
+		
+		if(this.helperAppened){
+			this.helperAppened = false;
+			this.helper.remove();
+			
+			/* selected change */			
+			this._selectTargets.each(function(){
+				var selectTarget = jQuery.data(this, "selectableItem");
+				if(selectTarget){
+					if (selectTarget.selecting) {
+						selectTarget.jQueryelement.removeClass(cfg.selectingClassName);
+						selectTarget.selecting = false;
+						selectTarget.jQueryelement.addClass(cfg.beselectClassName);
+						selectTarget.selected = true;
+					}else if(selectTarget.selected){
+	
+					}
+				}
+			});
+		}
+		
+	},
+	selectorHelperMove: function(event){
+		var cfg = this.config;
+		if(this.helperAppened){
+			
+			var _helperPos = this.helperPos;
+			var tmp,
+				x1 = this.helperPos.x,
+				y1 = this.helperPos.y,
+				x2 = event.pageX - _helperPos.bodyLeft,
+				y2 = event.pageY - _helperPos.bodyTop;
+			if (x1 > x2) { tmp = x2; x2 = x1; x1 = tmp; }
+			if (y1 > y2) { tmp = y2; y2 = y1; y1 = tmp; }
+			this.helper.css({left: x1, top: y1, width: x2-x1, height: y2-y1});
+			
+			this._selectTargets.each(function(){
+				
+				var selectTarget = jQuery.data(this, "selectableItem"), hit = false;
+				/*trace({sl:selectTarget.left, sr:selectTarget.right, st:selectTarget.top, sb:selectTarget.bottom, x1:x1, x2:x2, y1:y1, y2:y2}); */				
+				if(!selectTarget) return;
+
+				var stL = selectTarget.left.number(), stR = selectTarget.right.number(), stT = selectTarget.top.number(), stB = selectTarget.bottom.number();
+				stL = stL + _helperPos.stageX - _helperPos.scrollLeft - _helperPos.bodyLeft;
+				stR = stR + _helperPos.stageX - _helperPos.scrollLeft - _helperPos.bodyLeft;
+				stT = stT + _helperPos.stageY - _helperPos.scrollTop - _helperPos.bodyTop;
+				stB = stB + _helperPos.stageY - _helperPos.scrollTop - _helperPos.bodyTop;
+
+				hit = ( !(stL > x2 || stR < x1 || stT > y2 || stB < y1) ); /* touch */
+				/* hit = (selectTarget.left > x1 && selectTarget.right < x2 && selectTarget.top > y1 && selectTarget.bottom < y2); fit */
+				if(hit){
+					/* SELECT */
+					if (selectTarget.selected) {
+						selectTarget.jQueryelement.removeClass(cfg.beselectClassName);
+						selectTarget.selected = false;
+					}
+					if (!selectTarget.selecting) {
+						selectTarget.jQueryelement.addClass(cfg.selectingClassName);
+						selectTarget.selecting = true;
+					}
+				}else{
+					/* UNSELECT */
+					if (selectTarget.selecting) {
+						selectTarget.jQueryelement.removeClass(cfg.selectingClassName);
+						selectTarget.selecting = false;
+					}
+					if (selectTarget.selected) {
+						if (!event.metaKey && !event.shiftKey && !event.ctrlKey) {
+							selectTarget.jQueryelement.removeClass(cfg.beselectClassName);
+							selectTarget.selected = false;
+						}
+					}
+				}
+			});
+			
+		}else{
+			this.helperAppened = true;
+			jQuery(document.body).append(this.helper);
+
+			var css = {left:(event.pageX - jQuery(document.body).offset().left), top:(event.pageY - jQuery(document.body).offset().top), width:0, height:0};
+			this.helper.css(css);
+			var stagePos = this._selectStage.offset();
+			this.helperPos = {
+				stageX:stagePos.left.number(),
+				stageY:stagePos.top.number(),
+				x:css.left.number(), 
+				y:css.top.number(), 
+				scrollLeft:this._selectStage.scrollLeft().number(),
+				scrollTop:this._selectStage.scrollTop().number(),
+				bodyLeft:jQuery(document.body).offset().left,
+				bodyTop:jQuery(document.body).offset().top
+			};
+		}
+	},
+	
+	/* touch helper */
+	touchstart: function(event){
+		var cfg = this.config;
+				
+		var touchEnd = this.touchEnd.bind(this);
+		this.touchEndBind = function () {
+			touchEnd(event);
+		};
+
+		var touchMove = this.touchMove.bind(this);
+		this.touchMoveBind = function () {
+			touchMove(event);
+		};
+
+		if (document.addEventListener) {
+			document.addEventListener("touchend", this.touchEndBind, false);
+			document.addEventListener("touchmove", this.touchMoveBind, false);
+		}
+		
+		this.helperAppenedReady = true;
+	},
+	touchMove: function(event){
+		var cfg = this.config;
+		var event = window.event || e;
+		var touch = event.touches[0];		
+		if (!touch.pageX) return;
+		var offset = this._selectStage.offset();
+		var right = offset.left + this._selectStage.width();
+		var bottom = offset.top + this._selectStage.height();
+		
+		if(this.moveSens == 0){
+			this.touchStartXY = {x:touch.pageX, y:touch.pageY, scrollTop:this._selectStage.scrollTop()};
+		}
+		
+		/*드래그 감도 적용 */
+		if (this.config.moveSens > this.moveSens) this.moveSens++;
+		if (this.moveSens == this.config.moveSens){
+			if(this.touchMode == "drag"){
+				if(bottom < touch.pageY) this._selectStage.scrollTop(this.touchStartXY.scrollTop - (bottom - touch.pageY));
+				else if(offset.top > touch.pageY) this._selectStage.scrollTop(this.touchStartXY.scrollTop - (offset.top - touch.pageY));
+				if(right < touch.pageX) this._selectStage.scrollLeft(this.touchStartXY.scrollLeft - (right - touch.pageX));
+				else if(offset.left > touch.pageX) this._selectStage.scrollLeft(this.touchStartXY.scrollLeft - (offset.left - touch.pageX));
+				this.selectorHelperMoveByTouch(event);
+			}else if(this.touchMode == "scrollTop"){
+				this._selectStage.scrollTop(this.touchStartXY.scrollTop + (this.touchStartXY.y - touch.pageY));
+			}else if(this.touchMode == "scrollLeft"){
+				this._selectStage.scrollLeft(this.touchStartXY.scrollLeft + (this.touchStartXY.x - touch.pageX));
+			}else{
+				if(((this.touchStartXY.x - touch.pageX).abs() - (this.touchStartXY.y - touch.pageY).abs()).abs() < 5){
+					this.touchMode = "drag"
+					this.selectorHelperMoveByTouch(event);
+				}else if((this.touchStartXY.x - touch.pageX).abs() < (this.touchStartXY.y - touch.pageY).abs()){
+					this.touchMode = "scrollTop";
+					this._selectStage.scrollTop(this.touchStartXY.scrollTop + (this.touchStartXY.y - touch.pageY));
+				}else if((this.touchStartXY.x - touch.pageX).abs() > (this.touchStartXY.y - touch.pageY).abs()){
+					this.touchMode = "scrollLeft";
+					this._selectStage.scrollLeft(this.touchStartXY.scrollLeft + (this.touchStartXY.x - touch.pageX));
+				}
+			}
+		}
+
+		if (event.preventDefault) event.preventDefault();
+		else return false;
+	},
+	selectorHelperMoveByTouch: function(e){
+		var cfg = this.config;
+		var event = window.event || e;
+		var touch = event.touches[0];
+		
+		if(this.helperAppened){
+			
+			var _helperPos = this.helperPos;
+			var tmp,
+				x1 = this.helperPos.x,
+				y1 = this.helperPos.y,
+				x2 = touch.pageX - _helperPos.bodyLeft,
+				y2 = touch.pageY - _helperPos.bodyTop;
+			if (x1 > x2) { tmp = x2; x2 = x1; x1 = tmp; }
+			if (y1 > y2) { tmp = y2; y2 = y1; y1 = tmp; }
+			this.helper.css({left: x1, top: y1, width: x2-x1, height: y2-y1});
+			
+			this._selectTargets.each(function(){
+				
+				var selectTarget = jQuery.data(this, "selectableItem"), hit = false;
+				/*trace({sl:selectTarget.left, sr:selectTarget.right, st:selectTarget.top, sb:selectTarget.bottom, x1:x1, x2:x2, y1:y1, y2:y2}); */				
+				if(!selectTarget) return;
+
+				var stL = selectTarget.left.number(), stR = selectTarget.right.number(), stT = selectTarget.top.number(), stB = selectTarget.bottom.number();
+				stL = stL + _helperPos.stageX - _helperPos.scrollLeft - _helperPos.bodyLeft;
+				stR = stR + _helperPos.stageX - _helperPos.scrollLeft - _helperPos.bodyLeft;
+				stT = stT + _helperPos.stageY - _helperPos.scrollTop - _helperPos.bodyTop;
+				stB = stB + _helperPos.stageY - _helperPos.scrollTop - _helperPos.bodyTop;
+
+				hit = ( !(stL > x2 || stR < x1 || stT > y2 || stB < y1) ); /* touch */
+				/* hit = (selectTarget.left > x1 && selectTarget.right < x2 && selectTarget.top > y1 && selectTarget.bottom < y2); fit */
+				if(hit){
+					/* SELECT */
+					if (selectTarget.selected) {
+						selectTarget.jQueryelement.removeClass(cfg.beselectClassName);
+						selectTarget.selected = false;
+					}
+					if (!selectTarget.selecting) {
+						selectTarget.jQueryelement.addClass(cfg.selectingClassName);
+						selectTarget.selecting = true;
+					}
+				}else{
+					/* UNSELECT */
+					if (selectTarget.selecting) {
+						selectTarget.jQueryelement.removeClass(cfg.selectingClassName);
+						selectTarget.selecting = false;
+					}
+					if (selectTarget.selected) {
+						if (!event.metaKey && !event.shiftKey && !event.ctrlKey) {
+							selectTarget.jQueryelement.removeClass(cfg.beselectClassName);
+							selectTarget.selected = false;
+						}
+					}
+				}
+			});
+			
+		}else{
+			this.helperAppened = true;
+			jQuery(document.body).append(this.helper);
+
+			var css = {left:(touch.pageX - jQuery(document.body).offset().left), top:(touch.pageY - jQuery(document.body).offset().top), width:0, height:0};
+			this.helper.css(css);
+			var stagePos = this._selectStage.offset();
+			this.helperPos = {
+				stageX:stagePos.left.number(),
+				stageY:stagePos.top.number(),
+				x:css.left.number(), 
+				y:css.top.number(), 
+				scrollLeft:this._selectStage.scrollLeft().number(),
+				scrollTop:this._selectStage.scrollTop().number(),
+				bodyLeft:jQuery(document.body).offset().left,
+				bodyTop:jQuery(document.body).offset().top
+			};
+		}
+	},
+	touchEnd: function(e){
+		var cfg = this.config;
+		var event = window.event || e;
+		this.helperAppenedReady = false;
+		this.moveSens = 0;
+
+		this.touchMode = false;
+
+		if (document.removeEventListener) {
+			document.removeEventListener("touchend", this.touchEndBind, false);
+			document.removeEventListener("touchmove", this.touchMoveBind, false);
+		}
+		
+		if(this.helperAppened){
+			this.helperAppened = false;
+			this.helper.remove();
+			
+			/* selected change */			
+			this._selectTargets.each(function(){
+				var selectTarget = jQuery.data(this, "selectableItem");
+				if(selectTarget){
+					if (selectTarget.selecting) {
+						selectTarget.jQueryelement.removeClass(cfg.selectingClassName);
+						selectTarget.selecting = false;
+						selectTarget.jQueryelement.addClass(cfg.beselectClassName);
+						selectTarget.selected = true;
+					}else if(selectTarget.selected){
+	
+					}
+				}
+			});
 		}
 	},
 	getSelects: function () {
-		return this.selects;
+		var cfg = this.config;
+		var selects = [];
+		this._selectTargets.each(function(){
+			var selectTarget = jQuery.data(this, "selectableItem");
+			if(selectTarget){
+				if(selectTarget.selected){
+					selects.push(selectTarget.element);
+				}
+			}
+		});
+		return selects;
 	},
 	size: function () {
-		return this.selects.length;
+		var cfg = this.config;
+		var selects = [];
+		this._selectTargets.each(function(){
+			var selectTarget = jQuery.data(this, "selectableItem");
+			if(selectTarget){
+				if(selectTarget.selected){
+					selects.push(selectTarget.element);
+				}
+			}
+		});
+		return selects.length;
 	}
 });
 /* ********************************************** AXMultiSelect ** */
+
+/* ** AXResizable ********************************************** */
+var AXResizable = Class.create(AXJ, {
+	version: "AXResizable v1.0",
+	author: "tom@axisj.com",
+    logs: [
+    	"2013-11-12 오전 10:22:06"
+	],
+	initialize: function (AXJ_super) {
+		AXJ_super();
+		this.moveSens = 0;
+		this.config.moveSens = 2;
+		this.objects = [];
+		this.config.bindResiableContainer = "AXResizable";
+		this.config.bindResiableHandle = "AXResizableHandle";
+	},
+	init: function () {
+		this.helper = jQuery("<div class='AXResizableHelper'></div>");
+	},
+	bind: function(obj){
+		var cfg = this.config;
+		if (!obj.id) {
+			trace("bind 대상 ID가 없어 bind 처리할 수 없습니다.");
+			return;
+		}
+		if (!AXgetId(obj.id)) {
+			trace("bind 대상이 없어 bind 처리할 수 없습니다.");
+			return;
+		}
+		var objID = obj.id;
+		var objSeq = null;
+
+		jQuery.each(this.objects, function (idx, O) {
+			/*if (this.id == objID && this.isDel == true) objSeq = idx;*/
+			if (this.id == objID) {
+				objSeq = idx;
+			}
+		});
+		if (objSeq == null) {
+			objSeq = this.objects.length;
+			this.objects.push({
+				id: objID, 
+				element:AXgetId(objID), 
+				jQueryElement:jQuery("#"+objID), 
+				config: obj
+			});
+		} else {
+			this.objects[objSeq].isDel = undefined;
+			this.objects[objSeq].config = obj;
+		}
+		this.bindResizer(objID, objSeq);
+	},
+	unbind: function (obj) {
+		var cfg = this.config;
+		var removeIdx;
+		jQuery.each(this.objects, function (idx, O) {
+			if (O.id != obj.id) {
+			} else {
+				if (O.isDel != true) {
+					removeIdx = idx;
+				}
+			}
+		});
+		if(removeIdx != undefined){
+			this.objects[removeIdx].isDel = true;
+			/* unbind 구문 */
+		}
+	},
+	bindResizer: function(objID, objSeq){
+		var _this = this;
+		var cfg = this.config;
+		
+		var obj = this.objects[objSeq];
+		
+		var po = [];
+		po.push("<div class=\"" + cfg.bindResiableHandle + "\"></div>");
+		obj.jQueryElement.addClass(cfg.bindResiableContainer);
+		obj.jQueryElement.append(po.join(''));
+		
+		//obj.jQueryElement.bind("mousedown.AXResizable", function(){_this.mousedown(objID, objSeq, event)});
+		obj.jQueryElement.bind("mousedown.AXResizable", this.mousedown.bind(this, objID, objSeq));
+	},
+	mousedown: function(objID, objSeq, event){
+		var _this = this;
+		var cfg = this.config;
+		
+		jQuery(window).bind("mousemove.AXResizable", this.mousemove.bind(this, objID, objSeq));
+		jQuery(window).bind("mouseup.AXResizable", this.mouseup.bind(this, objID, objSeq));
+		/*jQuery(document.body).bind("mouseleave.AXResizable", this.mouseup.bind(this, objID, objSeq));*/
+		
+		jQuery(document.body).attr("onselectstart", "return false");
+		jQuery(document.body).addClass("AXUserSelectNone");
+		
+		this.helperAppenedReady = true;
+	},
+	mousemove: function(objID, objSeq, event){
+		var cfg = this.config;
+		if (!event.pageX) return;
+		
+		/*드래그 감도 적용 */
+		if (this.config.moveSens > this.moveSens) this.moveSens++;
+		if (this.moveSens == this.config.moveSens) this.selectorHelperMove(objID, objSeq, event);
+	},
+	mouseup: function(objID, objSeq, event){
+		var cfg = this.config;
+		var obj = this.objects[objSeq];
+		
+		this.helperAppenedReady = false;
+		this.moveSens = 0;
+		
+		jQuery(window).unbind("mousemove.AXResizable");
+		jQuery(window).unbind("mouseup.AXResizable");
+		/*jQuery(document.body).unbind("mouseleave.AXResizable");*/
+		
+		jQuery(document.body).removeAttr("onselectstart");
+		jQuery(document.body).removeClass("AXUserSelectNone");
+		
+		if(this.helperAppened){
+			this.helperAppened = false;
+			
+			var newWidth = this.helper.width();
+			var newHeight = this.helper.height();
+			
+			var paddingLeft = obj.jQueryElement.css("padding-left");
+			var paddingRight = obj.jQueryElement.css("padding-right");
+			var paddingTop = obj.jQueryElement.css("padding-top");
+			var paddingBottom = obj.jQueryElement.css("padding-bottom");
+			var paddingW = paddingLeft.number() + paddingRight.number();
+			var paddingH = paddingTop.number() + paddingBottom.number();
+			
+			if(obj.config.animate){
+				obj.jQueryElement.animate(
+					{width:newWidth-paddingW, height:newHeight-paddingH},
+					(obj.config.animate.duration||300), (obj.config.animate.easing||"liner"), 
+					function(){
+						if(obj.config.onChange){
+							obj.config.onChange.call(obj, obj);
+						}
+					}
+				);
+			}else{
+				obj.jQueryElement.css({width:newWidth-paddingW, height:newHeight-paddingH});
+				if(obj.config.onChange){
+					obj.config.onChange.call(obj, obj);
+				}
+			}
+			
+			this.helper.remove();
+		}
+	},
+	selectorHelperMove: function(objID, objSeq, event){
+		var cfg = this.config;
+		var obj = this.objects[objSeq];
+		
+		if(this.helperAppened){
+			
+			var _helperPos = this.helperPos;
+			var tmp,
+				x1 = this.helperPos.x,
+				y1 = this.helperPos.y,
+				x2 = event.pageX - _helperPos.bodyLeft,
+				y2 = event.pageY - _helperPos.bodyTop;
+			
+			var minWidth = (obj.config.minWidth||0), 
+				minHeight = (obj.config.minHeight||0), 
+				maxWidth = (obj.config.maxWidth||0), 
+				maxHeight = (obj.config.maxHeight||0);
+			
+			var myWidth = x2-x1, myHeight = y2-y1;
+			
+			if(minWidth != 0 && myWidth < minWidth) myWidth = minWidth;
+			if(minHeight != 0 && myHeight < minHeight) myHeight = minHeight;
+			if(maxWidth != 0 && myWidth > maxWidth) myWidth = maxWidth;
+			if(maxHeight != 0 && myHeight > maxHeight) myHeight = maxHeight;
+			
+			if(obj.config.aspectRatio){
+				myWidth = myHeight * obj.config.aspectRatio;
+			}
+			
+			if(obj.config.snap){
+				myWidth = obj.config.snap * (myWidth / obj.config.snap).ceil();
+				myHeight = obj.config.snap * (myHeight / obj.config.snap).ceil();
+			}
+			//trace({width: myWidth, height: myHeight});
+			this.helper.css({width: myWidth, height: myHeight});
+
+		}else{
+			this.helperAppened = true;
+			jQuery(document.body).append(this.helper);
+			
+			var bodyLeft = jQuery(document.body).offset().left;
+			var bodyTop = jQuery(document.body).offset().top;
+						
+			var pos = obj.jQueryElement.offset();
+			var css = {
+				left: pos.left + bodyLeft,
+				top: pos.top + bodyLeft,
+				width: obj.jQueryElement.outerWidth(),
+				height: obj.jQueryElement.outerHeight()
+			};
+			this.helper.css(css);
+
+			this.helperPos = {
+				x:css.left,
+				y:css.top,
+				bodyLeft: jQuery(document.body).offset().left,
+				bodyTop: jQuery(document.body).offset().top
+			};
+		}
+	}
+});
+var AXResizableBinder = new AXResizable();
+AXResizableBinder.setConfig({ targetID: "defaultResiable" });
+
+jQuery.fn.bindAXResizable = function (config) {
+	jQuery.each(this, function () {
+		config = config || {}; config.id = this.id;
+		AXResizableBinder.bind(config);
+		return this;
+	});
+};
+
+jQuery.fn.unbindAXResizable = function (config) {
+	jQuery.each(this, function () {
+		if (config == undefined) config = {};
+		config.id = this.id;
+		AXResizableBinder.unbind(config);
+		return this;
+	});
+};
+/* ********************************************** AXResizable ** */
 
 /* ** AXContextMenu ********************************************** */
 var AXContextMenuClass = Class.create(AXJ, {
@@ -2572,7 +3207,7 @@ var AXContextMenuClass = Class.create(AXJ, {
 		var getSubMenu = this.getSubMenu.bind(this);
 		var subMenuID = parentID + "_AX_subMenu";
 
-		//trace(subMenu.length);
+		//trace(subMenu.length);		
 		var po = [];
 		po.push("<div id=\"" + subMenuID + "\" class=\"" + theme + "\" style=\"width:" + width + "px;left:" + (width.number() - 15) + "px;display:none;\">");
 		jQuery.each(subMenu, function (idx, menu) {
@@ -2685,7 +3320,7 @@ var AXContextMenuClass = Class.create(AXJ, {
 		if (clienWidth > pBox.width) pBox.width = clienWidth;
 		if (clientHeight > pBox.height) pBox.height = clientHeight;
 		var _box = { width: jQuery("#" + objID).outerWidth(), height: jQuery("#" + objID).outerHeight() };
-		// -- 부모박스 정보와 박스 정보
+		// -- 부모박스 정보와 박스 정보		
 
 		if ((_box.height.number() + css.top.number()) > pBox.height) {
 			css.top -= ((_box.height.number() + css.top.number()) - pBox.height) + 5;
@@ -2727,10 +3362,10 @@ var AXContextMenuClass = Class.create(AXJ, {
 		var contextMenuItemDownBind = function (event) {
 			contextMenuItemDown(event, objSeq, objID);
 		};
-
+		
 		jQuery(document).bind("mousedown.AXContenxtMenu", contextMenuItemDownBind);
 		jQuery(document).bind("keydown.AXContenxtMenu", contextMenuItemDownBind);
-
+		
 		jQuery(document).find("iframe").each(function () {
 			jQuery(window[this.name].document).bind("mousedown.AXContenxtMenu", contextMenuItemDownBind);
 			jQuery(window[this.name].document).bind("keydown.AXContenxtMenu", contextMenuItemDownBind);
@@ -2801,7 +3436,7 @@ var AXContextMenuClass = Class.create(AXJ, {
 			evt: eventTarget, evtIDs: eid,
 			find: function (evt, evtIDs) { return (jQuery(evt).hasClass("contextMenuItem")) ? true : false; }
 		});
-		// event target search ------------------------
+		// event target search ------------------------    	
 		if (myTarget) {
 			var poi = myTarget.id.split(/_AX_/g);
 			var depth = poi[poi.length - 2];
@@ -2818,7 +3453,7 @@ var AXContextMenuClass = Class.create(AXJ, {
 				if (clienWidth > pBox.width) pBox.width = clienWidth;
 				if (clientHeight > pBox.height) pBox.height = clientHeight;
 				var _box = { width: jQuery("#" + myTarget.id + "_AX_subMenu").outerWidth(), height: jQuery("#" + myTarget.id + "_AX_subMenu").outerHeight() };
-				// -- 부모박스 정보와 박스 정보
+				// -- 부모박스 정보와 박스 정보		
 
 				var subMenuTop = jQuery("#" + myTarget.id).position().top;
 
@@ -3070,7 +3705,7 @@ var AXPopOverClass = Class.create(AXContextMenuClass, {
 		if (clienWidth > pBox.width) pBox.width = clienWidth;
 		if (clientHeight > pBox.height) pBox.height = clientHeight;
 		var _box = { width: jQuery("#" + objID).outerWidth(), height: jQuery("#" + objID).outerHeight() };
-		// -- 부모박스 정보와 박스 정보
+		// -- 부모박스 정보와 박스 정보		
 		var openTB = "";
 		if (direction == "top") {
 			openTB = "top";
@@ -3122,7 +3757,7 @@ var AXPopOverClass = Class.create(AXContextMenuClass, {
 			evt: eventTarget, evtIDs: eid,
 			find: function (evt, evtIDs) { return (jQuery(evt).hasClass("contextMenuItem")) ? true : false; }
 		});
-		// event target search ------------------------
+		// event target search ------------------------    	
 		if (myTarget) {
 			var poi = myTarget.id.split(/_AX_/g);
 			var depth = poi[poi.length - 2];
@@ -3259,23 +3894,22 @@ jQuery.fn.scrollToDiv = function (margin, boxDim, leftScroll) {
 };
 /* *********************************************** jQuery misc plugin **/
 
-
-var r20 = /%20/g,
-	rbracket = /\[\]$/,
-	rCRLF = /\r?\n/g,
-	rinput = /^(?:color|date|datetime|datetime-local|email|hidden|month|number|password|range|search|tel|text|time|url|week)$/i,
-	rselectTextarea = /^(?:select|textarea)/i;
+var __r20 = /%20/g,
+	__rbracket = /\[\]$/,
+	__rCRLF = /\r?\n/g,
+	__rinput = /^(?:color|date|datetime|datetime-local|email|hidden|month|number|password|range|search|tel|text|time|url|week)$/i,
+	__rselectTextarea = /^(?:select|textarea)/i;
 
 jQuery.fn.extend({
 	serializeObject: function () {
-
+				
 		var myArray = this.map(function () {
 			return this.elements ? jQuery.makeArray(this.elements) : this;
 		})
 		.filter(function () {
 			return this.name && !this.disabled &&
-				(this.checked || rselectTextarea.test(this.nodeName) ||
-					rinput.test(this.type));
+				(this.checked || __rselectTextarea.test(this.nodeName) ||
+					__rinput.test(this.type));
 		})
 		.map(function (i, elem) {
 			var val = jQuery(this).val();
@@ -3285,9 +3919,10 @@ jQuery.fn.extend({
 				null :
 				jQuery.isArray(val) ?
 					jQuery.map(val, function (val, i) {
-						return { id: elem.id, name: elem.name, type: elem.type, value: val.replace(rCRLF, "\r\n"), label: label };
+						return { id: elem.id, name: elem.name, type: elem.type, value: val.replace(__rCRLF, "\r\n"), label: label };
 					}) :
-					{ id: elem.id, name: elem.name, type: elem.type, value: val.replace(rCRLF, "\r\n"), label: label };
+					{ id: elem.id, name: elem.name, type: elem.type, value: val.replace(__rCRLF, "\r\n"), label: label };
+					
 		}).get();
 		return myArray;
 	}
@@ -3297,3 +3932,22 @@ jQuery(document.body).ready(function () {
 	jQuery("input[type=text]").bind("mousedown", function () { this.focus(); });
 	jQuery("textarea").bind("mousedown", function () { this.focus(); });
 });
+
+jQuery.fn.endFocus = function() {
+    var elem = this;
+    var elemLen = elem.val().length;
+    if(elemLen == 0){
+        elem.focus();
+        return;
+    }
+    // For IE Only
+    if (document.selection) {
+        // Set focus
+        elem.focus();        
+        elem.val(elem.val());
+    }
+    else if (document.selection == undefined || elem.selectionStart || elem.selectionStart == '0') {
+        // Firefox/Chrome
+        elem.focus().val(elem.val());
+    } // if
+};
