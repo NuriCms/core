@@ -1041,6 +1041,7 @@ class memberController extends member
 		$auth_key = Context::get('auth_key');
 		if(!$member_srl || !$auth_key) return $this->stop('msg_invalid_request');
 		// Test logs for finding password by user_id and authkey
+		$args = new stdClass;
 		$args->member_srl = $member_srl;
 		$args->auth_key = $auth_key;
 		$output = executeQuery('member.getAuthMail', $args);
@@ -2194,7 +2195,7 @@ class memberController extends member
 	function deleteMember($member_srl)
 	{
 		// Call a trigger (before)
-		$tirgger_obj = new stdClass();
+		$trigger_obj = new stdClass();
 		$trigger_obj->member_srl = $member_srl;
 		$output = ModuleHandler::triggerCall('member.deleteMember', 'before', $trigger_obj);
 		if(!$output->toBool()) return $output;
