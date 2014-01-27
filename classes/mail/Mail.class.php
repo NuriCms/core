@@ -432,9 +432,6 @@ class Mail extends PHPMailer
 	 */
 	function getPlainContent()
 	{
-		require_once _XE_PATH_ . "libs/Markdownify/markdownify.php";
-		$Markdownify = new Markdownify($leap, MDFY_BODYWIDTH, FALSE);
-		$this->content = $Markdownify->parseString($this->content);
 		return chunk_split(base64_encode(str_replace(array("<", ">", "&"), array("&lt;", "&gt;", "&amp;"), $this->content)));
 	}
 
