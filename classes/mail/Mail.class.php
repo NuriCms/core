@@ -557,12 +557,12 @@ class Mail extends PHPMailer
 			$this->header = "Content-Type: multipart/alternative;" . $this->eol . "\tboundary=\"" . $boundary . "\"" . $this->eol . $this->eol;
 			$this->body = sprintf(
 					"--%s" . $this->eol .
-					"Content-Type: text/plain; charset=utf-8; format=flowed" . $this->eol .
+					"Content-Type: text/plain; charset=UTF-8; format=flowed" . $this->eol .
 					"Content-Transfer-Encoding: base64" . $this->eol .
 					"Content-Disposition: inline" . $this->eol . $this->eol .
 					"%s" .
 					"--%s" . $this->eol .
-					"Content-Type: text/html; charset=utf-8" . $this->eol .
+					"Content-Type: text/html; charset=UTF-8" . $this->eol .
 					"Content-Transfer-Encoding: base64" . $this->eol .
 					"Content-Disposition: inline" . $this->eol . $this->eol .
 					"%s" .
@@ -572,12 +572,13 @@ class Mail extends PHPMailer
 			$this->procCidAttachments();
 			$this->procAttachments();
 			$headers = sprintf(
+					"X-Accept-Language: %s" . $this->eol .
 					"From: %s" . $this->eol .
 					"%s" .
 					"%s" .
 					"%s" .
 					"%s" .
-					"MIME-Version: 1.0" . $this->eol . "", $this->getSender(), $this->messageId ? ("Message-ID: <" . $this->messageId . ">" . $this->eol) : "", $this->replyTo ? ("Reply-To: <" . $this->replyTo . ">" . $this->eol) : "", $this->bcc ? ("Bcc: " . $this->bcc . $this->eol) : "", $this->references ? ("References: <" . $this->references . ">" . $this->eol . "In-Reply-To: <" . $this->references . ">" . $this->eol) : ""
+					"MIME-Version: 1.0" . $this->eol . "", Context::getLangType(TRUE), $this->getSender(), $this->messageId ? ("Message-ID: <" . $this->messageId . ">" . $this->eol) : "", $this->replyTo ? ("Reply-To: <" . $this->replyTo . ">" . $this->eol . "Return-Path: <" . $this->replyTo . ">" . $this->eol) : "", $this->bcc ? ("Bcc: " . $this->bcc . $this->eol) : "", $this->references ? ("References: <" . $this->references . ">" . $this->eol . "In-Reply-To: <" . $this->references . ">" . $this->eol) : ""
 			);
 			$headers .= $this->header;
 			if($this->additional_params)

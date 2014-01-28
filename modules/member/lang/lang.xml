@@ -12,6 +12,18 @@
 		<value xml:lang="tr"><![CDATA[Üye]]></value>
 		<value xml:lang="vi"><![CDATA[Thành viên]]></value>
 	</item>
+	<item name="member_srl">
+		<value xml:lang="ko"><![CDATA[회원번호]]></value>
+		<value xml:lang="en"><![CDATA[Membership code]]></value>
+		<value xml:lang="jp"><![CDATA[Membership code]]></value>
+		<value xml:lang="zh-CN"><![CDATA[Membership code]]></value>
+		<value xml:lang="zh-TW"><![CDATA[Membership code]]></value>
+		<value xml:lang="fr"><![CDATA[Membership code]]></value>
+		<value xml:lang="ru"><![CDATA[Membership code]]></value>
+		<value xml:lang="es"><![CDATA[Membership code]]></value>
+		<value xml:lang="tr"><![CDATA[Membership code]]></value>
+		<value xml:lang="vi"><![CDATA[Membership code]]></value>
+	</item>
 	<item name="site">
 		<value xml:lang="ko"><![CDATA[사이트]]></value>
 		<value xml:lang="en"><![CDATA[Site]]></value>
@@ -255,6 +267,18 @@
 		<value xml:lang="es"><![CDATA[Atribución del administrador superior]]></value>
 		<value xml:lang="tr"><![CDATA[Süperadmin Yetkisi]]></value>
 		<value xml:lang="vi"><![CDATA[Toàn quyền Administrator]]></value>
+	</item>
+	<item name="group_list">
+		<value xml:lang="ko"><![CDATA[회원 그룹]]></value>
+		<value xml:lang="en"><![CDATA[Member Group]]></value>
+		<value xml:lang="jp"><![CDATA[所属グループ]]></value>
+		<value xml:lang="zh-CN"><![CDATA[用户组]]></value>
+		<value xml:lang="zh-TW"><![CDATA[群組]]></value>
+		<value xml:lang="fr"><![CDATA[Groupe assigné]]></value>
+		<value xml:lang="ru"><![CDATA[Группа]]></value>
+		<value xml:lang="es"><![CDATA[Grupo asignado]]></value>
+		<value xml:lang="tr"><![CDATA[Grup]]></value>
+		<value xml:lang="vi"><![CDATA[Phân nhóm]]></value>
 	</item>
 	<item name="member_group">
 		<value xml:lang="ko"><![CDATA[회원 그룹]]></value>

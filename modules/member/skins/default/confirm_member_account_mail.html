@@ -2,7 +2,8 @@
 <hr noshade="noshade" />
 <ul>
 	<li>{$lang->site} : <a href="{getUrl()}" target="_blank">{getUrl()}</a></li>
-	<li loop="$memberInfo=>$name,$value">{$name} : {$value}</li>
+	<li loop="$memberInfo=>$name,$value">{Context::getLang($name)} : <block cond="$name !== 'group_list'">{$value}</block><block cond="$name === 'group_list'">{implode(', ', $value)}</block></li>
+
 </ul>
 <hr noshade="noshade" />
 {$lang->msg_confirm_account_comment}<br />
