@@ -6,6 +6,7 @@
 		<permission action="procModuleAdminUpdateCategory" target="root" />
 		<permission action="procModuleAdminDeleteCategory" target="root" />
 		<permission action="procModuleAdminCopyModule" target="root" />
+		<permission action="procModuleAdminInsertAdminID" target="root" />
 		<permission action="procModuleAdminInsertGrant" target="root" />
 		<permission action="procModuleAdminUpdateSkinInfo" target="root" />
 		<permission action="procModuleAdminModuleSetup" target="root" />
@@ -53,6 +54,7 @@
 		<action name="procModuleAdminUpdateCategory" type="controller" ruleset="updateCategory" />
 		<action name="procModuleAdminDeleteCategory" type="controller" ruleset="deleteCategory" />
 		<action name="procModuleAdminCopyModule" type="controller" ruleset="copyModule" />
+		<action name="procModuleAdminInsertAdminID" type="controller" />
 		<action name="procModuleAdminInsertGrant" type="controller" />
 		<action name="procModuleAdminUpdateSkinInfo" type="controller" />
 		<action name="procModuleAdminModuleSetup" type="controller" ruleset="insertModuleSetup" />

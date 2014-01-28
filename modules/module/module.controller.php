@@ -798,10 +798,11 @@ class moduleController extends module
 	 */
 	function insertAdminId($module_srl, $admin_id)
 	{
-		$oMemberModel = &getModel('member');
-		$member_config = $oMemberModel->getMemberConfig();
+		if(!trim($admin_id) || !$module_srl) return;
 
-		if($member_config->identifier == 'email_address')
+		$oMemberModel = &getModel('member');
+
+		if(strpos($admin_id, '@'))
 			$member_info = $oMemberModel->getMemberInfoByEmailAddress($admin_id);
 		else
 			$member_info = $oMemberModel->getMemberInfoByUserID($admin_id);
