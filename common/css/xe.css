@@ -25,13 +25,12 @@ body>.message{margin:1em}
 .message.update{border-color:#D6E9C6;background-color:#DFF0D8;color:#468847}
 /* Waiting for server response */
 .wfsr{display:none;position:absolute;position:fixed;left:0;top:0;right:0;z-index:100;color:#fff;background:#333 url(../../common/img/msg.loading.gif) no-repeat center 15px;text-align:center;margin:0;padding:20px 0 0 0;opacity:.8;filter:alpha(opacity=80);font:bold 16px/60px "Helvetica Neue", Helvetica, Arial, 돋움, Dotum, sans-serif;box-shadow:0 0 5px #000;border-bottom:1px solid #ccc}
-/* Admin Bar */
-#adminBar{position:fixed;top:0;left:0;right:0;height:28px;background:#666;width:100%;z-index:9999;color:#fff;font:12px/28px Arial,Helvetica,sans-serif;padding:0;overflow:hidden;border-top:1px solid #eee;border-bottom:1px solid #eee;box-shadow:0 0 5px #333}
-#adminBar>h1{margin:0 10px 0 0;padding:6px 0 0 10px;float:left;font-size:12px;line-height:1}
-#adminBar img{vertical-align:top}
-#adminBar>p{margin:0}
-#adminBar>.admin{float:left}
-#adminBar>.link{float:right;padding:0 10px 0 0}
+/* Admin Bar 2014.01.28 by misol */
+#adminBar { position:fixed; z-index:100000; bottom:0; right:0; width:100px; height:30px; padding:5px; background:#666; color:#fff; filter:alpha(opacity=40); opacity:0.4;}
+#adminBar:hover {height:60px; filter:alpha(opacity=90); opacity:0.9;}
+#adminBar>p{display:block;width:100px;height:20px;margin:0;padding:0;font:14px;}
+#adminBar>.admin{font-weight:bold;}
+#adminBar>.link{text-align:right;}
 #adminBar a{color:#fff;text-decoration:none}
 #adminBar a:hover,
 #adminBar a:active,

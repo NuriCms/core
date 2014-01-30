@@ -268,19 +268,16 @@ class moduleAdminController extends module
 	}
 
 	/**
-	 * @brief Save the module permissions
+	 * @param $output boolen, return AdminID result.
+	 * @brief Register Admin ID
 	 */
-	function procModuleAdminInsertGrant()
+	function procModuleAdminInsertAdminID($output = TRUE)
 	{
-		$oModuleController = &getController('module');
-		$oModuleModel = &getModel('module');
 		// Get module_srl
 		$module_srl = Context::get('module_srl');
-		// Get information of the module
-		$columnList = array('module_srl', 'module');
-		$module_info = $oModuleModel->getModuleInfoByModuleSrl($module_srl, $columnList);
-		if(!$module_info) return new Object(-1,'msg_invalid_request');
+
 		// Register Admin ID
+		$oModuleController = &getController('module');
 		$oModuleController->deleteAdminId($module_srl);
 		$admin_member = Context::get('admin_member');
 		if($admin_member)
@@ -293,6 +290,48 @@ class moduleAdminController extends module
 				$oModuleController->insertAdminId($module_srl, $admin_id);
 			}
 		}
+
+		if($output === TRUE)
+		{
+			// Return results;
+			$oModuleModel = &getModel('module');
+			$oMemberModel = &getModel('member');
+			$member_config = $oMemberModel->getMemberConfig();
+			$admin_member = $oModuleModel->getAdminId($module_srl);
+			$output = array();
+			if(is_array($admin_member))
+			{
+				foreach($admin_member as $key => $value)
+				{
+					$output[$key] = new stdClass;
+					$output[$key]->nick_name = $value->nick_name;
+					$output[$key]->email_address = $value->email_address;
+					$output[$key]->user_id = $value->user_id;
+				}
+			}
+			$this->setMessage('success_saved');
+			$this->add('identifier',$member_config->identifier);
+			$this->add('admin_member',$output);
+		}
+	}
+
+	/**
+	 * @brief Save the module permissions
+	 */
+	function procModuleAdminInsertGrant()
+	{
+		$oModuleController = &getController('module');
+		$oModuleModel = &getModel('module');
+		// Get module_srl
+		$module_srl = Context::get('module_srl');
+		// Get information of the module
+		$columnList = array('module_srl', 'module');
+		$module_info = $oModuleModel->getModuleInfoByModuleSrl($module_srl, $columnList);
+		if(!$module_info) return new Object(-1,'msg_invalid_request');
+
+		// Register Admin ID
+		$this->procModuleAdminInsertAdminID(FALSE);
+
 		// List permissions
 		$xml_info = $oModuleModel->getModuleActionXML($module_info->module);
 

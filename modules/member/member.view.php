@@ -541,30 +541,13 @@ class memberView extends member
 
 	/**
 	 * @brief Page of re-sending an authentication mail
+	 * @deprecated
 	 */
 	function dispMemberResendAuthMail()
 	{
-		$authMemberSrl = $_SESSION['auth_member_srl'];
-		unset($_SESSION['auth_member_srl']);
-
-		if(Context::get('is_logged'))
-		{
-			return $this->stop('already_logged');
-		}
-
-		if($authMemberSrl)
-		{
-			$oMemberModel = &getModel('member');
-			$memberInfo = $oMemberModel->getMemberInfoByMemberSrl($authMemberSrl);
-
-			$_SESSION['auth_member_info'] = $memberInfo;
-			Context::set('memberInfo', $memberInfo);
-			$this->setTemplateFile('reset_mail');
-		}
-		else
-		{
-			$this->setTemplateFile('resend_auth_mail');
-		}
+		header('Location: '.getNotEncodedUrl('act','dispMemberFindAccount').'#resendAuthMail');
+		Context::close();
+		exit();
 	}
 
 	function dispMemberModifyEmailAddress()

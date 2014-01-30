@@ -117,6 +117,14 @@ function doInsertAdmin() {
 	}
 	fo_obj.admin_member.value = members.join(',');
 
+	exec_xml(
+		'module',
+		'procModuleAdminInsertAdminID',
+		{module_srl:fo_obj.module_srl.value,admin_member:fo_obj.admin_member.value},
+		function(ret, response_tags, callback_func_arg, fo_obj){ viewAdminList(ret['identifier'],ret['admin_member']) },
+		['error','message','identifier','admin_member']
+	);
+
 	fo_obj.admin_id.focus();
 }
 
@@ -134,8 +142,33 @@ function doDeleteAdmin() {
 
 	}
 	fo_obj.admin_member.value = members.join(',');
+
+	exec_xml(
+		'module',
+		'procModuleAdminInsertAdminID',
+		{module_srl:fo_obj.module_srl.value,admin_member:fo_obj.admin_member.value},
+		function(ret, response_tags, callback_func_arg, fo_obj){ viewAdminList(ret['identifier'],ret['admin_member']) },
+		['error','message','identifier','admin_member']
+	);
 }
 
+function viewAdminList(identifier,vari)
+{
+	if(vari)
+	{
+		if(typeof(vari.item.length) == "undefined")
+		{
+			vari.item = new Array(vari.item);
+		}
+
+		var options = '';
+		for (var i=0;i<vari.item.length;i++)
+		{
+			options += "<option value='" + vari.item[i][identifier] + "'>" + vari.item[i]['nick_name'] + " (" + vari.item[i][identifier] + ")" + "</option>";
+		}
+	}
+	jQuery("select[name='_admin_member']").html(options);
+}
 
 function completeModuleSetup(ret_obj) {
 	alert(ret_obj['message']);
