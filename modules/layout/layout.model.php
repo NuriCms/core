@@ -474,6 +474,7 @@ class layoutModel extends layout
 		if(!$layout_path) $layout_path = $this->getLayoutPath($layout, $layout_type);
 		if(!is_dir($layout_path)) return;
 		// Read the xml file for module skin information
+		$layout_info = new stdClass;
 		if(!$xml_file) $xml_file = sprintf("%sconf/info.xml", $layout_path);
 		if(!file_exists($xml_file))
 		{

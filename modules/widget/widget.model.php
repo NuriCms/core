@@ -142,7 +142,7 @@ class widgetModel extends widget
 		$xml_obj = $tmp_xml_obj->widget;
 		if(!$xml_obj) return;
 
-		$buff = '';
+		$buff = '$widget_info = new stdClass;';
 
 		if($xml_obj->version && $xml_obj->attrs->version == '0.2')
 		{
@@ -166,6 +166,7 @@ class widgetModel extends widget
 
 			for($i=0; $i < count($author_list); $i++)
 			{
+				$buff .= '$widget_info->author['.$i.'] = new stdClass;';
 				$buff .= sprintf('$widget_info->author['.$i.']->name = "%s";', $author_list[$i]->name->body);
 				$buff .= sprintf('$widget_info->author['.$i.']->email_address = "%s";', $author_list[$i]->attrs->email_address);
 				$buff .= sprintf('$widget_info->author['.$i.']->homepage = "%s";', $author_list[$i]->attrs->link);
@@ -181,6 +182,7 @@ class widgetModel extends widget
 				{
 					sscanf($history_list[$i]->attrs->date, '%d-%d-%d', $date_obj->y, $date_obj->m, $date_obj->d);
 					$date = sprintf('%04d%02d%02d', $date_obj->y, $date_obj->m, $date_obj->d);
+					$buff .= '$widget_info->history['.$i.'] = new stdClass;';
 					$buff .= sprintf('$widget_info->history['.$i.']->description = "%s";', $history_list[$i]->description->body);
 					$buff .= sprintf('$widget_info->history['.$i.']->version = "%s";', $history_list[$i]->attrs->version);
 					$buff .= sprintf('$widget_info->history['.$i.']->date = "%s";', $date);
@@ -191,6 +193,7 @@ class widgetModel extends widget
 
 						for($j=0; $j < count($obj->author_list); $j++)
 						{
+							$buff .= '$widget_info->history['.$i.']->author['.$j.'] = new stdClass;';
 							$buff .= sprintf('$widget_info->history['.$i.']->author['.$j.']->name = "%s";', $obj->author_list[$j]->name->body);
 							$buff .= sprintf('$widget_info->history['.$i.']->author['.$j.']->email_address = "%s";', $obj->author_list[$j]->attrs->email_address);
 							$buff .= sprintf('$widget_info->history['.$i.']->author['.$j.']->homepage = "%s";', $obj->author_list[$j]->attrs->link);
@@ -202,6 +205,7 @@ class widgetModel extends widget
 						(!is_array($history_list[$i]->log)) ? $obj->log_list[] = $history_list[$i]->log : $obj->log_list = $history_list[$i]->log;
 
 						for($j=0; $j < count($obj->log_list); $j++) {
+							$buff .= '$widget_info->history['.$i.']->logs['.$j.'] = new stdClass;';
 							$buff .= sprintf('$widget_info->history['.$i.']->logs['.$j.']->text = "%s";', $obj->log_list[$j]->body);
 							$buff .= sprintf('$widget_info->history['.$i.']->logs['.$j.']->link = "%s";', $obj->log_list[$j]->attrs->link);
 						}
@@ -223,6 +227,7 @@ class widgetModel extends widget
 			$buff .= sprintf('$widget_info->widget_srl = $widget_srl;');
 			$buff .= sprintf('$widget_info->widget_title = $widget_title;');
 			// Author information
+			$buff .= '$widget_info->author[0] = new stdClass;';
 			$buff .= sprintf('$widget_info->author[0]->name = "%s";', $xml_obj->author->name->body);
 			$buff .= sprintf('$widget_info->author[0]->email_address = "%s";', $xml_obj->author->attrs->email_address);
 			$buff .= sprintf('$widget_info->author[0]->homepage = "%s";', $xml_obj->author->attrs->link);
@@ -241,6 +246,7 @@ class widgetModel extends widget
 				$extra_var_count = count($extra_vars);
 
 				$buff .= sprintf('$widget_info->extra_var_count = "%s";', $extra_var_count);
+				$buff .= '$widget_info->extra_var = new stdClass;';
 				for($i=0;$i<$extra_var_count;$i++)
 				{
 					unset($var);
@@ -250,8 +256,12 @@ class widgetModel extends widget
 					$id = $var->attrs->id?$var->attrs->id:$var->attrs->name;
 					$name = $var->name->body?$var->name->body:$var->title->body;
 					$type = $var->attrs->type?$var->attrs->type:$var->type->body;
-					if($type =='filebox') $buff .= sprintf('$widget_info->extra_var->%s->filter = "%s";', $id, $var->type->attrs->filter);
-					if($type =='filebox') $buff .= sprintf('$widget_info->extra_var->%s->allow_multiple = "%s";', $id, $var->type->attrs->allow_multiple);
+					$buff .= sprintf('$widget_info->extra_var->%s = new stdClass;', $id);
+					if($type =='filebox') 
+					{
+						$buff .= sprintf('$widget_info->extra_var->%s->filter = "%s";', $id, $var->type->attrs->filter);
+						$buff .= sprintf('$widget_info->extra_var->%s->allow_multiple = "%s";', $id, $var->type->attrs->allow_multiple);
+					}
 
 					$buff .= sprintf('$widget_info->extra_var->%s->group = "%s";', $id, $group->title->body);
 					$buff .= sprintf('$widget_info->extra_var->%s->name = "%s";', $id, $name);

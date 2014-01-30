@@ -29,7 +29,7 @@ define('__ZBXE__', __XE__);
 /**
  * Display the version info of NURI CMS.
  */
-define('__NURI_VERSION__', '0.1.1.Acetaminophen');
+define('__NURI_VERSION__', '0.1.2.Acetaminophen');
 /**
  * Display XE's full version.
  */
